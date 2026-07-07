@@ -1,349 +1,415 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IVY Director Insights</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
-  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7"></script>
-  <style>
-    :root { --bg:#f8f9fa; --card:#fff; --accent:#4a6741; --accent-light:#6b8f63; --text:#2c3e2c; --muted:#6c757d; --border:#dee2e6; }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--text); line-height:1.5; }
-    .container { max-width:1400px; margin:0 auto; padding:1rem; }
-    header { background:var(--accent); color:#fff; padding:1rem 0; margin-bottom:1rem; }
-    header h1 { font-size:1.4rem; font-weight:600; }
-    header .sub { font-size:.8rem; opacity:.8; }
-
-    .filter-bar { background:var(--card); border-radius:8px; padding:1rem 1.25rem; margin-bottom:1.5rem; box-shadow:0 1px 3px rgba(0,0,0,.08); display:flex; flex-wrap:wrap; gap:.75rem; align-items:center; }
-    .filter-bar label { font-size:.8rem; font-weight:600; color:var(--muted); text-transform:uppercase; }
-    .filter-bar input[type=date] { padding:.4rem .6rem; border:1px solid var(--border); border-radius:4px; font-size:.85rem; }
-    .filter-bar select { padding:.4rem .6rem; border:1px solid var(--border); border-radius:4px; font-size:.85rem; }
-    .filter-bar .preset-btn { padding:.35rem .7rem; border:1px solid var(--border); border-radius:4px; background:#fff; cursor:pointer; font-size:.8rem; }
-    .filter-bar .preset-btn:hover { border-color:var(--accent); color:var(--accent); }
-    .filter-bar .preset-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
-    .filter-bar .count { font-size:.8rem; color:var(--muted); margin-left:auto; }
-
-    nav { display:flex; gap:0; border-bottom:2px solid var(--border); margin-bottom:1.5rem; overflow-x:auto; }
-    nav button { padding:.7rem 1.1rem; border:none; background:none; cursor:pointer; font-size:.85rem; color:var(--muted); border-bottom:2px solid transparent; margin-bottom:-2px; white-space:nowrap; }
-    nav button.active { color:var(--accent); border-bottom-color:var(--accent); font-weight:600; }
-    .tab-content { display:none; } .tab-content.active { display:block; }
-
-    .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:.75rem; margin-bottom:1.5rem; }
-    .kpi-card { background:var(--card); border-radius:8px; padding:1rem; box-shadow:0 1px 3px rgba(0,0,0,.08); }
-    .kpi-card .value { font-size:1.6rem; font-weight:700; color:var(--accent); }
-    .kpi-card .label { font-size:.75rem; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; }
-    .card { background:var(--card); border-radius:8px; padding:1.25rem; box-shadow:0 1px 3px rgba(0,0,0,.08); margin-bottom:1.25rem; }
-    .card h3 { margin-bottom:.75rem; font-size:1rem; }
-    table { width:100%; border-collapse:collapse; font-size:.82rem; }
-    th,td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--border); }
-    th { font-weight:600; color:var(--muted); font-size:.72rem; text-transform:uppercase; cursor:pointer; }
-    th:hover { color:var(--accent); }
-    tr:hover { background:#f1f5f1; }
-    .num { text-align:right; font-variant-numeric:tabular-nums; }
-    .chart-container { position:relative; height:280px; margin:.75rem 0; }
-    .search-box { width:100%; padding:.6rem .9rem; border:1px solid var(--border); border-radius:6px; font-size:.85rem; margin-bottom:.75rem; }
-    .search-box:focus { outline:none; border-color:var(--accent); }
-    .bucket-tag { display:inline-block; padding:.1rem .4rem; border-radius:3px; font-size:.68rem; font-weight:600; }
-    .bucket-tag.ret { background:#e8f5e9; color:#2e7d32; }
-    .bucket-tag.idmt { background:#e3f2fd; color:#1565c0; }
-    .bucket-tag.ben { background:#fff3e0; color:#e65100; }
-    .bucket-tag.rep { background:#fce4ec; color:#c62828; }
-    .bucket-tag.sej { background:#f3e5f5; color:#6a1b9a; }
-    footer { text-align:center; padding:2rem; font-size:.72rem; color:var(--muted); }
-    @media(max-width:768px) { .kpi-grid { grid-template-columns:repeat(2,1fr); } .filter-bar { flex-direction:column; align-items:stretch; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>IVY Director Insights</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7"></script>
+<style>
+:root{--bg:#f8f9fa;--card:#fff;--accent:#4a6741;--accent2:#6b8f63;--text:#2c3e2c;--muted:#6c757d;--border:#dee2e6;--hover:#f1f5f1}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
+.wrap{max-width:1440px;margin:0 auto;padding:.75rem 1rem}
+header{background:var(--accent);color:#fff;padding:.75rem 0}
+header h1{font-size:1.3rem;font-weight:600}
+header .sub{font-size:.78rem;opacity:.8}
+.fbar{background:var(--card);border-radius:8px;padding:.8rem 1rem;margin-bottom:1rem;box-shadow:0 1px 3px rgba(0,0,0,.06);display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.fbar label{font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase}
+.fbar input[type=date],.fbar select{padding:.35rem .5rem;border:1px solid var(--border);border-radius:4px;font-size:.82rem}
+.pbtn{padding:.3rem .6rem;border:1px solid var(--border);border-radius:4px;background:#fff;cursor:pointer;font-size:.76rem;font-weight:500}
+.pbtn:hover{border-color:var(--accent);color:var(--accent)}
+.pbtn.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.fbar .ct{font-size:.78rem;color:var(--muted);margin-left:auto}
+nav{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:1.25rem;overflow-x:auto}
+nav button{padding:.6rem 1rem;border:none;background:none;cursor:pointer;font-size:.82rem;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap}
+nav button.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tc{display:none}.tc.on{display:block}
+.kg{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.6rem;margin-bottom:1.25rem}
+.kc{background:var(--card);border-radius:8px;padding:.9rem;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.kc .v{font-size:1.5rem;font-weight:700;color:var(--accent)}
+.kc .l{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.card{background:var(--card);border-radius:8px;padding:1.1rem;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:1.1rem}
+.card h3{margin-bottom:.6rem;font-size:.95rem}
+.card .note{font-size:.72rem;color:var(--muted);margin-bottom:.5rem;font-style:italic}
+table{width:100%;border-collapse:collapse;font-size:.78rem}
+th,td{text-align:left;padding:.4rem .55rem;border-bottom:1px solid var(--border)}
+th{font-weight:600;color:var(--muted);font-size:.7rem;text-transform:uppercase;cursor:pointer;user-select:none;white-space:nowrap}
+th:hover{color:var(--accent)}
+th.sorted-asc::after{content:' ▲';font-size:.6rem}
+th.sorted-desc::after{content:' ▼';font-size:.6rem}
+tr:hover{background:var(--hover)}
+.n{text-align:right;font-variant-numeric:tabular-nums}
+.cc{position:relative;height:270px;margin:.6rem 0}
+.sb{width:100%;padding:.55rem .8rem;border:1px solid var(--border);border-radius:6px;font-size:.82rem;margin-bottom:.6rem}
+.sb:focus{outline:none;border-color:var(--accent)}
+.bt{display:inline-block;padding:.12rem .4rem;border-radius:3px;font-size:.65rem;font-weight:600}
+.bt.ret{background:#e8f5e9;color:#2e7d32}.bt.idmt{background:#e3f2fd;color:#1565c0}
+.bt.ben{background:#fff3e0;color:#e65100}.bt.rep{background:#fce4ec;color:#c62828}
+.bt.sej{background:#f3e5f5;color:#6a1b9a}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:900px){.two-col{grid-template-columns:1fr}}
+footer{text-align:center;padding:1.5rem;font-size:.7rem;color:var(--muted)}
+@media(max-width:768px){.kg{grid-template-columns:repeat(2,1fr)}.fbar{flex-direction:column;align-items:stretch}}
+</style>
 </head>
 <body>
-<header><div class="container"><h1>IVY Director Insights</h1><div class="sub">Institut Vajra Yogini — Tableau de bord directeur</div></div></header>
-<div class="container">
-
-<div class="filter-bar" id="filter-bar">
+<header><div class="wrap"><h1>IVY Director Insights</h1><div class="sub">Institut Vajra Yogini — Tableau de bord directeur</div></div></header>
+<div class="wrap">
+<div class="fbar">
   <label>Période :</label>
-  <input type="date" id="f-from"> <span>→</span> <input type="date" id="f-to">
-  <label style="margin-left:.5rem">Préréglages :</label>
-  <button class="preset-btn" data-preset="2324">2023–24</button>
-  <button class="preset-btn" data-preset="2425">2024–25</button>
-  <button class="preset-btn" data-preset="2526">2025–26</button>
-  <button class="preset-btn" data-preset="all">Tout</button>
-  <select id="f-month">
-    <option value="">— Mois —</option>
-  </select>
-  <span class="count" id="f-count"></span>
+  <input type="date" id="f-from" value="2023-09-01"> <span style="color:var(--muted)">→</span> <input type="date" id="f-to" value="2026-08-31">
+  <label>Saisons :</label>
+  <button class="pbtn" data-p="2324">23–24</button>
+  <button class="pbtn" data-p="2425">24–25</button>
+  <button class="pbtn" data-p="2526">25–26</button>
+  <button class="pbtn on" data-p="all">Tout</button>
+  <select id="f-month"><option value="">— Mois —</option></select>
+  <select id="f-bucket"><option value="">— Catégorie —</option></select>
+  <select id="f-status"><option value="">— Statut —</option></select>
+  <span class="ct" id="f-ct"></span>
 </div>
-
 <nav id="tabs">
-  <button class="active" data-tab="overview">Vue d'ensemble</button>
-  <button data-tab="events">Événements</button>
-  <button data-tab="seasons">Saisons</button>
-  <button data-tab="lodging">Hébergement</button>
-  <button data-tab="teachers">Enseignants</button>
-  <button data-tab="collections">Encaissements</button>
-  <button data-tab="search">Recherche</button>
+  <button class="on" data-t="ov">Vue d'ensemble</button>
+  <button data-t="ev">Événements</button>
+  <button data-t="se">Saisons</button>
+  <button data-t="lo">Hébergement</button>
+  <button data-t="te">Enseignants</button>
+  <button data-t="co">Encaissements</button>
+  <button data-t="br">Toutes les réservations</button>
 </nav>
 
-<div class="tab-content active" id="tab-overview">
-  <div class="kpi-grid" id="kpi-cards"></div>
-  <div class="card"><h3>Revenus par catégorie</h3><div class="chart-container"><canvas id="chart-buckets"></canvas></div></div>
-  <div class="card"><h3>Revenus mensuels</h3><div class="chart-container"><canvas id="chart-monthly"></canvas></div></div>
+<!-- VUE D'ENSEMBLE -->
+<div class="tc on" id="t-ov">
+  <div class="kg" id="kpi"></div>
+  <div class="two-col">
+    <div class="card"><h3>Revenus par catégorie</h3><div class="cc"><canvas id="c-bk"></canvas></div></div>
+    <div class="card"><h3>Revenus mensuels</h3><div class="cc"><canvas id="c-mo"></canvas></div></div>
+  </div>
+  <div class="two-col">
+    <div class="card"><h3>Réservations mensuelles (nombre)</h3><div class="cc"><canvas id="c-mo2"></canvas></div></div>
+    <div class="card"><h3>Sur place vs en ligne</h3><div class="cc"><canvas id="c-at"></canvas></div></div>
+  </div>
+  <div class="card"><h3>Comparaison : revenus par mois de la période vs même mois saison précédente</h3>
+    <div class="note">Les barres claires = saison N−1 pour les mêmes mois calendaires</div>
+    <div class="cc"><canvas id="c-yoy"></canvas></div></div>
 </div>
 
-<div class="tab-content" id="tab-events">
-  <div class="card"><h3>Événements & retraites classés par revenus</h3>
-  <input class="search-box" id="ev-search" placeholder="Rechercher...">
-  <div style="overflow-x:auto"><table id="ev-table"><thead><tr>
-    <th>Événement</th><th>Catégorie</th><th class="num">Réservations</th>
-    <th class="num">Revenus</th><th class="num">Participation</th>
-    <th class="num">Héberg.</th><th class="num">Repas</th><th class="num">Solde</th><th>Enseignant</th>
-  </tr></thead><tbody></tbody></table></div></div>
+<!-- ÉVÉNEMENTS -->
+<div class="tc" id="t-ev">
+  <div class="card">
+    <h3>Événements & retraites — classés par revenus</h3>
+    <div class="note">Chaque ligne = une série d'événements (toutes sessions confondues). « Inscriptions » = nombre de réservations individuelles. « Participants » = cumul personnes × jours.</div>
+    <input class="sb" id="ev-s" placeholder="Filtrer par nom d'événement ou enseignant...">
+    <div style="overflow-x:auto"><table id="t-ev-t"><thead><tr>
+      <th data-k="s">Événement</th><th data-k="b">Catégorie</th><th class="n" data-k="n">Inscriptions</th>
+      <th class="n" data-k="p">Participants</th>
+      <th class="n" data-k="r">Revenus</th><th class="n" data-k="a">Participation</th>
+      <th class="n" data-k="l">Héberg.</th><th class="n" data-k="m">Repas</th>
+      <th class="n" data-k="ba">Solde dû</th><th class="n" data-k="rpi">Revenu/inscr.</th>
+      <th data-k="te">Enseignant</th>
+    </tr></thead><tbody></tbody></table></div>
+  </div>
 </div>
 
-<div class="tab-content" id="tab-seasons">
-  <div class="card"><h3>Réservations par saison (sept – août)</h3><div class="chart-container"><canvas id="chart-seasons"></canvas></div></div>
-  <div class="card"><table id="season-table"><thead><tr><th>Saison</th><th class="num">Total</th><th class="num">Avec héberg.</th><th class="num">Repas seul</th><th class="num">Revenus</th></tr></thead><tbody></tbody></table></div>
+<!-- SAISONS -->
+<div class="tc" id="t-se">
+  <div class="card"><h3>Réservations par saison (sept → août)</h3><div class="cc"><canvas id="c-se"></canvas></div></div>
+  <div class="card"><h3>Revenus par saison</h3><div class="cc"><canvas id="c-ser"></canvas></div></div>
+  <div class="card"><table id="t-se-t"><thead><tr>
+    <th>Saison</th><th class="n">Inscriptions</th><th class="n">Avec héberg.</th><th class="n">Repas seul</th><th class="n">En ligne seul</th><th class="n">Revenus</th><th class="n">Encaissé</th><th class="n">Solde</th>
+  </tr></thead><tbody></tbody></table></div>
 </div>
 
-<div class="tab-content" id="tab-lodging">
-  <div class="card"><h3>Types de chambre</h3><div class="chart-container"><canvas id="chart-rooms"></canvas></div></div>
-  <div class="card"><table id="room-table"><thead><tr><th>Type</th><th class="num">Réservations</th><th class="num">Revenus héberg.</th><th class="num">Nuitées</th><th class="num">€/nuit</th></tr></thead><tbody></tbody></table></div>
+<!-- HÉBERGEMENT -->
+<div class="tc" id="t-lo">
+  <div class="two-col">
+    <div class="card"><h3>Popularité par type de chambre (inscriptions)</h3><div class="cc"><canvas id="c-rm"></canvas></div></div>
+    <div class="card"><h3>Revenus hébergement par type</h3><div class="cc"><canvas id="c-rmr"></canvas></div></div>
+  </div>
+  <div class="card"><table id="t-lo-t"><thead><tr>
+    <th data-k="t">Type de chambre</th><th class="n" data-k="n">Inscriptions</th><th class="n" data-k="r">Revenus héberg.</th>
+    <th class="n" data-k="ni">Nuitées</th><th class="n" data-k="rpn">€/nuit</th><th class="n" data-k="avg">Moy. nuits/inscr.</th>
+  </tr></thead><tbody></tbody></table></div>
 </div>
 
-<div class="tab-content" id="tab-teachers">
-  <div class="card"><h3>Enseignants par revenus associés</h3>
-  <table id="teach-table"><thead><tr><th>Enseignant</th><th class="num">Réservations</th><th class="num">Revenus</th><th class="num">Événements</th></tr></thead><tbody></tbody></table></div>
+<!-- ENSEIGNANTS -->
+<div class="tc" id="t-te">
+  <div class="card">
+    <h3>Enseignants — revenus associés aux événements qu'ils animent</h3>
+    <div class="note">Le revenu inclut hébergement + repas + participation de toutes les inscriptions liées aux événements de cet enseignant.</div>
+    <table id="t-te-t"><thead><tr>
+      <th data-k="t">Enseignant</th><th class="n" data-k="n">Inscriptions</th><th class="n" data-k="p">Participants</th>
+      <th class="n" data-k="r">Revenus associés</th><th class="n" data-k="e">Événements</th><th class="n" data-k="avg">Rev./inscr.</th>
+    </tr></thead><tbody></tbody></table>
+  </div>
 </div>
 
-<div class="tab-content" id="tab-collections">
-  <div class="kpi-grid" id="coll-kpis"></div>
-  <div class="card"><h3>Statuts</h3><div class="chart-container"><canvas id="chart-status"></canvas></div></div>
+<!-- ENCAISSEMENTS -->
+<div class="tc" id="t-co">
+  <div class="kg" id="co-kpi"></div>
+  <div class="two-col">
+    <div class="card"><h3>Statuts des réservations</h3><div class="cc"><canvas id="c-st"></canvas></div></div>
+    <div class="card"><h3>Paiement en ligne</h3><div class="cc"><canvas id="c-op"></canvas></div></div>
+  </div>
 </div>
 
-<div class="tab-content" id="tab-search">
-  <div class="card"><h3>Recherche</h3>
-  <input class="search-box" id="global-search" placeholder="Événement, enseignant, type de chambre...">
-  <table id="search-table"><thead><tr><th>Événement</th><th>Catégorie</th><th class="num">Revenus</th><th class="num">N</th><th>Enseignant</th></tr></thead><tbody></tbody></table></div>
+<!-- TOUTES LES RÉSERVATIONS (browse) -->
+<div class="tc" id="t-br">
+  <div class="card">
+    <h3>Toutes les réservations (période sélectionnée)</h3>
+    <div class="note">Triez en cliquant sur les en-têtes. « Inscriptions » = réservations. Données anonymisées (pas de noms).</div>
+    <input class="sb" id="br-s" placeholder="Filtrer : événement, type de chambre, enseignant...">
+    <div style="overflow-x:auto"><table id="t-br-t"><thead><tr>
+      <th data-k="f">Du</th><th data-k="t2">Au</th><th data-k="ev">Événement</th>
+      <th data-k="rm">Chambre</th><th class="n" data-k="ni">Nuits</th><th class="n" data-k="md">Jours repas</th>
+      <th class="n" data-k="rv">Revenus</th><th class="n" data-k="pd">Payé</th><th class="n" data-k="bl">Solde</th>
+      <th data-k="st">Statut</th><th data-k="ty">Type</th><th data-k="tc">Enseignant</th>
+    </tr></thead><tbody></tbody></table></div>
+    <div id="br-pg" style="margin-top:.5rem;font-size:.78rem;color:var(--muted)"></div>
+  </div>
 </div>
 
 </div>
-<footer id="footer"></footer>
+<footer id="foot"></footer>
 
 <script>
-let RAW=null, STRINGS=null, EVENTS=null, TEACHERS=null, ROOMS=null;
-let filtered=[];
-let charts={};
+let RAW=[],STR={},EVT={},TCH={},RMS={},filtered=[];
+const CX={};
+const F=n=>n.toLocaleString('fr-FR',{maximumFractionDigits:0});
+const FE=n=>F(n)+' €';
+function S(i,d){return i<0?'':d[i]||'';}
+function BC(b){if(b.includes('Retraite'))return'ret';if(b.includes('IDMT'))return'idmt';if(b.includes('Bénévole'))return'ben';if(b.includes('Repas'))return'rep';if(b.includes('Séjour'))return'sej';return'ret';}
 
-const fmt=n=>n.toLocaleString('fr-FR',{maximumFractionDigits:0});
-const fmtE=n=>fmt(n)+' €';
-function str(idx,dict){return idx<0?'':dict[idx]||'';}
-function bucketCls(b){
-  if(b.includes('Retraite'))return 'ret';
-  if(b.includes('IDMT'))return 'idmt';
-  if(b.includes('Bénévole'))return 'ben';
-  if(b.includes('Repas'))return 'rep';
-  if(b.includes('Séjour'))return 'sej';
-  return 'ret';
-}
+function P(r){return{from:r[0],to:r[1],mid:r[2],series:S(r[3],STR),bucket:S(r[4],STR),event:S(r[5],EVT),room:S(r[6],RMS),nights:r[7],mealDays:r[8],revAtt:r[9],revLodg:r[10],revMeals:r[11],revMisc:r[12],revTotal:r[13],paid:r[14],balance:r[15],status:S(r[16],STR),type:S(r[17],STR),teacher:S(r[18],TCH),participants:r[19]};}
 
-function parseRow(r){
-  return{
-    from:r[0],to:r[1],mid:r[2],
-    series:str(r[3],STRINGS),bucket:str(r[4],STRINGS),
-    event:str(r[5],EVENTS),room:str(r[6],ROOMS),
-    nights:r[7],mealDays:r[8],
-    revAtt:r[9],revLodg:r[10],revMeals:r[11],revMisc:r[12],revTotal:r[13],
-    paid:r[14],balance:r[15],
-    status:str(r[16],STRINGS),type:str(r[17],STRINGS),
-    teacher:str(r[18],TEACHERS)
-  };
-}
-
-function midMonth(row){return row.mid?row.mid.slice(0,7):row.from.slice(0,7);}
-function fiscalSeason(dateStr){
-  if(!dateStr)return null;
-  const m=parseInt(dateStr.slice(5,7)), y=parseInt(dateStr.slice(0,4));
-  return m>=9?y:y-1;
-}
+function midMonth(r){return(r.mid||r.from).slice(0,7);}
+function fy(d){if(!d)return null;const m=+d.slice(5,7),y=+d.slice(0,4);return m>=9?y:y-1;}
 
 async function init(){
-  const resp=await fetch('data/bookings.json');
-  const data=await resp.json();
-  // Build reverse lookup dicts (key->string)
-  STRINGS=Object.fromEntries(Object.entries(data.strings).map(([k,v])=>[v,k]));
-  EVENTS=Object.fromEntries(Object.entries(data.events).map(([k,v])=>[v,k]));
-  TEACHERS=Object.fromEntries(Object.entries(data.teachers).map(([k,v])=>[v,k]));
-  ROOMS=Object.fromEntries(Object.entries(data.rooms).map(([k,v])=>[v,k]));
-  RAW=data.rows.map(parseRow);
-
+  const d=await(await fetch('data/bookings.json')).json();
+  STR=Object.fromEntries(Object.entries(d.strings).map(([k,v])=>[v,k]));
+  EVT=Object.fromEntries(Object.entries(d.events).map(([k,v])=>[v,k]));
+  TCH=Object.fromEntries(Object.entries(d.teachers).map(([k,v])=>[v,k]));
+  RMS=Object.fromEntries(Object.entries(d.rooms).map(([k,v])=>[v,k]));
+  RAW=d.rows.map(P);
   setupFilters();
   applyFilter();
-  document.getElementById('footer').textContent=`Source : ${data.dataSource} — Mis à jour : ${new Date(data.updatedAt).toLocaleDateString('fr-FR')}`;
+  document.getElementById('foot').textContent=`Source : ${d.dataSource} — Mis à jour : ${new Date(d.updatedAt).toLocaleDateString('fr-FR')} — ${F(RAW.length)} réservations totales`;
 }
 
 function setupFilters(){
-  const months=new Set();
-  RAW.forEach(r=>{const m=midMonth(r);if(m)months.add(m);});
-  const sel=document.getElementById('f-month');
-  [...months].sort().forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=m;sel.appendChild(o);});
-
-  document.getElementById('f-from').value='2023-09-01';
-  document.getElementById('f-to').value='2026-08-31';
-
+  const months=new Set(),buckets=new Set(),statuses=new Set();
+  RAW.forEach(r=>{months.add(midMonth(r));buckets.add(r.bucket);statuses.add(r.status);});
+  const ms=document.getElementById('f-month');
+  [...months].sort().forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=m;ms.appendChild(o);});
+  const bs=document.getElementById('f-bucket');
+  [...buckets].sort().forEach(b=>{const o=document.createElement('option');o.value=b;o.textContent=b;bs.appendChild(o);});
+  const ss=document.getElementById('f-status');
+  [...statuses].sort().forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;ss.appendChild(o);});
   document.getElementById('f-from').addEventListener('change',applyFilter);
   document.getElementById('f-to').addEventListener('change',applyFilter);
-  document.getElementById('f-month').addEventListener('change',e=>{
-    if(e.target.value){
-      const y=parseInt(e.target.value.slice(0,4)),m=parseInt(e.target.value.slice(5,7));
-      const start=e.target.value+'-01';
-      const end=new Date(y,m,0).toISOString().slice(0,10);
-      document.getElementById('f-from').value=start;
-      document.getElementById('f-to').value=end;
-    }
+  document.getElementById('f-month').addEventListener('change',e=>{if(e.target.value){const y=+e.target.value.slice(0,4),m=+e.target.value.slice(5,7);document.getElementById('f-from').value=e.target.value+'-01';document.getElementById('f-to').value=new Date(y,m,0).toISOString().slice(0,10);}applyFilter();});
+  document.getElementById('f-bucket').addEventListener('change',applyFilter);
+  document.getElementById('f-status').addEventListener('change',applyFilter);
+  document.querySelectorAll('.pbtn').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.pbtn').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+    document.getElementById('f-month').value='';
+    const p=b.dataset.p;
+    if(p==='all'){document.getElementById('f-from').value='2023-09-01';document.getElementById('f-to').value='2028-12-31';}
+    else if(p==='2324'){document.getElementById('f-from').value='2023-09-01';document.getElementById('f-to').value='2024-08-31';}
+    else if(p==='2425'){document.getElementById('f-from').value='2024-09-01';document.getElementById('f-to').value='2025-08-31';}
+    else if(p==='2526'){document.getElementById('f-from').value='2025-09-01';document.getElementById('f-to').value='2026-08-31';}
     applyFilter();
-  });
-
-  document.querySelectorAll('.preset-btn').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('f-month').value='';
-      const p=btn.dataset.preset;
-      if(p==='all'){document.getElementById('f-from').value='2023-09-01';document.getElementById('f-to').value='2028-12-31';}
-      else if(p==='2324'){document.getElementById('f-from').value='2023-09-01';document.getElementById('f-to').value='2024-08-31';}
-      else if(p==='2425'){document.getElementById('f-from').value='2024-09-01';document.getElementById('f-to').value='2025-08-31';}
-      else if(p==='2526'){document.getElementById('f-from').value='2025-09-01';document.getElementById('f-to').value='2026-08-31';}
-      applyFilter();
-    });
-  });
+  }));
 }
 
 function applyFilter(){
-  const from=document.getElementById('f-from').value;
-  const to=document.getElementById('f-to').value;
+  const from=document.getElementById('f-from').value,to=document.getElementById('f-to').value;
+  const bk=document.getElementById('f-bucket').value,st=document.getElementById('f-status').value;
   filtered=RAW.filter(r=>{
     const d=r.mid||r.from;
-    return d>=from && d<=to;
+    if(d<from||d>to)return false;
+    if(bk&&r.bucket!==bk)return false;
+    if(st&&r.status!==st)return false;
+    return true;
   });
-  document.getElementById('f-count').textContent=`${fmt(filtered.length)} réservations`;
+  document.getElementById('f-ct').textContent=`${F(filtered.length)} inscriptions affichées`;
   render();
 }
 
-function render(){
-  renderOverview();renderEvents();renderSeasons();renderLodging();renderTeachers();renderCollections();
-}
+function render(){rOv();rEv();rSe();rLo();rTe();rCo();rBr();}
+function DC(id){if(CX[id]){CX[id].destroy();delete CX[id];}}
 
-function destroyChart(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
+function rOv(){
+  let rev=0,paid=0,bal=0,n=filtered.length,conf=0,canc=0,ol=0,os=0,pts=0,nights=0,meals=0;
+  filtered.forEach(r=>{rev+=r.revTotal;paid+=r.paid;if(r.balance>0)bal+=r.balance;
+    if(r.status==='Confirmed')conf++;if(r.status==='Canceled')canc++;
+    if(r.type==='online')ol++;if(r.type==='on-site')os++;
+    pts+=r.participants;nights+=r.nights;meals+=r.mealDays;});
+  document.getElementById('kpi').innerHTML=[
+    {l:'Revenus totaux',v:FE(rev)},{l:'Encaissé',v:FE(paid)},{l:'Solde ouvert',v:FE(bal)},
+    {l:'Inscriptions',v:F(n)},{l:'Participants (jours)',v:F(pts)},{l:'Confirmées',v:F(conf)},
+    {l:'Annulées',v:F(canc)},{l:'Nuitées totales',v:F(nights)},{l:'Jours repas',v:F(meals)},
+    {l:'Sur place',v:F(os)},{l:'En ligne',v:F(ol)},{l:'Revenu moy./inscr.',v:n?FE(rev/n):'—'}
+  ].map(c=>`<div class="kc"><div class="v">${c.v}</div><div class="l">${c.l}</div></div>`).join('');
 
-function renderOverview(){
-  const k={rev:0,paid:0,bal:0,n:filtered.length,conf:0,canc:0,online:0,onsite:0};
-  filtered.forEach(r=>{k.rev+=r.revTotal;k.paid+=r.paid;if(r.balance>0)k.bal+=r.balance;if(r.status==='Confirmed')k.conf++;if(r.status==='Canceled')k.canc++;if(r.type==='online')k.online++;if(r.type==='on-site')k.onsite++;});
-  document.getElementById('kpi-cards').innerHTML=[
-    {l:'Revenus totaux',v:fmtE(k.rev)},{l:'Encaissé',v:fmtE(k.paid)},{l:'Solde ouvert',v:fmtE(k.bal)},
-    {l:'Réservations',v:fmt(k.n)},{l:'Confirmées',v:fmt(k.conf)},{l:'Annulées',v:fmt(k.canc)},
-    {l:'Sur place',v:fmt(k.onsite)},{l:'En ligne',v:fmt(k.online)}
-  ].map(c=>`<div class="kpi-card"><div class="value">${c.v}</div><div class="label">${c.l}</div></div>`).join('');
+  const bks={};filtered.forEach(r=>{bks[r.bucket]=(bks[r.bucket]||0)+r.revTotal;});
+  DC('bk');CX.bk=new Chart(document.getElementById('c-bk'),{type:'doughnut',data:{labels:Object.keys(bks),datasets:[{data:Object.values(bks),backgroundColor:['#4a6741','#1565c0','#e65100','#c62828','#6a1b9a']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right'}}}});
 
-  const buckets={};
-  filtered.forEach(r=>{if(!buckets[r.bucket])buckets[r.bucket]=0;buckets[r.bucket]+=r.revTotal;});
-  destroyChart('buckets');
-  charts.buckets=new Chart(document.getElementById('chart-buckets'),{type:'doughnut',data:{labels:Object.keys(buckets),datasets:[{data:Object.values(buckets),backgroundColor:['#4a6741','#1565c0','#e65100','#c62828','#6a1b9a']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right'}}}});
+  const mo={};filtered.forEach(r=>{const m=midMonth(r);mo[m]=(mo[m]||0)+r.revTotal;});
+  const mks=Object.keys(mo).sort();
+  DC('mo');CX.mo=new Chart(document.getElementById('c-mo'),{type:'bar',data:{labels:mks,datasets:[{label:'Revenus',data:mks.map(m=>mo[m]),backgroundColor:'#4a6741'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}},plugins:{legend:{display:false}}}});
 
-  const monthly={};
-  filtered.forEach(r=>{const m=midMonth(r);if(!monthly[m])monthly[m]=0;monthly[m]+=r.revTotal;});
-  const ms=Object.keys(monthly).sort();
-  destroyChart('monthly');
-  charts.monthly=new Chart(document.getElementById('chart-monthly'),{type:'bar',data:{labels:ms,datasets:[{label:'Revenus',data:ms.map(m=>monthly[m]),backgroundColor:'#4a6741'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}},plugins:{legend:{display:false}}}});
-}
+  const mo2={};filtered.forEach(r=>{const m=midMonth(r);mo2[m]=(mo2[m]||0)+1;});
+  DC('mo2');CX.mo2=new Chart(document.getElementById('c-mo2'),{type:'line',data:{labels:mks,datasets:[{label:'Inscriptions',data:mks.map(m=>mo2[m]||0),borderColor:'#4a6741',fill:true,backgroundColor:'rgba(74,103,65,.1)',tension:.3}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}},plugins:{legend:{display:false}}}});
 
-function renderEvents(){
-  const agg={};
-  filtered.forEach(r=>{
-    if(!agg[r.series])agg[r.series]={n:0,rev:0,att:0,lodg:0,meals:0,bal:0,bucket:r.bucket,teachers:new Set()};
-    const a=agg[r.series];a.n++;a.rev+=r.revTotal;a.att+=r.revAtt;a.lodg+=r.revLodg;a.meals+=r.revMeals;a.bal+=r.balance;
-    if(r.teacher)a.teachers.add(r.teacher);
+  const at={'Sur place':os,'En ligne':ol};
+  DC('at');CX.at=new Chart(document.getElementById('c-at'),{type:'pie',data:{labels:Object.keys(at),datasets:[{data:Object.values(at),backgroundColor:['#4a6741','#1565c0']}]},options:{responsive:true,maintainAspectRatio:false}});
+
+  // YoY comparison
+  const curMo={},prevMo={};
+  const fromDate=document.getElementById('f-from').value,toDate=document.getElementById('f-to').value;
+  filtered.forEach(r=>{const m=midMonth(r);curMo[m]=(curMo[m]||0)+r.revTotal;});
+  const shift=12;
+  RAW.forEach(r=>{const d=r.mid||r.from;const mRaw=d.slice(0,7);
+    const [y2,m2]=[+mRaw.slice(0,4),+mRaw.slice(5,7)];
+    const shifted=`${y2+1}-${String(m2).padStart(2,'0')}`;
+    if(shifted>=fromDate.slice(0,7)&&shifted<=toDate.slice(0,7))prevMo[shifted]=(prevMo[shifted]||0)+r.revTotal;
   });
-  const sorted=Object.entries(agg).sort((a,b)=>b[1].rev-a[1].rev);
-  const tbody=document.querySelector('#ev-table tbody');
-  tbody.innerHTML=sorted.filter(([,v])=>v.rev>0).map(([s,v])=>`<tr>
-    <td>${s}</td><td><span class="bucket-tag ${bucketCls(v.bucket)}">${v.bucket}</span></td>
-    <td class="num">${v.n}</td><td class="num">${fmtE(v.rev)}</td><td class="num">${fmtE(v.att)}</td>
-    <td class="num">${fmtE(v.lodg)}</td><td class="num">${fmtE(v.meals)}</td><td class="num">${fmtE(v.bal)}</td>
-    <td>${[...v.teachers].join(', ')||'—'}</td></tr>`).join('');
-
-  document.getElementById('ev-search').oninput=e=>{
-    const q=e.target.value.toLowerCase();
-    tbody.querySelectorAll('tr').forEach(tr=>tr.style.display=tr.textContent.toLowerCase().includes(q)?'':'none');
-  };
+  DC('yoy');CX.yoy=new Chart(document.getElementById('c-yoy'),{type:'bar',data:{labels:mks,datasets:[{label:'Période actuelle',data:mks.map(m=>curMo[m]||0),backgroundColor:'#4a6741'},{label:'Même mois N−1',data:mks.map(m=>prevMo[m]||0),backgroundColor:'rgba(74,103,65,.3)'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}}}});
 }
 
-function renderSeasons(){
+function rEv(){
   const agg={};
   filtered.forEach(r=>{
-    const fy=fiscalSeason(r.mid||r.from);if(!fy)return;
-    const k=`${fy}-${fy+1}`;
-    if(!agg[k])agg[k]={all:0,lodg:0,meals:0,rev:0};
-    agg[k].all++;agg[k].rev+=r.revTotal;
-    if(r.revLodg>0)agg[k].lodg++;
-    else if(r.revMeals>0)agg[k].meals++;
+    if(!agg[r.series])agg[r.series]={n:0,p:0,r:0,a:0,l:0,m:0,ba:0,b:r.bucket,te:new Set()};
+    const x=agg[r.series];x.n++;x.p+=r.participants;x.r+=r.revTotal;x.a+=r.revAtt;x.l+=r.revLodg;x.m+=r.revMeals;x.ba+=r.balance;
+    if(r.teacher)r.teacher.split('; ').forEach(t=>{if(t.trim())x.te.add(t.trim());});
+  });
+  let rows=Object.entries(agg).map(([s,v])=>({s,b:v.b,n:v.n,p:v.p,r:v.r,a:v.a,l:v.l,m:v.m,ba:v.ba,rpi:v.n?v.r/v.n:0,te:[...v.te].join(', ')}));
+  rows.sort((a,b)=>b.r-a.r);
+  renderSortableTable('t-ev-t',rows,[
+    {k:'s',f:v=>v},{k:'b',f:v=>`<span class="bt ${BC(v)}">${v}</span>`},{k:'n',f:F,c:'n'},{k:'p',f:F,c:'n'},
+    {k:'r',f:FE,c:'n'},{k:'a',f:FE,c:'n'},{k:'l',f:FE,c:'n'},{k:'m',f:FE,c:'n'},
+    {k:'ba',f:FE,c:'n'},{k:'rpi',f:v=>FE(v),c:'n'},{k:'te',f:v=>v||'—'}
+  ]);
+  document.getElementById('ev-s').oninput=e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('#t-ev-t tbody tr').forEach(tr=>tr.style.display=tr.textContent.toLowerCase().includes(q)?'':'none');};
+}
+
+function rSe(){
+  const agg={};
+  filtered.forEach(r=>{
+    const f=fy(r.mid||r.from);if(!f)return;
+    const k=`${f}–${f+1}`;
+    if(!agg[k])agg[k]={n:0,lo:0,me:0,ol:0,r:0,p:0,ba:0};
+    const x=agg[k];x.n++;x.r+=r.revTotal;x.p+=r.paid;x.ba+=r.balance;
+    if(r.revLodg>0)x.lo++;else if(r.revMeals>0&&r.type!=='online')x.me++;
+    if(r.type==='online')x.ol++;
   });
   const keys=Object.keys(agg).sort();
-  destroyChart('seasons');
-  charts.seasons=new Chart(document.getElementById('chart-seasons'),{type:'bar',data:{labels:keys,datasets:[
-    {label:'Toutes',data:keys.map(k=>agg[k].all),backgroundColor:'#4a6741'},
-    {label:'Avec hébergement',data:keys.map(k=>agg[k].lodg),backgroundColor:'#1565c0'},
-    {label:'Repas seul',data:keys.map(k=>agg[k].meals),backgroundColor:'#e65100'}
+  DC('se');CX.se=new Chart(document.getElementById('c-se'),{type:'bar',data:{labels:keys,datasets:[
+    {label:'Total inscriptions',data:keys.map(k=>agg[k].n),backgroundColor:'#4a6741'},
+    {label:'Avec hébergement',data:keys.map(k=>agg[k].lo),backgroundColor:'#1565c0'},
+    {label:'Repas seul',data:keys.map(k=>agg[k].me),backgroundColor:'#e65100'},
+    {label:'En ligne',data:keys.map(k=>agg[k].ol),backgroundColor:'#90caf9'}
   ]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}}}});
-  document.querySelector('#season-table tbody').innerHTML=keys.map(k=>`<tr><td>${k}</td><td class="num">${fmt(agg[k].all)}</td><td class="num">${fmt(agg[k].lodg)}</td><td class="num">${fmt(agg[k].meals)}</td><td class="num">${fmtE(agg[k].rev)}</td></tr>`).join('');
+  DC('ser');CX.ser=new Chart(document.getElementById('c-ser'),{type:'bar',data:{labels:keys,datasets:[
+    {label:'Revenus',data:keys.map(k=>agg[k].r),backgroundColor:'#4a6741'},
+    {label:'Encaissé',data:keys.map(k=>agg[k].p),backgroundColor:'#81c784'}
+  ]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}}}});
+  document.querySelector('#t-se-t tbody').innerHTML=keys.map(k=>{const v=agg[k];return`<tr><td>${k}</td><td class="n">${F(v.n)}</td><td class="n">${F(v.lo)}</td><td class="n">${F(v.me)}</td><td class="n">${F(v.ol)}</td><td class="n">${FE(v.r)}</td><td class="n">${FE(v.p)}</td><td class="n">${FE(v.ba)}</td></tr>`;}).join('');
 }
 
-function renderLodging(){
+function rLo(){
   const agg={};
-  filtered.forEach(r=>{if(!r.room||r.room==='Hébergement à l\'extérieur'||r.room.includes('LIGNE')||r.room.includes('ONLINE'))return;
-    if(!agg[r.room])agg[r.room]={n:0,rev:0,nights:0};agg[r.room].n++;agg[r.room].rev+=r.revLodg;agg[r.room].nights+=r.nights;});
-  const sorted=Object.entries(agg).filter(([,v])=>v.n>5).sort((a,b)=>b[1].n-a[1].n);
-  destroyChart('rooms');
-  charts.rooms=new Chart(document.getElementById('chart-rooms'),{type:'bar',data:{labels:sorted.map(([k])=>k),datasets:[{label:'Réservations',data:sorted.map(([,v])=>v.n),backgroundColor:'#4a6741'}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}}}});
-  document.querySelector('#room-table tbody').innerHTML=sorted.map(([k,v])=>`<tr><td>${k}</td><td class="num">${v.n}</td><td class="num">${fmtE(v.rev)}</td><td class="num">${fmt(v.nights)}</td><td class="num">${v.nights?((v.rev/v.nights).toFixed(2)+' €'):'—'}</td></tr>`).join('');
+  filtered.forEach(r=>{if(!r.room||r.room.includes('extérieur')||r.room.includes('LIGNE')||r.room.includes('ONLINE'))return;
+    if(!agg[r.room])agg[r.room]={n:0,r:0,ni:0};const x=agg[r.room];x.n++;x.r+=r.revLodg;x.ni+=r.nights;});
+  let rows=Object.entries(agg).filter(([,v])=>v.n>3).map(([t,v])=>({t,n:v.n,r:v.r,ni:v.ni,rpn:v.ni?v.r/v.ni:0,avg:v.n?v.ni/v.n:0}));
+  rows.sort((a,b)=>b.n-a.n);
+  DC('rm');CX.rm=new Chart(document.getElementById('c-rm'),{type:'bar',data:{labels:rows.map(r=>r.t),datasets:[{data:rows.map(r=>r.n),backgroundColor:'#4a6741'}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}}}});
+  DC('rmr');CX.rmr=new Chart(document.getElementById('c-rmr'),{type:'bar',data:{labels:rows.map(r=>r.t),datasets:[{data:rows.map(r=>r.r),backgroundColor:'#1565c0'}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}}}});
+  renderSortableTable('t-lo-t',rows,[
+    {k:'t',f:v=>v},{k:'n',f:F,c:'n'},{k:'r',f:FE,c:'n'},{k:'ni',f:F,c:'n'},{k:'rpn',f:v=>v.toFixed(2)+' €',c:'n'},{k:'avg',f:v=>v.toFixed(1),c:'n'}
+  ]);
 }
 
-function renderTeachers(){
+function rTe(){
   const agg={};
-  filtered.forEach(r=>{if(!r.teacher)return;r.teacher.split('; ').forEach(t=>{t=t.trim();if(!t)return;if(!agg[t])agg[t]={n:0,rev:0,evts:new Set()};agg[t].n++;agg[t].rev+=r.revTotal;agg[t].evts.add(r.series);});});
-  const sorted=Object.entries(agg).sort((a,b)=>b[1].rev-a[1].rev).slice(0,25);
-  document.querySelector('#teach-table tbody').innerHTML=sorted.map(([t,v])=>`<tr><td>${t}</td><td class="num">${fmt(v.n)}</td><td class="num">${fmtE(v.rev)}</td><td class="num">${v.evts.size}</td></tr>`).join('');
+  filtered.forEach(r=>{if(!r.teacher)return;r.teacher.split('; ').forEach(t=>{t=t.trim();if(!t)return;
+    if(!agg[t])agg[t]={n:0,p:0,r:0,evts:new Set()};agg[t].n++;agg[t].p+=r.participants;agg[t].r+=r.revTotal;agg[t].evts.add(r.series);});});
+  let rows=Object.entries(agg).map(([t,v])=>({t,n:v.n,p:v.p,r:v.r,e:v.evts.size,avg:v.n?v.r/v.n:0}));
+  rows.sort((a,b)=>b.r-a.r);
+  renderSortableTable('t-te-t',rows,[
+    {k:'t',f:v=>v},{k:'n',f:F,c:'n'},{k:'p',f:F,c:'n'},{k:'r',f:FE,c:'n'},{k:'e',f:F,c:'n'},{k:'avg',f:FE,c:'n'}
+  ]);
 }
 
-function renderCollections(){
-  let rev=0,paid=0,bal=0;
-  const statuses={};
-  filtered.forEach(r=>{rev+=r.revTotal;paid+=r.paid;if(r.balance>0)bal+=r.balance;statuses[r.status]=(statuses[r.status]||0)+1;});
+function rCo(){
+  let rev=0,paid=0,bal=0;const st={},op={};
+  filtered.forEach(r=>{rev+=r.revTotal;paid+=r.paid;if(r.balance>0)bal+=r.balance;st[r.status]=(st[r.status]||0)+1;});
   const rate=rev>0?(100*paid/rev).toFixed(1)+'%':'—';
-  document.getElementById('coll-kpis').innerHTML=[
-    {l:'Revenus',v:fmtE(rev)},{l:'Encaissé',v:fmtE(paid)},{l:'Solde ouvert',v:fmtE(bal)},{l:'Taux encaissement',v:rate}
-  ].map(c=>`<div class="kpi-card"><div class="value">${c.v}</div><div class="label">${c.l}</div></div>`).join('');
-  destroyChart('status');
-  charts.status=new Chart(document.getElementById('chart-status'),{type:'pie',data:{labels:Object.keys(statuses),datasets:[{data:Object.values(statuses),backgroundColor:['#4a6741','#c0392b','#d4a017','#1565c0','#6a1b9a','#e65100','#888']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right'}}}});
+  const unpaid=filtered.filter(r=>r.balance>0).length;
+  document.getElementById('co-kpi').innerHTML=[
+    {l:'Revenus',v:FE(rev)},{l:'Encaissé',v:FE(paid)},{l:'Solde ouvert',v:FE(bal)},
+    {l:'Taux encaissement',v:rate},{l:'Inscriptions impayées',v:F(unpaid)},{l:'Solde moyen (impayés)',v:unpaid?FE(bal/unpaid):'—'}
+  ].map(c=>`<div class="kc"><div class="v">${c.v}</div><div class="l">${c.l}</div></div>`).join('');
+  DC('st');CX.st=new Chart(document.getElementById('c-st'),{type:'pie',data:{labels:Object.keys(st),datasets:[{data:Object.values(st),backgroundColor:['#4a6741','#c0392b','#d4a017','#1565c0','#6a1b9a','#e65100']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right'}}}});
 }
 
-// Tab switching
-document.getElementById('tabs').addEventListener('click',e=>{if(e.target.tagName!=='BUTTON')return;document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));e.target.classList.add('active');document.getElementById('tab-'+e.target.dataset.tab).classList.add('active');});
+const PAGE_SIZE=100;let brPage=0,brRows=[];
+function rBr(){
+  brPage=0;
+  brRows=filtered.map(r=>({f:r.from,t2:r.to,ev:r.series,rm:r.room||'—',ni:r.nights,md:r.mealDays,rv:r.revTotal,pd:r.paid,bl:r.balance,st:r.status,ty:r.type,tc:r.teacher||'—'}));
+  brRows.sort((a,b)=>a.f<b.f?-1:a.f>b.f?1:0);
+  renderBrPage();
+  document.getElementById('br-s').oninput=e=>{
+    const q=e.target.value.toLowerCase();
+    brRows=filtered.filter(r=>(r.series+r.room+r.teacher+r.status+r.type).toLowerCase().includes(q))
+      .map(r=>({f:r.from,t2:r.to,ev:r.series,rm:r.room||'—',ni:r.nights,md:r.mealDays,rv:r.revTotal,pd:r.paid,bl:r.balance,st:r.status,ty:r.type,tc:r.teacher||'—'}));
+    brPage=0;renderBrPage();
+  };
+}
+function renderBrPage(){
+  const start=brPage*PAGE_SIZE,end=Math.min(start+PAGE_SIZE,brRows.length);
+  const slice=brRows.slice(start,end);
+  const tbody=document.querySelector('#t-br-t tbody');
+  tbody.innerHTML=slice.map(r=>`<tr><td>${r.f}</td><td>${r.t2}</td><td>${r.ev}</td><td>${r.rm}</td><td class="n">${r.ni}</td><td class="n">${r.md}</td><td class="n">${FE(r.rv)}</td><td class="n">${FE(r.pd)}</td><td class="n">${FE(r.bl)}</td><td>${r.st}</td><td>${r.ty}</td><td>${r.tc}</td></tr>`).join('');
+  const pages=Math.ceil(brRows.length/PAGE_SIZE);
+  document.getElementById('br-pg').innerHTML=`Affichage ${start+1}–${end} sur ${F(brRows.length)} | `+
+    (brPage>0?`<a href="#" onclick="brPrev();return false">← Précédent</a> `:'')+
+    (end<brRows.length?`<a href="#" onclick="brNext();return false">Suivant →</a>`:'');
+}
+function brNext(){brPage++;renderBrPage();}
+function brPrev(){brPage--;renderBrPage();}
 
-// Search tab
-function initSearchTab(){
-  const input=document.getElementById('global-search');
-  input.addEventListener('input',()=>{
-    const q=input.value.trim().toLowerCase();
-    if(!q){document.querySelector('#search-table tbody').innerHTML='';return;}
-    const agg={};
-    filtered.forEach(r=>{
-      if(!agg[r.series])agg[r.series]={n:0,rev:0,bucket:r.bucket,teacher:new Set()};
-      agg[r.series].n++;agg[r.series].rev+=r.revTotal;if(r.teacher)agg[r.series].teacher.add(r.teacher);
-    });
-    const results=Object.entries(agg).filter(([k,v])=>(k+v.bucket+[...v.teacher].join(' ')).toLowerCase().includes(q)).sort((a,b)=>b[1].rev-a[1].rev).slice(0,30);
-    document.querySelector('#search-table tbody').innerHTML=results.map(([k,v])=>`<tr><td>${k}</td><td><span class="bucket-tag ${bucketCls(v.bucket)}">${v.bucket}</span></td><td class="num">${fmtE(v.rev)}</td><td class="num">${v.n}</td><td>${[...v.teacher].join(', ')||'—'}</td></tr>`).join('');
+// Sortable tables
+function renderSortableTable(tableId,data,cols){
+  const table=document.getElementById(tableId);
+  const tbody=table.querySelector('tbody');
+  const render=()=>{
+    tbody.innerHTML=data.map(row=>'<tr>'+cols.map(c=>`<td${c.c?' class="n"':''}>${c.f(row[c.k])}</td>`).join('')+'</tr>').join('');
+  };
+  render();
+  table.querySelectorAll('th[data-k]').forEach(th=>{
+    th.onclick=()=>{
+      const k=th.dataset.k;
+      const desc=th.classList.contains('sorted-asc');
+      table.querySelectorAll('th').forEach(t=>{t.classList.remove('sorted-asc','sorted-desc');});
+      th.classList.add(desc?'sorted-desc':'sorted-asc');
+      data.sort((a,b)=>{const av=a[k],bv=b[k];if(typeof av==='number')return desc?av-bv:bv-av;return desc?String(av).localeCompare(String(bv)):String(bv).localeCompare(String(av));});
+      render();
+    };
   });
 }
 
-init().then(initSearchTab);
+// Tabs
+document.getElementById('tabs').addEventListener('click',e=>{if(e.target.tagName!=='BUTTON')return;
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.tc').forEach(t=>t.classList.remove('on'));
+  e.target.classList.add('on');document.getElementById('t-'+e.target.dataset.t).classList.add('on');});
+
+init();
 </script>
 </body>
 </html>
