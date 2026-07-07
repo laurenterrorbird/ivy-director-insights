@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IVY Director Insights</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7"></script>
+  <style>
+    :root {
+      --bg: #f8f9fa;
+      --card: #ffffff;
+      --accent: #4a6741;
+      --accent-light: #6b8f63;
+      --text: #2c3e2c;
+      --muted: #6c757d;
+      --border: #dee2e6;
+      --warning: #d4a017;
+      --danger: #c0392b;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 1rem; }
+    header { background: var(--accent); color: white; padding: 1rem 0; margin-bottom: 1.5rem; }
+    header h1 { font-size: 1.5rem; font-weight: 600; }
+    header .subtitle { font-size: 0.85rem; opacity: 0.8; }
+    nav { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 1.5rem; overflow-x: auto; }
+    nav button { padding: 0.75rem 1.25rem; border: none; background: none; cursor: pointer; font-size: 0.9rem; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -2px; white-space: nowrap; }
+    nav button.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+    nav button:hover { color: var(--accent-light); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .kpi-card { background: var(--card); border-radius: 8px; padding: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .kpi-card .value { font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+    .kpi-card .label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .card { background: var(--card); border-radius: 8px; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 1.5rem; }
+    .card h3 { margin-bottom: 1rem; font-size: 1.1rem; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th, td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); }
+    th { font-weight: 600; color: var(--muted); font-size: 0.75rem; text-transform: uppercase; }
+    tr:hover { background: #f1f5f1; }
+    .num { text-align: right; font-variant-numeric: tabular-nums; }
+    .chart-container { position: relative; height: 300px; margin: 1rem 0; }
+    .search-box { width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; margin-bottom: 1rem; }
+    .search-box:focus { outline: none; border-color: var(--accent); }
+    .bucket-tag { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 600; }
+    .bucket-tag.retraites { background: #e8f5e9; color: #2e7d32; }
+    .bucket-tag.idmt { background: #e3f2fd; color: #1565c0; }
+    .bucket-tag.benevole { background: #fff3e0; color: #e65100; }
+    .bucket-tag.repas { background: #fce4ec; color: #c62828; }
+    .bucket-tag.sejour { background: #f3e5f5; color: #6a1b9a; }
+    footer { text-align: center; padding: 2rem; font-size: 0.75rem; color: var(--muted); }
+    @media (max-width: 768px) {
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .kpi-card .value { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>IVY Director Insights</h1>
+      <div class="subtitle">Institut Vajra Yogini — Tableau de bord</div>
+    </div>
+  </header>
+
+  <div class="container">
+    <nav id="tabs">
+      <button class="active" data-tab="overview">Vue d'ensemble</button>
+      <button data-tab="events">Événements</button>
+      <button data-tab="seasons">Saisons</button>
+      <button data-tab="lodging">Hébergement</button>
+      <button data-tab="teachers">Enseignants</button>
+      <button data-tab="collections">Encaissements</button>
+      <button data-tab="search">Recherche</button>
+    </nav>
+
+    <!-- OVERVIEW -->
+    <div class="tab-content active" id="tab-overview">
+      <div class="kpi-grid" id="kpi-cards"></div>
+      <div class="card">
+        <h3>Répartition du chiffre d'affaires par catégorie</h3>
+        <div class="chart-container"><canvas id="chart-buckets"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Tendance mensuelle (CA)</h3>
+        <div class="chart-container"><canvas id="chart-monthly"></canvas></div>
+      </div>
+    </div>
+
+    <!-- EVENTS -->
+    <div class="tab-content" id="tab-events">
+      <div class="card">
+        <h3>Retraites & événements par rentabilité</h3>
+        <input class="search-box" id="events-search" placeholder="Rechercher un événement...">
+        <div style="overflow-x:auto">
+          <table id="events-table">
+            <thead><tr>
+              <th>Événement</th><th>Catégorie</th><th class="num">Réservations</th>
+              <th class="num">CA total</th><th class="num">Participation</th>
+              <th class="num">Héberg.</th><th class="num">Repas</th>
+              <th class="num">Solde</th><th>Enseignant</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEASONS -->
+    <div class="tab-content" id="tab-seasons">
+      <div class="card">
+        <h3>Réservations par saison (sept – août)</h3>
+        <div class="chart-container"><canvas id="chart-seasons"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Détail par saison</h3>
+        <table id="seasons-table">
+          <thead><tr><th>Saison</th><th class="num">Total</th><th class="num">Avec héberg.</th><th class="num">Repas seul</th><th class="num">CA</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- LODGING -->
+    <div class="tab-content" id="tab-lodging">
+      <div class="card">
+        <h3>Types de chambre par popularité</h3>
+        <div class="chart-container"><canvas id="chart-rooms"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Détail hébergement</h3>
+        <table id="rooms-table">
+          <thead><tr><th>Type</th><th class="num">Réservations</th><th class="num">CA héberg.</th><th class="num">Nuitées</th><th class="num">€/nuit</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TEACHERS -->
+    <div class="tab-content" id="tab-teachers">
+      <div class="card">
+        <h3>Enseignants par CA associé</h3>
+        <table id="teachers-table">
+          <thead><tr><th>Enseignant</th><th class="num">Réservations</th><th class="num">CA associé</th><th class="num">Événements</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- COLLECTIONS -->
+    <div class="tab-content" id="tab-collections">
+      <div class="card">
+        <h3>Encaissements et soldes</h3>
+        <div class="kpi-grid" id="collections-kpis"></div>
+      </div>
+      <div class="card">
+        <h3>Statuts des réservations</h3>
+        <div class="chart-container"><canvas id="chart-status"></canvas></div>
+      </div>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="tab-content" id="tab-search">
+      <div class="card">
+        <h3>Recherche par événement</h3>
+        <input class="search-box" id="global-search" placeholder="Tapez un nom d'événement, enseignant, type de chambre...">
+        <table id="search-results">
+          <thead><tr><th>Événement</th><th>Catégorie</th><th class="num">CA</th><th class="num">Réservations</th><th>Enseignant</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer"></footer>
+
+  <script>
+    let DATA = null;
+    const fmt = n => n.toLocaleString('fr-FR', {maximumFractionDigits: 0});
+    const fmtEur = n => fmt(n) + ' €';
+
+    function bucketClass(b) {
+      if (b.includes('Retraite')) return 'retraites';
+      if (b.includes('IDMT')) return 'idmt';
+      if (b.includes('Bénévole')) return 'benevole';
+      if (b.includes('Repas')) return 'repas';
+      if (b.includes('Séjour')) return 'sejour';
+      return 'retraites';
+    }
+
+    async function init() {
+      const resp = await fetch('data/summary.json');
+      DATA = await resp.json();
+      renderOverview();
+      renderEvents();
+      renderSeasons();
+      renderLodging();
+      renderTeachers();
+      renderCollections();
+      initSearch();
+      document.getElementById('footer').textContent =
+        `Données : ${DATA.dataSource} — Mis à jour : ${new Date(DATA.updatedAt).toLocaleDateString('fr-FR')}`;
+    }
+
+    function renderOverview() {
+      const k = DATA.kpis;
+      const cards = [
+        { label: 'CA total', value: fmtEur(k.totalRevenue) },
+        { label: 'Encaissé', value: fmtEur(k.totalPayments) },
+        { label: 'Solde ouvert', value: fmtEur(k.openBalance) },
+        { label: 'Réservations', value: fmt(k.totalRows) },
+        { label: 'Confirmées', value: fmt(k.confirmedCount) },
+        { label: 'Annulées', value: fmt(k.canceledCount) },
+        { label: 'Sur place', value: fmt(k.onsiteCount) },
+        { label: 'En ligne', value: fmt(k.onlineCount) },
+      ];
+      document.getElementById('kpi-cards').innerHTML = cards.map(c =>
+        `<div class="kpi-card"><div class="value">${c.value}</div><div class="label">${c.label}</div></div>`
+      ).join('');
+
+      const buckets = DATA.byBucket;
+      const labels = Object.keys(buckets);
+      const values = labels.map(l => buckets[l].revenue_total);
+      new Chart(document.getElementById('chart-buckets'), {
+        type: 'doughnut',
+        data: { labels, datasets: [{ data: values, backgroundColor: ['#4a6741','#1565c0','#e65100','#c62828','#6a1b9a'] }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }
+      });
+
+      const months = DATA.byMonth;
+      new Chart(document.getElementById('chart-monthly'), {
+        type: 'line',
+        data: {
+          labels: months.map(m => m.month),
+          datasets: [{ label: 'CA mensuel', data: months.map(m => m.revenue), borderColor: '#4a6741', fill: true, backgroundColor: 'rgba(74,103,65,0.1)', tension: 0.3 }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } }
+      });
+    }
+
+    function renderEvents() {
+      const tbody = document.querySelector('#events-table tbody');
+      const series = DATA.byEventSeries.filter(s => s.revenue_total > 0);
+      tbody.innerHTML = series.map(s => `<tr>
+        <td>${s.series}</td>
+        <td><span class="bucket-tag ${bucketClass(s.bucket)}">${s.bucket}</span></td>
+        <td class="num">${s.rows}</td>
+        <td class="num">${fmtEur(s.revenue_total)}</td>
+        <td class="num">${fmtEur(s.revenue_attendance)}</td>
+        <td class="num">${fmtEur(s.revenue_lodging)}</td>
+        <td class="num">${fmtEur(s.revenue_meals)}</td>
+        <td class="num">${fmtEur(s.balance)}</td>
+        <td>${s.teachers || '—'}</td>
+      </tr>`).join('');
+
+      document.getElementById('events-search').addEventListener('input', e => {
+        const q = e.target.value.toLowerCase();
+        tbody.querySelectorAll('tr').forEach(tr => {
+          tr.style.display = tr.textContent.toLowerCase().includes(q) ? '' : 'none';
+        });
+      });
+    }
+
+    function renderSeasons() {
+      const seasons = DATA.bySeason;
+      new Chart(document.getElementById('chart-seasons'), {
+        type: 'bar',
+        data: {
+          labels: seasons.map(s => s.season),
+          datasets: [
+            { label: 'Toutes', data: seasons.map(s => s.all), backgroundColor: '#4a6741' },
+            { label: 'Avec hébergement', data: seasons.map(s => s.with_lodging), backgroundColor: '#1565c0' },
+            { label: 'Repas seul', data: seasons.map(s => s.meals_only), backgroundColor: '#e65100' },
+          ]
+        },
+        options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+      });
+      const tbody = document.querySelector('#seasons-table tbody');
+      tbody.innerHTML = seasons.map(s => `<tr>
+        <td>${s.season}</td><td class="num">${fmt(s.all)}</td>
+        <td class="num">${fmt(s.with_lodging)}</td><td class="num">${fmt(s.meals_only)}</td>
+        <td class="num">${fmtEur(s.revenue_total)}</td>
+      </tr>`).join('');
+    }
+
+    function renderLodging() {
+      const rooms = DATA.byRoomType.filter(r => r.bookings > 10);
+      new Chart(document.getElementById('chart-rooms'), {
+        type: 'bar',
+        data: {
+          labels: rooms.map(r => r.room_type),
+          datasets: [{ label: 'Réservations', data: rooms.map(r => r.bookings), backgroundColor: '#4a6741' }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { beginAtZero: true } }, plugins: { legend: { display: false } } }
+      });
+      const tbody = document.querySelector('#rooms-table tbody');
+      tbody.innerHTML = DATA.byRoomType.filter(r => r.bookings > 5).map(r => `<tr>
+        <td>${r.room_type}</td><td class="num">${r.bookings}</td>
+        <td class="num">${fmtEur(r.revenue)}</td><td class="num">${fmt(r.nights)}</td>
+        <td class="num">${r.rev_per_night.toFixed(2)} €</td>
+      </tr>`).join('');
+    }
+
+    function renderTeachers() {
+      const tbody = document.querySelector('#teachers-table tbody');
+      tbody.innerHTML = DATA.byTeacher.map(t => `<tr>
+        <td>${t.teacher}</td><td class="num">${fmt(t.rows)}</td>
+        <td class="num">${fmtEur(t.revenue)}</td><td class="num">${t.events}</td>
+      </tr>`).join('');
+    }
+
+    function renderCollections() {
+      const k = DATA.kpis;
+      const cards = [
+        { label: 'CA total', value: fmtEur(k.totalRevenue) },
+        { label: 'Encaissé', value: fmtEur(k.totalPayments) },
+        { label: 'Solde ouvert', value: fmtEur(k.openBalance) },
+        { label: 'Taux d\'encaissement', value: (100 * k.totalPayments / k.totalRevenue).toFixed(1) + '%' },
+      ];
+      document.getElementById('collections-kpis').innerHTML = cards.map(c =>
+        `<div class="kpi-card"><div class="value">${c.value}</div><div class="label">${c.label}</div></div>`
+      ).join('');
+
+      const statuses = DATA.byStatus;
+      new Chart(document.getElementById('chart-status'), {
+        type: 'pie',
+        data: { labels: Object.keys(statuses), datasets: [{ data: Object.values(statuses), backgroundColor: ['#4a6741','#c0392b','#d4a017','#1565c0','#6a1b9a','#e65100','#888'] }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }
+      });
+    }
+
+    function initSearch() {
+      const fuse = new Fuse(DATA.byEventSeries, { keys: ['series','bucket','teachers'], threshold: 0.3 });
+      const input = document.getElementById('global-search');
+      const tbody = document.querySelector('#search-results tbody');
+      input.addEventListener('input', () => {
+        const q = input.value.trim();
+        if (!q) { tbody.innerHTML = ''; return; }
+        const results = fuse.search(q).slice(0, 30);
+        tbody.innerHTML = results.map(r => r.item).map(s => `<tr>
+          <td>${s.series}</td>
+          <td><span class="bucket-tag ${bucketClass(s.bucket)}">${s.bucket}</span></td>
+          <td class="num">${fmtEur(s.revenue_total)}</td>
+          <td class="num">${s.rows}</td>
+          <td>${s.teachers || '—'}</td>
+        </tr>`).join('');
+      });
+    }
+
+    // Tab switching
+    document.getElementById('tabs').addEventListener('click', e => {
+      if (e.target.tagName !== 'BUTTON') return;
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      e.target.classList.add('active');
+      document.getElementById('tab-' + e.target.dataset.tab).classList.add('active');
+    });
+
+    init();
+  </script>
+</body>
+</html>

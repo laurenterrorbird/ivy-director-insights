@@ -1,0 +1,9 @@
+# Data files (large, gitignored)
+data/bookings_extract.tsv
+data/*.csv
+data/*.parquet
+downloads/
+
+# Credentials
+credentials.json
+*.env
