@@ -73,7 +73,7 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
   <button class="on" data-t="ov">Vue d'ensemble</button>
   <button data-t="ev">Événements</button>
   <button data-t="se">Saisons</button>
-  <button data-t="lo">Hébergement & Occupation</button>
+  <button data-t="lo">Hébergement</button>
   <button data-t="te">Enseignants</button>
   <button data-t="co">Encaissements</button>
   <button data-t="br">Détail réservations</button>
@@ -116,17 +116,16 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
 <div class="tc" id="t-lo">
   <div class="kg" id="lo-kpi"></div>
   <div class="card">
-    <h3>Taux d'occupation par type de chambre</h3>
-    <div class="note">Occupation chambre = % de nuits où au moins 1 personne occupait la chambre. Occupation lits = % de lits-nuits utilisés. Sous-occupation = nuits où une chambre partagée avait moins de personnes que de lits.</div>
+    <h3>Utilisation des lits par type d'hébergement</h3>
+    <div class="note">Lits dispo. = nombre de lits × jours dans la période. Personnes-nuits = nombre de personnes hébergées × nuits. Taux d'utilisation = personnes-nuits / lits disponibles. Sous-occupation = nuits où une chambre partagée avait des lits vides.</div>
     <table id="t-lo-t"><thead><tr>
-      <th data-k="name">Type</th><th class="n" data-k="rooms">Chambres</th><th class="n" data-k="beds">Lits</th>
-      <th class="n" data-k="avail">Nuits dispo.</th><th class="n" data-k="occRN">Nuits occupées</th>
-      <th class="n" data-k="occPct">Occ. chambre %</th>
-      <th class="n" data-k="pn">Pers.-nuits</th><th class="n" data-k="bedPct">Occ. lits %</th>
-      <th class="n" data-k="under">Sous-occ. nuits</th><th class="n" data-k="single">Seul en partagée</th>
+      <th data-k="name">Type d'hébergement</th><th class="n" data-k="beds">Lits</th>
+      <th class="n" data-k="bedAvail">Lits-nuits dispo.</th>
+      <th class="n" data-k="pn">Personnes-nuits</th><th class="n" data-k="bedPct">Utilisation lits %</th>
+      <th class="n" data-k="under">Nuits sous-occupées</th><th class="n" data-k="single">Nuits 1 seul en partagée</th>
     </tr></thead><tbody></tbody></table>
   </div>
-  <div class="card"><h3>Occupation mensuelle par type</h3><div class="cc" style="height:320px"><canvas id="c-occ"></canvas></div></div>
+  <div class="card"><h3>Utilisation des lits par mois (%)</h3><div class="cc" style="height:320px"><canvas id="c-occ"></canvas></div></div>
   <div class="card">
     <h3>Popularité (inscriptions avec hébergement)</h3>
     <div class="cc"><canvas id="c-rm"></canvas></div>
@@ -325,22 +324,21 @@ function rLo(){
     totalRoomNightsAvail+=avail;totalRoomNightsOcc+=roomNightsOcc;
     totalBedNightsAvail+=bedAvail;totalPersonNights+=personNights;totalUnder+=underOcc;
 
-    typeRows.push({name:info.name,rooms:info.rooms,beds:info.beds,avail,occRN:roomNightsOcc,occPct,pn:personNights,bedPct,under:underOcc,single:info.singleUseNights||0});
+    typeRows.push({name:info.name,rooms:info.rooms,beds:info.beds,bedAvail:bedAvail,occRN:roomNightsOcc,occPct,pn:personNights,bedPct,under:underOcc,single:info.singleUseNights||0});
   }
-  typeRows.sort((a,b)=>b.occPct-a.occPct);
+  typeRows.sort((a,b)=>b.bedPct-a.bedPct);
 
   const overallRoom=totalRoomNightsAvail>0?totalRoomNightsOcc/totalRoomNightsAvail:0;
   const overallBed=totalBedNightsAvail>0?totalPersonNights/totalBedNightsAvail:0;
 
   document.getElementById('lo-kpi').innerHTML=[
-    {l:'Occ. chambres (global)',v:FP(overallRoom)},{l:'Occ. lits (global)',v:FP(overallBed)},
-    {l:'Nuits sous-occupées',v:F(totalUnder)},{l:'Jours dans la période',v:F(totalDays)}
+    {l:'Utilisation globale des lits',v:FP(overallBed)},{l:'Lits-nuits disponibles',v:F(totalBedNightsAvail)},
+    {l:'Personnes-nuits hébergées',v:F(totalPersonNights)},{l:'Nuits sous-occupées',v:F(totalUnder)}
   ].map(c=>`<div class="kc"><div class="v">${c.v}</div><div class="l">${c.l}</div></div>`).join('');
 
   sortableTable('t-lo-t',typeRows,[
-    {k:'name',f:v=>v},{k:'rooms',f:F,c:'n'},{k:'beds',f:F,c:'n'},
-    {k:'avail',f:F,c:'n'},{k:'occRN',f:F,c:'n'},
-    {k:'occPct',f:FP,c:'n'},{k:'pn',f:F,c:'n'},{k:'bedPct',f:FP,c:'n'},
+    {k:'name',f:v=>v},{k:'beds',f:F,c:'n'},
+    {k:'bedAvail',f:F,c:'n'},{k:'pn',f:F,c:'n'},{k:'bedPct',f:FP,c:'n'},
     {k:'under',f:F,c:'n'},{k:'single',f:F,c:'n'}
   ]);
 
@@ -357,12 +355,12 @@ function rLo(){
       const v=ROCC[typeCode]?.months[m];
       if(!v)return 0;
       const daysInMonth=new Date(+m.slice(0,4),+m.slice(5,7),0).getDate();
-      const avail=t.rooms*daysInMonth;
-      return avail>0?Math.round(100*v[0]/avail):0;
+      const bedAvail=t.beds*daysInMonth;
+      return bedAvail>0?Math.round(100*v[1]/bedAvail):0;
     });
     return{label:t.name,data,borderColor:colors[i%5],backgroundColor:colors[i%5]+'30',tension:.3,fill:false};
   });
-  DC('occ');CX.occ=new Chart(document.getElementById('c-occ'),{type:'line',data:{labels:months,datasets},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,max:100,title:{display:true,text:'% occupation chambre'}}},plugins:{legend:{position:'top'}}}});
+  DC('occ');CX.occ=new Chart(document.getElementById('c-occ'),{type:'line',data:{labels:months,datasets},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,max:100,title:{display:true,text:'% utilisation des lits'}}},plugins:{legend:{position:'top'}}}});
 
   // Room popularity from bookings
   const roomPop={};
