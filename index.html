@@ -7,358 +7,343 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7"></script>
   <style>
-    :root {
-      --bg: #f8f9fa;
-      --card: #ffffff;
-      --accent: #4a6741;
-      --accent-light: #6b8f63;
-      --text: #2c3e2c;
-      --muted: #6c757d;
-      --border: #dee2e6;
-      --warning: #d4a017;
-      --danger: #c0392b;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
-    .container { max-width: 1400px; margin: 0 auto; padding: 1rem; }
-    header { background: var(--accent); color: white; padding: 1rem 0; margin-bottom: 1.5rem; }
-    header h1 { font-size: 1.5rem; font-weight: 600; }
-    header .subtitle { font-size: 0.85rem; opacity: 0.8; }
-    nav { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 1.5rem; overflow-x: auto; }
-    nav button { padding: 0.75rem 1.25rem; border: none; background: none; cursor: pointer; font-size: 0.9rem; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -2px; white-space: nowrap; }
-    nav button.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
-    nav button:hover { color: var(--accent-light); }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-    .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-    .kpi-card { background: var(--card); border-radius: 8px; padding: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
-    .kpi-card .value { font-size: 1.8rem; font-weight: 700; color: var(--accent); }
-    .kpi-card .label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
-    .card { background: var(--card); border-radius: 8px; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); margin-bottom: 1.5rem; }
-    .card h3 { margin-bottom: 1rem; font-size: 1.1rem; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-    th, td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--border); }
-    th { font-weight: 600; color: var(--muted); font-size: 0.75rem; text-transform: uppercase; }
-    tr:hover { background: #f1f5f1; }
-    .num { text-align: right; font-variant-numeric: tabular-nums; }
-    .chart-container { position: relative; height: 300px; margin: 1rem 0; }
-    .search-box { width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 6px; font-size: 0.9rem; margin-bottom: 1rem; }
-    .search-box:focus { outline: none; border-color: var(--accent); }
-    .bucket-tag { display: inline-block; padding: 0.15rem 0.5rem; border-radius: 3px; font-size: 0.7rem; font-weight: 600; }
-    .bucket-tag.retraites { background: #e8f5e9; color: #2e7d32; }
-    .bucket-tag.idmt { background: #e3f2fd; color: #1565c0; }
-    .bucket-tag.benevole { background: #fff3e0; color: #e65100; }
-    .bucket-tag.repas { background: #fce4ec; color: #c62828; }
-    .bucket-tag.sejour { background: #f3e5f5; color: #6a1b9a; }
-    footer { text-align: center; padding: 2rem; font-size: 0.75rem; color: var(--muted); }
-    @media (max-width: 768px) {
-      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-      .kpi-card .value { font-size: 1.4rem; }
-    }
+    :root { --bg:#f8f9fa; --card:#fff; --accent:#4a6741; --accent-light:#6b8f63; --text:#2c3e2c; --muted:#6c757d; --border:#dee2e6; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--text); line-height:1.5; }
+    .container { max-width:1400px; margin:0 auto; padding:1rem; }
+    header { background:var(--accent); color:#fff; padding:1rem 0; margin-bottom:1rem; }
+    header h1 { font-size:1.4rem; font-weight:600; }
+    header .sub { font-size:.8rem; opacity:.8; }
+
+    .filter-bar { background:var(--card); border-radius:8px; padding:1rem 1.25rem; margin-bottom:1.5rem; box-shadow:0 1px 3px rgba(0,0,0,.08); display:flex; flex-wrap:wrap; gap:.75rem; align-items:center; }
+    .filter-bar label { font-size:.8rem; font-weight:600; color:var(--muted); text-transform:uppercase; }
+    .filter-bar input[type=date] { padding:.4rem .6rem; border:1px solid var(--border); border-radius:4px; font-size:.85rem; }
+    .filter-bar select { padding:.4rem .6rem; border:1px solid var(--border); border-radius:4px; font-size:.85rem; }
+    .filter-bar .preset-btn { padding:.35rem .7rem; border:1px solid var(--border); border-radius:4px; background:#fff; cursor:pointer; font-size:.8rem; }
+    .filter-bar .preset-btn:hover { border-color:var(--accent); color:var(--accent); }
+    .filter-bar .preset-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .filter-bar .count { font-size:.8rem; color:var(--muted); margin-left:auto; }
+
+    nav { display:flex; gap:0; border-bottom:2px solid var(--border); margin-bottom:1.5rem; overflow-x:auto; }
+    nav button { padding:.7rem 1.1rem; border:none; background:none; cursor:pointer; font-size:.85rem; color:var(--muted); border-bottom:2px solid transparent; margin-bottom:-2px; white-space:nowrap; }
+    nav button.active { color:var(--accent); border-bottom-color:var(--accent); font-weight:600; }
+    .tab-content { display:none; } .tab-content.active { display:block; }
+
+    .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:.75rem; margin-bottom:1.5rem; }
+    .kpi-card { background:var(--card); border-radius:8px; padding:1rem; box-shadow:0 1px 3px rgba(0,0,0,.08); }
+    .kpi-card .value { font-size:1.6rem; font-weight:700; color:var(--accent); }
+    .kpi-card .label { font-size:.75rem; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; }
+    .card { background:var(--card); border-radius:8px; padding:1.25rem; box-shadow:0 1px 3px rgba(0,0,0,.08); margin-bottom:1.25rem; }
+    .card h3 { margin-bottom:.75rem; font-size:1rem; }
+    table { width:100%; border-collapse:collapse; font-size:.82rem; }
+    th,td { text-align:left; padding:.45rem .6rem; border-bottom:1px solid var(--border); }
+    th { font-weight:600; color:var(--muted); font-size:.72rem; text-transform:uppercase; cursor:pointer; }
+    th:hover { color:var(--accent); }
+    tr:hover { background:#f1f5f1; }
+    .num { text-align:right; font-variant-numeric:tabular-nums; }
+    .chart-container { position:relative; height:280px; margin:.75rem 0; }
+    .search-box { width:100%; padding:.6rem .9rem; border:1px solid var(--border); border-radius:6px; font-size:.85rem; margin-bottom:.75rem; }
+    .search-box:focus { outline:none; border-color:var(--accent); }
+    .bucket-tag { display:inline-block; padding:.1rem .4rem; border-radius:3px; font-size:.68rem; font-weight:600; }
+    .bucket-tag.ret { background:#e8f5e9; color:#2e7d32; }
+    .bucket-tag.idmt { background:#e3f2fd; color:#1565c0; }
+    .bucket-tag.ben { background:#fff3e0; color:#e65100; }
+    .bucket-tag.rep { background:#fce4ec; color:#c62828; }
+    .bucket-tag.sej { background:#f3e5f5; color:#6a1b9a; }
+    footer { text-align:center; padding:2rem; font-size:.72rem; color:var(--muted); }
+    @media(max-width:768px) { .kpi-grid { grid-template-columns:repeat(2,1fr); } .filter-bar { flex-direction:column; align-items:stretch; } }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <h1>IVY Director Insights</h1>
-      <div class="subtitle">Institut Vajra Yogini — Tableau de bord</div>
-    </div>
-  </header>
+<header><div class="container"><h1>IVY Director Insights</h1><div class="sub">Institut Vajra Yogini — Tableau de bord directeur</div></div></header>
+<div class="container">
 
-  <div class="container">
-    <nav id="tabs">
-      <button class="active" data-tab="overview">Vue d'ensemble</button>
-      <button data-tab="events">Événements</button>
-      <button data-tab="seasons">Saisons</button>
-      <button data-tab="lodging">Hébergement</button>
-      <button data-tab="teachers">Enseignants</button>
-      <button data-tab="collections">Encaissements</button>
-      <button data-tab="search">Recherche</button>
-    </nav>
+<div class="filter-bar" id="filter-bar">
+  <label>Période :</label>
+  <input type="date" id="f-from"> <span>→</span> <input type="date" id="f-to">
+  <label style="margin-left:.5rem">Préréglages :</label>
+  <button class="preset-btn" data-preset="2324">2023–24</button>
+  <button class="preset-btn" data-preset="2425">2024–25</button>
+  <button class="preset-btn" data-preset="2526">2025–26</button>
+  <button class="preset-btn" data-preset="all">Tout</button>
+  <select id="f-month">
+    <option value="">— Mois —</option>
+  </select>
+  <span class="count" id="f-count"></span>
+</div>
 
-    <!-- OVERVIEW -->
-    <div class="tab-content active" id="tab-overview">
-      <div class="kpi-grid" id="kpi-cards"></div>
-      <div class="card">
-        <h3>Répartition du chiffre d'affaires par catégorie</h3>
-        <div class="chart-container"><canvas id="chart-buckets"></canvas></div>
-      </div>
-      <div class="card">
-        <h3>Tendance mensuelle (CA)</h3>
-        <div class="chart-container"><canvas id="chart-monthly"></canvas></div>
-      </div>
-    </div>
+<nav id="tabs">
+  <button class="active" data-tab="overview">Vue d'ensemble</button>
+  <button data-tab="events">Événements</button>
+  <button data-tab="seasons">Saisons</button>
+  <button data-tab="lodging">Hébergement</button>
+  <button data-tab="teachers">Enseignants</button>
+  <button data-tab="collections">Encaissements</button>
+  <button data-tab="search">Recherche</button>
+</nav>
 
-    <!-- EVENTS -->
-    <div class="tab-content" id="tab-events">
-      <div class="card">
-        <h3>Retraites & événements par rentabilité</h3>
-        <input class="search-box" id="events-search" placeholder="Rechercher un événement...">
-        <div style="overflow-x:auto">
-          <table id="events-table">
-            <thead><tr>
-              <th>Événement</th><th>Catégorie</th><th class="num">Réservations</th>
-              <th class="num">CA total</th><th class="num">Participation</th>
-              <th class="num">Héberg.</th><th class="num">Repas</th>
-              <th class="num">Solde</th><th>Enseignant</th>
-            </tr></thead>
-            <tbody></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+<div class="tab-content active" id="tab-overview">
+  <div class="kpi-grid" id="kpi-cards"></div>
+  <div class="card"><h3>Revenus par catégorie</h3><div class="chart-container"><canvas id="chart-buckets"></canvas></div></div>
+  <div class="card"><h3>Revenus mensuels</h3><div class="chart-container"><canvas id="chart-monthly"></canvas></div></div>
+</div>
 
-    <!-- SEASONS -->
-    <div class="tab-content" id="tab-seasons">
-      <div class="card">
-        <h3>Réservations par saison (sept – août)</h3>
-        <div class="chart-container"><canvas id="chart-seasons"></canvas></div>
-      </div>
-      <div class="card">
-        <h3>Détail par saison</h3>
-        <table id="seasons-table">
-          <thead><tr><th>Saison</th><th class="num">Total</th><th class="num">Avec héberg.</th><th class="num">Repas seul</th><th class="num">CA</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </div>
+<div class="tab-content" id="tab-events">
+  <div class="card"><h3>Événements & retraites classés par revenus</h3>
+  <input class="search-box" id="ev-search" placeholder="Rechercher...">
+  <div style="overflow-x:auto"><table id="ev-table"><thead><tr>
+    <th>Événement</th><th>Catégorie</th><th class="num">Réservations</th>
+    <th class="num">Revenus</th><th class="num">Participation</th>
+    <th class="num">Héberg.</th><th class="num">Repas</th><th class="num">Solde</th><th>Enseignant</th>
+  </tr></thead><tbody></tbody></table></div></div>
+</div>
 
-    <!-- LODGING -->
-    <div class="tab-content" id="tab-lodging">
-      <div class="card">
-        <h3>Types de chambre par popularité</h3>
-        <div class="chart-container"><canvas id="chart-rooms"></canvas></div>
-      </div>
-      <div class="card">
-        <h3>Détail hébergement</h3>
-        <table id="rooms-table">
-          <thead><tr><th>Type</th><th class="num">Réservations</th><th class="num">CA héberg.</th><th class="num">Nuitées</th><th class="num">€/nuit</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </div>
+<div class="tab-content" id="tab-seasons">
+  <div class="card"><h3>Réservations par saison (sept – août)</h3><div class="chart-container"><canvas id="chart-seasons"></canvas></div></div>
+  <div class="card"><table id="season-table"><thead><tr><th>Saison</th><th class="num">Total</th><th class="num">Avec héberg.</th><th class="num">Repas seul</th><th class="num">Revenus</th></tr></thead><tbody></tbody></table></div>
+</div>
 
-    <!-- TEACHERS -->
-    <div class="tab-content" id="tab-teachers">
-      <div class="card">
-        <h3>Enseignants par CA associé</h3>
-        <table id="teachers-table">
-          <thead><tr><th>Enseignant</th><th class="num">Réservations</th><th class="num">CA associé</th><th class="num">Événements</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </div>
+<div class="tab-content" id="tab-lodging">
+  <div class="card"><h3>Types de chambre</h3><div class="chart-container"><canvas id="chart-rooms"></canvas></div></div>
+  <div class="card"><table id="room-table"><thead><tr><th>Type</th><th class="num">Réservations</th><th class="num">Revenus héberg.</th><th class="num">Nuitées</th><th class="num">€/nuit</th></tr></thead><tbody></tbody></table></div>
+</div>
 
-    <!-- COLLECTIONS -->
-    <div class="tab-content" id="tab-collections">
-      <div class="card">
-        <h3>Encaissements et soldes</h3>
-        <div class="kpi-grid" id="collections-kpis"></div>
-      </div>
-      <div class="card">
-        <h3>Statuts des réservations</h3>
-        <div class="chart-container"><canvas id="chart-status"></canvas></div>
-      </div>
-    </div>
+<div class="tab-content" id="tab-teachers">
+  <div class="card"><h3>Enseignants par revenus associés</h3>
+  <table id="teach-table"><thead><tr><th>Enseignant</th><th class="num">Réservations</th><th class="num">Revenus</th><th class="num">Événements</th></tr></thead><tbody></tbody></table></div>
+</div>
 
-    <!-- SEARCH -->
-    <div class="tab-content" id="tab-search">
-      <div class="card">
-        <h3>Recherche par événement</h3>
-        <input class="search-box" id="global-search" placeholder="Tapez un nom d'événement, enseignant, type de chambre...">
-        <table id="search-results">
-          <thead><tr><th>Événement</th><th>Catégorie</th><th class="num">CA</th><th class="num">Réservations</th><th>Enseignant</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+<div class="tab-content" id="tab-collections">
+  <div class="kpi-grid" id="coll-kpis"></div>
+  <div class="card"><h3>Statuts</h3><div class="chart-container"><canvas id="chart-status"></canvas></div></div>
+</div>
 
-  <footer id="footer"></footer>
+<div class="tab-content" id="tab-search">
+  <div class="card"><h3>Recherche</h3>
+  <input class="search-box" id="global-search" placeholder="Événement, enseignant, type de chambre...">
+  <table id="search-table"><thead><tr><th>Événement</th><th>Catégorie</th><th class="num">Revenus</th><th class="num">N</th><th>Enseignant</th></tr></thead><tbody></tbody></table></div>
+</div>
 
-  <script>
-    let DATA = null;
-    const fmt = n => n.toLocaleString('fr-FR', {maximumFractionDigits: 0});
-    const fmtEur = n => fmt(n) + ' €';
+</div>
+<footer id="footer"></footer>
 
-    function bucketClass(b) {
-      if (b.includes('Retraite')) return 'retraites';
-      if (b.includes('IDMT')) return 'idmt';
-      if (b.includes('Bénévole')) return 'benevole';
-      if (b.includes('Repas')) return 'repas';
-      if (b.includes('Séjour')) return 'sejour';
-      return 'retraites';
+<script>
+let RAW=null, STRINGS=null, EVENTS=null, TEACHERS=null, ROOMS=null;
+let filtered=[];
+let charts={};
+
+const fmt=n=>n.toLocaleString('fr-FR',{maximumFractionDigits:0});
+const fmtE=n=>fmt(n)+' €';
+function str(idx,dict){return idx<0?'':dict[idx]||'';}
+function bucketCls(b){
+  if(b.includes('Retraite'))return 'ret';
+  if(b.includes('IDMT'))return 'idmt';
+  if(b.includes('Bénévole'))return 'ben';
+  if(b.includes('Repas'))return 'rep';
+  if(b.includes('Séjour'))return 'sej';
+  return 'ret';
+}
+
+function parseRow(r){
+  return{
+    from:r[0],to:r[1],mid:r[2],
+    series:str(r[3],STRINGS),bucket:str(r[4],STRINGS),
+    event:str(r[5],EVENTS),room:str(r[6],ROOMS),
+    nights:r[7],mealDays:r[8],
+    revAtt:r[9],revLodg:r[10],revMeals:r[11],revMisc:r[12],revTotal:r[13],
+    paid:r[14],balance:r[15],
+    status:str(r[16],STRINGS),type:str(r[17],STRINGS),
+    teacher:str(r[18],TEACHERS)
+  };
+}
+
+function midMonth(row){return row.mid?row.mid.slice(0,7):row.from.slice(0,7);}
+function fiscalSeason(dateStr){
+  if(!dateStr)return null;
+  const m=parseInt(dateStr.slice(5,7)), y=parseInt(dateStr.slice(0,4));
+  return m>=9?y:y-1;
+}
+
+async function init(){
+  const resp=await fetch('data/bookings.json');
+  const data=await resp.json();
+  // Build reverse lookup dicts (key->string)
+  STRINGS=Object.fromEntries(Object.entries(data.strings).map(([k,v])=>[v,k]));
+  EVENTS=Object.fromEntries(Object.entries(data.events).map(([k,v])=>[v,k]));
+  TEACHERS=Object.fromEntries(Object.entries(data.teachers).map(([k,v])=>[v,k]));
+  ROOMS=Object.fromEntries(Object.entries(data.rooms).map(([k,v])=>[v,k]));
+  RAW=data.rows.map(parseRow);
+
+  setupFilters();
+  applyFilter();
+  document.getElementById('footer').textContent=`Source : ${data.dataSource} — Mis à jour : ${new Date(data.updatedAt).toLocaleDateString('fr-FR')}`;
+}
+
+function setupFilters(){
+  const months=new Set();
+  RAW.forEach(r=>{const m=midMonth(r);if(m)months.add(m);});
+  const sel=document.getElementById('f-month');
+  [...months].sort().forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=m;sel.appendChild(o);});
+
+  document.getElementById('f-from').value='2023-09-01';
+  document.getElementById('f-to').value='2026-08-31';
+
+  document.getElementById('f-from').addEventListener('change',applyFilter);
+  document.getElementById('f-to').addEventListener('change',applyFilter);
+  document.getElementById('f-month').addEventListener('change',e=>{
+    if(e.target.value){
+      const y=parseInt(e.target.value.slice(0,4)),m=parseInt(e.target.value.slice(5,7));
+      const start=e.target.value+'-01';
+      const end=new Date(y,m,0).toISOString().slice(0,10);
+      document.getElementById('f-from').value=start;
+      document.getElementById('f-to').value=end;
     }
+    applyFilter();
+  });
 
-    async function init() {
-      const resp = await fetch('data/summary.json');
-      DATA = await resp.json();
-      renderOverview();
-      renderEvents();
-      renderSeasons();
-      renderLodging();
-      renderTeachers();
-      renderCollections();
-      initSearch();
-      document.getElementById('footer').textContent =
-        `Données : ${DATA.dataSource} — Mis à jour : ${new Date(DATA.updatedAt).toLocaleDateString('fr-FR')}`;
-    }
-
-    function renderOverview() {
-      const k = DATA.kpis;
-      const cards = [
-        { label: 'CA total', value: fmtEur(k.totalRevenue) },
-        { label: 'Encaissé', value: fmtEur(k.totalPayments) },
-        { label: 'Solde ouvert', value: fmtEur(k.openBalance) },
-        { label: 'Réservations', value: fmt(k.totalRows) },
-        { label: 'Confirmées', value: fmt(k.confirmedCount) },
-        { label: 'Annulées', value: fmt(k.canceledCount) },
-        { label: 'Sur place', value: fmt(k.onsiteCount) },
-        { label: 'En ligne', value: fmt(k.onlineCount) },
-      ];
-      document.getElementById('kpi-cards').innerHTML = cards.map(c =>
-        `<div class="kpi-card"><div class="value">${c.value}</div><div class="label">${c.label}</div></div>`
-      ).join('');
-
-      const buckets = DATA.byBucket;
-      const labels = Object.keys(buckets);
-      const values = labels.map(l => buckets[l].revenue_total);
-      new Chart(document.getElementById('chart-buckets'), {
-        type: 'doughnut',
-        data: { labels, datasets: [{ data: values, backgroundColor: ['#4a6741','#1565c0','#e65100','#c62828','#6a1b9a'] }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }
-      });
-
-      const months = DATA.byMonth;
-      new Chart(document.getElementById('chart-monthly'), {
-        type: 'line',
-        data: {
-          labels: months.map(m => m.month),
-          datasets: [{ label: 'CA mensuel', data: months.map(m => m.revenue), borderColor: '#4a6741', fill: true, backgroundColor: 'rgba(74,103,65,0.1)', tension: 0.3 }]
-        },
-        options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } }
-      });
-    }
-
-    function renderEvents() {
-      const tbody = document.querySelector('#events-table tbody');
-      const series = DATA.byEventSeries.filter(s => s.revenue_total > 0);
-      tbody.innerHTML = series.map(s => `<tr>
-        <td>${s.series}</td>
-        <td><span class="bucket-tag ${bucketClass(s.bucket)}">${s.bucket}</span></td>
-        <td class="num">${s.rows}</td>
-        <td class="num">${fmtEur(s.revenue_total)}</td>
-        <td class="num">${fmtEur(s.revenue_attendance)}</td>
-        <td class="num">${fmtEur(s.revenue_lodging)}</td>
-        <td class="num">${fmtEur(s.revenue_meals)}</td>
-        <td class="num">${fmtEur(s.balance)}</td>
-        <td>${s.teachers || '—'}</td>
-      </tr>`).join('');
-
-      document.getElementById('events-search').addEventListener('input', e => {
-        const q = e.target.value.toLowerCase();
-        tbody.querySelectorAll('tr').forEach(tr => {
-          tr.style.display = tr.textContent.toLowerCase().includes(q) ? '' : 'none';
-        });
-      });
-    }
-
-    function renderSeasons() {
-      const seasons = DATA.bySeason;
-      new Chart(document.getElementById('chart-seasons'), {
-        type: 'bar',
-        data: {
-          labels: seasons.map(s => s.season),
-          datasets: [
-            { label: 'Toutes', data: seasons.map(s => s.all), backgroundColor: '#4a6741' },
-            { label: 'Avec hébergement', data: seasons.map(s => s.with_lodging), backgroundColor: '#1565c0' },
-            { label: 'Repas seul', data: seasons.map(s => s.meals_only), backgroundColor: '#e65100' },
-          ]
-        },
-        options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
-      });
-      const tbody = document.querySelector('#seasons-table tbody');
-      tbody.innerHTML = seasons.map(s => `<tr>
-        <td>${s.season}</td><td class="num">${fmt(s.all)}</td>
-        <td class="num">${fmt(s.with_lodging)}</td><td class="num">${fmt(s.meals_only)}</td>
-        <td class="num">${fmtEur(s.revenue_total)}</td>
-      </tr>`).join('');
-    }
-
-    function renderLodging() {
-      const rooms = DATA.byRoomType.filter(r => r.bookings > 10);
-      new Chart(document.getElementById('chart-rooms'), {
-        type: 'bar',
-        data: {
-          labels: rooms.map(r => r.room_type),
-          datasets: [{ label: 'Réservations', data: rooms.map(r => r.bookings), backgroundColor: '#4a6741' }]
-        },
-        options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { beginAtZero: true } }, plugins: { legend: { display: false } } }
-      });
-      const tbody = document.querySelector('#rooms-table tbody');
-      tbody.innerHTML = DATA.byRoomType.filter(r => r.bookings > 5).map(r => `<tr>
-        <td>${r.room_type}</td><td class="num">${r.bookings}</td>
-        <td class="num">${fmtEur(r.revenue)}</td><td class="num">${fmt(r.nights)}</td>
-        <td class="num">${r.rev_per_night.toFixed(2)} €</td>
-      </tr>`).join('');
-    }
-
-    function renderTeachers() {
-      const tbody = document.querySelector('#teachers-table tbody');
-      tbody.innerHTML = DATA.byTeacher.map(t => `<tr>
-        <td>${t.teacher}</td><td class="num">${fmt(t.rows)}</td>
-        <td class="num">${fmtEur(t.revenue)}</td><td class="num">${t.events}</td>
-      </tr>`).join('');
-    }
-
-    function renderCollections() {
-      const k = DATA.kpis;
-      const cards = [
-        { label: 'CA total', value: fmtEur(k.totalRevenue) },
-        { label: 'Encaissé', value: fmtEur(k.totalPayments) },
-        { label: 'Solde ouvert', value: fmtEur(k.openBalance) },
-        { label: 'Taux d\'encaissement', value: (100 * k.totalPayments / k.totalRevenue).toFixed(1) + '%' },
-      ];
-      document.getElementById('collections-kpis').innerHTML = cards.map(c =>
-        `<div class="kpi-card"><div class="value">${c.value}</div><div class="label">${c.label}</div></div>`
-      ).join('');
-
-      const statuses = DATA.byStatus;
-      new Chart(document.getElementById('chart-status'), {
-        type: 'pie',
-        data: { labels: Object.keys(statuses), datasets: [{ data: Object.values(statuses), backgroundColor: ['#4a6741','#c0392b','#d4a017','#1565c0','#6a1b9a','#e65100','#888'] }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }
-      });
-    }
-
-    function initSearch() {
-      const fuse = new Fuse(DATA.byEventSeries, { keys: ['series','bucket','teachers'], threshold: 0.3 });
-      const input = document.getElementById('global-search');
-      const tbody = document.querySelector('#search-results tbody');
-      input.addEventListener('input', () => {
-        const q = input.value.trim();
-        if (!q) { tbody.innerHTML = ''; return; }
-        const results = fuse.search(q).slice(0, 30);
-        tbody.innerHTML = results.map(r => r.item).map(s => `<tr>
-          <td>${s.series}</td>
-          <td><span class="bucket-tag ${bucketClass(s.bucket)}">${s.bucket}</span></td>
-          <td class="num">${fmtEur(s.revenue_total)}</td>
-          <td class="num">${s.rows}</td>
-          <td>${s.teachers || '—'}</td>
-        </tr>`).join('');
-      });
-    }
-
-    // Tab switching
-    document.getElementById('tabs').addEventListener('click', e => {
-      if (e.target.tagName !== 'BUTTON') return;
-      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-      e.target.classList.add('active');
-      document.getElementById('tab-' + e.target.dataset.tab).classList.add('active');
+  document.querySelectorAll('.preset-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.preset-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('f-month').value='';
+      const p=btn.dataset.preset;
+      if(p==='all'){document.getElementById('f-from').value='2023-09-01';document.getElementById('f-to').value='2028-12-31';}
+      else if(p==='2324'){document.getElementById('f-from').value='2023-09-01';document.getElementById('f-to').value='2024-08-31';}
+      else if(p==='2425'){document.getElementById('f-from').value='2024-09-01';document.getElementById('f-to').value='2025-08-31';}
+      else if(p==='2526'){document.getElementById('f-from').value='2025-09-01';document.getElementById('f-to').value='2026-08-31';}
+      applyFilter();
     });
+  });
+}
 
-    init();
-  </script>
+function applyFilter(){
+  const from=document.getElementById('f-from').value;
+  const to=document.getElementById('f-to').value;
+  filtered=RAW.filter(r=>{
+    const d=r.mid||r.from;
+    return d>=from && d<=to;
+  });
+  document.getElementById('f-count').textContent=`${fmt(filtered.length)} réservations`;
+  render();
+}
+
+function render(){
+  renderOverview();renderEvents();renderSeasons();renderLodging();renderTeachers();renderCollections();
+}
+
+function destroyChart(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
+
+function renderOverview(){
+  const k={rev:0,paid:0,bal:0,n:filtered.length,conf:0,canc:0,online:0,onsite:0};
+  filtered.forEach(r=>{k.rev+=r.revTotal;k.paid+=r.paid;if(r.balance>0)k.bal+=r.balance;if(r.status==='Confirmed')k.conf++;if(r.status==='Canceled')k.canc++;if(r.type==='online')k.online++;if(r.type==='on-site')k.onsite++;});
+  document.getElementById('kpi-cards').innerHTML=[
+    {l:'Revenus totaux',v:fmtE(k.rev)},{l:'Encaissé',v:fmtE(k.paid)},{l:'Solde ouvert',v:fmtE(k.bal)},
+    {l:'Réservations',v:fmt(k.n)},{l:'Confirmées',v:fmt(k.conf)},{l:'Annulées',v:fmt(k.canc)},
+    {l:'Sur place',v:fmt(k.onsite)},{l:'En ligne',v:fmt(k.online)}
+  ].map(c=>`<div class="kpi-card"><div class="value">${c.v}</div><div class="label">${c.l}</div></div>`).join('');
+
+  const buckets={};
+  filtered.forEach(r=>{if(!buckets[r.bucket])buckets[r.bucket]=0;buckets[r.bucket]+=r.revTotal;});
+  destroyChart('buckets');
+  charts.buckets=new Chart(document.getElementById('chart-buckets'),{type:'doughnut',data:{labels:Object.keys(buckets),datasets:[{data:Object.values(buckets),backgroundColor:['#4a6741','#1565c0','#e65100','#c62828','#6a1b9a']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right'}}}});
+
+  const monthly={};
+  filtered.forEach(r=>{const m=midMonth(r);if(!monthly[m])monthly[m]=0;monthly[m]+=r.revTotal;});
+  const ms=Object.keys(monthly).sort();
+  destroyChart('monthly');
+  charts.monthly=new Chart(document.getElementById('chart-monthly'),{type:'bar',data:{labels:ms,datasets:[{label:'Revenus',data:ms.map(m=>monthly[m]),backgroundColor:'#4a6741'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}},plugins:{legend:{display:false}}}});
+}
+
+function renderEvents(){
+  const agg={};
+  filtered.forEach(r=>{
+    if(!agg[r.series])agg[r.series]={n:0,rev:0,att:0,lodg:0,meals:0,bal:0,bucket:r.bucket,teachers:new Set()};
+    const a=agg[r.series];a.n++;a.rev+=r.revTotal;a.att+=r.revAtt;a.lodg+=r.revLodg;a.meals+=r.revMeals;a.bal+=r.balance;
+    if(r.teacher)a.teachers.add(r.teacher);
+  });
+  const sorted=Object.entries(agg).sort((a,b)=>b[1].rev-a[1].rev);
+  const tbody=document.querySelector('#ev-table tbody');
+  tbody.innerHTML=sorted.filter(([,v])=>v.rev>0).map(([s,v])=>`<tr>
+    <td>${s}</td><td><span class="bucket-tag ${bucketCls(v.bucket)}">${v.bucket}</span></td>
+    <td class="num">${v.n}</td><td class="num">${fmtE(v.rev)}</td><td class="num">${fmtE(v.att)}</td>
+    <td class="num">${fmtE(v.lodg)}</td><td class="num">${fmtE(v.meals)}</td><td class="num">${fmtE(v.bal)}</td>
+    <td>${[...v.teachers].join(', ')||'—'}</td></tr>`).join('');
+
+  document.getElementById('ev-search').oninput=e=>{
+    const q=e.target.value.toLowerCase();
+    tbody.querySelectorAll('tr').forEach(tr=>tr.style.display=tr.textContent.toLowerCase().includes(q)?'':'none');
+  };
+}
+
+function renderSeasons(){
+  const agg={};
+  filtered.forEach(r=>{
+    const fy=fiscalSeason(r.mid||r.from);if(!fy)return;
+    const k=`${fy}-${fy+1}`;
+    if(!agg[k])agg[k]={all:0,lodg:0,meals:0,rev:0};
+    agg[k].all++;agg[k].rev+=r.revTotal;
+    if(r.revLodg>0)agg[k].lodg++;
+    else if(r.revMeals>0)agg[k].meals++;
+  });
+  const keys=Object.keys(agg).sort();
+  destroyChart('seasons');
+  charts.seasons=new Chart(document.getElementById('chart-seasons'),{type:'bar',data:{labels:keys,datasets:[
+    {label:'Toutes',data:keys.map(k=>agg[k].all),backgroundColor:'#4a6741'},
+    {label:'Avec hébergement',data:keys.map(k=>agg[k].lodg),backgroundColor:'#1565c0'},
+    {label:'Repas seul',data:keys.map(k=>agg[k].meals),backgroundColor:'#e65100'}
+  ]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}}}});
+  document.querySelector('#season-table tbody').innerHTML=keys.map(k=>`<tr><td>${k}</td><td class="num">${fmt(agg[k].all)}</td><td class="num">${fmt(agg[k].lodg)}</td><td class="num">${fmt(agg[k].meals)}</td><td class="num">${fmtE(agg[k].rev)}</td></tr>`).join('');
+}
+
+function renderLodging(){
+  const agg={};
+  filtered.forEach(r=>{if(!r.room||r.room==='Hébergement à l\'extérieur'||r.room.includes('LIGNE')||r.room.includes('ONLINE'))return;
+    if(!agg[r.room])agg[r.room]={n:0,rev:0,nights:0};agg[r.room].n++;agg[r.room].rev+=r.revLodg;agg[r.room].nights+=r.nights;});
+  const sorted=Object.entries(agg).filter(([,v])=>v.n>5).sort((a,b)=>b[1].n-a[1].n);
+  destroyChart('rooms');
+  charts.rooms=new Chart(document.getElementById('chart-rooms'),{type:'bar',data:{labels:sorted.map(([k])=>k),datasets:[{label:'Réservations',data:sorted.map(([,v])=>v.n),backgroundColor:'#4a6741'}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}}}});
+  document.querySelector('#room-table tbody').innerHTML=sorted.map(([k,v])=>`<tr><td>${k}</td><td class="num">${v.n}</td><td class="num">${fmtE(v.rev)}</td><td class="num">${fmt(v.nights)}</td><td class="num">${v.nights?((v.rev/v.nights).toFixed(2)+' €'):'—'}</td></tr>`).join('');
+}
+
+function renderTeachers(){
+  const agg={};
+  filtered.forEach(r=>{if(!r.teacher)return;r.teacher.split('; ').forEach(t=>{t=t.trim();if(!t)return;if(!agg[t])agg[t]={n:0,rev:0,evts:new Set()};agg[t].n++;agg[t].rev+=r.revTotal;agg[t].evts.add(r.series);});});
+  const sorted=Object.entries(agg).sort((a,b)=>b[1].rev-a[1].rev).slice(0,25);
+  document.querySelector('#teach-table tbody').innerHTML=sorted.map(([t,v])=>`<tr><td>${t}</td><td class="num">${fmt(v.n)}</td><td class="num">${fmtE(v.rev)}</td><td class="num">${v.evts.size}</td></tr>`).join('');
+}
+
+function renderCollections(){
+  let rev=0,paid=0,bal=0;
+  const statuses={};
+  filtered.forEach(r=>{rev+=r.revTotal;paid+=r.paid;if(r.balance>0)bal+=r.balance;statuses[r.status]=(statuses[r.status]||0)+1;});
+  const rate=rev>0?(100*paid/rev).toFixed(1)+'%':'—';
+  document.getElementById('coll-kpis').innerHTML=[
+    {l:'Revenus',v:fmtE(rev)},{l:'Encaissé',v:fmtE(paid)},{l:'Solde ouvert',v:fmtE(bal)},{l:'Taux encaissement',v:rate}
+  ].map(c=>`<div class="kpi-card"><div class="value">${c.v}</div><div class="label">${c.l}</div></div>`).join('');
+  destroyChart('status');
+  charts.status=new Chart(document.getElementById('chart-status'),{type:'pie',data:{labels:Object.keys(statuses),datasets:[{data:Object.values(statuses),backgroundColor:['#4a6741','#c0392b','#d4a017','#1565c0','#6a1b9a','#e65100','#888']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right'}}}});
+}
+
+// Tab switching
+document.getElementById('tabs').addEventListener('click',e=>{if(e.target.tagName!=='BUTTON')return;document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));e.target.classList.add('active');document.getElementById('tab-'+e.target.dataset.tab).classList.add('active');});
+
+// Search tab
+function initSearchTab(){
+  const input=document.getElementById('global-search');
+  input.addEventListener('input',()=>{
+    const q=input.value.trim().toLowerCase();
+    if(!q){document.querySelector('#search-table tbody').innerHTML='';return;}
+    const agg={};
+    filtered.forEach(r=>{
+      if(!agg[r.series])agg[r.series]={n:0,rev:0,bucket:r.bucket,teacher:new Set()};
+      agg[r.series].n++;agg[r.series].rev+=r.revTotal;if(r.teacher)agg[r.series].teacher.add(r.teacher);
+    });
+    const results=Object.entries(agg).filter(([k,v])=>(k+v.bucket+[...v.teacher].join(' ')).toLowerCase().includes(q)).sort((a,b)=>b[1].rev-a[1].rev).slice(0,30);
+    document.querySelector('#search-table tbody').innerHTML=results.map(([k,v])=>`<tr><td>${k}</td><td><span class="bucket-tag ${bucketCls(v.bucket)}">${v.bucket}</span></td><td class="num">${fmtE(v.rev)}</td><td class="num">${v.n}</td><td>${[...v.teacher].join(', ')||'—'}</td></tr>`).join('');
+  });
+}
+
+init().then(initSearchTab);
+</script>
 </body>
 </html>
