@@ -199,6 +199,10 @@ const CX={};
 const F=n=>n.toLocaleString('fr-FR',{maximumFractionDigits:0});
 const FE=n=>F(n)+' €';
 const FP=n=>(n*100).toFixed(1)+'%';
+const chartVal=c=>c.parsed?.y??c.parsed??c.raw;
+const chartEuroTip={callbacks:{label(c){const l=c.label?(c.label+': '):(c.dataset.label?c.dataset.label+': ':'');return l+FE(chartVal(c));}}};
+const chartCountTip={callbacks:{label(c){const l=c.label?(c.label+': '):(c.dataset.label?c.dataset.label+': ':'');return l+F(chartVal(c));}}};
+const chartEuroY={ticks:{callback:v=>FE(v)}};
 function S(i,d){return i<0?'':d[i]||'';}
 function BC(b){if(!b)return'ret';if(b.includes('Retraite'))return'ret';if(b.includes('IDMT'))return'idmt';if(b.includes('Bénévole'))return'ben';if(b.includes('Repas'))return'rep';if(b.includes('Séjour'))return'sej';return'ret';}
 function P(r){return{from:r[0],to:r[1],mid:r[2],series:S(r[3],STR),bucket:S(r[4],STR),event:S(r[5],EVT),room:S(r[6],RMS),nights:r[7],mealDays:r[8],revAtt:r[9],revLodg:r[10],revMeals:r[11],revMisc:r[12],revTotal:r[13],paid:r[14],balance:r[15],status:S(r[16],STR),type:S(r[17],STR),teacher:S(r[18],TCH)};}
@@ -271,15 +275,15 @@ function rOv(){
   ].map(c=>`<div class="kc"><div class="v">${c.v}</div><div class="l">${c.l}</div></div>`).join('');
 
   const bks={};filtered.forEach(r=>{bks[r.bucket]=(bks[r.bucket]||0)+r.revTotal;});
-  DC('bk');CX.bk=new Chart(document.getElementById('c-bk'),{type:'doughnut',data:{labels:Object.keys(bks),datasets:[{data:Object.values(bks),backgroundColor:['#4a6741','#1565c0','#e65100','#c62828','#6a1b9a']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right'}}}});
+  DC('bk');CX.bk=new Chart(document.getElementById('c-bk'),{type:'doughnut',data:{labels:Object.keys(bks),datasets:[{data:Object.values(bks),backgroundColor:['#4a6741','#1565c0','#e65100','#c62828','#6a1b9a']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right'},tooltip:chartEuroTip}}});
 
   const mo={},mo2={};
   filtered.forEach(r=>{const m=midMonth(r);mo[m]=(mo[m]||0)+r.revTotal;mo2[m]=(mo2[m]||0)+1;});
   const mks=Object.keys(mo).sort();
-  DC('mo');CX.mo=new Chart(document.getElementById('c-mo'),{type:'bar',data:{labels:mks,datasets:[{label:'Revenus',data:mks.map(m=>mo[m]),backgroundColor:'#4a6741'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}},plugins:{legend:{display:false}}}});
-  DC('mo2');CX.mo2=new Chart(document.getElementById('c-mo2'),{type:'line',data:{labels:mks,datasets:[{label:'Inscriptions',data:mks.map(m=>mo2[m]||0),borderColor:'#4a6741',fill:true,backgroundColor:'rgba(74,103,65,.1)',tension:.3}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}},plugins:{legend:{display:false}}}});
+  DC('mo');CX.mo=new Chart(document.getElementById('c-mo'),{type:'bar',data:{labels:mks,datasets:[{label:'Revenus',data:mks.map(m=>mo[m]),backgroundColor:'#4a6741'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,...chartEuroY}},plugins:{legend:{display:false},tooltip:chartEuroTip}}});
+  DC('mo2');CX.mo2=new Chart(document.getElementById('c-mo2'),{type:'line',data:{labels:mks,datasets:[{label:'Inscriptions',data:mks.map(m=>mo2[m]||0),borderColor:'#4a6741',fill:true,backgroundColor:'rgba(74,103,65,.1)',tension:.3}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}},plugins:{legend:{display:false},tooltip:chartCountTip}}});
 
-  DC('at');CX.at=new Chart(document.getElementById('c-at'),{type:'pie',data:{labels:['Sur place','En ligne'],datasets:[{data:[os,ol],backgroundColor:['#4a6741','#1565c0']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12,padding:8}}}}});
+  DC('at');CX.at=new Chart(document.getElementById('c-at'),{type:'pie',data:{labels:['Sur place','En ligne'],datasets:[{data:[os,ol],backgroundColor:['#4a6741','#1565c0']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12,padding:8}},tooltip:chartCountTip}}});
 }
 
 function rEv(){
@@ -315,7 +319,7 @@ function rSe(){
     {label:'Avec héberg.',data:keys.map(k=>agg[k].lo),backgroundColor:'#1565c0'},
     {label:'Repas seul',data:keys.map(k=>agg[k].me),backgroundColor:'#e65100'},
     {label:'En ligne',data:keys.map(k=>agg[k].ol),backgroundColor:'#90caf9'}
-  ]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}}}});
+  ]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}},plugins:{tooltip:chartCountTip}}});
   document.querySelector('#t-se-t tbody').innerHTML=keys.map(k=>{const v=agg[k];return`<tr><td>${k}</td><td class="n">${F(v.n)}</td><td class="n">${F(v.lo)}</td><td class="n">${F(v.me)}</td><td class="n">${F(v.ol)}</td><td class="n">${FE(v.r)}</td><td class="n">${FE(v.p)}</td></tr>`;}).join('');
 }
 
@@ -390,7 +394,7 @@ function rLo(){
   const roomPop={};
   filtered.forEach(r=>{if(r.room&&!r.room.includes('extérieur')&&!r.room.includes('LIGNE'))roomPop[r.room]=(roomPop[r.room]||0)+1;});
   const rpSorted=Object.entries(roomPop).filter(([,n])=>n>5).sort((a,b)=>b[1]-a[1]);
-  DC('rm');CX.rm=new Chart(document.getElementById('c-rm'),{type:'bar',data:{labels:rpSorted.map(([k])=>k),datasets:[{data:rpSorted.map(([,v])=>v),backgroundColor:'#4a6741'}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}}}});
+  DC('rm');CX.rm=new Chart(document.getElementById('c-rm'),{type:'bar',data:{labels:rpSorted.map(([k])=>k),datasets:[{label:'Inscriptions',data:rpSorted.map(([,v])=>v),backgroundColor:'#4a6741'}]},options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:chartCountTip}}});
 }
 
 function rTe(){
@@ -422,8 +426,8 @@ function rCo(){
     {l:'Revenus (tous statuts)',v:FE(rev)},{l:'Encaissé',v:FE(paid)},{l:'Solde ouvert',v:FE(bal)},
     {l:'Taux encaissement',v:rate},{l:'Confirmées impayées',v:F(unpaid)},{l:'Solde moy. (impayés)',v:unpaid?FE(bal/unpaid):'—'}
   ].map(c=>`<div class="kc"><div class="v">${c.v}</div><div class="l">${c.l}</div></div>`).join('');
-  DC('st');CX.st=new Chart(document.getElementById('c-st'),{type:'pie',data:{labels:Object.keys(st),datasets:[{data:Object.values(st),backgroundColor:['#4a6741','#c0392b','#d4a017','#1565c0','#6a1b9a','#e65100']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right'}}}});
-  DC('bal');CX.bal=new Chart(document.getElementById('c-bal'),{type:'bar',data:{labels:Object.keys(balByBk),datasets:[{label:'Solde dû',data:Object.values(balByBk),backgroundColor:'#c0392b'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}}});
+  DC('st');CX.st=new Chart(document.getElementById('c-st'),{type:'pie',data:{labels:Object.keys(st),datasets:[{data:Object.values(st),backgroundColor:['#4a6741','#c0392b','#d4a017','#1565c0','#6a1b9a','#e65100']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right'},tooltip:chartCountTip}}});
+  DC('bal');CX.bal=new Chart(document.getElementById('c-bal'),{type:'bar',data:{labels:Object.keys(balByBk),datasets:[{label:'Solde dû',data:Object.values(balByBk),backgroundColor:'#c0392b'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,...chartEuroY}},plugins:{legend:{display:false},tooltip:chartEuroTip}}});
 }
 
 const PG=100;let brP=0,brD=[];
