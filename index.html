@@ -41,7 +41,8 @@ tr:hover{background:var(--hover)}
 .sb{width:100%;padding:.5rem .7rem;border:1px solid var(--border);border-radius:6px;font-size:.8rem;margin-bottom:.5rem}
 .sb:focus{outline:none;border-color:var(--accent)}
 .bt{display:inline-block;padding:.1rem .35rem;border-radius:3px;font-size:.63rem;font-weight:600}
-.bt.ret{background:#e8f5e9;color:#2e7d32}.bt.idmt{background:#e3f2fd;color:#1565c0}
+.bt.ret{background:#e8f5e9;color:#2e7d32}.bt.ret-ol{background:#e0f7fa;color:#00838f}
+.bt.idmt{background:#e3f2fd;color:#1565c0}
 .bt.ben{background:#fff3e0;color:#e65100}.bt.rep{background:#fce4ec;color:#c62828}
 .bt.sej{background:#f3e5f5;color:#6a1b9a}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
@@ -204,7 +205,9 @@ const chartEuroTip={callbacks:{label(c){const l=c.label?(c.label+': '):(c.datase
 const chartCountTip={callbacks:{label(c){const l=c.label?(c.label+': '):(c.dataset.label?c.dataset.label+': ':'');return l+F(chartVal(c));}}};
 const chartEuroY={ticks:{callback:v=>FE(v)}};
 function S(i,d){return i<0?'':d[i]||'';}
-function BC(b){if(!b)return'ret';if(b.includes('Retraite'))return'ret';if(b.includes('IDMT'))return'idmt';if(b.includes('Bénévole'))return'ben';if(b.includes('Repas'))return'rep';if(b.includes('Séjour'))return'sej';return'ret';}
+const BUCKET_COLORS={'Bénévole':'#4a6741','IDMT (en ligne)':'#1565c0','Retraites & événements (sur place)':'#e65100','Retraites & événements (en ligne)':'#26a69a','Retraites & événements':'#e65100','Repas hors activités':'#c62828','Séjour personnel':'#6a1b9a'};
+const BUCKET_ORDER=['Retraites & événements (sur place)','Retraites & événements (en ligne)','IDMT (en ligne)','Bénévole','Repas hors activités','Séjour personnel'];
+function BC(b){if(!b)return'ret';if(b.includes('IDMT'))return'idmt';if(b.includes('Bénévole'))return'ben';if(b.includes('Repas'))return'rep';if(b.includes('Séjour'))return'sej';if(b.includes('en ligne'))return'ret-ol';return'ret';}
 function P(r){return{from:r[0],to:r[1],mid:r[2],series:S(r[3],STR),bucket:S(r[4],STR),event:S(r[5],EVT),room:S(r[6],RMS),nights:r[7],mealDays:r[8],revAtt:r[9],revLodg:r[10],revMeals:r[11],revMisc:r[12],revTotal:r[13],paid:r[14],balance:r[15],status:S(r[16],STR),type:S(r[17],STR),teacher:S(r[18],TCH)};}
 function midMonth(r){return(r.mid||r.from).slice(0,7);}
 function fy(d){if(!d)return null;const m=+d.slice(5,7),y=+d.slice(0,4);return m>=9?y:y-1;}
@@ -228,7 +231,7 @@ function setupFilters(){
   const ms=document.getElementById('f-month');
   [...months].sort().forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=m;ms.appendChild(o);});
   const bs=document.getElementById('f-bucket');
-  [...buckets].sort().forEach(b=>{const o=document.createElement('option');o.value=b;o.textContent=b;bs.appendChild(o);});
+  [...buckets].sort((a,b)=>{const ia=BUCKET_ORDER.indexOf(a),ib=BUCKET_ORDER.indexOf(b);return(ia<0?99:ia)-(ib<0?99:ib);}).forEach(b=>{const o=document.createElement('option');o.value=b;o.textContent=b;bs.appendChild(o);});
   document.getElementById('f-from').addEventListener('change',applyFilter);
   document.getElementById('f-to').addEventListener('change',applyFilter);
   document.getElementById('f-month').addEventListener('change',e=>{if(e.target.value){const[y,m]=[+e.target.value.slice(0,4),+e.target.value.slice(5,7)];document.getElementById('f-from').value=e.target.value+'-01';document.getElementById('f-to').value=new Date(y,m,0).toISOString().slice(0,10);}applyFilter();});
@@ -275,7 +278,8 @@ function rOv(){
   ].map(c=>`<div class="kc"><div class="v">${c.v}</div><div class="l">${c.l}</div></div>`).join('');
 
   const bks={};filtered.forEach(r=>{bks[r.bucket]=(bks[r.bucket]||0)+r.revTotal;});
-  DC('bk');CX.bk=new Chart(document.getElementById('c-bk'),{type:'doughnut',data:{labels:Object.keys(bks),datasets:[{data:Object.values(bks),backgroundColor:['#4a6741','#1565c0','#e65100','#c62828','#6a1b9a']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right'},tooltip:chartEuroTip}}});
+  const bkLabels=Object.keys(bks).sort((a,b)=>{const ia=BUCKET_ORDER.indexOf(a),ib=BUCKET_ORDER.indexOf(b);return(ia<0?99:ia)-(ib<0?99:ib);});
+  DC('bk');CX.bk=new Chart(document.getElementById('c-bk'),{type:'doughnut',data:{labels:bkLabels,datasets:[{data:bkLabels.map(k=>bks[k]),backgroundColor:bkLabels.map(k=>BUCKET_COLORS[k]||'#888')}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right'},tooltip:chartEuroTip}}});
 
   const mo={},mo2={};
   filtered.forEach(r=>{const m=midMonth(r);mo[m]=(mo[m]||0)+r.revTotal;mo2[m]=(mo2[m]||0)+1;});
