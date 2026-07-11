@@ -77,6 +77,7 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
   <button data-t="te">Enseignants</button>
   <button data-t="co">Encaissements</button>
   <button data-t="br">Détail réservations</button>
+  <button data-t="ai">Poser une question</button>
 </nav>
 
 <div class="tc on" id="t-ov">
@@ -163,6 +164,26 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
       <th data-k="ty">Type</th><th data-k="tc">Enseignant</th>
     </tr></thead><tbody></tbody></table></div>
     <div id="br-pg" style="margin-top:.4rem;font-size:.75rem;color:var(--muted)"></div>
+  </div>
+</div>
+
+<div class="tc" id="t-ai">
+  <div class="card">
+    <h3>Poser une question sur les données</h3>
+    <div class="note">Posez vos questions en français. L'IA analyse les données en temps réel depuis SeminarDesk.</div>
+    <div id="ai-suggestions" style="margin-bottom:.75rem;display:flex;flex-wrap:wrap;gap:.4rem">
+      <button class="pbtn ai-q">Repas par saison (les 3 repas)</button>
+      <button class="pbtn ai-q">Revenus par événement cette saison</button>
+      <button class="pbtn ai-q">Taux d'occupation des chambres individuelles</button>
+      <button class="pbtn ai-q">Compare les inscriptions 24-25 vs 25-26</button>
+      <button class="pbtn ai-q">Quels événements rapportent le plus par inscription ?</button>
+    </div>
+    <div id="ai-chat" style="max-height:500px;overflow-y:auto;margin-bottom:.75rem;border:1px solid var(--border);border-radius:6px;padding:.75rem;background:var(--bg)"></div>
+    <div style="display:flex;gap:.5rem">
+      <input class="sb" id="ai-input" placeholder="Votre question..." style="margin-bottom:0;flex:1">
+      <button id="ai-send" class="pbtn on" style="padding:.5rem 1rem;font-size:.85rem">Envoyer</button>
+    </div>
+    <div id="ai-status" style="font-size:.7rem;color:var(--muted);margin-top:.3rem"></div>
   </div>
 </div>
 
@@ -432,6 +453,72 @@ document.getElementById('tabs').addEventListener('click',e=>{if(e.target.tagName
   e.target.classList.add('on');document.getElementById('t-'+e.target.dataset.t).classList.add('on');});
 
 init();
+
+// --- AI CHAT ---
+const WORKER_URL = 'https://ivy-director-chat.joyful-effort-site.workers.dev';
+let aiHistory = JSON.parse(localStorage.getItem('ivy-ai-history') || '[]');
+
+function renderAiChat() {
+  const container = document.getElementById('ai-chat');
+  if (aiHistory.length === 0) {
+    container.innerHTML = '<p style="color:var(--muted);font-size:.8rem;text-align:center;padding:1rem">Posez une question pour commencer...</p>';
+    return;
+  }
+  container.innerHTML = aiHistory.map(h => {
+    if (h.role === 'user') return `<div style="margin-bottom:.75rem"><strong style="color:var(--accent)">Vous :</strong> <span style="font-size:.82rem">${escHtml(h.content)}</span></div>`;
+    return `<div style="margin-bottom:.75rem;padding:.5rem;background:var(--card);border-radius:6px;border:1px solid var(--border)"><div class="ai-answer" style="font-size:.82rem">${markdownToHtml(h.content)}</div></div>`;
+  }).join('');
+  container.scrollTop = container.scrollHeight;
+}
+
+function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function markdownToHtml(md) {
+  let html = escHtml(md);
+  html = html.replace(/\n\n/g, '</p><p>');
+  html = html.replace(/\n/g, '<br>');
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\|(.+)\|/g, (match) => {
+    const cells = match.split('|').filter(c => c.trim());
+    if (cells.every(c => /^[\s\-:]+$/.test(c))) return '';
+    return '<tr>' + cells.map(c => `<td style="padding:.2rem .4rem;border:1px solid var(--border);font-size:.75rem">${c.trim()}</td>`).join('') + '</tr>';
+  });
+  html = html.replace(/(<tr>.*<\/tr>)/gs, (tables) => `<table style="border-collapse:collapse;margin:.4rem 0;width:100%">${tables}</table>`);
+  return `<p>${html}</p>`;
+}
+
+async function sendAiQuestion(q) {
+  if (!q.trim()) return;
+  aiHistory.push({ role: 'user', content: q });
+  renderAiChat();
+  document.getElementById('ai-status').textContent = 'Analyse en cours...';
+  document.getElementById('ai-send').disabled = true;
+  document.getElementById('ai-input').value = '';
+
+  try {
+    const resp = await fetch(WORKER_URL + '/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question: q, history: aiHistory.slice(-6) }),
+    });
+    const data = await resp.json();
+    if (data.error) throw new Error(data.error);
+    aiHistory.push({ role: 'assistant', content: data.answer });
+    localStorage.setItem('ivy-ai-history', JSON.stringify(aiHistory.slice(-20)));
+  } catch (err) {
+    aiHistory.push({ role: 'assistant', content: `Erreur : ${err.message}` });
+  }
+  document.getElementById('ai-status').textContent = '';
+  document.getElementById('ai-send').disabled = false;
+  renderAiChat();
+}
+
+document.getElementById('ai-send').addEventListener('click', () => sendAiQuestion(document.getElementById('ai-input').value));
+document.getElementById('ai-input').addEventListener('keydown', e => { if (e.key === 'Enter') sendAiQuestion(e.target.value); });
+document.querySelectorAll('.ai-q').forEach(btn => btn.addEventListener('click', () => sendAiQuestion(btn.textContent)));
+document.getElementById('ai-chat').querySelector('a[href="#clear"]')?.addEventListener('click', () => { aiHistory = []; localStorage.removeItem('ivy-ai-history'); renderAiChat(); });
+
+renderAiChat();
 </script>
 </body>
 </html>
