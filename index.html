@@ -84,9 +84,17 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
 <div class="tc on" id="t-ov">
   <div class="kg" id="kpi"></div>
   <div class="g2">
-    <div class="card"><h3>Revenus par catégorie</h3><div class="cc"><canvas id="c-bk"></canvas></div></div>
-    <div class="card"><h3>Revenus mensuels</h3><div class="cc"><canvas id="c-mo"></canvas></div></div>
+    <div class="card"><h3>Revenus par catégorie</h3>
+    <div class="note">Montants en euros (€).</div>
+    <div class="cc"><canvas id="c-bk"></canvas></div></div>
+    <div class="card"><h3>Participants par catégorie</h3>
+    <div class="note">1 participant = 1 inscription confirmée.</div>
+    <div class="cc"><canvas id="c-bk-n"></canvas></div></div>
   </div>
+  <div class="g2">
+    <div class="card"><h3>Revenus mensuels</h3>
+    <div class="note">Montants en euros (€). <a href="#" id="explain-mo" style="font-size:.7rem">Expliquer ce graphique</a></div>
+    <div class="cc"><canvas id="c-mo"></canvas></div></div>
   <div class="g2">
     <div class="card"><h3>Inscriptions par mois</h3><div class="cc"><canvas id="c-mo2"></canvas></div></div>
     <div class="card"><h3>Sur place vs en ligne</h3>
@@ -174,13 +182,15 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
 <div class="tc" id="t-ai">
   <div class="card">
     <h3>Poser une question sur les données</h3>
-    <div class="note">Posez vos questions en français. L'IA analyse les mêmes données que ce tableau de bord (view 43 SeminarDesk).</div>
+    <div class="note">Posez vos questions en français. L'IA reçoit les mêmes données que ce tableau de bord, plus les filtres et graphiques actuellement affichés.</div>
+    <div id="ai-filter-hint" style="font-size:.7rem;color:var(--muted);margin-bottom:.5rem"></div>
     <div id="ai-suggestions" style="margin-bottom:.75rem;display:flex;flex-wrap:wrap;gap:.4rem">
       <button class="pbtn ai-q">Repas par saison (les 3 repas)</button>
       <button class="pbtn ai-q">Revenus par événement cette saison</button>
       <button class="pbtn ai-q">Taux d'occupation des chambres individuelles</button>
       <button class="pbtn ai-q">Compare les inscriptions 24-25 vs 25-26</button>
       <button class="pbtn ai-q">Quels événements rapportent le plus par inscription ?</button>
+      <button class="pbtn ai-q">Pourquoi les revenus de juillet–août 2025–26 sont-ils si élevés ?</button>
     </div>
     <div id="ai-chat" style="max-height:500px;overflow-y:auto;margin-bottom:.75rem;border:1px solid var(--border);border-radius:6px;padding:.75rem;background:var(--bg)"></div>
     <div style="display:flex;gap:.5rem">
@@ -200,16 +210,60 @@ const CX={};
 const F=n=>n.toLocaleString('fr-FR',{maximumFractionDigits:0});
 const FE=n=>F(n)+' €';
 const FP=n=>(n*100).toFixed(1)+'%';
-const chartVal=c=>c.parsed?.y??c.parsed??c.raw;
+const chartVal=c=>{const p=c.parsed;if(typeof p==='number')return p;const v=p?.y??p?.r??c.raw;return Number(v)||0;};
 const chartEuroTip={callbacks:{label(c){const l=c.label?(c.label+': '):(c.dataset.label?c.dataset.label+': ':'');return l+FE(chartVal(c));}}};
 const chartCountTip={callbacks:{label(c){const l=c.label?(c.label+': '):(c.dataset.label?c.dataset.label+': ':'');return l+F(chartVal(c));}}};
 const chartEuroY={ticks:{callback:v=>FE(v)}};
+const doughnutTip=(tip)=>({plugins:{legend:{position:'right'},tooltip:tip}});
 function S(i,d){return i<0?'':d[i]||'';}
 const BUCKET_COLORS={'Bénévole':'#4a6741','IDMT (en ligne)':'#1565c0','Retraites & événements (sur place)':'#e65100','Retraites & événements (en ligne)':'#26a69a','Retraites & événements':'#e65100','Repas hors activités':'#c62828','Séjour personnel':'#6a1b9a'};
 const BUCKET_ORDER=['Retraites & événements (sur place)','Retraites & événements (en ligne)','IDMT (en ligne)','Bénévole','Repas hors activités','Séjour personnel'];
 function BC(b){if(!b)return'ret';if(b.includes('IDMT'))return'idmt';if(b.includes('Bénévole'))return'ben';if(b.includes('Repas'))return'rep';if(b.includes('Séjour'))return'sej';if(b.includes('en ligne'))return'ret-ol';return'ret';}
 function P(r){return{from:r[0],to:r[1],mid:r[2],series:S(r[3],STR),bucket:S(r[4],STR),event:S(r[5],EVT),room:S(r[6],RMS),nights:r[7],mealDays:r[8],revAtt:r[9],revLodg:r[10],revMeals:r[11],revMisc:r[12],revTotal:r[13],paid:r[14],balance:r[15],status:S(r[16],STR),type:S(r[17],STR),teacher:S(r[18],TCH)};}
 function midMonth(r){return(r.mid||r.from).slice(0,7);}
+function sortBkLabels(keys){return keys.sort((a,b)=>{const ia=BUCKET_ORDER.indexOf(a),ib=BUCKET_ORDER.indexOf(b);return(ia<0?99:ia)-(ib<0?99:ib);});}
+
+function buildDashboardSnapshot(rows){
+  const from=document.getElementById('f-from').value,to=document.getElementById('f-to').value;
+  const bucket=document.getElementById('f-bucket').value;
+  const byCategory={},byMonth={},byMonthSeason={},eventsByMonth={};
+  rows.forEach(r=>{
+    const b=r.bucket;
+    if(!byCategory[b])byCategory[b]={revenue:0,participants:0};
+    byCategory[b].revenue+=r.revTotal;byCategory[b].participants++;
+    const m=midMonth(r);
+    if(!byMonth[m])byMonth[m]={revenue:0,participants:0};
+    byMonth[m].revenue+=r.revTotal;byMonth[m].participants++;
+    const f=fy(r.mid||r.from);
+    if(f){const sk=`${f}-${f+1}`;if(!byMonthSeason[sk])byMonthSeason[sk]={};
+      if(!byMonthSeason[sk][m])byMonthSeason[sk][m]={revenue:0,participants:0};
+      byMonthSeason[sk][m].revenue+=r.revTotal;byMonthSeason[sk][m].participants++;}
+    if(!eventsByMonth[m])eventsByMonth[m]={};
+    if(!eventsByMonth[m][r.series])eventsByMonth[m][r.series]={revenue:0,participants:0,bucket:b};
+    eventsByMonth[m][r.series].revenue+=r.revTotal;eventsByMonth[m][r.series].participants++;
+  });
+  const peakMonths=Object.entries(byMonth).sort((a,b)=>b[1].revenue-a[1].revenue).slice(0,3).map(([m])=>m);
+  const topEventsInMonth={};
+  peakMonths.forEach(m=>{
+    topEventsInMonth[m]=Object.entries(eventsByMonth[m]||{}).sort((a,b)=>b[1].revenue-a[1].revenue).slice(0,5)
+      .map(([series,v])=>({series,bucket:v.bucket,revenue:Math.round(v.revenue),participants:v.participants}));
+  });
+  return{filters:{from,to,bucket:bucket||null,confirmedOnly:true,participants:rows.length},byCategory,byMonth,byMonthSeason,peakMonths,topEventsInMonth};
+}
+
+function updateAiFilterHint(){
+  const from=document.getElementById('f-from').value,to=document.getElementById('f-to').value;
+  const bk=document.getElementById('f-bucket').value||'Toutes';
+  const el=document.getElementById('ai-filter-hint');
+  if(el)el.textContent=`Analyse avec les filtres actuels : ${from} → ${to} · ${bk} · ${F(filtered.length)} inscriptions confirmées`;
+}
+
+function explainMonthlyChart(){
+  const snap=buildDashboardSnapshot(filtered);
+  const top=Object.entries(snap.byMonth).sort((a,b)=>b[1].revenue-a[1].revenue).slice(0,3)
+    .map(([m,v])=>`${m}: ${FE(v.revenue)} (${F(v.participants)} inscr.)`).join('; ');
+  sendAiQuestion(`Explique les revenus mensuels affichés sur le tableau de bord (filtres: ${snap.filters.from} → ${snap.filters.to}). Les 3 mois les plus élevés sont : ${top}. Pourquoi ces pics, quels événements ou catégories les expliquent ?`);
+}
 function fy(d){if(!d)return null;const m=+d.slice(5,7),y=+d.slice(0,4);return m>=9?y:y-1;}
 
 async function init(){
@@ -260,6 +314,7 @@ function applyFilter(){
     return true;
   });
   document.getElementById('f-ct').textContent=`${F(filtered.length)} inscriptions confirmées`;
+  updateAiFilterHint();
   render();
 }
 
@@ -277,9 +332,11 @@ function rOv(){
     {l:'Sur place',v:F(os)},{l:'En ligne',v:F(ol)},{l:'Revenu moy./inscr.',v:n?FE(rev/n):'—'}
   ].map(c=>`<div class="kc"><div class="v">${c.v}</div><div class="l">${c.l}</div></div>`).join('');
 
-  const bks={};filtered.forEach(r=>{bks[r.bucket]=(bks[r.bucket]||0)+r.revTotal;});
-  const bkLabels=Object.keys(bks).sort((a,b)=>{const ia=BUCKET_ORDER.indexOf(a),ib=BUCKET_ORDER.indexOf(b);return(ia<0?99:ia)-(ib<0?99:ib);});
-  DC('bk');CX.bk=new Chart(document.getElementById('c-bk'),{type:'doughnut',data:{labels:bkLabels,datasets:[{data:bkLabels.map(k=>bks[k]),backgroundColor:bkLabels.map(k=>BUCKET_COLORS[k]||'#888')}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right'},tooltip:chartEuroTip}}});
+  const bks={};const bkN={};
+  filtered.forEach(r=>{bks[r.bucket]=(bks[r.bucket]||0)+r.revTotal;bkN[r.bucket]=(bkN[r.bucket]||0)+1;});
+  const bkLabels=sortBkLabels(Object.keys(bks));
+  DC('bk');CX.bk=new Chart(document.getElementById('c-bk'),{type:'doughnut',data:{labels:bkLabels,datasets:[{data:bkLabels.map(k=>bks[k]),backgroundColor:bkLabels.map(k=>BUCKET_COLORS[k]||'#888')}]},options:{responsive:true,maintainAspectRatio:false,...doughnutTip(chartEuroTip)}});
+  DC('bk-n');CX['bk-n']=new Chart(document.getElementById('c-bk-n'),{type:'doughnut',data:{labels:bkLabels,datasets:[{data:bkLabels.map(k=>bkN[k]),backgroundColor:bkLabels.map(k=>BUCKET_COLORS[k]||'#888')}]},options:{responsive:true,maintainAspectRatio:false,...doughnutTip(chartCountTip)}});
 
   const mo={},mo2={};
   filtered.forEach(r=>{const m=midMonth(r);mo[m]=(mo[m]||0)+r.revTotal;mo2[m]=(mo2[m]||0)+1;});
@@ -516,7 +573,7 @@ async function sendAiQuestion(q) {
     const resp = await fetch(WORKER_URL + '/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ question: q, history: aiHistory.slice(-6) }),
+      body: JSON.stringify({ question: q, history: aiHistory.slice(-6), context: buildDashboardSnapshot(filtered) }),
     });
     const data = await resp.json();
     if (data.error) throw new Error(data.error);
@@ -533,6 +590,7 @@ async function sendAiQuestion(q) {
 document.getElementById('ai-send').addEventListener('click', () => sendAiQuestion(document.getElementById('ai-input').value));
 document.getElementById('ai-input').addEventListener('keydown', e => { if (e.key === 'Enter') sendAiQuestion(e.target.value); });
 document.querySelectorAll('.ai-q').forEach(btn => btn.addEventListener('click', () => sendAiQuestion(btn.textContent)));
+document.getElementById('explain-mo')?.addEventListener('click', e => { e.preventDefault(); explainMonthlyChart(); });
 document.getElementById('ai-chat').querySelector('a[href="#clear"]')?.addEventListener('click', () => { aiHistory = []; localStorage.removeItem('ivy-ai-history'); renderAiChat(); });
 
 renderAiChat();
