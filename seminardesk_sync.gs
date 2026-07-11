@@ -204,21 +204,22 @@ function parsePayloadToGuestRows_(payloadStr) {
       const logicalType = m[1]; // type field
       const begin = m[3], end = m[4];
       const text = m[5], actual = parseNumber_(m[10]), calc = parseNumber_(m[9]);
+      const price = calc || actual;
       totalAct += actual; 
       totalCalc += calc;
 
       if (logicalType === 'ACCOMMODATION') {
         lodgingText = text;
-        lodgingPrice += actual;
+        lodgingPrice += price;
         accBegin = begin; 
         accEnd = end;
       } else if (logicalType === 'MEALS') {
         mealsText = text;
-        mealsPrice += actual;
+        mealsPrice += price;
       } else if (logicalType === 'EVENT') {
-        eventFee += actual;
+        eventFee += price;
       } else {
-        miscTotal += actual;
+        miscTotal += price;
       }
     });
 
