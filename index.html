@@ -88,7 +88,9 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
   </div>
   <div class="g2">
     <div class="card"><h3>Inscriptions par mois</h3><div class="cc"><canvas id="c-mo2"></canvas></div></div>
-    <div class="card"><h3>Sur place vs en ligne</h3><div class="cc"><canvas id="c-at"></canvas></div></div>
+    <div class="card"><h3>Sur place vs en ligne</h3>
+    <div class="note">Nombre d'inscriptions confirmées dans la période sélectionnée (1 ligne = 1 participant).</div>
+    <div class="cc"><canvas id="c-at"></canvas></div></div>
   </div>
 </div>
 
@@ -98,7 +100,7 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
     <div class="note">Chaque ligne = série d'événements (sessions regroupées). Inscriptions = réservations confirmées individuelles.</div>
     <input class="sb" id="ev-s" placeholder="Filtrer par nom ou enseignant...">
     <div style="overflow-x:auto"><table id="t-ev-t"><thead><tr>
-      <th data-k="s">Événement</th><th data-k="b">Catégorie</th><th class="n" data-k="n">Inscr.</th>
+      <th data-k="s">Événement</th><th data-k="b">Catégorie</th><th class="n" data-k="n">Participants</th>
       <th class="n" data-k="r">Revenus</th><th class="n" data-k="a">Participation</th>
       <th class="n" data-k="l">Héberg.</th><th class="n" data-k="m">Repas</th>
       <th class="n" data-k="ba">Solde dû</th><th class="n" data-k="rpi">Rev./inscr.</th>
@@ -118,7 +120,7 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
   <div class="kg" id="lo-kpi"></div>
   <div class="card">
     <h3>Utilisation des lits par type d'hébergement</h3>
-    <div class="note">Lits dispo. = nombre de lits × jours dans la période. Personnes-nuits = nombre de personnes hébergées × nuits. Taux d'utilisation = personnes-nuits / lits disponibles. Sous-occupation = nuits où une chambre partagée avait des lits vides.</div>
+    <div class="note">Lits dispo. = nombre de lits × jours dans la période. Personnes-nuits = inscriptions confirmées avec hébergement × nuits. Données d'occupation détaillées (sous-occupation) : référence statique backup ; inscriptions et revenus : view 43 SeminarDesk.</div>
     <table id="t-lo-t"><thead><tr>
       <th data-k="name">Type d'hébergement</th><th class="n" data-k="beds">Lits</th>
       <th class="n" data-k="bedAvail">Lits-nuits dispo.</th>
@@ -136,15 +138,16 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
 <div class="tc" id="t-te">
   <div class="card">
     <h3>Enseignants — revenus des événements qu'ils animent</h3>
-    <div class="note">Le revenu inclut hébergement + repas + participation de toutes les inscriptions confirmées liées.</div>
+    <div class="note">1 participant = 1 inscription confirmée. Co-animés : compté une fois par enseignant distinct. Le revenu inclut hébergement + repas + participation.</div>
     <table id="t-te-t"><thead><tr>
-      <th data-k="t">Enseignant</th><th class="n" data-k="n">Inscr.</th>
-      <th class="n" data-k="r">Revenus</th><th class="n" data-k="e">Événements</th><th class="n" data-k="avg">Rev./inscr.</th>
+      <th data-k="t">Enseignant</th><th class="n" data-k="n">Participants</th>
+      <th class="n" data-k="r">Revenus</th><th class="n" data-k="e">Événements</th><th class="n" data-k="avg">Rev./part.</th>
     </tr></thead><tbody></tbody></table>
   </div>
 </div>
 
 <div class="tc" id="t-co">
+  <div class="note" style="margin-bottom:.5rem">Cet onglet inclut <strong>tous les statuts</strong> (confirmées, annulées, en attente…) pour suivre les encaissements. Les autres onglets n'affichent que les inscriptions confirmées.</div>
   <div class="kg" id="co-kpi"></div>
   <div class="g2">
     <div class="card"><h3>Statuts</h3><div class="cc"><canvas id="c-st"></canvas></div></div>
@@ -170,7 +173,7 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
 <div class="tc" id="t-ai">
   <div class="card">
     <h3>Poser une question sur les données</h3>
-    <div class="note">Posez vos questions en français. L'IA analyse les données en temps réel depuis SeminarDesk.</div>
+    <div class="note">Posez vos questions en français. L'IA analyse les mêmes données que ce tableau de bord (view 43 SeminarDesk).</div>
     <div id="ai-suggestions" style="margin-bottom:.75rem;display:flex;flex-wrap:wrap;gap:.4rem">
       <button class="pbtn ai-q">Repas par saison (les 3 repas)</button>
       <button class="pbtn ai-q">Revenus par événement cette saison</button>
@@ -212,7 +215,7 @@ async function init(){
   RAW=d.rows.map(P);
   setupFilters();
   applyFilter();
-  document.getElementById('foot').textContent=`Source : ${d.dataSource} — ${F(RAW.length)} réservations au total — Confirmées affichées par défaut`;
+  document.getElementById('foot').textContent=`Source : ${d.dataSource} — ${F(RAW.length)} inscriptions au total — Onglets analytiques : confirmées uniquement (sauf Encaissements)`;
 }
 
 function setupFilters(){
@@ -263,7 +266,7 @@ function rOv(){
     nights+=r.nights;meals+=r.mealDays;});
   document.getElementById('kpi').innerHTML=[
     {l:'Revenus totaux',v:FE(rev)},{l:'Encaissé',v:FE(paid)},{l:'Solde ouvert',v:FE(bal)},
-    {l:'Inscriptions',v:F(n)},{l:'Nuitées',v:F(nights)},{l:'Jours repas',v:F(meals)},
+    {l:'Inscriptions confirmées',v:F(n)},{l:'Nuitées',v:F(nights)},{l:'Jours repas',v:F(meals)},
     {l:'Sur place',v:F(os)},{l:'En ligne',v:F(ol)},{l:'Revenu moy./inscr.',v:n?FE(rev/n):'—'}
   ].map(c=>`<div class="kc"><div class="v">${c.v}</div><div class="l">${c.l}</div></div>`).join('');
 
@@ -276,7 +279,7 @@ function rOv(){
   DC('mo');CX.mo=new Chart(document.getElementById('c-mo'),{type:'bar',data:{labels:mks,datasets:[{label:'Revenus',data:mks.map(m=>mo[m]),backgroundColor:'#4a6741'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}},plugins:{legend:{display:false}}}});
   DC('mo2');CX.mo2=new Chart(document.getElementById('c-mo2'),{type:'line',data:{labels:mks,datasets:[{label:'Inscriptions',data:mks.map(m=>mo2[m]||0),borderColor:'#4a6741',fill:true,backgroundColor:'rgba(74,103,65,.1)',tension:.3}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}},plugins:{legend:{display:false}}}});
 
-  DC('at');CX.at=new Chart(document.getElementById('c-at'),{type:'pie',data:{labels:['Sur place','En ligne'],datasets:[{data:[os,ol],backgroundColor:['#4a6741','#1565c0']}]},options:{responsive:true,maintainAspectRatio:false}});
+  DC('at');CX.at=new Chart(document.getElementById('c-at'),{type:'pie',data:{labels:['Sur place','En ligne'],datasets:[{data:[os,ol],backgroundColor:['#4a6741','#1565c0']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:12,padding:8}}}}});
 }
 
 function rEv(){
@@ -392,8 +395,14 @@ function rLo(){
 
 function rTe(){
   const agg={};
-  filtered.forEach(r=>{if(!r.teacher)return;r.teacher.split('; ').forEach(t=>{t=t.trim();if(!t)return;
-    if(!agg[t])agg[t]={n:0,r:0,evts:new Set()};agg[t].n++;agg[t].r+=r.revTotal;agg[t].evts.add(r.series);});});
+  filtered.forEach(r=>{
+    if(!r.teacher)return;
+    const teachers=[...new Set(r.teacher.split('; ').map(t=>t.trim()).filter(Boolean))];
+    teachers.forEach(t=>{
+      if(!agg[t])agg[t]={n:0,r:0,evts:new Set()};
+      agg[t].n++;agg[t].r+=r.revTotal;agg[t].evts.add(r.series);
+    });
+  });
   let rows=Object.entries(agg).map(([t,v])=>({t,n:v.n,r:v.r,e:v.evts.size,avg:v.n?v.r/v.n:0}));
   rows.sort((a,b)=>b.r-a.r);
   sortableTable('t-te-t',rows,[{k:'t',f:v=>v},{k:'n',f:F,c:'n'},{k:'r',f:FE,c:'n'},{k:'e',f:F,c:'n'},{k:'avg',f:FE,c:'n'}]);
