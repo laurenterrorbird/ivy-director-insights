@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>IVY — Rapport Strategie Revenus</title>
+<style>
+@media print{@page{margin:1.5cm}body{font-size:11pt}.no-print{display:none!important}}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:900px;margin:0 auto;padding:2rem 1.5rem;color:#2c3e2c;line-height:1.6;font-size:14px}
+h1{font-size:1.5rem;color:#4a6741;border-bottom:3px solid #4a6741;padding-bottom:.4rem;margin-bottom:.3rem}
+h2{font-size:1.1rem;color:#4a6741;margin-top:2rem;border-bottom:1px solid #dee2e6;padding-bottom:.3rem}
+h3{font-size:.95rem;margin-top:1.2rem}
+.subtitle{font-size:.85rem;color:#6c757d;margin-bottom:2rem}
+table{width:100%;border-collapse:collapse;font-size:.82rem;margin:.8rem 0}
+th,td{text-align:left;padding:.35rem .5rem;border:1px solid #dee2e6}
+th{background:#f8f9fa;font-weight:600;color:#6c757d;font-size:.75rem;text-transform:uppercase}
+.n{text-align:right;font-variant-numeric:tabular-nums}
+.pos{color:#2e7d32;font-weight:600}.neg{color:#c62828;font-weight:600}
+.highlight{background:#fff8e1;padding:.8rem;border-left:4px solid #f9a825;margin:1rem 0;border-radius:4px}
+.green-box{background:#e8f5e9;padding:.8rem;border-left:4px solid #2e7d32;margin:1rem 0;border-radius:4px}
+.kpi-row{display:flex;gap:1rem;margin:1rem 0;flex-wrap:wrap}
+.kpi{flex:1;min-width:120px;background:#f8f9fa;padding:.6rem;border-radius:6px;text-align:center}
+.kpi .v{font-size:1.3rem;font-weight:700;color:#4a6741}
+.kpi .l{font-size:.7rem;color:#6c757d;text-transform:uppercase}
+ol li{margin-bottom:.5rem}
+.footer{margin-top:3rem;padding-top:1rem;border-top:1px solid #dee2e6;font-size:.75rem;color:#6c757d;text-align:center}
+</style>
+</head>
+<body>
+<h1>Institut Vajra Yogini — Rapport Strategie Revenus</h1>
+<div class="subtitle">Analyse basee sur les donnees SeminarDesk (backup juillet 2026) — Saisons 23-24, 24-25, 25-26<br>
+Prepare pour le Conseil d'Administration et la Direction — Juillet 2026</div>
+
+<div class="highlight">
+<strong>Resume executif :</strong> Le Conseil propose d'augmenter les tarifs CI+ de 5 a 10 €/nuit. Notre analyse montre que cette mesure genererait au maximum <strong>3 650 €/an</strong> (sur 365 nuits payees en 25-26), tandis que des leviers plus simples — correction d'une erreur de configuration SeminarDesk, occupation supplementaire, retention des visiteurs — pourraient generer <strong>30 000 € et plus</strong> sans risquer de decourager les participants les plus genereux.
+</div>
+
+<h2>1. CI+ : les chiffres reels</h2>
+
+<p>4 chambres CI+ = 1 460 nuits disponibles par saison (1 personne par chambre).</p>
+
+<div class="kpi-row" id="kpi1"></div>
+
+<h3>Hausse de prix vs occupation</h3>
+<table>
+<tr><th>Scenario</th><th class="n">Gain annuel</th><th>Commentaire</th></tr>
+<tr><td>Hausse +4 €/nuit (66 → 70)</td><td class="n" id="v-p4"></td><td>Sur les 365 nuits payees de 25-26</td></tr>
+<tr><td>Hausse +10 €/nuit (66 → 76)</td><td class="n" id="v-p10"></td><td>Maximum envisage par le CA</td></tr>
+<tr><td class="pos">Remplir 55 nuits de plus (a 66 €)</td><td class="n pos" id="v-n55"></td><td>= 2 semaines par chambre</td></tr>
+<tr><td class="pos">Remplir 109 nuits de plus</td><td class="n pos" id="v-n109"></td><td>Equivalent au gain de la hausse +10 €</td></tr>
+</table>
+
+<h3>Erreur de configuration decouverte</h3>
+<p>La politique IVY stipule : <strong>pas de reduction membre pour les chambres individuelles</strong>. Or SeminarDesk applique 55 €/nuit aux membres au lieu de 66 €.</p>
+<table>
+<tr><th>Tarif</th><th>Saison</th><th class="n">Nuits</th><th class="n">Revenu percu</th><th class="n">Revenu attendu</th><th class="n neg">Manque a gagner</th></tr>
+<tbody id="tb-disc"></tbody>
+</table>
+<div class="green-box"><strong>Corriger cette configuration dans SeminarDesk coute zero et recupere immediatement <span id="v-lost"></span> par an.</strong></div>
+
+<h2>2. Occupation : le vrai levier</h2>
+<table>
+<tr><th>Type</th><th class="n">Nuits 24-25</th><th class="n">Nuits 25-26</th><th class="n">Revenus 24-25</th><th class="n">Revenus 25-26</th></tr>
+<tbody id="tb-rooms"></tbody>
+</table>
+<p>Les Chambres a 2 et Dortoirs ont ~6 600 nuits vides. Remplir 10 % de ces nuits genere <strong class="pos">~11 700 €</strong> — bien plus que la hausse CI+.</p>
+
+<h2>3. Revenus en ligne</h2>
+<table>
+<tr><th>Type</th><th class="n">Inscr. totales</th><th class="n">Personnes</th><th class="n">Revenus</th><th class="n">€/inscr.</th></tr>
+<tbody id="tb-online"></tbody>
+</table>
+
+<h3>IDMT : les memes personnes chaque semaine</h3>
+<table>
+<tr><th>Saison</th><th class="n">Inscriptions</th><th class="n">Personnes uniques</th><th class="n">Revenus</th><th class="n">€/personne</th></tr>
+<tbody id="tb-idmt"></tbody>
+</table>
+<p>Les revenus en ligne representent ~6 % du total. La question strategique : ce rendement justifie-t-il l'infrastructure, ou le maintient-on pour la mission d'accessibilite ?</p>
+
+<h2>4. Evenements a fort impact</h2>
+
+<h3>Top 10 evenements (toutes saisons confondues)</h3>
+<table>
+<tr><th>Evenement</th><th class="n">Participants</th><th class="n">Nuits</th><th class="n">Revenus</th><th class="n">Rev./pers.</th></tr>
+<tbody id="tb-top-ev"></tbody>
+</table>
+
+<h3>Retraite de Vajra Yogini — un exemple frappant</h3>
+<table>
+<tr><th>Instance</th><th>Periode</th><th class="n">Participants</th><th class="n">Nuits</th><th class="n">Revenus</th></tr>
+<tbody id="tb-vy"></tbody>
+</table>
+<p>La variation d'inscription a cette seule retraite (6 → 37 → 6 participants) represente <strong>~16 000 €</strong> de difference — plus que toute hausse CI+.</p>
+
+<h2>5. Retention : le plus grand gisement</h2>
+
+<div class="kpi-row">
+<div class="kpi"><div class="v" id="v-guests"></div><div class="l">Personnes uniques</div></div>
+<div class="kpi"><div class="v neg" id="v-onetimers"></div><div class="l">Ne reviennent jamais</div></div>
+<div class="kpi"><div class="v pos" id="v-regulars"></div><div class="l">Reguliers (11+)</div></div>
+</div>
+
+<table>
+<tr><th>Segment</th><th class="n">Personnes</th><th class="n">Reservations</th><th class="n">Revenus</th><th class="n">Rev. moy.</th></tr>
+<tbody id="tb-ret"></tbody>
+</table>
+<p><strong>58 % des visiteurs viennent une seule fois.</strong> Convertir 10 % d'entre eux en visiteurs a 2 passages = 174 reservations supplementaires = <strong class="pos">~17 400 €</strong>.</p>
+
+<h3>Pipeline initiation</h3>
+<table>
+<tr><th>Apres le cours d'initiation</th><th class="n">Personnes</th><th class="n">Revenus generes ensuite</th></tr>
+<tbody id="tb-intro"></tbody>
+</table>
+
+<h2>6. Comportement des membres</h2>
+<p>Les membres sont les premiers clients des chambres CI/CI+. Augmenter le tarif CI+ penalise directement les participants les plus fideles.</p>
+
+<h2>Recommandations — classees par impact</h2>
+<div class="green-box">
+<ol id="reco-list"></ol>
+</div>
+
+<div class="footer">
+Donnees : SeminarDesk backup du 7 juillet 2026 — Hors benevoles et residents<br>
+Rapport genere le <span id="report-date"></span> — IVY Director Insights
+</div>
+
+<script>
+const F=n=>n.toLocaleString('fr-FR',{maximumFractionDigits:0});
+const FE=n=>F(n)+' €';
+fetch('data/strategy_report.json').then(r=>r.json()).then(S=>{
+  const ci25=S.ciOccupancy.find(r=>r.seg==='CI+'&&r.season==='25-26')||{};
+  const pN=ci25.paid_nights||0;
+
+  document.getElementById('kpi1').innerHTML=[
+    {l:'Occupation payee 25-26',v:(pN/1460*100).toFixed(1)+'%'},
+    {l:'Nuits payees',v:F(pN)},
+    {l:'Nuits vides',v:F(1460-pN-(ci25.free_nights||0))},
+    {l:'Revenu CI+ 25-26',v:FE(ci25.rev||0)}
+  ].map(c=>`<div class="kpi"><div class="v">${c.v}</div><div class="l">${c.l}</div></div>`).join('');
+
+  document.getElementById('v-p4').textContent=FE(pN*4);
+  document.getElementById('v-p10').textContent=FE(pN*10);
+  document.getElementById('v-n55').textContent=FE(55*66);
+  document.getElementById('v-n109').textContent=FE(109*66);
+
+  const disc=S.ciplusDiscountImpact||[];
+  document.getElementById('tb-disc').innerHTML=disc.map(r=>
+    `<tr><td>${r.tier}</td><td>${r.season||'—'}</td><td class="n">${F(r.nights)}</td>
+     <td class="n">${FE(r.actual_rev)}</td><td class="n">${FE(r.should_be_rev)}</td>
+     <td class="n neg">${FE(r.lost_rev)}</td></tr>`).join('');
+  const lost=disc.reduce((s,r)=>s+r.lost_rev,0);
+  document.getElementById('v-lost').textContent=FE(lost);
+
+  const rooms=S.roomOccupancy||[];
+  const roomTypes=[...new Set(rooms.map(r=>r.room_type))].filter(Boolean);
+  document.getElementById('tb-rooms').innerHTML=roomTypes.map(rt=>{
+    const r24=rooms.find(r=>r.room_type===rt&&r.season==='24-25')||{nights:0,lodg_rev:0};
+    const r25=rooms.find(r=>r.room_type===rt&&r.season==='25-26')||{nights:0,lodg_rev:0};
+    return `<tr><td>${rt}</td><td class="n">${F(r24.nights)}</td><td class="n">${F(r25.nights)}</td>
+      <td class="n">${FE(r24.lodg_rev)}</td><td class="n">${FE(r25.lodg_rev)}</td></tr>`;
+  }).join('');
+
+  const onl=S.onlineRevenue||[];
+  const onlTotals={};
+  onl.forEach(r=>{if(!onlTotals[r.attendance])onlTotals[r.attendance]={i:0,g:new Set(),rev:0};
+    onlTotals[r.attendance].i+=r.inscriptions;onlTotals[r.attendance].rev+=r.total_rev;});
+  document.getElementById('tb-online').innerHTML=onl.map(r=>
+    `<tr><td>${r.attendance} (${r.season})</td><td class="n">${F(r.inscriptions)}</td><td class="n">${F(r.unique_guests)}</td>
+     <td class="n">${FE(r.total_rev)}</td><td class="n">${FE(r.inscriptions?r.total_rev/r.inscriptions:0)}</td></tr>`).join('');
+
+  document.getElementById('tb-idmt').innerHTML=(S.idmt||[]).map(r=>
+    `<tr><td>${r.season}</td><td class="n">${F(r.inscriptions)}</td><td class="n">${F(r.unique_ppl)}</td>
+     <td class="n">${FE(r.rev)}</td><td class="n">${FE(r.unique_ppl?r.rev/r.unique_ppl:0)}</td></tr>`).join('');
+
+  const evAgg={};
+  (S.eventsBySeason||[]).forEach(r=>{if(!evAgg[r.event])evAgg[r.event]={p:0,n:0,rev:0};
+    evAgg[r.event].p+=r.participants;evAgg[r.event].n+=r.nights;evAgg[r.event].rev+=r.total_rev;});
+  const topEv=Object.entries(evAgg).sort((a,b)=>b[1].rev-a[1].rev).slice(0,10);
+  document.getElementById('tb-top-ev').innerHTML=topEv.map(([ev,v])=>
+    `<tr><td>${ev}</td><td class="n">${F(v.p)}</td><td class="n">${F(v.n)}</td>
+     <td class="n">${FE(v.rev)}</td><td class="n">${FE(v.p?v.rev/v.p:0)}</td></tr>`).join('');
+
+  document.getElementById('tb-vy').innerHTML=(S.vyRetreats||[]).map(r=>
+    `<tr><td>${r.instance}</td><td>${r.period}</td><td class="n">${F(r.participants)}</td>
+     <td class="n">${F(r.nights)}</td><td class="n">${FE(r.total_rev)}</td></tr>`).join('');
+
+  const retSegs={'1_one_timer':'1 seule fois','2_light':'2-3 fois','3_moderate':'4-10 fois','4_regular':'11+ fois'};
+  const ret=S.guestRetention||[];
+  const totalG=ret.reduce((s,r)=>s+r.guests,0);
+  const oneT=ret.find(r=>r.segment==='1_one_timer');
+  const reg=ret.find(r=>r.segment==='4_regular');
+  document.getElementById('v-guests').textContent=F(totalG);
+  document.getElementById('v-onetimers').textContent=oneT?F(oneT.guests)+' ('+((oneT.guests/totalG*100).toFixed(0))+'%)':'—';
+  document.getElementById('v-regulars').textContent=reg?F(reg.guests)+' ('+((reg.guests/totalG*100).toFixed(0))+'%)':'—';
+  document.getElementById('tb-ret').innerHTML=ret.map(r=>
+    `<tr><td>${retSegs[r.segment]||r.segment}</td><td class="n">${F(r.guests)}</td><td class="n">${F(r.bookings)}</td>
+     <td class="n">${FE(r.rev)}</td><td class="n">${FE(r.avg_rev)}</td></tr>`).join('');
+
+  const introSegs={'0_never_returned':'Jamais revenu','1_returned_1_2':'Revenu 1-2 fois','2_returned_3_5':'Revenu 3-5 fois','3_returned_6plus':'Revenu 6+ fois'};
+  document.getElementById('tb-intro').innerHTML=(S.introPipeline||[]).map(r=>
+    `<tr><td>${introSegs[r.segment]||r.segment}</td><td class="n">${F(r.guests)}</td><td class="n">${FE(r.subsequent_rev)}</td></tr>`).join('');
+
+  document.getElementById('reco-list').innerHTML=`
+    <li><strong>Corriger la config SeminarDesk CI+</strong> — 66 €/nuit pour tous. Gain immediat : <strong>${FE(lost)}</strong>/an.</li>
+    <li><strong>Occupation avant la hausse de prix</strong> — +10 % de nuits Chambre a 2 + Dortoir = ~11 700 € (vs ${FE(pN*10)} max pour hausse +10 € CI+).</li>
+    <li><strong>Retention</strong> — Convertir 10 % des visiteurs uniques en 2e visite = ~17 400 €.</li>
+    <li><strong>Programmation evenements</strong> — Renforcer Lamrim Gendun (735 €/pers.), Vipassana (346 €/pers.) et retraites longues residentielles.</li>
+    <li><strong>Retraite Vajra Yogini</strong> — Ramener l'inscription de 6 a 37 participants = ~16 000 € recuperes.</li>
+    <li><strong>Pipeline initiation</strong> — 39 % des eleves ne reviennent jamais. Ameliorer le suivi.</li>
+    <li><strong>Tarifs Bienfaiteur hebergement</strong> — Dortoir a 3,50 €/nuit (maintenant 6,25 €) pour 1 161 nuits : verifier la soutenabilite.</li>
+    <li><strong>Strategie en ligne</strong> — 40 000 € (6 % du total). Clarifier objectif financier vs mission.</li>`;
+
+  document.getElementById('report-date').textContent=new Date().toLocaleDateString('fr-FR');
+});
+</script>
+</body>
+</html>

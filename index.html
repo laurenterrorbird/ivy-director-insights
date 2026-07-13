@@ -81,6 +81,7 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
   <button data-t="te">Enseignants</button>
   <button data-t="co">Encaissements</button>
   <button data-t="br">Détail réservations</button>
+  <button data-t="st">Strategie</button>
   <button data-t="ai">Poser une question</button>
 </nav>
 
@@ -214,6 +215,149 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
   </div>
 </div>
 
+<div class="tc" id="t-st">
+  <div class="card" style="background:#fff8e1;border-left:4px solid #f9a825">
+    <h3 style="color:#f57f17">Rapport strategie revenue — pour le CA et la direction</h3>
+    <div class="note">Analyse complète des leviers de revenus, basée sur les donnees SeminarDesk (backup juillet 2026). Hors benevoles et residents. <a href="strategy_report.html" target="_blank" style="font-weight:600">Version imprimable pour le CA</a></div>
+  </div>
+
+  <div class="card">
+    <h3>1. CI+ : hausse des prix vs taux d'occupation</h3>
+    <div class="note">4 chambres CI+ = 1 460 nuits disponibles/saison (1 personne par chambre). Les nuits « gratuites » accueillent des enseignants, traducteurs et intervenants.</div>
+    <div class="kg" id="st-ci-kpi"></div>
+    <div class="g2">
+      <div><h4 style="font-size:.8rem;margin-bottom:.3rem">Simulateur : hausse de prix vs occupation supplementaire</h4>
+        <div style="font-size:.75rem;margin-bottom:.4rem">
+          <label>Hausse CI+ par nuit : <strong id="st-sim-p">+4 €</strong></label>
+          <input type="range" id="st-sim-price" min="0" max="20" value="4" step="1" style="width:100%">
+          <label>Nuits supplementaires remplies : <strong id="st-sim-n">109</strong></label>
+          <input type="range" id="st-sim-nights" min="0" max="500" value="109" step="1" style="width:100%">
+        </div>
+        <div style="display:flex;gap:1rem;font-size:.82rem">
+          <div style="flex:1;padding:.5rem;background:#fce4ec;border-radius:6px;text-align:center">
+            <div style="font-size:.7rem;color:var(--muted)">Gain hausse prix (sur nuits payees 25-26)</div>
+            <div style="font-size:1.2rem;font-weight:700;color:#c62828" id="st-sim-rev-price">0 €</div>
+          </div>
+          <div style="flex:1;padding:.5rem;background:#e8f5e9;border-radius:6px;text-align:center">
+            <div style="font-size:.7rem;color:var(--muted)">Gain occupation supplementaire (a 66 €/nuit)</div>
+            <div style="font-size:1.2rem;font-weight:700;color:#2e7d32" id="st-sim-rev-occ">0 €</div>
+          </div>
+        </div>
+      </div>
+      <div><div class="cc"><canvas id="c-st-occ"></canvas></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>1b. Erreur de configuration SD : reduction membre CI+ non autorisee</h3>
+    <div class="note">La politique IVY stipule que les chambres individuelles ne beneficient pas de la reduction membre. SeminarDesk applique pourtant 55 €/nuit aux membres au lieu de 66 €.</div>
+    <div style="overflow-x:auto"><table id="t-st-disc"><thead><tr>
+      <th>Tarif</th><th>Saison</th><th class="n">Reserv.</th><th class="n">Nuits</th><th class="n">Revenu reel</th><th class="n">Revenu attendu (66 €)</th><th class="n diff-neg">Manque a gagner</th>
+    </tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <div class="card">
+    <h3>2. Occupation par type d'hebergement</h3>
+    <div class="note">Nuits reservees vs disponibles. Remplir 10 % des nuits vides genere bien plus que la hausse CI+.</div>
+    <div style="overflow-x:auto"><table id="t-st-rooms"><thead><tr>
+      <th>Type</th><th>Saison</th><th class="n">Nuits</th><th class="n">Revenus hebergement</th><th class="n">€/nuit moy.</th>
+    </tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <div class="card">
+    <h3>3. Revenus en ligne</h3>
+    <div class="note">IDMT = memes ~130-150 personnes chaque semaine. Revenus en ligne = 6 % du total.</div>
+    <div class="g2">
+      <div style="overflow-x:auto"><table id="t-st-online"><thead><tr>
+        <th>Type</th><th>Saison</th><th class="n">Inscriptions</th><th class="n">Personnes</th><th class="n">Revenus</th><th class="n">€/inscr.</th>
+      </tr></thead><tbody></tbody></table></div>
+      <div>
+        <h4 style="font-size:.8rem">IDMT : inscriptions vs personnes reelles</h4>
+        <div style="overflow-x:auto"><table id="t-st-idmt"><thead><tr>
+          <th>Saison</th><th class="n">Inscriptions</th><th class="n">Personnes uniques</th><th class="n">Revenus</th><th class="n">€/personne</th>
+        </tr></thead><tbody></tbody></table></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>4. Evenements : top revenus par saison</h3>
+    <div class="note">Comparer les saisons pour voir quels evenements declinent ou croissent.</div>
+    <input class="sb" id="st-ev-s" placeholder="Filtrer par nom d'evenement...">
+    <div style="overflow-x:auto"><table id="t-st-events"><thead><tr>
+      <th data-k="event">Evenement</th><th data-k="season">Saison</th><th class="n" data-k="participants">Participants</th>
+      <th class="n" data-k="onsite">Sur place</th><th class="n" data-k="nights">Nuits</th>
+      <th class="n" data-k="total_rev">Revenus</th><th class="n" data-k="lodg_rev">Hebergement</th><th class="n" data-k="avg_pp">Rev./pers.</th>
+    </tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <div class="card">
+    <h3>4b. Retraite de Vajra Yogini — evolution</h3>
+    <div class="note">La variation d'inscription a cette seule retraite a plus d'impact que la hausse CI+.</div>
+    <div style="overflow-x:auto"><table id="t-st-vy"><thead><tr>
+      <th>Instance</th><th>Periode</th><th class="n">Participants</th><th class="n">Nuits</th><th class="n">Revenus</th><th class="n">Rev./pers.</th>
+    </tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <div class="card">
+    <h3>5. Enseignants : qui remplit la maison ?</h3>
+    <div class="note">Revenus des evenements par enseignant, avec part hebergement et nuits.</div>
+    <input class="sb" id="st-te-s" placeholder="Filtrer par enseignant...">
+    <div style="overflow-x:auto"><table id="t-st-teachers"><thead><tr>
+      <th data-k="teacher">Enseignant</th><th data-k="season">Saison</th>
+      <th class="n" data-k="participants">Particip.</th><th class="n" data-k="onsite">Sur place</th>
+      <th class="n" data-k="nights">Nuits</th><th class="n" data-k="total_rev">Revenus</th>
+      <th class="n" data-k="lodg_rev">Hebergement</th><th class="n" data-k="avg_pp">Rev./pers.</th>
+    </tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <div class="card">
+    <h3>6. Retention : qui revient, qui disparait ?</h3>
+    <div class="note">3 012 personnes uniques depuis sept. 2023. 58 % ne reviennent jamais.</div>
+    <div class="g2">
+      <div>
+        <div class="cc"><canvas id="c-st-ret"></canvas></div>
+      </div>
+      <div style="overflow-x:auto"><table id="t-st-ret"><thead><tr>
+        <th>Segment</th><th class="n">Personnes</th><th class="n">Reservations</th><th class="n">Revenus</th><th class="n">Rev. moy./pers.</th>
+      </tr></thead><tbody></tbody></table></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>6b. Pipeline intro : Initiation a la Meditation / au Bouddhisme</h3>
+    <div class="note">Que deviennent les nouveaux eleves apres leur premier cours d'initiation ?</div>
+    <div class="g2">
+      <div class="cc"><canvas id="c-st-intro"></canvas></div>
+      <div style="overflow-x:auto"><table id="t-st-intro"><thead><tr>
+        <th>Segment</th><th class="n">Personnes</th><th class="n">Revenus suivants</th>
+      </tr></thead><tbody></tbody></table></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>7. Comportement membres : choix de chambres et tarifs</h3>
+    <div class="note">Qui reserve quoi, et a quel prix reel par nuit ?</div>
+    <div style="overflow-x:auto"><table id="t-st-members"><thead><tr>
+      <th>Tarif</th><th>Type chambre</th><th class="n">Reserv.</th><th class="n">Nuits</th>
+      <th class="n">Revenus hebergement</th><th class="n">€/nuit paye</th>
+    </tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <div class="card">
+    <h3>8. Grille tarifaire actuelle (Standard, jan 2026)</h3>
+    <div class="note">Prix par nuit configures dans SeminarDesk. CI+ : 55 € pour membres = erreur a corriger.</div>
+    <div style="overflow-x:auto"><table id="t-st-grid"><thead><tr>
+      <th>Tarif</th><th>Type chambre</th><th class="n">Prix/nuit</th>
+    </tr></thead><tbody></tbody></table></div>
+  </div>
+
+  <div class="card" style="background:#e8f5e9;border-left:4px solid #2e7d32">
+    <h3>9. Feuille de route — recommandations classees par impact</h3>
+    <div id="st-reco"></div>
+  </div>
+</div>
+
 <div class="tc" id="t-ai">
   <div class="card">
     <h3>Poser une question sur les données</h3>
@@ -240,7 +384,7 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
 <footer id="foot"></footer>
 
 <script>
-let RAW=[],STR={},EVT={},TCH={},RMS={},ROCC={},filtered=[],MEALS={months:{}};
+let RAW=[],STR={},EVT={},TCH={},RMS={},ROCC={},filtered=[],MEALS={months:{}},STRAT=null;
 const CX={};
 const F=n=>n.toLocaleString('fr-FR',{maximumFractionDigits:0});
 const FE=n=>F(n)+' €';
@@ -315,6 +459,7 @@ async function init(){
   let mRes=await fetch('data/meals_monthly.json');
   if(!mRes.ok)mRes=await fetch('data/meals_lunch.json');
   try{MEALS=await mRes.json();}catch(e){MEALS={months:{}};}
+  try{const sRes=await fetch('data/strategy_report.json');STRAT=await sRes.json();}catch(e){STRAT=null;}
   STR=Object.fromEntries(Object.entries(d.strings).map(([k,v])=>[v,k]));
   EVT=Object.fromEntries(Object.entries(d.events).map(([k,v])=>[v,k]));
   TCH=Object.fromEntries(Object.entries(d.teachers).map(([k,v])=>[v,k]));
@@ -384,7 +529,7 @@ function switchTab(btn){
 }
 
 function render(){
-  const fns=[['ov',rOv],['ev',rEv],['se',rSe],['me',rMe],['lo',rLo],['te',rTe],['co',rCo],['br',rBr]];
+  const fns=[['ov',rOv],['ev',rEv],['se',rSe],['me',rMe],['lo',rLo],['te',rTe],['co',rCo],['br',rBr],['st',rSt]];
   for(const [name,fn] of fns){
     try{fn();}catch(err){console.error('Render failed:',name,err);}
   }
@@ -511,6 +656,135 @@ function rLunchTables(){
     cumRows+=`<tr><td>${FY_LABELS[i]}</td>${LUNCH_SEASONS.map((s,j)=>`<td class="n">${F(sumN(j))}</td><td class="n">${FE(sumR(j))}</td>`).join('')}${diffCountCell(sumN(1)-sumN(0))}${diffCell(sumR(1)-sumR(0))}${diffCountCell(sumN(2)-sumN(1))}${diffCell(sumR(2)-sumR(1))}</tr>`;
   }
   document.querySelector('#t-lunch-cum tbody').innerHTML=cumRows;
+}
+
+function rSt(){
+  if(!STRAT)return;
+  const S=STRAT;
+
+  // --- 1. CI/CI+ KPIs and simulator ---
+  const ci25=S.ciOccupancy.find(r=>r.seg==='CI+'&&r.season==='25-26')||{};
+  const ci24=S.ciOccupancy.find(r=>r.seg==='CI+'&&r.season==='24-25')||{};
+  const paidN=ci25.paid_nights||0, freeN=ci25.free_nights||0, rev25=ci25.rev||0;
+  const occPct=((paidN+freeN)/1460*100).toFixed(1);
+  const paidPct=(paidN/1460*100).toFixed(1);
+  const emptyN=1460-paidN-freeN;
+  const discRows=S.ciplusDiscountImpact||[];
+  const lostTotal=discRows.reduce((s,r)=>s+r.lost_rev,0);
+  document.getElementById('st-ci-kpi').innerHTML=[
+    {l:'Nuits payees 25-26 (CI+)',v:F(paidN)},{l:'Occupation payee',v:paidPct+'%'},{l:'Nuits vides',v:F(emptyN)},
+    {l:'Manque CI+ erreur SD',v:FE(lostTotal)},{l:'Gain max hausse +10 €',v:FE(paidN*10)},
+    {l:'Equivalent en nuits a 66 €',v:F(Math.ceil(paidN*10/66))+' nuits'}
+  ].map(c=>`<div class="kc"><div class="v">${c.v}</div><div class="l">${c.l}</div></div>`).join('');
+
+  // Simulator
+  const priceSlider=document.getElementById('st-sim-price');
+  const nightsSlider=document.getElementById('st-sim-nights');
+  function updateSim(){
+    const dp=+priceSlider.value, dn=+nightsSlider.value;
+    document.getElementById('st-sim-p').textContent=`+${dp} €`;
+    document.getElementById('st-sim-n').textContent=F(dn);
+    document.getElementById('st-sim-rev-price').textContent=FE(paidN*dp);
+    document.getElementById('st-sim-rev-occ').textContent=FE(dn*66);
+  }
+  priceSlider.oninput=updateSim; nightsSlider.oninput=updateSim; updateSim();
+
+  // Occupancy chart
+  const ciSeasons=['23-24','24-25','25-26'];
+  const ciData=ciSeasons.map(s=>{const r=S.ciOccupancy.find(x=>x.seg==='CI+'&&x.season===s);return r?r.paid_nights:0;});
+  const ciFree=ciSeasons.map(s=>{const r=S.ciOccupancy.find(x=>x.seg==='CI+'&&x.season===s);return r?r.free_nights:0;});
+  DC('st-occ');CX['st-occ']=new Chart(document.getElementById('c-st-occ'),{type:'bar',data:{
+    labels:ciSeasons,datasets:[
+      {label:'Nuits payees',data:ciData,backgroundColor:'#4a6741'},
+      {label:'Nuits gratuites (enseignants)',data:ciFree,backgroundColor:'#90caf9'},
+      {label:'Nuits vides',data:ciSeasons.map((_,i)=>1460-ciData[i]-ciFree[i]),backgroundColor:'#e9ecef'}
+    ]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true},y:{stacked:true,max:1460,title:{display:true,text:'Nuits CI+ (4 chambres x 365)'}}},plugins:{tooltip:chartCountTip}}});
+
+  // --- 1b. Discount table ---
+  document.querySelector('#t-st-disc tbody').innerHTML=discRows.map(r=>
+    `<tr><td>${r.tier}</td><td>${r.season||'—'}</td><td class="n">${F(r.bookings)}</td><td class="n">${F(r.nights)}</td>
+     <td class="n">${FE(r.actual_rev)}</td><td class="n">${FE(r.should_be_rev)}</td><td class="n diff-neg">${FE(r.lost_rev)}</td></tr>`
+  ).join('')+`<tr style="font-weight:700"><td colspan="3">Total</td><td class="n">${F(discRows.reduce((s,r)=>s+r.nights,0))}</td>
+    <td class="n">${FE(discRows.reduce((s,r)=>s+r.actual_rev,0))}</td><td class="n">${FE(discRows.reduce((s,r)=>s+r.should_be_rev,0))}</td>
+    <td class="n diff-neg">${FE(lostTotal)}</td></tr>`;
+
+  // --- 2. Room occupancy ---
+  document.querySelector('#t-st-rooms tbody').innerHTML=(S.roomOccupancy||[]).map(r=>
+    `<tr><td>${r.room_type||'(non attribue)'}</td><td>${r.season}</td><td class="n">${F(r.nights)}</td>
+     <td class="n">${FE(r.lodg_rev)}</td><td class="n">${FE(r.avg_night)}</td></tr>`).join('');
+
+  // --- 3. Online revenue ---
+  const onl=S.onlineRevenue||[];
+  document.querySelector('#t-st-online tbody').innerHTML=onl.map(r=>
+    `<tr><td>${r.attendance}</td><td>${r.season}</td><td class="n">${F(r.inscriptions)}</td>
+     <td class="n">${F(r.unique_guests)}</td><td class="n">${FE(r.total_rev)}</td>
+     <td class="n">${FE(r.inscriptions?r.total_rev/r.inscriptions:0)}</td></tr>`).join('');
+
+  document.querySelector('#t-st-idmt tbody').innerHTML=(S.idmt||[]).map(r=>
+    `<tr><td>${r.season}</td><td class="n">${F(r.inscriptions)}</td><td class="n">${F(r.unique_ppl)}</td>
+     <td class="n">${FE(r.rev)}</td><td class="n">${FE(r.unique_ppl?r.rev/r.unique_ppl:0)}</td></tr>`).join('');
+
+  // --- 4. Events by season ---
+  const evRows=(S.eventsBySeason||[]).filter(r=>r.total_rev>500);
+  document.querySelector('#t-st-events tbody').innerHTML=evRows.map(r=>
+    `<tr><td>${r.event}</td><td>${r.season}</td><td class="n">${F(r.participants)}</td>
+     <td class="n">${F(r.onsite)}</td><td class="n">${F(r.nights)}</td>
+     <td class="n">${FE(r.total_rev)}</td><td class="n">${FE(r.lodg_rev)}</td><td class="n">${FE(r.avg_pp)}</td></tr>`).join('');
+  document.getElementById('st-ev-s').oninput=e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('#t-st-events tbody tr').forEach(tr=>tr.style.display=tr.textContent.toLowerCase().includes(q)?'':'none');};
+
+  // VY retreats
+  document.querySelector('#t-st-vy tbody').innerHTML=(S.vyRetreats||[]).map(r=>
+    `<tr><td>${r.instance}</td><td>${r.period}</td><td class="n">${F(r.participants)}</td>
+     <td class="n">${F(r.nights)}</td><td class="n">${FE(r.total_rev)}</td><td class="n">${FE(r.avg_pp)}</td></tr>`).join('');
+
+  // --- 5. Teachers ---
+  const teRows=(S.teachersBySeason||[]).filter(r=>r.total_rev>500);
+  document.querySelector('#t-st-teachers tbody').innerHTML=teRows.map(r=>
+    `<tr><td>${r.teacher}</td><td>${r.season}</td><td class="n">${F(r.participants)}</td>
+     <td class="n">${F(r.onsite)}</td><td class="n">${F(r.nights)}</td>
+     <td class="n">${FE(r.total_rev)}</td><td class="n">${FE(r.lodg_rev)}</td><td class="n">${FE(r.avg_pp)}</td></tr>`).join('');
+  document.getElementById('st-te-s').oninput=e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('#t-st-teachers tbody tr').forEach(tr=>tr.style.display=tr.textContent.toLowerCase().includes(q)?'':'none');};
+
+  // --- 6. Guest retention ---
+  const retSegs={'1_one_timer':'1 seule fois (58%)','2_light':'2-3 fois (21%)','3_moderate':'4-10 fois (10%)','4_regular':'11+ fois (11%)'};
+  const ret=S.guestRetention||[];
+  document.querySelector('#t-st-ret tbody').innerHTML=ret.map(r=>
+    `<tr><td>${retSegs[r.segment]||r.segment}</td><td class="n">${F(r.guests)}</td><td class="n">${F(r.bookings)}</td>
+     <td class="n">${FE(r.rev)}</td><td class="n">${FE(r.avg_rev)}</td></tr>`).join('');
+  DC('st-ret');CX['st-ret']=new Chart(document.getElementById('c-st-ret'),{type:'doughnut',data:{
+    labels:ret.map(r=>retSegs[r.segment]||r.segment),datasets:[{data:ret.map(r=>r.guests),
+    backgroundColor:['#c62828','#f57c00','#1565c0','#2e7d32']}]},options:{responsive:true,maintainAspectRatio:false,...doughnutTip(chartCountTip)}});
+
+  // Intro pipeline
+  const introSegs={'0_never_returned':'Jamais revenu','1_returned_1_2':'Revenu 1-2 fois','2_returned_3_5':'Revenu 3-5 fois','3_returned_6plus':'Revenu 6+ fois'};
+  const intro=S.introPipeline||[];
+  document.querySelector('#t-st-intro tbody').innerHTML=intro.map(r=>
+    `<tr><td>${introSegs[r.segment]||r.segment}</td><td class="n">${F(r.guests)}</td><td class="n">${FE(r.subsequent_rev)}</td></tr>`).join('');
+  DC('st-intro');CX['st-intro']=new Chart(document.getElementById('c-st-intro'),{type:'pie',data:{
+    labels:intro.map(r=>introSegs[r.segment]||r.segment),datasets:[{data:intro.map(r=>r.guests),
+    backgroundColor:['#c62828','#f57c00','#1565c0','#2e7d32']}]},options:{responsive:true,maintainAspectRatio:false,...doughnutTip(chartCountTip)}});
+
+  // --- 7. Member behavior ---
+  document.querySelector('#t-st-members tbody').innerHTML=(S.memberRoomChoice||[]).map(r=>
+    `<tr><td>${r.tier||'—'}</td><td>${r.room_type||'(non attribue)'}</td><td class="n">${F(r.bookings)}</td>
+     <td class="n">${F(r.nights)}</td><td class="n">${FE(r.lodg_rev)}</td>
+     <td class="n">${r.avg_paid_night?FE(r.avg_paid_night):'—'}</td></tr>`).join('');
+
+  // --- 8. Pricing grid ---
+  document.querySelector('#t-st-grid tbody').innerHTML=(S.pricingGrid||[]).map(r=>
+    `<tr><td>${r.tier}</td><td>${r.room}</td><td class="n">${FE(r.price)}</td></tr>`).join('');
+
+  // --- 9. Recommendations ---
+  document.getElementById('st-reco').innerHTML=`<ol style="font-size:.82rem;line-height:1.8;padding-left:1.2rem">
+    <li><strong>Corriger la config SeminarDesk CI+</strong> — appliquer 66 €/nuit pour tous (pas de reduction membre). Gain immediat : <strong class="diff-pos">${FE(lostTotal)}</strong> par an (cout : zero).</li>
+    <li><strong>Occupation avant tout</strong> — 10 % de nuits en plus dans Chambre a 2 + Dortoir = <strong class="diff-pos">~11 700 €</strong> (vs ${FE(paidN*10)} max pour hausse +10 € CI+).</li>
+    <li><strong>Retention</strong> — 58 % des visiteurs ne reviennent jamais. Convertir 10 % des « une seule fois » en 2 visites = <strong class="diff-pos">~17 400 €</strong>.</li>
+    <li><strong>Programmation</strong> — Renforcer les evenements a haut rendement (Lamrim Gendun : 735 €/pers., Vipassana : 346 €/pers., retraites longues qui remplissent des chambres).</li>
+    <li><strong>Retraite VY</strong> — De 6 participants (jan. 2026) a 37 (jan. 2025) = <strong class="diff-pos">~16 000 €</strong> de revenus supplementaires.</li>
+    <li><strong>Pipeline intro</strong> — 39 % des eleves d'initiation ne reviennent jamais. Ameliorer le suivi post-initiation.</li>
+    <li><strong>Tarifs Bienfaiteur hebergement</strong> — Dortoir a 3,50 €/nuit (maintenant 6,25 €) pour 1 161 nuits : verifier si ce tarif est soutenable.</li>
+    <li><strong>Strategie en ligne</strong> — 40 000 € de revenus en ligne (6 % du total). Clarifier si l'effort vaut le rendement financier ou si la mission (accessibilite) justifie le maintien.</li>
+  </ol>`;
 }
 
 function rLo(){
