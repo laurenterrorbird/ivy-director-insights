@@ -322,13 +322,10 @@ function applyFilter(){
 }
 
 function fixTabPanels(){
-  const wrap=document.querySelector('.wrap');
   const ov=document.getElementById('t-ov');
-  if(!wrap||!ov)return;
-  document.querySelectorAll('.wrap > .tc').forEach(p=>{
-    if(p.id!=='t-ov'&&ov.contains(p)){
-      ov.parentNode.insertBefore(p, ov.nextSibling);
-    }
+  if(!ov||!ov.parentNode)return;
+  [...ov.querySelectorAll('.tc')].filter(p=>p.id&&p.id!=='t-ov').forEach(p=>{
+    ov.parentNode.insertBefore(p, ov.nextSibling);
   });
 }
 
