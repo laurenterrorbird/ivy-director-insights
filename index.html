@@ -37,6 +37,7 @@ th{font-weight:600;color:var(--muted);font-size:.68rem;text-transform:uppercase;
 th:hover{color:var(--accent)}
 th.sa::after{content:' ▲';font-size:.55rem}th.sd::after{content:' ▼';font-size:.55rem}
 tr:hover{background:var(--hover)}
+.diff-pos{color:#2e7d32}.diff-neg{color:#c62828}
 .n{text-align:right;font-variant-numeric:tabular-nums}
 .cc{position:relative;height:260px;margin:.5rem 0}
 .sb{width:100%;padding:.5rem .7rem;border:1px solid var(--border);border-radius:6px;font-size:.8rem;margin-bottom:.5rem}
@@ -75,6 +76,7 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
   <button class="on" data-t="ov">Vue d'ensemble</button>
   <button data-t="ev">Événements</button>
   <button data-t="se">Saisons</button>
+  <button data-t="me">Repas</button>
   <button data-t="lo">Hébergement</button>
   <button data-t="te">Enseignants</button>
   <button data-t="co">Encaissements</button>
@@ -125,6 +127,37 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
   <div class="card"><table id="t-se-t"><thead><tr>
     <th>Saison</th><th class="n">Inscriptions</th><th class="n">Avec héberg.</th><th class="n">Repas seul</th><th class="n">En ligne</th><th class="n">Revenus</th><th class="n">Encaissé</th>
   </tr></thead><tbody></tbody></table></div>
+</div>
+
+<div class="tc" id="t-me">
+  <div class="note" style="margin-bottom:.5rem">Repas détaillés (PDJ / midi / soir) : backup SeminarDesk, <strong>hors bénévoles et résidents</strong>. Revenus repas des inscriptions (view 43) : filtres période / catégorie ci-dessus.</div>
+  <div class="kg" id="me-kpi"></div>
+  <div class="g2">
+    <div class="card"><h3>Repas servis par mois</h3>
+    <div class="note">Nombre de petits-déjeuners, déjeuners et dîners (confirmés).</div>
+    <div class="cc"><canvas id="c-me-n"></canvas></div></div>
+    <div class="card"><h3>Revenus repas par mois</h3>
+    <div class="note">Montants en euros (€), alloués par type de repas.</div>
+    <div class="cc"><canvas id="c-me-r"></canvas></div></div>
+  </div>
+  <div class="card">
+    <h3>Repas par saison (sept → août)</h3>
+    <div class="note">Volume et revenus cumulés sur la saison — hors bénévoles et résidents.</div>
+    <div style="overflow-x:auto"><table id="t-me-se"><thead><tr>
+      <th>Saison</th><th class="n">PDJ</th><th class="n">Déjeuners</th><th class="n">Dîners</th>
+      <th class="n">Rev. PDJ</th><th class="n">Rev. midi</th><th class="n">Rev. soir</th><th class="n">Total repas</th><th class="n">Rev. total</th>
+    </tr></thead><tbody></tbody></table></div>
+  </div>
+  <div class="card">
+    <h3>Déjeuners — volume et revenus mensuels (3 saisons)</h3>
+    <div class="note">Comparaison mois par mois entre saisons. Δ = écart vs saison précédente (même mois calendaire).</div>
+    <div style="overflow-x:auto"><table id="t-lunch-mo"><thead></thead><tbody></tbody></table></div>
+  </div>
+  <div class="card">
+    <h3>Déjeuners — volume et revenus cumulés (sept → mois)</h3>
+    <div class="note">Cumul déjeuners et € depuis septembre — ex. Déc = sept + oct + nov + déc.</div>
+    <div style="overflow-x:auto"><table id="t-lunch-cum"><thead></thead><tbody></tbody></table></div>
+  </div>
 </div>
 
 <div class="tc" id="t-lo">
@@ -207,7 +240,7 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
 <footer id="foot"></footer>
 
 <script>
-let RAW=[],STR={},EVT={},TCH={},RMS={},ROCC={},filtered=[];
+let RAW=[],STR={},EVT={},TCH={},RMS={},ROCC={},filtered=[],MEALS={months:{}};
 const CX={};
 const F=n=>n.toLocaleString('fr-FR',{maximumFractionDigits:0});
 const FE=n=>F(n)+' €';
@@ -267,10 +300,21 @@ function explainMonthlyChart(){
   sendAiQuestion(`Explique les revenus mensuels affichés sur le tableau de bord (filtres: ${snap.filters.from} → ${snap.filters.to}). Les 3 mois les plus élevés sont : ${top}. Pourquoi ces pics, quels événements ou catégories les expliquent ?`);
 }
 function fy(d){if(!d)return null;const m=+d.slice(5,7),y=+d.slice(0,4);return m>=9?y:y-1;}
+const FY_MONTHS=[9,10,11,12,1,2,3,4,5,6,7,8];
+const FY_LABELS=['Sep','Oct','Nov','Déc','Jan','Fév','Mar','Avr','Mai','Juin','Juil','Août'];
+const LUNCH_SEASONS=[{start:2023,label:'23–24'},{start:2024,label:'24–25'},{start:2025,label:'25–26'}];
+function seasonMonthKey(startYear,fyIdx){const m=FY_MONTHS[fyIdx],y=m>=9?startYear:startYear+1;return `${y}-${String(m).padStart(2,'0')}`;}
+function diffCell(d){if(d==null||Number.isNaN(d))return '<td class="n">—</td>';const cls=d>0?'diff-pos':d<0?'diff-neg':'';return `<td class="n ${cls}">${d>0?'+':''}${FE(d)}</td>`;}
+function diffCountCell(d){if(d==null||Number.isNaN(d))return '<td class="n">—</td>';const cls=d>0?'diff-pos':d<0?'diff-neg':'';return `<td class="n ${cls}">${d>0?'+':''}${F(d)}</td>`;}
+const LUNCH_HDR=(cum)=>`<tr><th>${cum?'Mois (cumul)':'Mois'}</th>${LUNCH_SEASONS.map(s=>`<th class="n">${s.label}<br>déj.</th><th class="n">${s.label}<br>€</th>`).join('')}<th class="n">Δ déj.<br>24→25</th><th class="n">Δ €<br>24→25</th><th class="n">Δ déj.<br>25→26</th><th class="n">Δ €<br>25→26</th></tr>`;
 
 async function init(){
   fixTabPanels();
-  const d=await(await fetch('data/bookings.json')).json();
+  const dRes=await fetch('data/bookings.json');
+  const d=await dRes.json();
+  let mRes=await fetch('data/meals_monthly.json');
+  if(!mRes.ok)mRes=await fetch('data/meals_lunch.json');
+  try{MEALS=await mRes.json();}catch(e){MEALS={months:{}};}
   STR=Object.fromEntries(Object.entries(d.strings).map(([k,v])=>[v,k]));
   EVT=Object.fromEntries(Object.entries(d.events).map(([k,v])=>[v,k]));
   TCH=Object.fromEntries(Object.entries(d.teachers).map(([k,v])=>[v,k]));
@@ -340,7 +384,7 @@ function switchTab(btn){
 }
 
 function render(){
-  const fns=[['ov',rOv],['ev',rEv],['se',rSe],['lo',rLo],['te',rTe],['co',rCo],['br',rBr]];
+  const fns=[['ov',rOv],['ev',rEv],['se',rSe],['me',rMe],['lo',rLo],['te',rTe],['co',rCo],['br',rBr]];
   for(const [name,fn] of fns){
     try{fn();}catch(err){console.error('Render failed:',name,err);}
   }
@@ -408,6 +452,65 @@ function rSe(){
     {label:'En ligne',data:keys.map(k=>agg[k].ol),backgroundColor:'#90caf9'}
   ]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true}},plugins:{tooltip:chartCountTip}}});
   document.querySelector('#t-se-t tbody').innerHTML=keys.map(k=>{const v=agg[k];return`<tr><td>${k}</td><td class="n">${F(v.n)}</td><td class="n">${F(v.lo)}</td><td class="n">${F(v.me)}</td><td class="n">${F(v.ol)}</td><td class="n">${FE(v.r)}</td><td class="n">${FE(v.p)}</td></tr>`;}).join('');
+}
+
+function mealMonthInRange(m,from,to){return m>=from.slice(0,7)&&m<=to.slice(0,7);}
+function seasonMealMonths(startYear){return FY_MONTHS.map((_,i)=>seasonMonthKey(startYear,i));}
+function sumMealField(M,months,field){return months.reduce((s,k)=>s+(M[k]?.[field]??0),0);}
+
+function rMe(){
+  let revM=0,days=0,nMeal=0,nMealOnly=0;
+  filtered.forEach(r=>{revM+=r.revMeals;days+=r.mealDays;if(r.revMeals>0||r.mealDays>0)nMeal++;
+    if(r.revMeals>0&&r.revLodg<=0&&r.type!=='online')nMealOnly++;});
+  document.getElementById('me-kpi').innerHTML=[
+    {l:'Revenus repas (inscr.)',v:FE(revM)},{l:'Jours-repas (inscr.)',v:F(days)},
+    {l:'Inscr. avec repas',v:F(nMeal)},{l:'Repas seul (sur place)',v:F(nMealOnly)}
+  ].map(c=>`<div class="kc"><div class="v">${c.v}</div><div class="l">${c.l}</div></div>`).join('');
+
+  const M=MEALS?.months||{},from=document.getElementById('f-from').value,to=document.getElementById('f-to').value;
+  const mks=Object.keys(M).filter(m=>mealMonthInRange(m,from,to)).sort();
+  const pdj=mks.map(m=>M[m].pdj??0),midi=mks.map(m=>M[m].midi??M[m].lunches??0),soir=mks.map(m=>M[m].soir??0);
+  const pdjR=mks.map(m=>M[m].pdjRev??0),midiR=mks.map(m=>M[m].midiRev??M[m].revenue??0),soirR=mks.map(m=>M[m].soirRev??0);
+  DC('me-n');CX['me-n']=new Chart(document.getElementById('c-me-n'),{type:'bar',data:{labels:mks,datasets:[
+    {label:'PDJ',data:pdj,backgroundColor:'#ffb74d'},{label:'Déjeuner',data:midi,backgroundColor:'#4a6741'},{label:'Dîner',data:soir,backgroundColor:'#5c6bc0'}
+  ]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true},y:{stacked:true,beginAtZero:true}},plugins:{tooltip:chartCountTip}}});
+  DC('me-r');CX['me-r']=new Chart(document.getElementById('c-me-r'),{type:'bar',data:{labels:mks,datasets:[
+    {label:'PDJ',data:pdjR,backgroundColor:'#ffb74d'},{label:'Déjeuner',data:midiR,backgroundColor:'#4a6741'},{label:'Dîner',data:soirR,backgroundColor:'#5c6bc0'}
+  ]},options:{responsive:true,maintainAspectRatio:false,scales:{x:{stacked:true},y:{stacked:true,beginAtZero:true,...chartEuroY}},plugins:{tooltip:chartEuroTip}}});
+
+  document.querySelector('#t-me-se tbody').innerHTML=LUNCH_SEASONS.map(s=>{
+    const ms=seasonMealMonths(s.start);
+    const p=sumMealField(M,ms,'pdj'),mi=sumMealField(M,ms,'midi'),so=sumMealField(M,ms,'soir');
+    const pr=sumMealField(M,ms,'pdjRev'),mr=sumMealField(M,ms,'midiRev'),sr=sumMealField(M,ms,'soirRev');
+    return `<tr><td>${s.label}</td><td class="n">${F(p)}</td><td class="n">${F(mi)}</td><td class="n">${F(so)}</td><td class="n">${FE(pr)}</td><td class="n">${FE(mr)}</td><td class="n">${FE(sr)}</td><td class="n">${F(p+mi+so)}</td><td class="n">${FE(pr+mr+sr)}</td></tr>`;
+  }).join('');
+  rLunchTables();
+}
+
+function rLunchTables(){
+  const M=MEALS?.months;
+  if(!M||!Object.keys(M).length){
+    ['#t-lunch-mo','#t-lunch-cum'].forEach(id=>{document.querySelector(id+' tbody').innerHTML='<tr><td colspan="11">Données déjeuners non disponibles</td></tr>';});
+    return;
+  }
+  const rev=k=>(M[k]?.midiRev??M[k]?.revenue)??0,cnt=k=>M[k]?.midi??M[k]?.lunches??0;
+  document.querySelector('#t-lunch-mo thead').innerHTML=LUNCH_HDR(false);
+  let moRows='';
+  for(let i=0;i<12;i++){
+    const keys=LUNCH_SEASONS.map(s=>seasonMonthKey(s.start,i));
+    const revs=keys.map(rev),counts=keys.map(cnt);
+    moRows+=`<tr><td>${FY_LABELS[i]}</td>${LUNCH_SEASONS.map((s,j)=>`<td class="n">${F(counts[j])}</td><td class="n">${FE(revs[j])}</td>`).join('')}${diffCountCell(counts[1]-counts[0])}${diffCell(revs[1]-revs[0])}${diffCountCell(counts[2]-counts[1])}${diffCell(revs[2]-revs[1])}</tr>`;
+  }
+  document.querySelector('#t-lunch-mo tbody').innerHTML=moRows;
+  document.querySelector('#t-lunch-cum thead').innerHTML=LUNCH_HDR(true);
+  const cumRev=[[],[],[]],cumCnt=[[],[],[]];
+  let cumRows='';
+  for(let i=0;i<12;i++){
+    LUNCH_SEASONS.forEach((s,j)=>{const k=seasonMonthKey(s.start,i);cumRev[j].push(rev(k));cumCnt[j].push(cnt(k));});
+    const sumR=j=>cumRev[j].reduce((a,b)=>a+b,0),sumN=j=>cumCnt[j].reduce((a,b)=>a+b,0);
+    cumRows+=`<tr><td>${FY_LABELS[i]}</td>${LUNCH_SEASONS.map((s,j)=>`<td class="n">${F(sumN(j))}</td><td class="n">${FE(sumR(j))}</td>`).join('')}${diffCountCell(sumN(1)-sumN(0))}${diffCell(sumR(1)-sumR(0))}${diffCountCell(sumN(2)-sumN(1))}${diffCell(sumR(2)-sumR(1))}</tr>`;
+  }
+  document.querySelector('#t-lunch-cum tbody').innerHTML=cumRows;
 }
 
 function rLo(){
