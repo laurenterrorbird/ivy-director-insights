@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <title>IVY Director Insights</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <style>
@@ -268,6 +269,7 @@ function explainMonthlyChart(){
 function fy(d){if(!d)return null;const m=+d.slice(5,7),y=+d.slice(0,4);return m>=9?y:y-1;}
 
 async function init(){
+  fixTabPanels();
   const d=await(await fetch('data/bookings.json')).json();
   STR=Object.fromEntries(Object.entries(d.strings).map(([k,v])=>[v,k]));
   EVT=Object.fromEntries(Object.entries(d.events).map(([k,v])=>[v,k]));
@@ -319,7 +321,33 @@ function applyFilter(){
   render();
 }
 
-function render(){rOv();rEv();rSe();rLo();rTe();rCo();rBr();}
+function fixTabPanels(){
+  const wrap=document.querySelector('.wrap');
+  const ov=document.getElementById('t-ov');
+  if(!wrap||!ov)return;
+  document.querySelectorAll('.wrap > .tc').forEach(p=>{
+    if(p.id!=='t-ov'&&ov.contains(p)){
+      ov.parentNode.insertBefore(p, ov.nextSibling);
+    }
+  });
+}
+
+function switchTab(btn){
+  const id=btn.dataset.t;
+  const panel=id&&document.getElementById('t-'+id);
+  if(!panel){console.warn('Tab panel missing:',id);return;}
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.tc').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');
+  panel.classList.add('on');
+}
+
+function render(){
+  const fns=[['ov',rOv],['ev',rEv],['se',rSe],['lo',rLo],['te',rTe],['co',rCo],['br',rBr]];
+  for(const [name,fn] of fns){
+    try{fn();}catch(err){console.error('Render failed:',name,err);}
+  }
+}
 function DC(id){if(CX[id]){CX[id].destroy();delete CX[id];}}
 
 function rOv(){
@@ -522,10 +550,10 @@ function sortableTable(id,data,cols){
     draw();};});
 }
 
-document.getElementById('tabs').addEventListener('click',e=>{if(e.target.tagName!=='BUTTON')return;
-  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));
-  document.querySelectorAll('.tc').forEach(t=>t.classList.remove('on'));
-  e.target.classList.add('on');document.getElementById('t-'+e.target.dataset.t).classList.add('on');});
+document.getElementById('tabs').addEventListener('click',e=>{
+  const btn=e.target.closest('button[data-t]');
+  if(btn) switchTab(btn);
+});
 
 init();
 
