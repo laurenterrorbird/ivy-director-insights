@@ -466,7 +466,7 @@ function rEv(){
   const allSeasons=['2023–2024','2024–2025','2025–2026'];
   const totalByGroup={};
   Object.entries(yoyGrouped).forEach(([g,sv])=>{totalByGroup[g]=allSeasons.reduce((a,k)=>a+(sv[k]||0),0);});
-  const topGroups=Object.entries(totalByGroup).sort((a,b)=>b[1]-a[1]).slice(0,15).map(e=>e[0]);
+  const topGroups=Object.entries(totalByGroup).sort((a,b)=>b[1]-a[1]).slice(0,15).map(e=>e[0]).sort((a,b)=>a.localeCompare(b,'fr'));
   const shortName=s=>s.length>25?s.slice(0,23)+'…':s;
   const colors=['#6b8f63','#4a6741','#2c3e2c'];
   DC('ev-yoy');CX['ev-yoy']=new Chart(document.getElementById('c-ev-yoy'),{type:'bar',data:{
@@ -480,7 +480,7 @@ function rEv(){
     if(!grpMembers[grp])grpMembers[grp]=[];
     if(ev!==grp)grpMembers[grp].push(ev);
   });
-  const legendGroups=topGroups.filter(g=>grpMembers[g]&&grpMembers[g].length>0);
+  const legendGroups=topGroups.filter(g=>grpMembers[g]&&grpMembers[g].length>0).sort((a,b)=>a.localeCompare(b,'fr'));
   document.getElementById('ev-group-legend').innerHTML=legendGroups.length?
     legendGroups.map(g=>`<div style="break-inside:avoid;margin-bottom:.5rem"><strong style="color:var(--text)">${g}</strong> : ${grpMembers[g].join(', ')}</div>`).join(''):'';
 }
