@@ -330,7 +330,7 @@ async function init(){
   if(!mRes.ok)mRes=await fetch('data/meals_lunch.json');
   try{MEALS=await mRes.json();}catch(e){MEALS={months:{}};}
   try{const sRes=await fetch('data/strategy_report.json');STRAT=await sRes.json();}catch(e){STRAT=null;}
-  try{const gRes=await fetch('data/event_groups.tsv');const gTxt=await gRes.text();
+  try{const gRes=await fetch('data/event_groups.tsv?v=20260811');const gTxt=await gRes.text();
     gTxt.trim().split('\n').slice(1).forEach(l=>{const p=l.split('\t');if(p[1])EVGROUPS[p[0]]=p[1];});}catch(e){}
   STR=Object.fromEntries(Object.entries(d.strings).map(([k,v])=>[v,k]));
   EVT=Object.fromEntries(Object.entries(d.events).map(([k,v])=>[v,k]));
