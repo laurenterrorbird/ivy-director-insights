@@ -123,7 +123,7 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
     <div class="note">Chaque groupe correspond à une barre du graphique. Les événements individuels sont listés par saison sous leur groupe.</div>
     <input class="sb" id="ev-s" placeholder="Filtrer par nom d'événement ou groupe...">
     <div style="overflow-x:auto"><table id="t-ev-t"><thead><tr>
-      <th>Groupe</th><th>Événement</th><th>Saison</th><th class="n">Participants</th><th class="n">Revenus</th>
+      <th>Groupe</th><th>Événement</th><th class="n">Part. 23–24</th><th class="n">Rev. 23–24</th><th class="n">Part. 24–25</th><th class="n">Rev. 24–25</th><th class="n">Part. 25–26</th><th class="n">Rev. 25–26</th>
     </tr></thead><tbody></tbody></table></div>
   </div>
 </div>
@@ -459,16 +459,20 @@ function rEv(){
   let html='';
   let alt=false;
   sortedGroups.forEach(([grp,gd])=>{
-    gd.events.sort((a,b)=>a.series.localeCompare(b.series,'fr')||seasonOrder.indexOf(a.season)-seasonOrder.indexOf(b.season));
     const cls=alt?'season-a':'';
     const bg=alt?'#f0f5f0':'#f8f9fa';
-    // Group header
-    const uniqueSeries=new Set(gd.events.map(e=>e.series));
-    html+=`<tr class="${cls}" style="font-weight:700;background:${bg}"><td>${grp}</td><td style="font-size:.7rem;color:var(--muted)">${uniqueSeries.size} événement${uniqueSeries.size>1?'s':''}</td><td></td><td class="n">${F(gd.totalN)}</td><td class="n">${FE(gd.totalR)}</td></tr>`;
-    // Event rows by series then season
-    gd.events.forEach(ev=>{
-      html+=`<tr class="${cls}"><td></td><td style="padding-left:1rem;font-size:.78rem">${ev.series}</td><td style="font-size:.78rem">${ev.season.replace('20','')}</td><td class="n">${F(ev.n)}</td><td class="n">${FE(ev.r)}</td></tr>`;
-    });
+    // Group totals per season
+    const grpBySeason={};
+    gd.events.forEach(ev=>{if(!grpBySeason[ev.season])grpBySeason[ev.season]={n:0,r:0};grpBySeason[ev.season].n+=ev.n;grpBySeason[ev.season].r+=ev.r;});
+    const uniqueSeries=[...new Set(gd.events.map(e=>e.series))].sort((a,b)=>a.localeCompare(b,'fr'));
+    html+=`<tr class="${cls}" style="font-weight:700;background:${bg}"><td>${grp}</td><td style="font-size:.7rem;color:var(--muted)">${uniqueSeries.length>1?uniqueSeries.length+' événements':''}</td>${seasonOrder.map(sk=>{const d=grpBySeason[sk];return `<td class="n">${d?F(d.n):''}</td><td class="n">${d?FE(d.r):''}</td>`;}).join('')}</tr>`;
+    // Individual events (only if group has multiple)
+    if(uniqueSeries.length>1){
+      uniqueSeries.forEach(series=>{
+        const byS={};gd.events.filter(e=>e.series===series).forEach(e=>{byS[e.season]=e;});
+        html+=`<tr class="${cls}"><td></td><td style="padding-left:1rem;font-size:.78rem">${series}</td>${seasonOrder.map(sk=>{const d=byS[sk];return `<td class="n" style="font-size:.78rem">${d?F(d.n):''}</td><td class="n" style="font-size:.78rem">${d?FE(d.r):''}</td>`;}).join('')}</tr>`;
+      });
+    }
     alt=!alt;
   });
   document.querySelector('#t-ev-t tbody').innerHTML=html;
