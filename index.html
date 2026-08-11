@@ -324,13 +324,13 @@ const LUNCH_HDR=(cum)=>`<tr><th>${cum?'Mois (cumul)':'Mois'}</th>${LUNCH_SEASONS
 
 async function init(){
   fixTabPanels();
-  const dRes=await fetch('data/bookings.json');
+  const dRes=await fetch('data/bookings.json?t='+Date.now());
   const d=await dRes.json();
-  let mRes=await fetch('data/meals_monthly.json');
-  if(!mRes.ok)mRes=await fetch('data/meals_lunch.json');
+  let mRes=await fetch('data/meals_monthly.json?t='+Date.now());
+  if(!mRes.ok)mRes=await fetch('data/meals_lunch.json?t='+Date.now());
   try{MEALS=await mRes.json();}catch(e){MEALS={months:{}};}
-  try{const sRes=await fetch('data/strategy_report.json');STRAT=await sRes.json();}catch(e){STRAT=null;}
-  try{const gRes=await fetch('data/event_groups.tsv?v=20260811');const gTxt=await gRes.text();
+  try{const sRes=await fetch('data/strategy_report.json?t='+Date.now());STRAT=await sRes.json();}catch(e){STRAT=null;}
+  try{const gRes=await fetch('data/event_groups.tsv?t='+Date.now());const gTxt=await gRes.text();
     gTxt.trim().split('\n').slice(1).forEach(l=>{const p=l.split('\t');if(p[1])EVGROUPS[p[0]]=p[1];});}catch(e){}
   STR=Object.fromEntries(Object.entries(d.strings).map(([k,v])=>[v,k]));
   EVT=Object.fromEntries(Object.entries(d.events).map(([k,v])=>[v,k]));
