@@ -254,7 +254,7 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
 <footer id="foot"></footer>
 
 <script>
-let RAW=[],STR={},EVT={},TCH={},RMS={},ROCC={},filtered=[],MEALS={months:{}},STRAT=null;
+let RAW=[],STR={},EVT={},TCH={},RMS={},ROCC={},filtered=[],MEALS={months:{}},STRAT=null,EVGROUPS={};
 const CX={};
 const F=n=>n.toLocaleString('fr-FR',{maximumFractionDigits:0});
 const FE=n=>F(n)+' €';
@@ -330,6 +330,8 @@ async function init(){
   if(!mRes.ok)mRes=await fetch('data/meals_lunch.json');
   try{MEALS=await mRes.json();}catch(e){MEALS={months:{}};}
   try{const sRes=await fetch('data/strategy_report.json');STRAT=await sRes.json();}catch(e){STRAT=null;}
+  try{const gRes=await fetch('data/event_groups.tsv');const gTxt=await gRes.text();
+    gTxt.trim().split('\n').slice(1).forEach(l=>{const p=l.split('\t');if(p[1])EVGROUPS[p[0]]=p[1];});}catch(e){}
   STR=Object.fromEntries(Object.entries(d.strings).map(([k,v])=>[v,k]));
   EVT=Object.fromEntries(Object.entries(d.events).map(([k,v])=>[v,k]));
   TCH=Object.fromEntries(Object.entries(d.teachers).map(([k,v])=>[v,k]));
@@ -448,23 +450,24 @@ function rEv(){
   ]);
   document.getElementById('ev-s').oninput=e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('#t-ev-t tbody tr').forEach(tr=>tr.style.display=tr.textContent.toLowerCase().includes(q)?'':'none');};
 
-  // YoY revenue comparison chart
-  const yoySeason={};
+  // YoY revenue comparison chart — grouped by event_groups.tsv
+  const yoyGrouped={};
   RAW.filter(r=>r.status==='Confirmed').forEach(r=>{
     const f=fy(r.mid||r.from);if(!f)return;
     const sk=`${f}–${f+1}`;
-    if(!yoySeason[r.series])yoySeason[r.series]={};
-    yoySeason[r.series][sk]=(yoySeason[r.series][sk]||0)+r.revTotal;
+    const grp=EVGROUPS[r.series]||r.series;
+    if(!yoyGrouped[grp])yoyGrouped[grp]={};
+    yoyGrouped[grp][sk]=(yoyGrouped[grp][sk]||0)+r.revTotal;
   });
   const allSeasons=['2023–2024','2024–2025','2025–2026'];
-  const totalBySeries={};
-  Object.entries(yoySeason).forEach(([s,sv])=>{totalBySeries[s]=allSeasons.reduce((a,k)=>a+(sv[k]||0),0);});
-  const topEvents=Object.entries(totalBySeries).sort((a,b)=>b[1]-a[1]).slice(0,15).map(e=>e[0]);
-  const shortName=s=>s.length>30?s.slice(0,28)+'…':s;
+  const totalByGroup={};
+  Object.entries(yoyGrouped).forEach(([g,sv])=>{totalByGroup[g]=allSeasons.reduce((a,k)=>a+(sv[k]||0),0);});
+  const topGroups=Object.entries(totalByGroup).sort((a,b)=>b[1]-a[1]).slice(0,15).map(e=>e[0]);
+  const shortName=s=>s.length>25?s.slice(0,23)+'…':s;
   const colors=['#6b8f63','#4a6741','#2c3e2c'];
   DC('ev-yoy');CX['ev-yoy']=new Chart(document.getElementById('c-ev-yoy'),{type:'bar',data:{
-    labels:topEvents.map(shortName),
-    datasets:allSeasons.map((sk,i)=>({label:sk.replace('20',''),data:topEvents.map(e=>(yoySeason[e]||{})[sk]||0),backgroundColor:colors[i]}))
+    labels:topGroups.map(shortName),
+    datasets:allSeasons.map((sk,i)=>({label:sk.replace('20',''),data:topGroups.map(g=>(yoyGrouped[g]||{})[sk]||0),backgroundColor:colors[i]}))
   },options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,...chartEuroY},x:{ticks:{maxRotation:45,minRotation:45,font:{size:10}}}},plugins:{legend:{position:'top'},tooltip:chartEuroTip}}});
 }
 
