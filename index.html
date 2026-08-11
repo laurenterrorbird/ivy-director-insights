@@ -119,11 +119,11 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
     <div id="ev-group-legend" style="margin-top:.3rem;font-size:.78rem;columns:2;column-gap:1.5rem;line-height:1.6"></div>
   </div>
   <div class="card">
-    <h3>Détail des revenus par événement, groupe et saison</h3>
-    <div class="note">Chaque groupe correspond à une barre du graphique. Les événements individuels sont listés par saison sous leur groupe.</div>
-    <input class="sb" id="ev-s" placeholder="Filtrer par nom d'événement ou groupe...">
+    <h3>Détail des revenus par événement, instance et saison</h3>
+    <div class="note">Chaque instance d'un événement est listée avec ses dates. Les groupes correspondent aux barres du graphique.</div>
+    <input class="sb" id="ev-s" placeholder="Filtrer par nom d'événement, groupe ou enseignant...">
     <div style="overflow-x:auto"><table id="t-ev-t"><thead><tr>
-      <th>Groupe</th><th>Événement</th><th>Intervenant</th><th class="n">Part. 23–24</th><th class="n">Rev. 23–24</th><th class="n">Part. 24–25</th><th class="n">Rev. 24–25</th><th class="n">Part. 25–26</th><th class="n">Rev. 25–26</th>
+      <th>Groupe</th><th>Instance</th><th>Dates</th><th>Intervenant</th><th class="n">Participants</th><th class="n">Revenus</th>
     </tr></thead><tbody></tbody></table></div>
   </div>
 </div>
@@ -436,54 +436,42 @@ function rOv(){
 }
 
 function rEv(){
-  // Aggregate per series per season, collect teachers
-  const agg={};
-  const seriesTeachers={};
+  // Aggregate per event instance (specific date)
+  const instances={};
   RAW.filter(r=>r.status==='Confirmed'&&r.bucket!=='IDMT (en ligne)').forEach(r=>{
-    const f=fy(r.mid||r.from);if(!f)return;
-    const sk=`${f}–${f+1}`;
-    const key=r.series+'||'+sk;
-    if(!agg[key])agg[key]={series:r.series,season:sk,n:0,r:0};
-    agg[key].n++;agg[key].r+=r.revTotal;
-    if(r.teacher&&r.teacher.trim()){
-      if(!seriesTeachers[r.series])seriesTeachers[r.series]=new Set();
-      r.teacher.split('; ').forEach(t=>{if(t.trim())seriesTeachers[r.series].add(t.trim());});
-    }
+    const key=r.event||r.series;
+    if(!instances[key])instances[key]={event:r.event,series:r.series,n:0,r:0,from:r.from,to:r.to,teachers:new Set()};
+    instances[key].n++;instances[key].r+=r.revTotal;
+    if(r.from<instances[key].from)instances[key].from=r.from;
+    if(r.to>instances[key].to)instances[key].to=r.to;
+    if(r.teacher&&r.teacher.trim())r.teacher.split('; ').forEach(t=>{if(t.trim())instances[key].teachers.add(t.trim());});
   });
 
-  // Build grouped structure: group -> {totalN, totalR, events: [{series, season, n, r}]}
+  // Group instances
   const groupData={};
-  Object.values(agg).forEach(v=>{
+  Object.values(instances).forEach(v=>{
     const grp=EVGROUPS[v.series]||v.series;
-    if(!groupData[grp])groupData[grp]={totalN:0,totalR:0,events:[]};
+    if(!groupData[grp])groupData[grp]={totalN:0,totalR:0,instances:[]};
     groupData[grp].totalN+=v.n;groupData[grp].totalR+=v.r;
-    groupData[grp].events.push(v);
+    groupData[grp].instances.push(v);
   });
 
-  const seasonOrder=['2023–2024','2024–2025','2025–2026'];
   const sortedGroups=Object.entries(groupData).sort((a,b)=>a[0].localeCompare(b[0],'fr'));
   let html='';
   let alt=false;
   sortedGroups.forEach(([grp,gd])=>{
+    gd.instances.sort((a,b)=>a.from.localeCompare(b.from));
     const cls=alt?'season-a':'';
     const bg=alt?'#f0f5f0':'#f8f9fa';
-    // Group totals per season
-    const grpBySeason={};
-    gd.events.forEach(ev=>{if(!grpBySeason[ev.season])grpBySeason[ev.season]={n:0,r:0};grpBySeason[ev.season].n+=ev.n;grpBySeason[ev.season].r+=ev.r;});
-    const uniqueSeries=[...new Set(gd.events.map(e=>e.series))].sort((a,b)=>a.localeCompare(b,'fr'));
-    // Collect all teachers for the group
     const grpTeachers=new Set();
-    uniqueSeries.forEach(s=>{(seriesTeachers[s]||new Set()).forEach(t=>grpTeachers.add(t));});
+    gd.instances.forEach(inst=>inst.teachers.forEach(t=>grpTeachers.add(t)));
     const teacherStr=[...grpTeachers].sort().join(', ');
-    html+=`<tr class="${cls}" style="font-weight:700;background:${bg}"><td>${grp}</td><td style="font-size:.7rem;color:var(--muted)">${uniqueSeries.length>1?uniqueSeries.length+' événements':''}</td><td style="font-size:.72rem">${teacherStr||'—'}</td>${seasonOrder.map(sk=>{const d=grpBySeason[sk];return `<td class="n">${d?F(d.n):''}</td><td class="n">${d?FE(d.r):''}</td>`;}).join('')}</tr>`;
-    // Individual events (only if group has multiple)
-    if(uniqueSeries.length>1){
-      uniqueSeries.forEach(series=>{
-        const byS={};gd.events.filter(e=>e.series===series).forEach(e=>{byS[e.season]=e;});
-        const te=[...(seriesTeachers[series]||[])].sort().join(', ');
-        html+=`<tr class="${cls}"><td></td><td style="padding-left:1rem;font-size:.78rem">${series}</td><td style="font-size:.72rem">${te||''}</td>${seasonOrder.map(sk=>{const d=byS[sk];return `<td class="n" style="font-size:.78rem">${d?F(d.n):''}</td><td class="n" style="font-size:.78rem">${d?FE(d.r):''}</td>`;}).join('')}</tr>`;
-      });
-    }
+    html+=`<tr class="${cls}" style="font-weight:700;background:${bg}"><td>${grp}</td><td style="font-size:.7rem;color:var(--muted)">${gd.instances.length} instance${gd.instances.length>1?'s':''}</td><td></td><td style="font-size:.72rem">${teacherStr||'—'}</td><td class="n">${F(gd.totalN)}</td><td class="n">${FE(gd.totalR)}</td></tr>`;
+    gd.instances.forEach(inst=>{
+      const dates=inst.from===inst.to?inst.from:`${inst.from} → ${inst.to}`;
+      const te=[...inst.teachers].sort().join(', ');
+      html+=`<tr class="${cls}"><td></td><td style="padding-left:1rem;font-size:.78rem">${inst.event||inst.series}</td><td style="font-size:.75rem">${dates}</td><td style="font-size:.72rem">${te||''}</td><td class="n" style="font-size:.78rem">${F(inst.n)}</td><td class="n" style="font-size:.78rem">${FE(inst.r)}</td></tr>`;
+    });
     alt=!alt;
   });
   document.querySelector('#t-ev-t tbody').innerHTML=html;
