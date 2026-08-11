@@ -21,11 +21,11 @@
   {
    "seg": "CI",
    "season": "25-26",
-   "nights": 1197,
-   "paid_nights": 537,
-   "free_nights": 660,
-   "rev": 22834.61,
-   "avg_paid": 49.03
+   "nights": 1179,
+   "paid_nights": 525,
+   "free_nights": 654,
+   "rev": 22168.61,
+   "avg_paid": 48.93
   },
   {
    "seg": "CI+",
@@ -39,225 +39,85 @@
   {
    "seg": "CI+",
    "season": "25-26",
-   "nights": 380,
-   "paid_nights": 365,
+   "nights": 365,
+   "paid_nights": 350,
    "free_nights": 15,
-   "rev": 20523.2,
-   "avg_paid": 57.58
+   "rev": 19698.2,
+   "avg_paid": 57.62
   }
  ],
- "ciplusDiscountImpact": [
+ "ciplusAllTiers": [
   {
    "tier": "Membre (adhérent/soutien) / Member (Basic/Support)",
-   "tier_id": 2,
    "season": "24-25",
    "bookings": 16,
    "nights": 71,
    "actual_rev": 3889.6,
-   "should_be_rev": 4686.0,
-   "lost_rev": 796.4
+   "actual_rate": 54.86
   },
   {
-   "tier": "Membre (adhérent/soutien) / Member (Basic/Support)",
-   "tier_id": 2,
-   "season": "25-26",
-   "bookings": 30,
-   "nights": 167,
-   "actual_rev": 9185.0,
-   "should_be_rev": 11022.0,
-   "lost_rev": 1837.0
+   "tier": "Non Membre / Non Member",
+   "season": "24-25",
+   "bookings": 15,
+   "nights": 36,
+   "actual_rev": 2376.0,
+   "actual_rate": 66.0
   },
   {
    "tier": "Membre Bienfaiteur / Member Benefactor",
-   "tier_id": 4,
-   "season": "NULL",
-   "bookings": 1,
-   "nights": 21,
-   "actual_rev": 1155.0,
-   "should_be_rev": 1386.0,
-   "lost_rev": 231.0
-  },
-  {
-   "tier": "Membre Bienfaiteur / Member Benefactor",
-   "tier_id": 4,
    "season": "24-25",
    "bookings": 3,
    "nights": 33,
    "actual_rev": 1815.0,
-   "should_be_rev": 2178.0,
-   "lost_rev": 363.0
+   "actual_rate": 55.0
+  },
+  {
+   "tier": "Membre (adhérent/soutien) / Member (Basic/Support)",
+   "season": "25-26",
+   "bookings": 30,
+   "nights": 163,
+   "actual_rev": 8965.0,
+   "actual_rate": 55.0
+  },
+  {
+   "tier": "Non Membre / Non Member",
+   "season": "25-26",
+   "bookings": 21,
+   "nights": 103,
+   "actual_rev": 6798.0,
+   "actual_rate": 66.0
   },
   {
    "tier": "Membre Bienfaiteur / Member Benefactor",
-   "tier_id": 4,
    "season": "25-26",
-   "bookings": 5,
-   "nights": 50,
-   "actual_rev": 2750.0,
-   "should_be_rev": 3300.0,
-   "lost_rev": 550.0
-  }
- ],
- "roomOccupancy": [
-  {
-   "room_type": "NULL",
-   "season": "24-25",
-   "bookings": 21,
-   "nights": 838,
-   "lodg_rev": 4760.9,
-   "avg_night": 12.14
+   "bookings": 4,
+   "nights": 39,
+   "actual_rev": 2145.0,
+   "actual_rate": 55.0
   },
   {
-   "room_type": "NULL",
-   "season": "25-26",
-   "bookings": 16,
-   "nights": 254,
-   "lodg_rev": 4455.26,
-   "avg_night": 19.43
-  },
-  {
-   "room_type": "Camping",
-   "season": "24-25",
-   "bookings": 162,
-   "nights": 796,
-   "lodg_rev": 3998.2,
-   "avg_night": 5.12
-  },
-  {
-   "room_type": "Camping",
-   "season": "25-26",
-   "bookings": 133,
-   "nights": 817,
-   "lodg_rev": 4100.14,
-   "avg_night": 5.53
-  },
-  {
-   "room_type": "Camping-car",
-   "season": "24-25",
-   "bookings": 56,
-   "nights": 278,
-   "lodg_rev": 1485.65,
-   "avg_night": 5.72
-  },
-  {
-   "room_type": "Camping-car",
-   "season": "25-26",
-   "bookings": 64,
-   "nights": 293,
-   "lodg_rev": 1579.35,
-   "avg_night": 5.51
-  },
-  {
-   "room_type": "Caravane",
-   "season": "24-25",
-   "bookings": 5,
-   "nights": 27,
-   "lodg_rev": 315.0,
-   "avg_night": 14.28
-  },
-  {
-   "room_type": "Caravane",
-   "season": "25-26",
-   "bookings": 5,
-   "nights": 22,
-   "lodg_rev": 164.64,
-   "avg_night": 7.06
-  },
-  {
-   "room_type": "Chambre à 2 pers.",
-   "season": "24-25",
-   "bookings": 466,
-   "nights": 2306,
-   "lodg_rev": 39971.7,
-   "avg_night": 20.33
-  },
-  {
-   "room_type": "Chambre à 2 pers.",
-   "season": "25-26",
-   "bookings": 348,
-   "nights": 1596,
-   "lodg_rev": 33610.99,
-   "avg_night": 22.5
-  },
-  {
-   "room_type": "Chambre à 3 ou 4 pers.",
-   "season": "24-25",
-   "bookings": 209,
-   "nights": 983,
-   "lodg_rev": 14269.92,
-   "avg_night": 16.87
-  },
-  {
-   "room_type": "Chambre à 3 ou 4 pers.",
-   "season": "25-26",
-   "bookings": 180,
-   "nights": 991,
-   "lodg_rev": 14966.86,
-   "avg_night": 17.85
-  },
-  {
-   "room_type": "Chambre individuelle",
-   "season": "24-25",
-   "bookings": 140,
-   "nights": 812,
-   "lodg_rev": 25071.26,
-   "avg_night": 34.23
-  },
-  {
-   "room_type": "Chambre individuelle",
-   "season": "25-26",
-   "bookings": 144,
-   "nights": 806,
-   "lodg_rev": 22692.61,
-   "avg_night": 34.14
-  },
-  {
-   "room_type": "Chambre individuelle +",
-   "season": "24-25",
-   "bookings": 36,
-   "nights": 155,
-   "lodg_rev": 8080.6,
-   "avg_night": 56.47
-  },
-  {
-   "room_type": "Chambre individuelle +",
-   "season": "25-26",
-   "bookings": 63,
-   "nights": 380,
-   "lodg_rev": 20523.2,
-   "avg_night": 54.83
-  },
-  {
-   "room_type": "Dortoir",
-   "season": "24-25",
-   "bookings": 579,
-   "nights": 2963,
-   "lodg_rev": 22312.35,
-   "avg_night": 8.65
-  },
-  {
-   "room_type": "Dortoir",
-   "season": "25-26",
-   "bookings": 487,
-   "nights": 2837,
-   "lodg_rev": 25422.13,
-   "avg_night": 9.26
-  },
-  {
-   "room_type": "Logement résident",
-   "season": "24-25",
-   "bookings": 5,
-   "nights": 23,
-   "lodg_rev": 0.0,
-   "avg_night": 0.0
-  },
-  {
-   "room_type": "Logement résident",
+   "tier": "Tarif général / Regular Price",
    "season": "25-26",
    "bookings": 1,
-   "nights": 12,
-   "lodg_rev": 0.0,
-   "avg_night": 0.0
+   "nights": 30,
+   "actual_rev": 1286.7,
+   "actual_rate": 42.89
+  },
+  {
+   "tier": "Sangha ordonnée / Ordained Sangha",
+   "season": "25-26",
+   "bookings": 2,
+   "nights": 10,
+   "actual_rev": 275.0,
+   "actual_rate": 27.5
+  },
+  {
+   "tier": "Spécial -30%",
+   "season": "25-26",
+   "bookings": 1,
+   "nights": 5,
+   "actual_rev": 228.5,
+   "actual_rate": 45.7
   }
  ],
  "onlineRevenue": [
@@ -279,22 +139,22 @@
    "attendance": "online",
    "season": "25-26",
    "inscriptions": 3013,
-   "unique_guests": 209,
+   "unique_guests": 206,
    "total_rev": 11762.53
   },
   {
    "attendance": "on-site",
    "season": "24-25",
    "inscriptions": 2801,
-   "unique_guests": 1293,
-   "total_rev": 280951.19
+   "unique_guests": 1292,
+   "total_rev": 281071.19
   },
   {
    "attendance": "on-site",
    "season": "25-26",
-   "inscriptions": 2491,
-   "unique_guests": 1293,
-   "total_rev": 309850.82
+   "inscriptions": 2569,
+   "unique_guests": 1329,
+   "total_rev": 314995.51
   }
  ],
  "idmt": [
@@ -317,1892 +177,1566 @@
    "rev": 2713.53
   }
  ],
- "hybridEvents": [
+ "roomOccupancy": [
   {
-   "event": "ZOOM Retraite de Lamrim avec Vénérable Gendun [EN LIGNE]",
-   "online_n": 21,
-   "onsite_n": 2,
-   "online_ppl": 20,
-   "onsite_ppl": 2,
-   "online_rev": 5184.0,
-   "onsite_rev": 324.0
+   "room_type": "Camping",
+   "season": "24-25",
+   "beds": 40,
+   "capacity": 14600,
+   "nights": 796,
+   "occupancy_pct": 5.5,
+   "lodg_rev": 3998.2,
+   "avg_night": 5.18
   },
   {
-   "event": "Retraite sur le souffle de la voie (Vipassana) [EN ZOOM]",
-   "online_n": 21,
-   "onsite_n": 1,
-   "online_ppl": 21,
-   "onsite_ppl": 1,
-   "online_rev": 2695.0,
-   "onsite_rev": 200.0
+   "room_type": "Camping",
+   "season": "25-26",
+   "beds": 40,
+   "capacity": 14600,
+   "nights": 886,
+   "occupancy_pct": 6.1,
+   "lodg_rev": 4540.24,
+   "avg_night": 5.72
   },
   {
-   "event": "Retraite sur le souffle de la voie (Vipassana) [SUR PLACE]",
-   "online_n": 12,
-   "onsite_n": 138,
-   "online_ppl": 12,
-   "onsite_ppl": 115,
-   "online_rev": 1890.0,
-   "onsite_rev": 50018.21
+   "room_type": "Camping-car",
+   "season": "24-25",
+   "beds": 15,
+   "capacity": 5475,
+   "nights": 278,
+   "occupancy_pct": 5.1,
+   "lodg_rev": 1485.65,
+   "avg_night": 5.94
   },
   {
-   "event": "[obsolète] Retraite de Vajra Yogini",
-   "online_n": 13,
-   "onsite_n": 40,
-   "online_ppl": 13,
-   "onsite_ppl": 40,
-   "online_rev": 1308.0,
-   "onsite_rev": 23145.49
+   "room_type": "Camping-car",
+   "season": "25-26",
+   "beds": 15,
+   "capacity": 5475,
+   "nights": 322,
+   "occupancy_pct": 5.9,
+   "lodg_rev": 1731.4,
+   "avg_night": 5.49
   },
   {
-   "event": "Serkong Rinpoché & Alexander Berzin (VIA ZOOM)",
-   "online_n": 40,
-   "onsite_n": 0,
-   "online_ppl": 40,
-   "onsite_ppl": 0,
-   "online_rev": 1170.0,
-   "onsite_rev": 0.0
+   "room_type": "Caravane",
+   "season": "24-25",
+   "beds": 7,
+   "capacity": 2555,
+   "nights": 27,
+   "occupancy_pct": 1.1,
+   "lodg_rev": 315.0,
+   "avg_night": 17.85
   },
   {
-   "event": "[obsolète] Retraite  avec Vén. Robina : Affronter la mort sans crainte",
-   "online_n": 17,
-   "onsite_n": 77,
-   "online_ppl": 17,
-   "onsite_ppl": 77,
-   "online_rev": 1153.0,
-   "onsite_rev": 10413.03
+   "room_type": "Caravane",
+   "season": "25-26",
+   "beds": 7,
+   "capacity": 2555,
+   "nights": 22,
+   "occupancy_pct": 0.9,
+   "lodg_rev": 164.64,
+   "avg_night": 11.76
   },
   {
-   "event": "Retraite du Bouddha Médecine..",
-   "online_n": 17,
-   "onsite_n": 66,
-   "online_ppl": 13,
-   "onsite_ppl": 60,
-   "online_rev": 1077.0,
-   "onsite_rev": 15280.44
+   "room_type": "Chambre à 2 pers.",
+   "season": "24-25",
+   "beds": 23,
+   "capacity": 8395,
+   "nights": 2306,
+   "occupancy_pct": 27.5,
+   "lodg_rev": 39971.7,
+   "avg_night": 21.15
   },
   {
-   "event": "[obsolète] Retraite de Bodhicitta et Tara Blanche (VIA ZOOM)",
-   "online_n": 18,
-   "onsite_n": 0,
-   "online_ppl": 11,
-   "onsite_ppl": 0,
-   "online_rev": 983.0,
-   "onsite_rev": 0.0
+   "room_type": "Chambre à 2 pers.",
+   "season": "25-26",
+   "beds": 23,
+   "capacity": 8395,
+   "nights": 1528,
+   "occupancy_pct": 18.2,
+   "lodg_rev": 31693.99,
+   "avg_night": 22.8
   },
   {
-   "event": "[obsolète] Mini-retraite Vipassana VIA ZOOM",
-   "online_n": 22,
-   "onsite_n": 0,
-   "online_ppl": 22,
-   "onsite_ppl": 0,
-   "online_rev": 879.0,
-   "onsite_rev": 0.0
+   "room_type": "Chambre à 3 ou 4 pers.",
+   "season": "24-25",
+   "beds": 15,
+   "capacity": 5475,
+   "nights": 983,
+   "occupancy_pct": 18.0,
+   "lodg_rev": 14269.92,
+   "avg_night": 17.03
   },
   {
-   "event": "[obsolète] Retraite avec Vén. Robina (VIA ZOOM) : La compassion courageuse",
-   "online_n": 17,
-   "onsite_n": 0,
-   "online_ppl": 17,
-   "onsite_ppl": 0,
-   "online_rev": 828.0,
-   "onsite_rev": 0.0
+   "room_type": "Chambre à 3 ou 4 pers.",
+   "season": "25-26",
+   "beds": 15,
+   "capacity": 5475,
+   "nights": 1028,
+   "occupancy_pct": 18.8,
+   "lodg_rev": 15725.61,
+   "avg_night": 18.14
   },
   {
-   "event": "Retraite d'été de Lamrim (VIA ZOOM)",
-   "online_n": 8,
-   "onsite_n": 0,
-   "online_ppl": 7,
-   "onsite_ppl": 0,
-   "online_rev": 560.0,
-   "onsite_rev": 0.0
+   "room_type": "Chambre individuelle",
+   "season": "24-25",
+   "beds": 2,
+   "capacity": 730,
+   "nights": 812,
+   "occupancy_pct": 111.2,
+   "lodg_rev": 25071.26,
+   "avg_night": 47.93
   },
   {
-   "event": "[obsolète] Atelier avec vénérable Thubten Chodron (VIA ZOOM)",
-   "online_n": 13,
-   "onsite_n": 0,
-   "online_ppl": 13,
-   "onsite_ppl": 0,
-   "online_rev": 502.0,
-   "onsite_rev": 0.0
+   "room_type": "Chambre individuelle",
+   "season": "25-26",
+   "beds": 2,
+   "capacity": 730,
+   "nights": 788,
+   "occupancy_pct": 107.9,
+   "lodg_rev": 22026.61,
+   "avg_night": 49.07
   },
   {
-   "event": "Retraite de Lamrim (Voie graduée vers l’éveil)",
-   "online_n": 19,
-   "onsite_n": 22,
-   "online_ppl": 19,
-   "onsite_ppl": 22,
-   "online_rev": 0.0,
-   "onsite_rev": 3786.05
+   "room_type": "Chambre individuelle +",
+   "season": "24-25",
+   "beds": 4,
+   "capacity": 1460,
+   "nights": 155,
+   "occupancy_pct": 10.6,
+   "lodg_rev": 8080.6,
+   "avg_night": 59.79
   },
   {
-   "event": "La Science Bouddhiste de l'Esprit (SBE)",
-   "online_n": 24,
-   "onsite_n": 41,
-   "online_ppl": 24,
-   "onsite_ppl": 41,
-   "online_rev": 0.0,
-   "onsite_rev": 1904.19
+   "room_type": "Chambre individuelle +",
+   "season": "25-26",
+   "beds": 4,
+   "capacity": 1460,
+   "nights": 365,
+   "occupancy_pct": 25.0,
+   "lodg_rev": 19698.2,
+   "avg_night": 57.62
+  },
+  {
+   "room_type": "Dortoir",
+   "season": "24-25",
+   "beds": 26,
+   "capacity": 9490,
+   "nights": 2963,
+   "occupancy_pct": 31.2,
+   "lodg_rev": 22312.35,
+   "avg_night": 8.76
+  },
+  {
+   "room_type": "Dortoir",
+   "season": "25-26",
+   "beds": 26,
+   "capacity": 9490,
+   "nights": 2854,
+   "occupancy_pct": 30.1,
+   "lodg_rev": 25557.63,
+   "avg_night": 9.27
   }
  ],
- "eventsBySeason": [
+ "retentionYoY": [
   {
-   "event": "Retraite de 108 Nyoung-Nés",
-   "season": "25-26",
-   "participants": 173,
-   "onsite": 173,
-   "nights": 2030,
-   "total_rev": 43473.75,
-   "lodg_rev": 22956.23,
-   "avg_pp": 251.29
-  },
-  {
-   "event": "Retraite de 108 Nyoung-Nés",
    "season": "23-24",
-   "participants": 159,
-   "onsite": 158,
-   "nights": 2005,
-   "total_rev": 41760.6,
-   "lodg_rev": 29059.6,
-   "avg_pp": 262.65
+   "new_guests": 778,
+   "returned": 384,
+   "never_returned": 394,
+   "retention_pct": 49.4
+  },
+  {
+   "season": "24-25",
+   "new_guests": 630,
+   "returned": 188,
+   "never_returned": 442,
+   "retention_pct": 29.8
+  }
+ ],
+ "guestRetentionBySeason": [
+  {
+   "season": "23-24",
+   "segment": "1_one_timer",
+   "guests": 300,
+   "bookings": 300,
+   "rev": 48717.0,
+   "avg_rev": 162.39
+  },
+  {
+   "season": "23-24",
+   "segment": "2_light",
+   "guests": 212,
+   "bookings": 512,
+   "rev": 93354.89,
+   "avg_rev": 440.35
+  },
+  {
+   "season": "23-24",
+   "segment": "3_moderate",
+   "guests": 171,
+   "bookings": 1010,
+   "rev": 108515.28,
+   "avg_rev": 634.59
+  },
+  {
+   "season": "23-24",
+   "segment": "4_regular",
+   "guests": 95,
+   "bookings": 2050,
+   "rev": 122604.25,
+   "avg_rev": 1290.57
+  },
+  {
+   "season": "24-25",
+   "segment": "1_one_timer",
+   "guests": 384,
+   "bookings": 384,
+   "rev": 53372.12,
+   "avg_rev": 138.99
+  },
+  {
+   "season": "24-25",
+   "segment": "2_light",
+   "guests": 172,
+   "bookings": 400,
+   "rev": 56286.05,
+   "avg_rev": 327.24
+  },
+  {
+   "season": "24-25",
+   "segment": "3_moderate",
+   "guests": 60,
+   "bookings": 332,
+   "rev": 37241.93,
+   "avg_rev": 620.7
+  },
+  {
+   "season": "24-25",
+   "segment": "4_regular",
+   "guests": 14,
+   "bookings": 203,
+   "rev": 16226.85,
+   "avg_rev": 1159.06
+  }
+ ],
+ "buddhistOneTimersBySeason": [
+  {
+   "season": "23-24",
+   "one_timers": 300,
+   "total_guests": 778,
+   "stayed": 172,
+   "day_only": 82,
+   "online": 46,
+   "rev": 48717.0,
+   "avg_pp": 162.39
+  },
+  {
+   "season": "24-25",
+   "one_timers": 384,
+   "total_guests": 630,
+   "stayed": 208,
+   "day_only": 132,
+   "online": 43,
+   "rev": 53372.12,
+   "avg_pp": 138.99
+  }
+ ],
+ "buddhistOneTimersByEvent": [
+  {
+   "event": "Initiation à la méditation",
+   "one_timers": 84,
+   "stayed": 46,
+   "rev": 4052.3,
+   "avg_pp": 48.24
   },
   {
    "event": "Retraite de 108 Nyoung-Nés",
-   "season": "24-25",
-   "participants": 173,
-   "onsite": 172,
-   "nights": 2545,
-   "total_rev": 32454.32,
-   "lodg_rev": 18869.16,
-   "avg_pp": 187.6
-  },
-  {
-   "event": "Retraite de Lamrim avec Vénérable Gendun [SUR PLACE]",
-   "season": "25-26",
-   "participants": 44,
-   "onsite": 44,
-   "nights": 846,
-   "total_rev": 32332.68,
-   "lodg_rev": 11047.17,
-   "avg_pp": 734.83
-  },
-  {
-   "event": "Retraite sur le souffle de la voie (Vipassana) [SUR PLACE]",
-   "season": "25-26",
-   "participants": 69,
-   "onsite": 69,
-   "nights": 768,
-   "total_rev": 29878.73,
-   "lodg_rev": 13109.0,
-   "avg_pp": 433.03
-  },
-  {
-   "event": "Séjour personnel",
-   "season": "24-25",
-   "participants": 230,
-   "onsite": 230,
-   "nights": 783,
-   "total_rev": 26424.74,
-   "lodg_rev": 14459.47,
-   "avg_pp": 114.89
-  },
-  {
-   "event": "[obsolète] Retraite de Vajra Yogini",
-   "season": "24-25",
-   "participants": 53,
-   "onsite": 40,
-   "nights": 705,
-   "total_rev": 24453.49,
-   "lodg_rev": 10902.9,
-   "avg_pp": 461.39
-  },
-  {
-   "event": "Retraite sur le souffle de la voie (Vipassana) [SUR PLACE]",
-   "season": "24-25",
-   "participants": 81,
-   "onsite": 69,
-   "nights": 661,
-   "total_rev": 22029.48,
-   "lodg_rev": 7724.65,
-   "avg_pp": 271.97
-  },
-  {
-   "event": "Formation approfondie à la méditation [EN LIGNE]",
-   "season": "24-25",
-   "participants": 3128,
-   "onsite": 0,
-   "nights": 0,
-   "total_rev": 19760.0,
-   "lodg_rev": 0.0,
-   "avg_pp": 6.32
+   "one_timers": 62,
+   "stayed": 61,
+   "rev": 24111.8,
+   "avg_pp": 388.9
   },
   {
    "event": "Pratique intensive de Vajrasattva / Intensive practice of Vajrasattva",
-   "season": "24-25",
-   "participants": 120,
-   "onsite": 120,
-   "nights": 533,
-   "total_rev": 19533.41,
-   "lodg_rev": 6532.75,
-   "avg_pp": 162.78
-  },
-  {
-   "event": "Pratique intensive de Vajrasattva / Intensive practice of Vajrasattva",
-   "season": "25-26",
-   "participants": 70,
-   "onsite": 70,
-   "nights": 490,
-   "total_rev": 18757.39,
-   "lodg_rev": 7868.35,
-   "avg_pp": 267.96
-  },
-  {
-   "event": "Retraite sur le souffle de la voie (Vipassana) [SUR PLACE]",
-   "season": "23-24",
-   "participants": 69,
-   "onsite": 53,
-   "nights": 560,
-   "total_rev": 16328.0,
-   "lodg_rev": 5985.0,
-   "avg_pp": 236.64
-  },
-  {
-   "event": "[obsolète] Retraite intercontemplative : Amour Radical",
-   "season": "24-25",
-   "participants": 75,
-   "onsite": 75,
-   "nights": 439,
-   "total_rev": 16235.22,
-   "lodg_rev": 5753.7,
-   "avg_pp": 216.47
-  },
-  {
-   "event": "PEBA (Programme d'Etudes Bouddhiques Approfondi)",
-   "season": "25-26",
-   "participants": 292,
-   "onsite": 292,
-   "nights": 355,
-   "total_rev": 15911.57,
-   "lodg_rev": 4759.9,
-   "avg_pp": 54.49
-  },
-  {
-   "event": "Séjour personnel",
-   "season": "23-24",
-   "participants": 200,
-   "onsite": 200,
-   "nights": 559,
-   "total_rev": 15633.75,
-   "lodg_rev": 7634.25,
-   "avg_pp": 78.17
-  },
-  {
-   "event": "Séjour personnel",
-   "season": "25-26",
-   "participants": 139,
-   "onsite": 139,
-   "nights": 378,
-   "total_rev": 15600.51,
-   "lodg_rev": 8442.8,
-   "avg_pp": 112.23
-  },
-  {
-   "event": "Pratique intensive de Vajrasattva / Intensive practice of Vajrasattva",
-   "season": "23-24",
-   "participants": 172,
-   "onsite": 166,
-   "nights": 540,
-   "total_rev": 15482.95,
-   "lodg_rev": 5537.95,
-   "avg_pp": 90.02
-  },
-  {
-   "event": "[obsolète] Retraite avec Vénérable Gendun : La voie du coeur",
-   "season": "23-24",
-   "participants": 67,
-   "onsite": 56,
-   "nights": 502,
-   "total_rev": 14925.7,
-   "lodg_rev": 5652.2,
-   "avg_pp": 222.77
+   "one_timers": 54,
+   "stayed": 33,
+   "rev": 7611.24,
+   "avg_pp": 140.95
   },
   {
    "event": "[obsolète] Expérience de la pratique de Vajra Yogini",
-   "season": "23-24",
-   "participants": 88,
-   "onsite": 41,
-   "nights": 287,
-   "total_rev": 14915.25,
-   "lodg_rev": 3597.5,
-   "avg_pp": 169.49
+   "one_timers": 43,
+   "stayed": 7,
+   "rev": 8067.5,
+   "avg_pp": 187.62
   },
   {
-   "event": "Formation approfondie à la méditation [EN LIGNE]",
-   "season": "23-24",
-   "participants": 3916,
-   "onsite": 0,
-   "nights": 0,
-   "total_rev": 13113.0,
-   "lodg_rev": 0.0,
-   "avg_pp": 3.35
+   "event": "Découverte du bouddhisme",
+   "one_timers": 37,
+   "stayed": 18,
+   "rev": 2007.88,
+   "avg_pp": 54.27
   },
   {
-   "event": "Retraite d'été de Lamrim (SUR PLACE)",
-   "season": "24-25",
-   "participants": 43,
-   "onsite": 43,
-   "nights": 292,
-   "total_rev": 12545.01,
-   "lodg_rev": 5320.2,
-   "avg_pp": 291.74
+   "event": "Retraite sur le souffle de la voie (Vipassana) [SUR PLACE]",
+   "one_timers": 32,
+   "stayed": 24,
+   "rev": 10363.23,
+   "avg_pp": 323.85
   },
   {
-   "event": "Retraite d'été de Lamrim (SUR PLACE)",
-   "season": "23-24",
-   "participants": 75,
-   "onsite": 59,
-   "nights": 340,
-   "total_rev": 11700.0,
-   "lodg_rev": 4424.0,
-   "avg_pp": 156.0
+   "event": "[obsolète] Mini-retraite Vipassana SUR PLACE",
+   "one_timers": 28,
+   "stayed": 16,
+   "rev": 1938.78,
+   "avg_pp": 69.24
   },
   {
-   "event": "PEBA (Programme d'Etudes Bouddhiques Approfondi)",
-   "season": "24-25",
-   "participants": 282,
-   "onsite": 281,
-   "nights": 322,
-   "total_rev": 11583.2,
-   "lodg_rev": 3689.05,
-   "avg_pp": 41.08
+   "event": "L'entraînement de l'esprit en huit versets",
+   "one_timers": 27,
+   "stayed": 15,
+   "rev": 1087.6,
+   "avg_pp": 40.28
   },
   {
    "event": "[obsolète] Retraite  avec Vén. Robina : Affronter la mort sans crainte",
-   "season": "24-25",
-   "participants": 94,
-   "onsite": 77,
-   "nights": 294,
-   "total_rev": 11566.03,
-   "lodg_rev": 4690.0,
-   "avg_pp": 123.04
+   "one_timers": 26,
+   "stayed": 16,
+   "rev": 4066.79,
+   "avg_pp": 156.42
   },
   {
-   "event": "Stage de William Nelson",
-   "season": "25-26",
-   "participants": 49,
-   "onsite": 49,
-   "nights": 246,
-   "total_rev": 11403.8,
-   "lodg_rev": 4243.2,
-   "avg_pp": 232.73
-  },
-  {
-   "event": "Stage de Joëlle Maurel",
-   "season": "25-26",
-   "participants": 89,
-   "onsite": 89,
-   "nights": 212,
-   "total_rev": 11295.78,
-   "lodg_rev": 5300.0,
-   "avg_pp": 126.92
-  },
-  {
-   "event": "Demeurer calme et la vue supérieure (Shamata et Vipashyana)",
-   "season": "25-26",
-   "participants": 33,
-   "onsite": 33,
-   "nights": 294,
-   "total_rev": 10678.91,
-   "lodg_rev": 4262.15,
-   "avg_pp": 323.6
-  },
-  {
-   "event": "Retraite de Shiné",
-   "season": "25-26",
-   "participants": 41,
-   "onsite": 41,
-   "nights": 285,
-   "total_rev": 9894.58,
-   "lodg_rev": 4544.45,
-   "avg_pp": 241.33
-  },
-  {
-   "event": "Découverte du bouddhisme",
-   "season": "24-25",
-   "participants": 196,
-   "onsite": 196,
-   "nights": 207,
-   "total_rev": 9735.17,
-   "lodg_rev": 3237.1,
-   "avg_pp": 49.67
-  },
-  {
-   "event": "Retraite du Bouddha Médecine..",
-   "season": "24-25",
-   "participants": 52,
-   "onsite": 35,
-   "nights": 188,
-   "total_rev": 9325.37,
-   "lodg_rev": 3125.2,
-   "avg_pp": 179.33
-  },
-  {
-   "event": "Retraite d'été de Lamrim (SUR PLACE)",
-   "season": "25-26",
-   "participants": 30,
-   "onsite": 30,
-   "nights": 181,
-   "total_rev": 9223.63,
-   "lodg_rev": 4458.55,
-   "avg_pp": 307.45
-  },
-  {
-   "event": "Initiation à la méditation",
-   "season": "25-26",
-   "participants": 138,
-   "onsite": 138,
-   "nights": 150,
-   "total_rev": 9040.11,
-   "lodg_rev": 2691.6,
-   "avg_pp": 65.51
-  },
-  {
-   "event": "Découverte du bouddhisme",
-   "season": "25-26",
-   "participants": 130,
-   "onsite": 130,
-   "nights": 151,
-   "total_rev": 8309.84,
-   "lodg_rev": 2634.5,
-   "avg_pp": 63.92
-  },
-  {
-   "event": "PEBA (Programme d'Etudes Bouddhiques Approfondi)",
-   "season": "23-24",
-   "participants": 253,
-   "onsite": 252,
-   "nights": 251,
-   "total_rev": 8254.5,
-   "lodg_rev": 2868.5,
-   "avg_pp": 32.63
-  },
-  {
-   "event": "Retraite de Shiné",
-   "season": "24-25",
-   "participants": 38,
-   "onsite": 38,
-   "nights": 285,
-   "total_rev": 8178.47,
-   "lodg_rev": 3534.5,
-   "avg_pp": 215.22
-  },
-  {
-   "event": "Retraite avec Vén. Robina / Retreat with Ven. Robina",
-   "season": "25-26",
-   "participants": 44,
-   "onsite": 44,
-   "nights": 178,
-   "total_rev": 7867.81,
-   "lodg_rev": 3540.75,
-   "avg_pp": 178.81
-  },
-  {
-   "event": "Serkong Rinpoché & Alexander Berzin (SUR PLACE / ONSITE)",
-   "season": "25-26",
-   "participants": 90,
-   "onsite": 90,
-   "nights": 157,
-   "total_rev": 7479.55,
-   "lodg_rev": 2349.95,
-   "avg_pp": 83.11
-  },
-  {
-   "event": "Retraite du Bouddha Médecine..",
-   "season": "25-26",
-   "participants": 31,
-   "onsite": 31,
-   "nights": 151,
-   "total_rev": 7032.07,
-   "lodg_rev": 3386.0,
-   "avg_pp": 226.84
-  },
-  {
-   "event": "Retraite de Shiné",
-   "season": "23-24",
-   "participants": 46,
-   "onsite": 46,
-   "nights": 339,
-   "total_rev": 6962.25,
-   "lodg_rev": 2805.0,
-   "avg_pp": 151.35
-  },
-  {
-   "event": "Retraite de Vajra Yogini",
-   "season": "25-26",
-   "participants": 12,
-   "onsite": 12,
-   "nights": 143,
-   "total_rev": 6764.91,
-   "lodg_rev": 4166.5,
-   "avg_pp": 563.74
-  },
-  {
-   "event": "Découverte du bouddhisme",
-   "season": "23-24",
-   "participants": 186,
-   "onsite": 185,
-   "nights": 153,
-   "total_rev": 6617.3,
-   "lodg_rev": 1833.3,
-   "avg_pp": 35.58
-  },
-  {
-   "event": "Stage de William Nelson",
-   "season": "24-25",
-   "participants": 30,
-   "onsite": 30,
-   "nights": 149,
-   "total_rev": 6589.32,
-   "lodg_rev": 2300.0,
-   "avg_pp": 219.64
-  },
-  {
-   "event": "Initiation à la méditation",
-   "season": "23-24",
-   "participants": 123,
-   "onsite": 123,
-   "nights": 151,
-   "total_rev": 6503.0,
-   "lodg_rev": 2420.0,
-   "avg_pp": 52.87
-  },
-  {
-   "event": "Stage de Joëlle Maurel",
-   "season": "23-24",
-   "participants": 50,
-   "onsite": 50,
-   "nights": 173,
-   "total_rev": 6461.1,
-   "lodg_rev": 3443.1,
-   "avg_pp": 129.22
-  },
-  {
-   "event": "Stage de yoga de Sébastien Cierco",
-   "season": "25-26",
-   "participants": 26,
-   "onsite": 26,
-   "nights": 49,
-   "total_rev": 6255.75,
-   "lodg_rev": 1166.3,
-   "avg_pp": 240.61
+   "event": "Initiation au bouddhisme",
+   "one_timers": 25,
+   "stayed": 13,
+   "rev": 1242.43,
+   "avg_pp": 49.7
   },
   {
    "event": "[obsolète] Retraite de Vajra Yogini",
-   "season": "23-24",
-   "participants": 14,
-   "onsite": 14,
-   "nights": 264,
-   "total_rev": 6192.25,
-   "lodg_rev": 3251.5,
-   "avg_pp": 442.3
+   "one_timers": 24,
+   "stayed": 15,
+   "rev": 12274.09,
+   "avg_pp": 511.42
   },
   {
-   "event": "Retraite de 100000 bols d'eau",
-   "season": "24-25",
-   "participants": 14,
-   "onsite": 14,
-   "nights": 189,
-   "total_rev": 6080.33,
-   "lodg_rev": 3100.0,
-   "avg_pp": 434.31
+   "event": "Lama Tcheupa",
+   "one_timers": 21,
+   "stayed": 1,
+   "rev": 66.22,
+   "avg_pp": 3.15
   },
   {
-   "event": "Stage de Joëlle Maurel",
-   "season": "24-25",
-   "participants": 33,
-   "onsite": 33,
-   "nights": 135,
-   "total_rev": 5873.68,
-   "lodg_rev": 3134.6,
-   "avg_pp": 177.99
-  },
-  {
-   "event": "Stage de Qi Gong de l'Oie Sauvage",
-   "season": "24-25",
-   "participants": 27,
-   "onsite": 27,
-   "nights": 107,
-   "total_rev": 5679.05,
-   "lodg_rev": 2622.2,
-   "avg_pp": 210.34
-  },
-  {
-   "event": "ZOOM Retraite de Lamrim avec Vénérable Gendun [EN LIGNE]",
-   "season": "25-26",
-   "participants": 23,
-   "onsite": 2,
-   "nights": 0,
-   "total_rev": 5508.0,
-   "lodg_rev": 0.0,
-   "avg_pp": 239.48
-  },
-  {
-   "event": "Stage de William Nelson",
-   "season": "23-24",
-   "participants": 28,
-   "onsite": 28,
-   "nights": 142,
-   "total_rev": 5247.0,
-   "lodg_rev": 1771.5,
-   "avg_pp": 187.39
-  },
-  {
-   "event": "Stage de Marguerite Aflallo",
-   "season": "23-24",
-   "participants": 24,
-   "onsite": 24,
-   "nights": 107,
-   "total_rev": 5157.0,
-   "lodg_rev": 2346.0,
-   "avg_pp": 214.88
-  },
-  {
-   "event": "Stage de Marguerite Aflallo",
-   "season": "24-25",
-   "participants": 34,
-   "onsite": 34,
-   "nights": 96,
-   "total_rev": 5093.5,
-   "lodg_rev": 2223.2,
-   "avg_pp": 149.81
-  },
-  {
-   "event": "Séminaire essentiel pour le service au sein de la FPMT",
-   "season": "25-26",
-   "participants": 38,
-   "onsite": 38,
-   "nights": 105,
-   "total_rev": 4831.68,
-   "lodg_rev": 990.73,
-   "avg_pp": 127.15
-  },
-  {
-   "event": "L'entraînement de l'esprit en huit versets",
-   "season": "24-25",
-   "participants": 127,
-   "onsite": 127,
-   "nights": 108,
-   "total_rev": 4609.49,
-   "lodg_rev": 1579.1,
-   "avg_pp": 36.3
-  },
-  {
-   "event": "Stage de Qi Gong de l'Oie Sauvage",
-   "season": "25-26",
-   "participants": 20,
-   "onsite": 20,
-   "nights": 83,
-   "total_rev": 4606.41,
-   "lodg_rev": 2258.1,
-   "avg_pp": 230.32
-  },
-  {
-   "event": "[obsolète] Retraite avec Vén. Robina (SUR PLACE) : La compassion courageuse",
-   "season": "24-25",
-   "participants": 32,
-   "onsite": 32,
-   "nights": 111,
-   "total_rev": 4605.55,
-   "lodg_rev": 2441.0,
-   "avg_pp": 143.92
-  },
-  {
-   "event": "Stage de Qi Gong de Thierry Julien",
-   "season": "25-26",
-   "participants": 24,
-   "onsite": 24,
-   "nights": 72,
-   "total_rev": 4482.87,
-   "lodg_rev": 1927.8,
-   "avg_pp": 186.79
-  },
-  {
-   "event": "[obsolète] Mini-retraite Vipassana SUR PLACE",
-   "season": "23-24",
-   "participants": 73,
-   "onsite": 51,
-   "nights": 110,
-   "total_rev": 4371.75,
-   "lodg_rev": 1525.75,
-   "avg_pp": 59.89
-  },
-  {
-   "event": "Initiation à la méditation",
-   "season": "24-25",
-   "participants": 95,
-   "onsite": 95,
-   "nights": 63,
-   "total_rev": 4251.65,
-   "lodg_rev": 1220.05,
-   "avg_pp": 44.75
-  },
-  {
-   "event": "Stage de Qi Gong de Thierry Julien",
-   "season": "23-24",
-   "participants": 29,
-   "onsite": 29,
-   "nights": 89,
-   "total_rev": 4192.5,
-   "lodg_rev": 1679.5,
-   "avg_pp": 144.57
-  },
-  {
-   "event": "[obsolète] Retraite de Bodhicitta et de Tara blanche (SUR PLACE)",
-   "season": "24-25",
-   "participants": 34,
-   "onsite": 34,
-   "nights": 118,
-   "total_rev": 4100.38,
-   "lodg_rev": 1755.0,
-   "avg_pp": 120.6
-  },
-  {
-   "event": "Retraite de Ganden Lha Gyama",
-   "season": "25-26",
-   "participants": 16,
-   "onsite": 16,
-   "nights": 107,
-   "total_rev": 4052.04,
-   "lodg_rev": 2041.5,
-   "avg_pp": 253.25
-  },
-  {
-   "event": "Stage de Qi Gong de l'Oie Sauvage",
-   "season": "23-24",
-   "participants": 23,
-   "onsite": 23,
-   "nights": 84,
-   "total_rev": 3932.0,
-   "lodg_rev": 1718.0,
-   "avg_pp": 170.96
-  },
-  {
-   "event": "Stage de yoga de Sébastien Cierco",
-   "season": "23-24",
-   "participants": 29,
-   "onsite": 29,
-   "nights": 19,
-   "total_rev": 3858.0,
-   "lodg_rev": 210.5,
-   "avg_pp": 133.03
-  },
-  {
-   "event": "Retraite de Lamrim (Voie graduée vers l’éveil)",
-   "season": "24-25",
-   "participants": 41,
-   "onsite": 22,
-   "nights": 150,
-   "total_rev": 3786.05,
-   "lodg_rev": 1483.2,
-   "avg_pp": 92.34
-  },
-  {
-   "event": "[obsolète] Mini-retraite Vipassana SUR PLACE",
-   "season": "24-25",
-   "participants": 55,
-   "onsite": 55,
-   "nights": 96,
-   "total_rev": 3536.48,
-   "lodg_rev": 1210.2,
-   "avg_pp": 64.3
-  },
-  {
-   "event": "Retraite de Lamrim (Voie graduée vers l’éveil)",
-   "season": "23-24",
-   "participants": 14,
-   "onsite": 14,
-   "nights": 105,
-   "total_rev": 3378.0,
-   "lodg_rev": 1926.25,
-   "avg_pp": 241.29
-  },
-  {
-   "event": "Retraite de 4 jours de compassion et pleine conscience, réservée aux femmes",
-   "season": "25-26",
-   "participants": 32,
-   "onsite": 32,
-   "nights": 84,
-   "total_rev": 3335.43,
-   "lodg_rev": 1183.3,
-   "avg_pp": 104.23
-  },
-  {
-   "event": "[obsolète] Stage de Bénédicte Pavelak",
-   "season": "23-24",
-   "participants": 15,
-   "onsite": 15,
-   "nights": 98,
-   "total_rev": 3298.5,
-   "lodg_rev": 1257.5,
-   "avg_pp": 219.9
-  },
-  {
-   "event": "Séjour personnel [non-public]",
-   "season": "23-24",
-   "participants": 45,
-   "onsite": 45,
-   "nights": 171,
-   "total_rev": 3163.5,
-   "lodg_rev": 1478.25,
-   "avg_pp": 70.3
-  },
-  {
-   "event": "Initiation au bouddhisme",
-   "season": "25-26",
-   "participants": 49,
-   "onsite": 49,
-   "nights": 41,
-   "total_rev": 3107.16,
-   "lodg_rev": 998.7,
-   "avg_pp": 63.41
-  },
-  {
-   "event": "[obsolète] Atelier et conférence avec vénérable Thubten Chodron (SUR PLACE)",
-   "season": "24-25",
-   "participants": 66,
-   "onsite": 66,
-   "nights": 71,
-   "total_rev": 3068.41,
-   "lodg_rev": 975.0,
-   "avg_pp": 46.49
-  },
-  {
-   "event": "Retraite de 4 jours de compassion et pleine conscience, réservée aux femmes",
-   "season": "23-24",
-   "participants": 15,
-   "onsite": 15,
-   "nights": 26,
-   "total_rev": 2921.0,
-   "lodg_rev": 357.5,
-   "avg_pp": 194.73
+   "event": "PEBA (Programme d'Etudes Bouddhiques Approfondi)",
+   "one_timers": 20,
+   "stayed": 14,
+   "rev": 1509.36,
+   "avg_pp": 75.47
   },
   {
    "event": "Serkong Rinpoché & Alexander Berzin (SUR PLACE / ONSITE)",
-   "season": "24-25",
-   "participants": 127,
-   "onsite": 120,
-   "nights": 68,
-   "total_rev": 2918.2,
-   "lodg_rev": 1017.0,
-   "avg_pp": 22.98
+   "one_timers": 18,
+   "stayed": 6,
+   "rev": 909.57,
+   "avg_pp": 50.53
   },
   {
-   "event": "Retraite sur le souffle de la voie (Vipassana) [EN ZOOM]",
-   "season": "25-26",
-   "participants": 22,
-   "onsite": 1,
-   "nights": 0,
-   "total_rev": 2895.0,
-   "lodg_rev": 0.0,
-   "avg_pp": 131.59
+   "event": "[obsolète] Atelier et conférence avec vénérable Thubten Chodron (SUR PLACE)",
+   "one_timers": 16,
+   "stayed": 10,
+   "rev": 1217.24,
+   "avg_pp": 76.08
   },
   {
-   "event": "L'entraînement de l'esprit en huit versets",
-   "season": "25-26",
-   "participants": 75,
-   "onsite": 75,
-   "nights": 46,
-   "total_rev": 2770.2,
-   "lodg_rev": 707.7,
-   "avg_pp": 36.94
+   "event": "[obsolète] Retraite avec Vénérable Gendun : La voie du coeur",
+   "one_timers": 15,
+   "stayed": 12,
+   "rev": 4130.5,
+   "avg_pp": 275.37
   },
   {
-   "event": "Formation approfondie à la méditation [EN LIGNE]",
-   "season": "25-26",
-   "participants": 2907,
-   "onsite": 0,
-   "nights": 0,
-   "total_rev": 2713.53,
-   "lodg_rev": 0.0,
-   "avg_pp": 0.93
-  },
-  {
-   "event": "Retraite de Mahamoudra",
-   "season": "25-26",
-   "participants": 22,
-   "onsite": 22,
-   "nights": 98,
-   "total_rev": 2710.46,
-   "lodg_rev": 1076.6,
-   "avg_pp": 123.2
-  },
-  {
-   "event": "[obsolète] Formation Approfondie à la Méditation (SESSIONS SUR PLACE)",
-   "season": "23-24",
-   "participants": 129,
-   "onsite": 129,
-   "nights": 18,
-   "total_rev": 2584.0,
-   "lodg_rev": 311.5,
-   "avg_pp": 20.03
-  },
-  {
-   "event": "Retraite de 4 jours de compassion et pleine conscience, réservée aux femmes",
-   "season": "24-25",
-   "participants": 17,
-   "onsite": 17,
-   "nights": 60,
-   "total_rev": 2577.11,
-   "lodg_rev": 926.2,
-   "avg_pp": 151.59
-  },
-  {
-   "event": "Retraite de pleine conscience en mouvement",
-   "season": "23-24",
-   "participants": 7,
-   "onsite": 7,
-   "nights": 16,
-   "total_rev": 2575.0,
-   "lodg_rev": 251.0,
-   "avg_pp": 367.86
-  },
-  {
-   "event": "Peinture de tsa-tsas",
-   "season": "25-26",
-   "participants": 82,
-   "onsite": 82,
-   "nights": 35,
-   "total_rev": 2325.75,
-   "lodg_rev": 613.7,
-   "avg_pp": 28.36
-  },
-  {
-   "event": "Enseignements de Guéshé Lodèn",
-   "season": "25-26",
-   "participants": 63,
-   "onsite": 63,
-   "nights": 31,
-   "total_rev": 2187.78,
-   "lodg_rev": 414.3,
-   "avg_pp": 34.73
-  },
-  {
-   "event": "Retraite de Yamantaka",
-   "season": "23-24",
-   "participants": 7,
-   "onsite": 7,
-   "nights": 198,
-   "total_rev": 2086.0,
-   "lodg_rev": 887.25,
-   "avg_pp": 298.0
-  },
-  {
-   "event": "L'entraînement de l'esprit en huit versets",
-   "season": "23-24",
-   "participants": 72,
-   "onsite": 72,
-   "nights": 48,
-   "total_rev": 1985.0,
-   "lodg_rev": 870.0,
-   "avg_pp": 27.57
-  },
-  {
-   "event": "Gestion des émotions par la pleine conscience",
-   "season": "23-24",
-   "participants": 30,
-   "onsite": 30,
-   "nights": 0,
-   "total_rev": 1919.5,
-   "lodg_rev": 0.0,
-   "avg_pp": 63.98
-  },
-  {
-   "event": "La Science Bouddhiste de l'Esprit (SBE)",
-   "season": "25-26",
-   "participants": 65,
-   "onsite": 41,
-   "nights": 32,
-   "total_rev": 1904.19,
-   "lodg_rev": 520.7,
-   "avg_pp": 29.3
-  },
-  {
-   "event": "Initiation au bouddhisme",
-   "season": "24-25",
-   "participants": 38,
-   "onsite": 38,
-   "nights": 28,
-   "total_rev": 1895.35,
-   "lodg_rev": 524.3,
-   "avg_pp": 49.88
-  },
-  {
-   "event": "Pratique intensive de Tchènrézi",
-   "season": "25-26",
-   "participants": 20,
-   "onsite": 20,
-   "nights": 41,
-   "total_rev": 1817.2,
-   "lodg_rev": 867.6,
-   "avg_pp": 90.86
-  },
-  {
-   "event": "Gestion des émotions par la pleine conscience",
-   "season": "24-25",
-   "participants": 42,
-   "onsite": 42,
-   "nights": 9,
-   "total_rev": 1804.65,
-   "lodg_rev": 355.0,
-   "avg_pp": 42.97
-  },
-  {
-   "event": "Le bonheur c'est maintenant ou jamais",
-   "season": "23-24",
-   "participants": 26,
-   "onsite": 26,
-   "nights": 25,
-   "total_rev": 1799.0,
-   "lodg_rev": 371.0,
-   "avg_pp": 69.19
-  },
-  {
-   "event": "Séjour personnel [non-public]",
-   "season": "24-25",
-   "participants": 17,
-   "onsite": 17,
-   "nights": 60,
-   "total_rev": 1792.29,
-   "lodg_rev": 987.0,
-   "avg_pp": 105.43
-  },
-  {
-   "event": "Compassion et auto-compassion",
-   "season": "23-24",
-   "participants": 25,
-   "onsite": 25,
-   "nights": 10,
-   "total_rev": 1700.5,
-   "lodg_rev": 90.0,
-   "avg_pp": 68.02
-  },
-  {
-   "event": "[obsolète] Retraite : apprentissage de la bienveillance",
-   "season": "24-25",
-   "participants": 30,
-   "onsite": 30,
-   "nights": 53,
-   "total_rev": 1696.16,
-   "lodg_rev": 761.4,
-   "avg_pp": 56.54
-  },
-  {
-   "event": "Chroniques Bouddhistes",
-   "season": "24-25",
-   "participants": 77,
-   "onsite": 77,
-   "nights": 42,
-   "total_rev": 1659.16,
-   "lodg_rev": 427.5,
-   "avg_pp": 21.55
-  },
-  {
-   "event": "Journée portes ouvertes",
-   "season": "25-26",
-   "participants": 104,
-   "onsite": 104,
-   "nights": 4,
-   "total_rev": 1581.57,
-   "lodg_rev": 82.5,
-   "avg_pp": 15.21
-  },
-  {
-   "event": "Transformative Mindfulness Methods (niveau 1)",
-   "season": "24-25",
-   "participants": 19,
-   "onsite": 19,
-   "nights": 16,
-   "total_rev": 1551.3,
-   "lodg_rev": 217.0,
-   "avg_pp": 81.65
-  },
-  {
-   "event": "Peinture de tsa-tsas",
-   "season": "24-25",
-   "participants": 59,
-   "onsite": 59,
-   "nights": 17,
-   "total_rev": 1372.92,
-   "lodg_rev": 360.0,
-   "avg_pp": 23.27
-  },
-  {
-   "event": "Transformative Mindfulness Methods (niveau 1)",
-   "season": "25-26",
-   "participants": 19,
-   "onsite": 19,
-   "nights": 34,
-   "total_rev": 1329.15,
-   "lodg_rev": 539.2,
-   "avg_pp": 69.96
-  },
-  {
-   "event": "Stage de Yoga de Dominique Meunier",
-   "season": "25-26",
-   "participants": 8,
-   "onsite": 8,
-   "nights": 18,
-   "total_rev": 1298.96,
-   "lodg_rev": 626.4,
-   "avg_pp": 162.37
+   "event": "Retraite d'été de Lamrim (SUR PLACE)",
+   "one_timers": 13,
+   "stayed": 9,
+   "rev": 2378.54,
+   "avg_pp": 182.96
   },
   {
    "event": "16 attitudes pour mieux vivre - Niveau 1",
-   "season": "24-25",
-   "participants": 24,
-   "onsite": 24,
-   "nights": 25,
-   "total_rev": 1193.42,
-   "lodg_rev": 321.0,
-   "avg_pp": 49.73
-  },
-  {
-   "event": "Serkong Rinpoché & Alexander Berzin (VIA ZOOM)",
-   "season": "25-26",
-   "participants": 40,
-   "onsite": 0,
-   "nights": 14,
-   "total_rev": 1170.0,
-   "lodg_rev": 0.0,
-   "avg_pp": 29.25
-  },
-  {
-   "event": "L’art de vivre et de mourir : enseignements essentiels",
-   "season": "25-26",
-   "participants": 17,
-   "onsite": 17,
-   "nights": 20,
-   "total_rev": 1157.91,
-   "lodg_rev": 205.4,
-   "avg_pp": 68.11
-  },
-  {
-   "event": "Stage de Yoga de Dominique Meunier",
-   "season": "24-25",
-   "participants": 11,
-   "onsite": 11,
-   "nights": 16,
-   "total_rev": 1067.26,
-   "lodg_rev": 345.6,
-   "avg_pp": 97.02
+   "one_timers": 12,
+   "stayed": 7,
+   "rev": 1082.16,
+   "avg_pp": 90.18
   },
   {
    "event": "Peinture de tsa-tsas",
-   "season": "23-24",
-   "participants": 49,
-   "onsite": 49,
-   "nights": 19,
-   "total_rev": 1008.5,
-   "lodg_rev": 185.0,
-   "avg_pp": 20.58
-  },
-  {
-   "event": "[obsolète] Retraite de Bodhicitta et Tara Blanche (VIA ZOOM)",
-   "season": "24-25",
-   "participants": 18,
-   "onsite": 0,
-   "nights": 0,
-   "total_rev": 983.0,
-   "lodg_rev": 0.0,
-   "avg_pp": 54.61
-  },
-  {
-   "event": "Stage de Gill-Eric Leininger",
-   "season": "24-25",
-   "participants": 6,
-   "onsite": 6,
-   "nights": 16,
-   "total_rev": 951.68,
-   "lodg_rev": 521.0,
-   "avg_pp": 158.61
-  },
-  {
-   "event": "Retraite de pleine conscience en mouvement",
-   "season": "24-25",
-   "participants": 9,
-   "onsite": 9,
-   "nights": 16,
-   "total_rev": 908.03,
-   "lodg_rev": 445.6,
-   "avg_pp": 100.89
-  },
-  {
-   "event": "[obsolète] Mini-retraite Vipassana VIA ZOOM",
-   "season": "24-25",
-   "participants": 22,
-   "onsite": 0,
-   "nights": 0,
-   "total_rev": 879.0,
-   "lodg_rev": 0.0,
-   "avg_pp": 39.95
-  },
-  {
-   "event": "16 attitudes pour mieux vivre - Niveau 1",
-   "season": "25-26",
-   "participants": 21,
-   "onsite": 21,
-   "nights": 18,
-   "total_rev": 859.62,
-   "lodg_rev": 324.0,
-   "avg_pp": 40.93
-  },
-  {
-   "event": "Initiation Je Rigsum Chidrup (Lama Tsong Khapa)",
-   "season": "25-26",
-   "participants": 100,
-   "onsite": 100,
-   "nights": 13,
-   "total_rev": 859.14,
-   "lodg_rev": 510.65,
-   "avg_pp": 8.59
-  },
-  {
-   "event": "Transformative Mindfulness Methods (niveau 1)",
-   "season": "23-24",
-   "participants": 6,
-   "onsite": 6,
-   "nights": 10,
-   "total_rev": 856.0,
-   "lodg_rev": 157.0,
-   "avg_pp": 142.67
-  },
-  {
-   "event": "[obsolète] Retraite avec Vén. Robina (VIA ZOOM) : La compassion courageuse",
-   "season": "24-25",
-   "participants": 17,
-   "onsite": 0,
-   "nights": 0,
-   "total_rev": 828.0,
-   "lodg_rev": 0.0,
-   "avg_pp": 48.71
-  },
-  {
-   "event": "16 attitudes pour mieux vivre - Niveau 1",
-   "season": "23-24",
-   "participants": 8,
-   "onsite": 8,
-   "nights": 5,
-   "total_rev": 819.5,
-   "lodg_rev": 119.0,
-   "avg_pp": 102.44
+   "one_timers": 11,
+   "stayed": 5,
+   "rev": 322.9,
+   "avg_pp": 29.35
   },
   {
    "event": "La Bienveillance et les 16 Attitudes pour Mieux Vivre",
-   "season": "23-24",
-   "participants": 13,
-   "onsite": 13,
-   "nights": 13,
-   "total_rev": 710.0,
-   "lodg_rev": 213.0,
-   "avg_pp": 54.62
+   "one_timers": 11,
+   "stayed": 9,
+   "rev": 583.0,
+   "avg_pp": 53.0
   },
   {
-   "event": "Initiation à la pleine conscience",
-   "season": "23-24",
-   "participants": 11,
-   "onsite": 11,
-   "nights": 1,
-   "total_rev": 679.0,
-   "lodg_rev": 11.0,
-   "avg_pp": 61.73
+   "event": "Retraite de Lamrim (Voie graduée vers l’éveil)",
+   "one_timers": 11,
+   "stayed": 2,
+   "rev": 440.5,
+   "avg_pp": 40.05
   },
   {
-   "event": "1.2.3 Bonheur Atelier Pleine Conscience Parents-Enfants",
-   "season": "24-25",
-   "participants": 19,
-   "onsite": 19,
-   "nights": 31,
-   "total_rev": 662.34,
-   "lodg_rev": 152.75,
-   "avg_pp": 34.86
-  },
-  {
-   "event": "Stage de Catherine Boussard",
-   "season": "24-25",
-   "participants": 8,
-   "onsite": 8,
-   "nights": 9,
-   "total_rev": 623.68,
-   "lodg_rev": 233.0,
-   "avg_pp": 77.96
-  },
-  {
-   "event": "Le Deuil… pour accomplir une part du chemin.",
-   "season": "24-25",
-   "participants": 16,
-   "onsite": 16,
-   "nights": 14,
-   "total_rev": 602.17,
-   "lodg_rev": 181.5,
-   "avg_pp": 37.64
-  },
-  {
-   "event": "16 attitudes pour mieux vivre - Niveau 2",
-   "season": "24-25",
-   "participants": 16,
-   "onsite": 16,
-   "nights": 17,
-   "total_rev": 572.91,
-   "lodg_rev": 212.2,
-   "avg_pp": 35.81
-  },
-  {
-   "event": "Retraite d'été de Lamrim (VIA ZOOM)",
-   "season": "24-25",
-   "participants": 8,
-   "onsite": 0,
-   "nights": 0,
-   "total_rev": 560.0,
-   "lodg_rev": 0.0,
-   "avg_pp": 70.0
-  },
-  {
-   "event": "Stage de Gill-Eric Leininger",
-   "season": "23-24",
-   "participants": 4,
-   "onsite": 4,
-   "nights": 11,
-   "total_rev": 554.5,
-   "lodg_rev": 267.0,
-   "avg_pp": 138.63
-  },
-  {
-   "event": "[obsolète] Atelier avec vénérable Thubten Chodron (VIA ZOOM)",
-   "season": "24-25",
-   "participants": 13,
-   "onsite": 0,
-   "nights": 0,
-   "total_rev": 502.0,
-   "lodg_rev": 0.0,
-   "avg_pp": 38.62
-  },
-  {
-   "event": "[obsolète] Éveillez vos Sens avec les 16 Attitudes",
-   "season": "23-24",
-   "participants": 9,
-   "onsite": 9,
-   "nights": 1,
-   "total_rev": 485.5,
-   "lodg_rev": 43.5,
-   "avg_pp": 53.94
-  },
-  {
-   "event": "[obsolète] Une journée de pleine conscience",
-   "season": "23-24",
-   "participants": 11,
-   "onsite": 11,
-   "nights": 1,
-   "total_rev": 476.0,
-   "lodg_rev": 0.0,
-   "avg_pp": 43.27
-  },
-  {
-   "event": "Compassion et auto-compassion",
-   "season": "24-25",
-   "participants": 7,
-   "onsite": 7,
-   "nights": 10,
-   "total_rev": 427.86,
-   "lodg_rev": 211.0,
-   "avg_pp": 61.12
-  },
-  {
-   "event": "[obsolète] Cultiver la Compassion : Un Voyage en Pleine Conscience",
-   "season": "23-24",
-   "participants": 10,
-   "onsite": 10,
-   "nights": 1,
-   "total_rev": 424.5,
-   "lodg_rev": 0.0,
-   "avg_pp": 42.45
+   "event": "Retraite de Shiné",
+   "one_timers": 11,
+   "stayed": 10,
+   "rev": 2772.87,
+   "avg_pp": 252.08
   },
   {
    "event": "Enseignements de Jan Willis",
-   "season": "24-25",
-   "participants": 37,
-   "onsite": 37,
-   "nights": 21,
-   "total_rev": 415.25,
-   "lodg_rev": 149.0,
-   "avg_pp": 11.22
+   "one_timers": 10,
+   "stayed": 2,
+   "rev": 47.8,
+   "avg_pp": 4.78
   },
   {
-   "event": "Stage de Gill-Eric Leininger",
-   "season": "25-26",
-   "participants": 2,
-   "onsite": 2,
-   "nights": 6,
-   "total_rev": 395.97,
-   "lodg_rev": 214.5,
-   "avg_pp": 197.98
+   "event": "Retraite du Bouddha Médecine..",
+   "one_timers": 9,
+   "stayed": 5,
+   "rev": 2143.8,
+   "avg_pp": 238.2
   },
   {
-   "event": "Anniversaire de Sa Sainteté le Dalaï Lama",
-   "season": "25-26",
-   "participants": 38,
-   "onsite": 38,
-   "nights": 0,
-   "total_rev": 395.78,
-   "lodg_rev": 0.0,
-   "avg_pp": 10.42
+   "event": "Pratique de Tara",
+   "one_timers": 7,
+   "stayed": 1,
+   "rev": 50.0,
+   "avg_pp": 7.14
   },
   {
-   "event": "Initiation au bouddhisme",
-   "season": "23-24",
-   "participants": 9,
-   "onsite": 9,
-   "nights": 6,
-   "total_rev": 320.0,
-   "lodg_rev": 98.5,
-   "avg_pp": 35.56
+   "event": "[obsolète] Retraite avec Vén. Robina (SUR PLACE) : La compassion courageuse",
+   "one_timers": 7,
+   "stayed": 6,
+   "rev": 1576.1,
+   "avg_pp": 225.16
   },
   {
-   "event": "16 attitudes pour mieux communiquer",
-   "season": "25-26",
-   "participants": 11,
-   "onsite": 11,
-   "nights": 7,
-   "total_rev": 281.34,
-   "lodg_rev": 22.5,
-   "avg_pp": 25.58
+   "event": "[obsolète] Retraite : apprentissage de la bienveillance",
+   "one_timers": 6,
+   "stayed": 4,
+   "rev": 535.1,
+   "avg_pp": 89.18
   },
   {
-   "event": "Losar",
-   "season": "25-26",
-   "participants": 21,
-   "onsite": 21,
-   "nights": 0,
-   "total_rev": 271.94,
-   "lodg_rev": 0.0,
-   "avg_pp": 12.95
+   "event": "[obsolète] Retraite avec Vén. Robina (VIA ZOOM) : La compassion courageuse",
+   "one_timers": 6,
+   "stayed": 0,
+   "rev": 284.0,
+   "avg_pp": 47.33
   },
   {
-   "event": "Célébration du Saka Dawa",
-   "season": "23-24",
-   "participants": 11,
-   "onsite": 11,
-   "nights": 7,
-   "total_rev": 251.0,
-   "lodg_rev": 63.0,
-   "avg_pp": 22.82
-  },
-  {
-   "event": "Le Deuil… pour accomplir une part du chemin.",
-   "season": "25-26",
-   "participants": 5,
-   "onsite": 5,
-   "nights": 2,
-   "total_rev": 248.04,
-   "lodg_rev": 120.0,
-   "avg_pp": 49.61
-  },
-  {
-   "event": "Célébration du Saka Dawa",
-   "season": "25-26",
-   "participants": 12,
-   "onsite": 12,
-   "nights": 3,
-   "total_rev": 206.33,
-   "lodg_rev": 23.4,
-   "avg_pp": 17.19
-  },
-  {
-   "event": "Retraite de pleine conscience en mouvement",
-   "season": "25-26",
-   "participants": 2,
-   "onsite": 2,
-   "nights": 6,
-   "total_rev": 176.39,
-   "lodg_rev": 110.0,
-   "avg_pp": 88.2
-  },
-  {
-   "event": "Pratique du Bouddha Médecine",
-   "season": "25-26",
-   "participants": 24,
-   "onsite": 24,
-   "nights": 2,
-   "total_rev": 156.47,
-   "lodg_rev": 47.5,
-   "avg_pp": 6.52
-  },
-  {
-   "event": "Chroniques Bouddhistes",
-   "season": "25-26",
-   "participants": 8,
-   "onsite": 8,
-   "nights": 5,
-   "total_rev": 153.56,
-   "lodg_rev": 32.0,
-   "avg_pp": 19.2
-  },
-  {
-   "event": "Célébration de Lhabab Dutchèn",
-   "season": "25-26",
-   "participants": 7,
-   "onsite": 7,
-   "nights": 4,
-   "total_rev": 150.73,
-   "lodg_rev": 32.0,
-   "avg_pp": 21.53
-  },
-  {
-   "event": "Compassion et auto-compassion",
-   "season": "25-26",
-   "participants": 5,
-   "onsite": 5,
-   "nights": 6,
-   "total_rev": 132.46,
-   "lodg_rev": 39.0,
-   "avg_pp": 26.49
-  },
-  {
-   "event": "Losar",
-   "season": "23-24",
-   "participants": 19,
-   "onsite": 19,
-   "nights": 0,
-   "total_rev": 130.0,
-   "lodg_rev": 0.0,
-   "avg_pp": 6.84
-  },
-  {
-   "event": "Enseignement du Dr Alexander Berzin",
-   "season": "25-26",
-   "participants": 10,
-   "onsite": 10,
-   "nights": 2,
-   "total_rev": 126.34,
-   "lodg_rev": 27.0,
-   "avg_pp": 12.63
-  },
-  {
-   "event": "Lama Tcheupa",
-   "season": "24-25",
-   "participants": 121,
-   "onsite": 121,
-   "nights": 2,
-   "total_rev": 125.19,
-   "lodg_rev": 13.5,
-   "avg_pp": 1.03
-  },
-  {
-   "event": "Journée portes ouvertes",
-   "season": "23-24",
-   "participants": 14,
-   "onsite": 14,
-   "nights": 0,
-   "total_rev": 105.5,
-   "lodg_rev": 0.0,
-   "avg_pp": 7.54
+   "event": "[obsolète] Retraite de Bodhicitta et de Tara blanche (SUR PLACE)",
+   "one_timers": 5,
+   "stayed": 5,
+   "rev": 1000.18,
+   "avg_pp": 200.04
   },
   {
    "event": "Initiation de Vajrasattva / Vajrasattva empowerment",
-   "season": "24-25",
-   "participants": 22,
-   "onsite": 22,
-   "nights": 0,
-   "total_rev": 101.85,
-   "lodg_rev": 0.0,
-   "avg_pp": 4.63
+   "one_timers": 5,
+   "stayed": 0,
+   "rev": 30.0,
+   "avg_pp": 6.0
   },
   {
-   "event": "Premier pas sur le chemin du pardon…",
-   "season": "25-26",
-   "participants": 3,
-   "onsite": 3,
-   "nights": 2,
-   "total_rev": 66.68,
-   "lodg_rev": 11.0,
-   "avg_pp": 22.23
-  },
-  {
-   "event": "Gestion des émotions par la pleine conscience",
-   "season": "25-26",
-   "participants": 5,
-   "onsite": 5,
-   "nights": 1,
-   "total_rev": 42.85,
-   "lodg_rev": 0.0,
-   "avg_pp": 8.57
-  },
-  {
-   "event": "Pratique du Bouddha Médecine",
-   "season": "24-25",
-   "participants": 13,
-   "onsite": 13,
-   "nights": 0,
-   "total_rev": 42.0,
-   "lodg_rev": 0.0,
-   "avg_pp": 3.23
-  },
-  {
-   "event": "Pratique de Tara",
-   "season": "23-24",
-   "participants": 1,
-   "onsite": 1,
-   "nights": 1,
-   "total_rev": 39.5,
-   "lodg_rev": 5.0,
-   "avg_pp": 39.5
-  },
-  {
-   "event": "Rencontre avec les jeunes avec Vénérable Robina",
-   "season": "25-26",
-   "participants": 9,
-   "onsite": 9,
-   "nights": 0,
-   "total_rev": 38.26,
-   "lodg_rev": 0.0,
-   "avg_pp": 4.25
-  },
-  {
-   "event": "Journée d'hommage à Guéshé Tèngyéla",
-   "season": "24-25",
-   "participants": 81,
-   "onsite": 81,
-   "nights": 0,
-   "total_rev": 37.3,
-   "lodg_rev": 0.0,
-   "avg_pp": 0.46
-  },
-  {
-   "event": "Lama Tcheupa",
-   "season": "25-26",
-   "participants": 41,
-   "onsite": 41,
-   "nights": 1,
-   "total_rev": 36.12,
-   "lodg_rev": 10.0,
-   "avg_pp": 0.88
-  },
-  {
-   "event": "Lama Tcheupa",
-   "season": "23-24",
-   "participants": 111,
-   "onsite": 111,
-   "nights": 1,
-   "total_rev": 34.5,
-   "lodg_rev": 0.0,
-   "avg_pp": 0.31
-  },
-  {
-   "event": "Losar",
-   "season": "24-25",
-   "participants": 16,
-   "onsite": 16,
-   "nights": 0,
-   "total_rev": 28.7,
-   "lodg_rev": 0.0,
-   "avg_pp": 1.79
-  },
-  {
-   "event": "Célébration du Saka Dawa",
-   "season": "24-25",
-   "participants": 5,
-   "onsite": 5,
-   "nights": 2,
-   "total_rev": 26.99,
-   "lodg_rev": 7.0,
-   "avg_pp": 5.4
-  },
-  {
-   "event": "Journée d'hommage à Guéshé Tèngyéla",
-   "season": "23-24",
-   "participants": 16,
-   "onsite": 16,
-   "nights": 0,
-   "total_rev": 24.75,
-   "lodg_rev": 0.0,
-   "avg_pp": 1.55
-  },
-  {
-   "event": "Célébration de Tcheukor Dutchèn",
-   "season": "24-25",
-   "participants": 3,
-   "onsite": 3,
-   "nights": 1,
-   "total_rev": 20.0,
-   "lodg_rev": 6.8,
-   "avg_pp": 6.67
-  },
-  {
-   "event": "Célébration de Lhabab Dutchèn",
-   "season": "23-24",
-   "participants": 2,
-   "onsite": 2,
-   "nights": 1,
-   "total_rev": 20.0,
-   "lodg_rev": 9.0,
-   "avg_pp": 10.0
-  },
-  {
-   "event": "Cercle d'empathie",
-   "season": "24-25",
-   "participants": 9,
-   "onsite": 9,
-   "nights": 0,
-   "total_rev": 18.95,
-   "lodg_rev": 0.0,
-   "avg_pp": 2.11
-  },
-  {
-   "event": "Journée d'hommage à Guéshé Tèngyéla",
-   "season": "25-26",
-   "participants": 33,
-   "onsite": 33,
-   "nights": 1,
-   "total_rev": 16.42,
-   "lodg_rev": 10.0,
-   "avg_pp": 0.5
-  },
-  {
-   "event": "Célébration de Tchotrul Dutchèn",
-   "season": "25-26",
-   "participants": 1,
-   "onsite": 1,
-   "nights": 0,
-   "total_rev": 12.25,
-   "lodg_rev": 0.0,
-   "avg_pp": 12.25
-  },
-  {
-   "event": "Pratique de Tara",
-   "season": "24-25",
-   "participants": 10,
-   "onsite": 10,
-   "nights": 0,
-   "total_rev": 10.5,
-   "lodg_rev": 0.0,
-   "avg_pp": 1.05
-  },
-  {
-   "event": "Nuit à Tara",
-   "season": "23-24",
-   "participants": 1,
-   "onsite": 1,
-   "nights": 0,
-   "total_rev": 10.0,
-   "lodg_rev": 0.0,
-   "avg_pp": 10.0
-  },
-  {
-   "event": "[obsolète] Nuit de prière pour le retour de Lama Zopa Rinpoché",
-   "season": "24-25",
-   "participants": 2,
-   "onsite": 2,
-   "nights": 1,
-   "total_rev": 8.0,
-   "lodg_rev": 8.0,
-   "avg_pp": 4.0
-  },
-  {
-   "event": "Célébration de Lhabab Dutchèn",
-   "season": "24-25",
-   "participants": 2,
-   "onsite": 2,
-   "nights": 0,
-   "total_rev": 0.0,
-   "lodg_rev": 0.0,
-   "avg_pp": 0.0
-  },
-  {
-   "event": "Pratique du Bouddha Médecine",
-   "season": "23-24",
-   "participants": 3,
-   "onsite": 3,
-   "nights": 0,
-   "total_rev": 0.0,
-   "lodg_rev": 0.0,
-   "avg_pp": 0.0
+   "event": "Retraite de 100000 bols d'eau",
+   "one_timers": 5,
+   "stayed": 5,
+   "rev": 3064.82,
+   "avg_pp": 612.96
   }
  ],
- "vyRetreats": [
+ "buddhistOneTimersStay": [
   {
-   "instance": "RET. PAULA VY [SUR PLACE] (2023-oct.-20-02)",
-   "period": "2023-10",
-   "participants": 37,
-   "nights": 287,
-   "total_rev": 8506.25,
-   "avg_pp": 229.9
+   "season": "23-24",
+   "stay": "0_jour",
+   "people": 128,
+   "rev": 7949.5,
+   "avg_pp": 62.11
   },
   {
-   "instance": "RET. PAULA VY [EN LIGNE] (2023-oct.-20-01)",
-   "period": "2023-10",
+   "season": "23-24",
+   "stay": "1_court",
+   "people": 73,
+   "rev": 5028.25,
+   "avg_pp": 68.88
+  },
+  {
+   "season": "23-24",
+   "stay": "2_moyen",
+   "people": 49,
+   "rev": 6314.5,
+   "avg_pp": 128.87
+  },
+  {
+   "season": "23-24",
+   "stay": "3_long",
+   "people": 50,
+   "rev": 29424.75,
+   "avg_pp": 588.5
+  },
+  {
+   "season": "24-25",
+   "stay": "0_jour",
+   "people": 176,
+   "rev": 5734.02,
+   "avg_pp": 32.58
+  },
+  {
+   "season": "24-25",
+   "stay": "1_court",
+   "people": 77,
+   "rev": 6052.35,
+   "avg_pp": 78.6
+  },
+  {
+   "season": "24-25",
+   "stay": "2_moyen",
+   "people": 81,
+   "rev": 16734.92,
+   "avg_pp": 206.6
+  },
+  {
+   "season": "24-25",
+   "stay": "3_long",
+   "people": 50,
+   "rev": 24850.83,
+   "avg_pp": 497.02
+  }
+ ],
+ "frequencyRevenue": [
+  {
+   "season": "23-24",
+   "frequency": "1 fois",
+   "guests": 502,
+   "bookings": 502,
+   "rev": 77915.0,
+   "avg_pp": 155.21
+  },
+  {
+   "season": "23-24",
+   "frequency": "2-3 fois",
+   "guests": 172,
+   "bookings": 399,
+   "rev": 53748.1,
+   "avg_pp": 312.49
+  },
+  {
+   "season": "23-24",
+   "frequency": "4-10 fois",
+   "guests": 92,
+   "bookings": 547,
+   "rev": 25595.45,
+   "avg_pp": 278.21
+  },
+  {
+   "season": "23-24",
+   "frequency": "11+ fois",
+   "guests": 12,
+   "bookings": 159,
+   "rev": 7085.0,
+   "avg_pp": 590.42
+  },
+  {
+   "season": "24-25",
+   "frequency": "1 fois",
+   "guests": 612,
+   "bookings": 612,
+   "rev": 96309.48,
+   "avg_pp": 157.37
+  },
+  {
+   "season": "24-25",
+   "frequency": "2-3 fois",
+   "guests": 237,
+   "bookings": 536,
+   "rev": 52369.59,
+   "avg_pp": 220.97
+  },
+  {
+   "season": "24-25",
+   "frequency": "4-10 fois",
+   "guests": 116,
+   "bookings": 698,
+   "rev": 46640.89,
+   "avg_pp": 402.08
+  },
+  {
+   "season": "24-25",
+   "frequency": "11+ fois",
+   "guests": 28,
+   "bookings": 407,
+   "rev": 15909.02,
+   "avg_pp": 568.18
+  }
+ ],
+ "caseVipassana": [
+  {
+   "edition": "Dec 2023",
+   "total": 51,
+   "first_timers": 34,
+   "repeaters": 17,
+   "rev": 14118.5
+  },
+  {
+   "edition": "Dec 2024",
+   "total": 69,
+   "first_timers": 41,
+   "repeaters": 28,
+   "rev": 20139.48
+  },
+  {
+   "edition": "Dec 2025",
+   "total": 69,
+   "first_timers": 36,
+   "repeaters": 33,
+   "rev": 29878.73
+  }
+ ],
+ "vipassanaDetail": [
+  {
+   "edition": "Dec 2023",
    "participants": 51,
-   "nights": 0,
-   "total_rev": 6409.0,
-   "avg_pp": 125.67
+   "avg_nights": 10.0,
+   "lodg_rev": 5985.0,
+   "meal_rev": 7878.5,
+   "total_rev": 14118.5
   },
   {
-   "instance": "Retraite VY (2024-janv.-07-01)",
-   "period": "2024-01",
-   "participants": 14,
-   "nights": 264,
-   "total_rev": 6192.25,
-   "avg_pp": 442.3
+   "edition": "Dec 2024",
+   "participants": 69,
+   "avg_nights": 9.0,
+   "lodg_rev": 7724.65,
+   "meal_rev": 10752.47,
+   "total_rev": 20139.48
   },
   {
-   "instance": "Retraite VY JS SUR PLACE (2025-janv.-13-05)",
-   "period": "2025-01",
-   "participants": 37,
-   "nights": 705,
-   "total_rev": 22818.49,
-   "avg_pp": 616.72
+   "edition": "Dec 2025",
+   "participants": 69,
+   "avg_nights": 11.0,
+   "lodg_rev": 13109.0,
+   "meal_rev": 15955.31,
+   "total_rev": 29878.73
+  }
+ ],
+ "vajrasattvaDetail": [
+  {
+   "season": "23-24",
+   "participants": 124,
+   "avg_nights": 4.0,
+   "lodg_rev": 5366.95,
+   "meal_rev": 9539.0,
+   "total_rev": 14920.95,
+   "avg_pp": 120.33,
+   "non_membres": 20,
+   "membres": 76,
+   "bienfaiteurs": 17
   },
   {
-   "instance": "Retraite VY JS EN LIGNE (2025-janv.-13-04)",
-   "period": "2025-01",
-   "participants": 16,
-   "nights": 0,
-   "total_rev": 1635.0,
-   "avg_pp": 102.19
+   "season": "24-25",
+   "participants": 142,
+   "avg_nights": 3.0,
+   "lodg_rev": 6532.75,
+   "meal_rev": 11617.54,
+   "total_rev": 19635.26,
+   "avg_pp": 138.28,
+   "non_membres": 26,
+   "membres": 70,
+   "bienfaiteurs": 28
   },
   {
-   "instance": "Retraite VY (1278)",
-   "period": "2026-01",
-   "participants": 6,
-   "nights": 143,
-   "total_rev": 6758.78,
-   "avg_pp": 1126.46
+   "season": "25-26",
+   "participants": 79,
+   "avg_nights": 5.0,
+   "lodg_rev": 7263.6,
+   "meal_rev": 9742.0,
+   "total_rev": 17425.63,
+   "avg_pp": 220.58,
+   "non_membres": 23,
+   "membres": 38,
+   "bienfaiteurs": 15
+  }
+ ],
+ "topGuests": [
+  {
+   "name": "Valentino GIACOMIN",
+   "bookings": 1,
+   "events": 1,
+   "nights": 222,
+   "rev": 13148.5
   },
   {
-   "instance": "JHADO RINPOCHE (1463)",
-   "period": "2026-10",
-   "participants": 58,
-   "nights": 342,
-   "total_rev": 15715.22,
-   "avg_pp": 270.95
+   "name": "Emanuela DRIUSSI",
+   "bookings": 3,
+   "events": 1,
+   "nights": 203,
+   "rev": 9483.5
   },
   {
-   "instance": "JHADO RINPOCHE (1464)",
-   "period": "2026-10",
-   "participants": 17,
-   "nights": 0,
-   "total_rev": 0.0,
-   "avg_pp": 0.0
+   "name": "Miriam ALSTON",
+   "bookings": 13,
+   "events": 11,
+   "nights": 140,
+   "rev": 7723.08
+  },
+  {
+   "name": "Celine Lacarte",
+   "bookings": 14,
+   "events": 6,
+   "nights": 287,
+   "rev": 5007.93
+  },
+  {
+   "name": "Olivier SYLVERE",
+   "bookings": 22,
+   "events": 6,
+   "nights": 98,
+   "rev": 4675.81
+  },
+  {
+   "name": "Christophe Sommer",
+   "bookings": 3,
+   "events": 2,
+   "nights": 66,
+   "rev": 4630.88
+  },
+  {
+   "name": "Veronique Brucker",
+   "bookings": 62,
+   "events": 30,
+   "nights": 228,
+   "rev": 4557.34
+  },
+  {
+   "name": "PASCAL MAYER",
+   "bookings": 16,
+   "events": 8,
+   "nights": 274,
+   "rev": 4377.28
+  },
+  {
+   "name": "Marco / Jigmé Dilasser",
+   "bookings": 2,
+   "events": 1,
+   "nights": 433,
+   "rev": 4329.91
+  },
+  {
+   "name": "Marie-Laure BEGGIORA",
+   "bookings": 49,
+   "events": 17,
+   "nights": 141,
+   "rev": 4203.68
+  }
+ ],
+ "caseJPO": [
+  {
+   "season": "23-24",
+   "total": 9,
+   "brand_new": 7,
+   "already_known": 2
+  },
+  {
+   "season": "25-26",
+   "total": 95,
+   "brand_new": 67,
+   "already_known": 28
+  }
+ ],
+ "caseJPOConversion": [
+  {
+   "total": 104,
+   "converted": 38,
+   "jpo_only": 66,
+   "pct": 36.5,
+   "subsequent_rev": 15036.14
+  }
+ ],
+ "introPipeline": [
+  {
+   "segment": "0_never_returned",
+   "guests": 192,
+   "subsequent_rev": 0.0
+  },
+  {
+   "segment": "1_returned_1_2",
+   "guests": 73,
+   "subsequent_rev": 7365.04
+  },
+  {
+   "segment": "2_returned_3_5",
+   "guests": 16,
+   "subsequent_rev": 5376.98
+  },
+  {
+   "segment": "3_returned_6plus",
+   "guests": 26,
+   "subsequent_rev": 31361.57
+  }
+ ],
+ "introNewVsReturning": [
+  {
+   "season": "23-24",
+   "total": 106,
+   "new_students": 73,
+   "returning": 46
+  },
+  {
+   "season": "24-25",
+   "total": 101,
+   "new_students": 71,
+   "returning": 44
+  },
+  {
+   "season": "25-26",
+   "total": 126,
+   "new_students": 81,
+   "returning": 66
+  }
+ ],
+ "eventPipelines": [
+  {
+   "label": "Journee portes ouvertes",
+   "code": "JPO",
+   "instance": "Journée portes ouvertes (2023-oct.-01-01)",
+   "event_date": "2023-10-01",
+   "attendees": 9,
+   "returned": 3,
+   "subsequent_rev": 535.16
+  },
+  {
+   "label": "Journee portes ouvertes",
+   "code": "JPO",
+   "instance": "Journée portes ouvertes (1404)",
+   "event_date": "2026-05-02",
+   "attendees": 95,
+   "returned": 15,
+   "subsequent_rev": 1834.46
+  },
+  {
+   "label": "Initiation a la Meditation (IM)",
+   "code": "IM",
+   "instance": "IM1 (2023-déc.-16-01)",
+   "event_date": "2023-12-15",
+   "attendees": 31,
+   "returned": 10,
+   "subsequent_rev": 7027.2
+  },
+  {
+   "label": "Initiation a la Meditation (IM)",
+   "code": "IM",
+   "instance": "IM2 (2023-déc.-18-01)",
+   "event_date": "2023-12-17",
+   "attendees": 11,
+   "returned": 5,
+   "subsequent_rev": 813.27
+  },
+  {
+   "label": "Initiation a la Meditation (IM)",
+   "code": "IM",
+   "instance": "IM1 (2024-mars-02-02)",
+   "event_date": "2024-03-01",
+   "attendees": 26,
+   "returned": 11,
+   "subsequent_rev": 12175.97
+  },
+  {
+   "label": "Initiation a la Meditation (IM)",
+   "code": "IM",
+   "instance": "IM1 (2024-juil.-20-01)",
+   "event_date": "2024-07-18",
+   "attendees": 36,
+   "returned": 16,
+   "subsequent_rev": 6013.31
+  },
+  {
+   "label": "Initiation a la Meditation (IM)",
+   "code": "IM",
+   "instance": "IM2 (2024-oct.-26-02)",
+   "event_date": "2024-07-20",
+   "attendees": 21,
+   "returned": 12,
+   "subsequent_rev": 4713.67
+  },
+  {
+   "label": "Initiation a la Meditation (IM)",
+   "code": "IM",
+   "instance": "IM2 (2024-juil.-22-01)",
+   "event_date": "2024-07-21",
+   "attendees": 17,
+   "returned": 7,
+   "subsequent_rev": 960.8
+  },
+  {
+   "label": "Initiation a la Meditation (IM)",
+   "code": "IM",
+   "instance": "IM1 (2024-oct.-05-01)",
+   "event_date": "2024-10-05",
+   "attendees": 32,
+   "returned": 10,
+   "subsequent_rev": 4293.95
+  },
+  {
+   "label": "Initiation a la Meditation (IM)",
+   "code": "IM",
+   "instance": "IM1 (1108)",
+   "event_date": "2025-05-23",
+   "attendees": 27,
+   "returned": 7,
+   "subsequent_rev": 1311.82
+  },
+  {
+   "label": "Initiation a la Meditation (IM)",
+   "code": "IM",
+   "instance": "IM2 (1109)",
+   "event_date": "2025-06-13",
+   "attendees": 17,
+   "returned": 8,
+   "subsequent_rev": 2315.97
+  },
+  {
+   "label": "Initiation a la Meditation (IM)",
+   "code": "IM",
+   "instance": "IM1 (1232)",
+   "event_date": "2025-12-12",
+   "attendees": 29,
+   "returned": 9,
+   "subsequent_rev": 1605.42
+  },
+  {
+   "label": "Initiation a la Meditation (IM)",
+   "code": "IM",
+   "instance": "IM1 (1344)",
+   "event_date": "2026-03-06",
+   "attendees": 55,
+   "returned": 17,
+   "subsequent_rev": 1508.53
+  },
+  {
+   "label": "Initiation a la Meditation (IM)",
+   "code": "IM",
+   "instance": "IM2 (1345)",
+   "event_date": "2026-04-10",
+   "attendees": 30,
+   "returned": 9,
+   "subsequent_rev": 818.73
+  },
+  {
+   "label": "Initiation a la Meditation (IM)",
+   "code": "IM",
+   "instance": "IM3 (1346)",
+   "event_date": "2026-05-07",
+   "attendees": 24,
+   "returned": 9,
+   "subsequent_rev": 1496.47
+  },
+  {
+   "label": "Initiation au Bouddhisme (IB)",
+   "code": "IB",
+   "instance": "IB (2023-oct.-14-04)",
+   "event_date": "2023-10-13",
+   "attendees": 9,
+   "returned": 6,
+   "subsequent_rev": 7225.69
+  },
+  {
+   "label": "Initiation au Bouddhisme (IB)",
+   "code": "IB",
+   "instance": "IB (2024-déc.-14-02)",
+   "event_date": "2024-12-13",
+   "attendees": 16,
+   "returned": 8,
+   "subsequent_rev": 3095.3
+  },
+  {
+   "label": "Initiation au Bouddhisme (IB)",
+   "code": "IB",
+   "instance": "IB (1107)",
+   "event_date": "2025-04-18",
+   "attendees": 22,
+   "returned": 7,
+   "subsequent_rev": 739.02
+  },
+  {
+   "label": "Initiation au Bouddhisme (IB)",
+   "code": "IB",
+   "instance": "IB (1236)",
+   "event_date": "2025-10-24",
+   "attendees": 26,
+   "returned": 17,
+   "subsequent_rev": 2640.64
+  },
+  {
+   "label": "Initiation au Bouddhisme (IB)",
+   "code": "IB",
+   "instance": "IB (1347)",
+   "event_date": "2026-06-05",
+   "attendees": 23,
+   "returned": 1,
+   "subsequent_rev": 47.45
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB8 (2023-oct.-14-03)",
+   "event_date": "2023-10-13",
+   "attendees": 28,
+   "returned": 22,
+   "subsequent_rev": 22301.57
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB9-1 (2023-nov.-11-07)",
+   "event_date": "2023-11-10",
+   "attendees": 25,
+   "returned": 18,
+   "subsequent_rev": 14022.07
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB9-2 (2023-déc.-09-02)",
+   "event_date": "2023-12-08",
+   "attendees": 28,
+   "returned": 22,
+   "subsequent_rev": 21725.68
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB10 (2024-mars-23-01)",
+   "event_date": "2024-03-22",
+   "attendees": 27,
+   "returned": 16,
+   "subsequent_rev": 12217.65
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB11 (2024-avr.-20-01)",
+   "event_date": "2024-04-19",
+   "attendees": 20,
+   "returned": 16,
+   "subsequent_rev": 12060.83
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB12 (2022-mai-18-01)",
+   "event_date": "2024-05-17",
+   "attendees": 27,
+   "returned": 20,
+   "subsequent_rev": 19429.91
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB13 (2024-juin-15-01)",
+   "event_date": "2024-06-14",
+   "attendees": 28,
+   "returned": 24,
+   "subsequent_rev": 23122.18
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB1 (2024-oct.-12-01)",
+   "event_date": "2024-10-11",
+   "attendees": 40,
+   "returned": 19,
+   "subsequent_rev": 12230.41
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB2 (2024-nov.-16-02)",
+   "event_date": "2024-11-15",
+   "attendees": 27,
+   "returned": 16,
+   "subsequent_rev": 8651.68
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB3 (2024-déc.-07-01)",
+   "event_date": "2024-12-06",
+   "attendees": 29,
+   "returned": 20,
+   "subsequent_rev": 13580.29
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB4 (1089)",
+   "event_date": "2025-03-13",
+   "attendees": 25,
+   "returned": 18,
+   "subsequent_rev": 7353.73
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB5 (1090)",
+   "event_date": "2025-04-11",
+   "attendees": 22,
+   "returned": 18,
+   "subsequent_rev": 9902.07
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB6 (1091)",
+   "event_date": "2025-05-15",
+   "attendees": 30,
+   "returned": 20,
+   "subsequent_rev": 9451.88
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB7 (1092)",
+   "event_date": "2025-06-06",
+   "attendees": 21,
+   "returned": 17,
+   "subsequent_rev": 9320.98
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB8 (1231)",
+   "event_date": "2025-10-17",
+   "attendees": 23,
+   "returned": 19,
+   "subsequent_rev": 7859.19
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB9 (1257)",
+   "event_date": "2025-11-07",
+   "attendees": 18,
+   "returned": 14,
+   "subsequent_rev": 6010.15
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB10 (1258)",
+   "event_date": "2025-11-08",
+   "attendees": 23,
+   "returned": 19,
+   "subsequent_rev": 6973.55
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB10 (1332)",
+   "event_date": "2026-03-13",
+   "attendees": 19,
+   "returned": 17,
+   "subsequent_rev": 4062.77
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB11 (1333)",
+   "event_date": "2026-04-17",
+   "attendees": 22,
+   "returned": 13,
+   "subsequent_rev": 2643.58
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB12 (1334)",
+   "event_date": "2026-05-15",
+   "attendees": 17,
+   "returned": 13,
+   "subsequent_rev": 3366.99
+  },
+  {
+   "label": "Decouverte du Bouddhisme (DB)",
+   "code": "DB",
+   "instance": "DB13 (1335)",
+   "event_date": "2026-06-26",
+   "attendees": 7,
+   "returned": 7,
+   "subsequent_rev": 1600.61
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 4 (2023-oct.-07-03)",
+   "event_date": "2023-10-05",
+   "attendees": 34,
+   "returned": 29,
+   "subsequent_rev": 26704.31
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 4 (2023-nov.-04-03)",
+   "event_date": "2023-11-03",
+   "attendees": 32,
+   "returned": 30,
+   "subsequent_rev": 23072.86
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 4 (2023-déc.-02-01)",
+   "event_date": "2023-11-30",
+   "attendees": 28,
+   "returned": 26,
+   "subsequent_rev": 17233.46
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 4 (2024-mars-16-01)",
+   "event_date": "2024-03-15",
+   "attendees": 39,
+   "returned": 34,
+   "subsequent_rev": 26324.04
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 4 (2024-avr.-13-01)",
+   "event_date": "2024-04-11",
+   "attendees": 27,
+   "returned": 23,
+   "subsequent_rev": 18433.37
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 4 (2024-mai-11-01)",
+   "event_date": "2024-05-10",
+   "attendees": 31,
+   "returned": 28,
+   "subsequent_rev": 15687.43
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 4 (2024-juin-08-01)",
+   "event_date": "2024-06-07",
+   "attendees": 28,
+   "returned": 24,
+   "subsequent_rev": 19166.42
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA (2024-juin-30-01)",
+   "event_date": "2024-06-28",
+   "attendees": 32,
+   "returned": 28,
+   "subsequent_rev": 22196.37
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 4 (2024-oct.-05-02)",
+   "event_date": "2024-10-04",
+   "attendees": 35,
+   "returned": 31,
+   "subsequent_rev": 20318.35
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 4 (2024-nov.-09-03)",
+   "event_date": "2024-11-08",
+   "attendees": 32,
+   "returned": 27,
+   "subsequent_rev": 14743.84
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 4 (2024-nov.-30-01)",
+   "event_date": "2024-11-28",
+   "attendees": 43,
+   "returned": 34,
+   "subsequent_rev": 20540.01
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 4 (1093)",
+   "event_date": "2025-02-27",
+   "attendees": 40,
+   "returned": 34,
+   "subsequent_rev": 18186.13
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 4 (1094)",
+   "event_date": "2025-03-28",
+   "attendees": 37,
+   "returned": 28,
+   "subsequent_rev": 14065.47
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 4 (1095)",
+   "event_date": "2025-04-30",
+   "attendees": 33,
+   "returned": 23,
+   "subsequent_rev": 11926.21
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 4 (1096)",
+   "event_date": "2025-05-30",
+   "attendees": 29,
+   "returned": 23,
+   "subsequent_rev": 9799.18
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA (1097)",
+   "event_date": "2025-07-10",
+   "attendees": 32,
+   "returned": 23,
+   "subsequent_rev": 9025.44
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 5 (1237)",
+   "event_date": "2025-10-03",
+   "attendees": 45,
+   "returned": 35,
+   "subsequent_rev": 14574.43
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 5 (1238)",
+   "event_date": "2025-10-31",
+   "attendees": 37,
+   "returned": 29,
+   "subsequent_rev": 14446.02
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 5 (1259)",
+   "event_date": "2025-11-26",
+   "attendees": 29,
+   "returned": 21,
+   "subsequent_rev": 11775.55
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 5 (1336)",
+   "event_date": "2026-03-06",
+   "attendees": 52,
+   "returned": 36,
+   "subsequent_rev": 11011.09
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 5 (1339)",
+   "event_date": "2026-04-10",
+   "attendees": 30,
+   "returned": 21,
+   "subsequent_rev": 5728.25
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 5 (1337)",
+   "event_date": "2026-05-07",
+   "attendees": 36,
+   "returned": 25,
+   "subsequent_rev": 6151.06
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 5 (1338)",
+   "event_date": "2026-06-05",
+   "attendees": 23,
+   "returned": 17,
+   "subsequent_rev": 2859.19
+  },
+  {
+   "label": "PEBA",
+   "code": "PEBA",
+   "instance": "PEBA module 5 (1340)",
+   "event_date": "2026-07-04",
+   "attendees": 38,
+   "returned": 18,
+   "subsequent_rev": 2807.02
+  },
+  {
+   "label": "16 Attitudes",
+   "code": "16A",
+   "instance": "16A (2023-oct.-14-05)",
+   "event_date": "2023-10-14",
+   "attendees": 2,
+   "returned": 1,
+   "subsequent_rev": 98.5
+  },
+  {
+   "label": "16 Attitudes",
+   "code": "16A",
+   "instance": "Bienveillance et 16A (2024-avr.-20-04)",
+   "event_date": "2024-04-19",
+   "attendees": 13,
+   "returned": 4,
+   "subsequent_rev": 870.15
+  },
+  {
+   "label": "16 Attitudes",
+   "code": "16A",
+   "instance": "16A (2024-juin-15-02)",
+   "event_date": "2024-06-15",
+   "attendees": 6,
+   "returned": 0,
+   "subsequent_rev": 0.0
+  },
+  {
+   "label": "16 Attitudes",
+   "code": "16A",
+   "instance": "Sens et 16A (2024-juil.-27-02)",
+   "event_date": "2024-07-27",
+   "attendees": 9,
+   "returned": 4,
+   "subsequent_rev": 2441.08
+  },
+  {
+   "label": "16 Attitudes",
+   "code": "16A",
+   "instance": "16A (2024-oct.-12-05)",
+   "event_date": "2024-10-11",
+   "attendees": 9,
+   "returned": 5,
+   "subsequent_rev": 3421.96
+  },
+  {
+   "label": "16 Attitudes",
+   "code": "16A",
+   "instance": "16A (1166)",
+   "event_date": "2025-03-14",
+   "attendees": 15,
+   "returned": 10,
+   "subsequent_rev": 6389.88
+  },
+  {
+   "label": "16 Attitudes",
+   "code": "16A",
+   "instance": "16A NIV2 (1161)",
+   "event_date": "2025-06-18",
+   "attendees": 16,
+   "returned": 11,
+   "subsequent_rev": 3902.41
+  },
+  {
+   "label": "16 Attitudes",
+   "code": "16A",
+   "instance": "16A (1262)",
+   "event_date": "2025-11-21",
+   "attendees": 12,
+   "returned": 3,
+   "subsequent_rev": 174.32
+  },
+  {
+   "label": "16 Attitudes",
+   "code": "16A",
+   "instance": "16A (1366)",
+   "event_date": "2026-03-13",
+   "attendees": 9,
+   "returned": 4,
+   "subsequent_rev": 488.0
+  },
+  {
+   "label": "16 Attitudes",
+   "code": "16A",
+   "instance": "16A (1378)",
+   "event_date": "2026-05-22",
+   "attendees": 11,
+   "returned": 2,
+   "subsequent_rev": 84.21
   }
  ],
  "teachersBySeason": [
+  {
+   "teacher": "christian charrier",
+   "season": "25-26",
+   "participants": 512,
+   "onsite": 512,
+   "nights": 925,
+   "total_rev": 46846.32,
+   "lodg_rev": 15508.2,
+   "avg_pp": 91.5
+  },
+  {
+   "teacher": "VENERABLE GUESHE LODEN",
+   "season": "25-26",
+   "participants": 521,
+   "onsite": 521,
+   "nights": 1108,
+   "total_rev": 45914.51,
+   "lodg_rev": 16842.4,
+   "avg_pp": 88.13
+  },
   {
    "teacher": "Moine Charles",
    "season": "25-26",
    "participants": 173,
    "onsite": 173,
    "nights": 2030,
-   "total_rev": 43473.75,
+   "total_rev": 43640.75,
    "lodg_rev": 22956.23,
-   "avg_pp": 251.29
+   "avg_pp": 252.26
+  },
+  {
+   "teacher": "VENERABLE GUESHE LODEN",
+   "season": "24-25",
+   "participants": 561,
+   "onsite": 560,
+   "nights": 1142,
+   "total_rev": 39420.27,
+   "lodg_rev": 13769.8,
+   "avg_pp": 70.27
+  },
+  {
+   "teacher": "christian charrier",
+   "season": "24-25",
+   "participants": 529,
+   "onsite": 520,
+   "nights": 821,
+   "total_rev": 34423.38,
+   "lodg_rev": 12246.35,
+   "avg_pp": 65.07
   },
   {
    "teacher": "Moine Charles",
@@ -2225,26 +1759,6 @@
    "avg_pp": 360.15
   },
   {
-   "teacher": "christian charrier",
-   "season": "24-25",
-   "participants": 299,
-   "onsite": 274,
-   "nights": 687,
-   "total_rev": 32165.55,
-   "lodg_rev": 11682.5,
-   "avg_pp": 107.58
-  },
-  {
-   "teacher": "christian charrier",
-   "season": "25-26",
-   "participants": 207,
-   "onsite": 207,
-   "nights": 590,
-   "total_rev": 28617.58,
-   "lodg_rev": 12520.55,
-   "avg_pp": 138.25
-  },
-  {
    "teacher": "Vénérable Lobsang Gendun",
    "season": "24-25",
    "participants": 158,
@@ -2265,34 +1779,44 @@
    "avg_pp": 461.39
   },
   {
-   "teacher": "VENERABLE GUESHE LODEN; YANGSI RINPOCHE",
+   "teacher": "Françoise NORMAND Vénérable LHAMO",
+   "season": "25-26",
+   "participants": 220,
+   "onsite": 220,
+   "nights": 352,
+   "total_rev": 19771.8,
+   "lodg_rev": 8180.8,
+   "avg_pp": 89.87
+  },
+  {
+   "teacher": "YANGSI RINPOCHE",
    "season": "24-25",
-   "participants": 120,
-   "onsite": 120,
+   "participants": 142,
+   "onsite": 142,
    "nights": 533,
-   "total_rev": 19533.41,
+   "total_rev": 19635.26,
    "lodg_rev": 6532.75,
-   "avg_pp": 162.78
+   "avg_pp": 138.28
   },
   {
    "teacher": "Françoise NORMAND Vénérable LHAMO",
-   "season": "25-26",
-   "participants": 199,
-   "onsite": 199,
-   "nights": 334,
-   "total_rev": 18912.18,
-   "lodg_rev": 7856.8,
-   "avg_pp": 95.04
+   "season": "24-25",
+   "participants": 285,
+   "onsite": 248,
+   "nights": 432,
+   "total_rev": 17445.1,
+   "lodg_rev": 5668.5,
+   "avg_pp": 61.21
   },
   {
-   "teacher": "VENERABLE GUESHE LODEN; YANGSI RINPOCHE",
+   "teacher": "YANGSI RINPOCHE",
    "season": "25-26",
-   "participants": 70,
-   "onsite": 70,
-   "nights": 490,
-   "total_rev": 18757.39,
-   "lodg_rev": 7868.35,
-   "avg_pp": 267.96
+   "participants": 79,
+   "onsite": 79,
+   "nights": 438,
+   "total_rev": 17425.63,
+   "lodg_rev": 7263.6,
+   "avg_pp": 220.58
   },
   {
    "teacher": "Vénérable Robina COURTIN",
@@ -2305,67 +1829,67 @@
    "avg_pp": 118.88
   },
   {
-   "teacher": "VENERABLE GUESHE LODEN; christian charrier",
-   "season": "25-26",
-   "participants": 292,
-   "onsite": 292,
-   "nights": 355,
-   "total_rev": 15911.57,
-   "lodg_rev": 4759.9,
-   "avg_pp": 54.49
-  },
-  {
-   "teacher": "VENERABLE GUESHE LODEN; christian charrier",
+   "teacher": "Michèle anila Maviel",
    "season": "24-25",
-   "participants": 282,
-   "onsite": 281,
-   "nights": 322,
-   "total_rev": 11583.2,
-   "lodg_rev": 3689.05,
-   "avg_pp": 41.08
+   "participants": 125,
+   "onsite": 108,
+   "nights": 394,
+   "total_rev": 16778.62,
+   "lodg_rev": 6585.2,
+   "avg_pp": 134.23
   },
   {
    "teacher": "William NELSON",
    "season": "25-26",
-   "participants": 49,
-   "onsite": 49,
-   "nights": 246,
-   "total_rev": 11403.8,
-   "lodg_rev": 4243.2,
-   "avg_pp": 232.73
+   "participants": 54,
+   "onsite": 54,
+   "nights": 271,
+   "total_rev": 11784.03,
+   "lodg_rev": 4195.4,
+   "avg_pp": 218.22
   },
   {
    "teacher": "joelle MAUREL",
    "season": "25-26",
-   "participants": 89,
-   "onsite": 89,
+   "participants": 90,
+   "onsite": 90,
    "nights": 212,
-   "total_rev": 11295.78,
-   "lodg_rev": 5300.0,
-   "avg_pp": 126.92
+   "total_rev": 11355.59,
+   "lodg_rev": 5258.0,
+   "avg_pp": 126.17
+  },
+  {
+   "teacher": "Michèle anila Maviel",
+   "season": "25-26",
+   "participants": 139,
+   "onsite": 139,
+   "nights": 232,
+   "total_rev": 11300.15,
+   "lodg_rev": 4878.3,
+   "avg_pp": 81.3
+  },
+  {
+   "teacher": "Chantal Carrerot",
+   "season": "25-26",
+   "participants": 58,
+   "onsite": 58,
+   "nights": 305,
+   "total_rev": 11052.49,
+   "lodg_rev": 4749.85,
+   "avg_pp": 190.56
   },
   {
    "teacher": "François Schick",
    "season": "25-26",
-   "participants": 33,
-   "onsite": 33,
-   "nights": 294,
-   "total_rev": 10678.91,
-   "lodg_rev": 4262.15,
-   "avg_pp": 323.6
+   "participants": 36,
+   "onsite": 36,
+   "nights": 310,
+   "total_rev": 10664.11,
+   "lodg_rev": 3877.15,
+   "avg_pp": 296.23
   },
   {
-   "teacher": "VENERABLE GUESHE LODEN; Chantal Carrerot",
-   "season": "25-26",
-   "participants": 41,
-   "onsite": 41,
-   "nights": 285,
-   "total_rev": 9894.58,
-   "lodg_rev": 4544.45,
-   "avg_pp": 241.33
-  },
-  {
-   "teacher": "VENERABLE GUESHE LODEN; Chantal Carrerot",
+   "teacher": "Chantal Carrerot",
    "season": "24-25",
    "participants": 38,
    "onsite": 38,
@@ -2395,34 +1919,14 @@
    "avg_pp": 219.64
   },
   {
-   "teacher": "christian charrier; Sébastien Cierco",
+   "teacher": "Sébastien Cierco",
    "season": "25-26",
    "participants": 26,
    "onsite": 26,
-   "nights": 49,
-   "total_rev": 6255.75,
-   "lodg_rev": 1166.3,
-   "avg_pp": 240.61
-  },
-  {
-   "teacher": "Françoise NORMAND Vénérable LHAMO",
-   "season": "24-25",
-   "participants": 133,
-   "onsite": 133,
-   "nights": 91,
-   "total_rev": 6147.0,
-   "lodg_rev": 1744.35,
-   "avg_pp": 46.22
-  },
-  {
-   "teacher": "Michèle anila Maviel",
-   "season": "24-25",
-   "participants": 14,
-   "onsite": 14,
-   "nights": 189,
-   "total_rev": 6080.33,
-   "lodg_rev": 3100.0,
-   "avg_pp": 434.31
+   "nights": 47,
+   "total_rev": 6007.48,
+   "lodg_rev": 1142.1,
+   "avg_pp": 231.06
   },
   {
    "teacher": "joelle MAUREL",
@@ -2435,6 +1939,16 @@
    "avg_pp": 177.99
   },
   {
+   "teacher": "Hilary Mac Michael",
+   "season": "24-25",
+   "participants": 62,
+   "onsite": 62,
+   "nights": 117,
+   "total_rev": 5218.61,
+   "lodg_rev": 1506.95,
+   "avg_pp": 84.17
+  },
+  {
    "teacher": "Marguerite AFLALLO",
    "season": "24-25",
    "participants": 34,
@@ -2445,7 +1959,7 @@
    "avg_pp": 149.81
   },
   {
-   "teacher": "Paula Chichester; Françoise NORMAND Vénérable LHAMO",
+   "teacher": "Paula Chichester",
    "season": "24-25",
    "participants": 52,
    "onsite": 34,
@@ -2455,7 +1969,17 @@
    "avg_pp": 97.76
   },
   {
-   "teacher": "François Lecointre; Wendy Ridley",
+   "teacher": "Hilary Mac Michael",
+   "season": "25-26",
+   "participants": 56,
+   "onsite": 56,
+   "nights": 125,
+   "total_rev": 4995.59,
+   "lodg_rev": 1765.7,
+   "avg_pp": 89.21
+  },
+  {
+   "teacher": "François Lecointre",
    "season": "25-26",
    "participants": 38,
    "onsite": 38,
@@ -2465,27 +1989,17 @@
    "avg_pp": 127.15
   },
   {
-   "teacher": "Hilary Mac Michael",
+   "teacher": "Wendy Ridley",
    "season": "25-26",
-   "participants": 56,
-   "onsite": 56,
-   "nights": 124,
-   "total_rev": 4797.04,
-   "lodg_rev": 1761.5,
-   "avg_pp": 85.66
+   "participants": 38,
+   "onsite": 38,
+   "nights": 105,
+   "total_rev": 4831.68,
+   "lodg_rev": 990.73,
+   "avg_pp": 127.15
   },
   {
-   "teacher": "Hilary Mac Michael",
-   "season": "24-25",
-   "participants": 43,
-   "onsite": 43,
-   "nights": 86,
-   "total_rev": 4556.27,
-   "lodg_rev": 1354.2,
-   "avg_pp": 105.96
-  },
-  {
-   "teacher": "Françoise NORMAND Vénérable LHAMO; Vénérable Lobsang Détchèn",
+   "teacher": "Vénérable Lobsang Détchèn",
    "season": "24-25",
    "participants": 41,
    "onsite": 22,
@@ -2525,24 +2039,24 @@
    "avg_pp": 123.2
   },
   {
-   "teacher": "Isabel Frere; Michèle anila Maviel",
-   "season": "25-26",
-   "participants": 82,
-   "onsite": 82,
-   "nights": 35,
-   "total_rev": 2325.75,
-   "lodg_rev": 613.7,
-   "avg_pp": 28.36
+   "teacher": "Mabel ODESSEY",
+   "season": "24-25",
+   "participants": 68,
+   "onsite": 68,
+   "nights": 73,
+   "total_rev": 2447.62,
+   "lodg_rev": 685.95,
+   "avg_pp": 35.99
   },
   {
-   "teacher": "VENERABLE GUESHE LODEN",
+   "teacher": "Isabel Frere",
    "season": "25-26",
-   "participants": 63,
-   "onsite": 63,
-   "nights": 31,
-   "total_rev": 2187.78,
-   "lodg_rev": 414.3,
-   "avg_pp": 34.73
+   "participants": 84,
+   "onsite": 84,
+   "nights": 34,
+   "total_rev": 2325.75,
+   "lodg_rev": 613.7,
+   "avg_pp": 27.69
   },
   {
    "teacher": "Josep Manresa Zafra",
@@ -2555,26 +2069,6 @@
    "avg_pp": 29.3
   },
   {
-   "teacher": "Michèle anila Maviel",
-   "season": "25-26",
-   "participants": 20,
-   "onsite": 20,
-   "nights": 41,
-   "total_rev": 1817.2,
-   "lodg_rev": 867.6,
-   "avg_pp": 90.86
-  },
-  {
-   "teacher": "Françoise NORMAND Vénérable LHAMO; Mabel ODESSEY",
-   "season": "24-25",
-   "participants": 40,
-   "onsite": 40,
-   "nights": 42,
-   "total_rev": 1766.33,
-   "lodg_rev": 533.2,
-   "avg_pp": 44.16
-  },
-  {
    "teacher": "Catherine Fradet Delmundo",
    "season": "24-25",
    "participants": 77,
@@ -2585,7 +2079,7 @@
    "avg_pp": 21.55
   },
   {
-   "teacher": "Isabel Frere; Michèle anila Maviel",
+   "teacher": "Isabel Frere",
    "season": "24-25",
    "participants": 59,
    "onsite": 59,
@@ -2595,14 +2089,14 @@
    "avg_pp": 23.27
   },
   {
-   "teacher": "Chantal Carrerot",
+   "teacher": "Mabel ODESSEY",
    "season": "25-26",
-   "participants": 17,
-   "onsite": 17,
-   "nights": 20,
-   "total_rev": 1157.91,
-   "lodg_rev": 205.4,
-   "avg_pp": 68.11
+   "participants": 32,
+   "onsite": 32,
+   "nights": 25,
+   "total_rev": 1140.96,
+   "lodg_rev": 346.5,
+   "avg_pp": 35.66
   },
   {
    "teacher": "Gill-Eric LEININGER",
@@ -2615,26 +2109,6 @@
    "avg_pp": 158.61
   },
   {
-   "teacher": "Françoise NORMAND Vénérable LHAMO; Mabel ODESSEY",
-   "season": "25-26",
-   "participants": 21,
-   "onsite": 21,
-   "nights": 18,
-   "total_rev": 859.62,
-   "lodg_rev": 324.0,
-   "avg_pp": 40.93
-  },
-  {
-   "teacher": "Françoise NORMAND Vénérable LHAMO; Mabel ODESSEY; Hilary Mac Michael",
-   "season": "24-25",
-   "participants": 19,
-   "onsite": 19,
-   "nights": 31,
-   "total_rev": 662.34,
-   "lodg_rev": 152.75,
-   "avg_pp": 34.86
-  },
-  {
    "teacher": "Marie Labourdette",
    "season": "24-25",
    "participants": 16,
@@ -2643,6 +2117,16 @@
    "total_rev": 602.17,
    "lodg_rev": 181.5,
    "avg_pp": 37.64
+  },
+  {
+   "teacher": "Marie Labourdette",
+   "season": "25-26",
+   "participants": 10,
+   "onsite": 10,
+   "nights": 8,
+   "total_rev": 519.0,
+   "lodg_rev": 227.0,
+   "avg_pp": 51.9
   },
   {
    "teacher": "Gill-Eric LEININGER",
@@ -2655,34 +2139,14 @@
    "avg_pp": 197.98
   },
   {
-   "teacher": "Marie Labourdette",
-   "season": "25-26",
-   "participants": 8,
-   "onsite": 8,
-   "nights": 4,
-   "total_rev": 314.72,
-   "lodg_rev": 131.0,
-   "avg_pp": 39.34
-  },
-  {
-   "teacher": "Mabel ODESSEY",
-   "season": "25-26",
-   "participants": 11,
-   "onsite": 11,
-   "nights": 7,
-   "total_rev": 281.34,
-   "lodg_rev": 22.5,
-   "avg_pp": 25.58
-  },
-  {
    "teacher": "Lorena Adame",
    "season": "25-26",
-   "participants": 7,
-   "onsite": 7,
-   "nights": 7,
-   "total_rev": 219.24,
-   "lodg_rev": 110.0,
-   "avg_pp": 31.32
+   "participants": 9,
+   "onsite": 9,
+   "nights": 9,
+   "total_rev": 361.38,
+   "lodg_rev": 170.0,
+   "avg_pp": 40.15
   },
   {
    "teacher": "Catherine Fradet Delmundo",
@@ -2695,7 +2159,7 @@
    "avg_pp": 19.2
   },
   {
-   "teacher": "Nicolas BRUN; VENERABLE GUESHE LODEN",
+   "teacher": "Nicolas BRUN",
    "season": "24-25",
    "participants": 121,
    "onsite": 121,
@@ -2705,152 +2169,80 @@
    "avg_pp": 1.03
   },
   {
-   "teacher": "YANGSI RINPOCHE",
-   "season": "24-25",
-   "participants": 22,
-   "onsite": 22,
-   "nights": 0,
-   "total_rev": 101.85,
-   "lodg_rev": 0.0,
-   "avg_pp": 4.63
-  },
-  {
-   "teacher": "Nicolas BRUN; VENERABLE GUESHE LODEN",
+   "teacher": "Nicolas BRUN",
    "season": "25-26",
-   "participants": 41,
-   "onsite": 41,
+   "participants": 42,
+   "onsite": 42,
    "nights": 1,
    "total_rev": 36.12,
    "lodg_rev": 10.0,
-   "avg_pp": 0.88
-  },
-  {
-   "teacher": "Mabel ODESSEY",
-   "season": "24-25",
-   "participants": 9,
-   "onsite": 9,
-   "nights": 0,
-   "total_rev": 18.95,
-   "lodg_rev": 0.0,
-   "avg_pp": 2.11
-  }
- ],
- "guestRetention": [
-  {
-   "segment": "1_one_timer",
-   "guests": 1737,
-   "bookings": 1737,
-   "rev": 243902.23,
-   "avg_rev": 140.42
-  },
-  {
-   "segment": "2_light",
-   "guests": 625,
-   "bookings": 1448,
-   "rev": 209225.74,
-   "avg_rev": 334.76
-  },
-  {
-   "segment": "3_moderate",
-   "guests": 311,
-   "bookings": 1703,
-   "rev": 166185.13,
-   "avg_rev": 534.36
-  },
-  {
-   "segment": "4_regular",
-   "guests": 339,
-   "bookings": 12992,
-   "rev": 268049.76,
-   "avg_rev": 790.71
-  }
- ],
- "introPipeline": [
-  {
-   "segment": "0_never_returned",
-   "guests": 192,
-   "subsequent_rev": 0.0
-  },
-  {
-   "segment": "1_returned_1_2",
-   "guests": 73,
-   "subsequent_rev": 7365.04
-  },
-  {
-   "segment": "2_returned_3_5",
-   "guests": 17,
-   "subsequent_rev": 5438.82
-  },
-  {
-   "segment": "3_returned_6plus",
-   "guests": 25,
-   "subsequent_rev": 30658.41
+   "avg_pp": 0.86
   }
  ],
  "memberRoomChoice": [
   {
    "tier": "Membre (adhérent/soutien) / Member (Basic/Support)",
    "room_type": "Dortoir",
-   "bookings": 489,
-   "nights": 2921,
-   "lodg_rev": 26617.34,
+   "bookings": 491,
+   "nights": 2934,
+   "lodg_rev": 26742.44,
    "avg_paid_night": 9.94
   },
   {
    "tier": "Membre (adhérent/soutien) / Member (Basic/Support)",
    "room_type": "Chambre à 2 pers.",
-   "bookings": 330,
-   "nights": 1525,
-   "lodg_rev": 35490.0,
+   "bookings": 327,
+   "nights": 1493,
+   "lodg_rev": 34722.0,
    "avg_paid_night": 23.93
   },
   {
    "tier": "Membre (adhérent/soutien) / Member (Basic/Support)",
    "room_type": "Chambre à 3 ou 4 pers.",
-   "bookings": 200,
-   "nights": 910,
-   "lodg_rev": 16891.92,
+   "bookings": 204,
+   "nights": 940,
+   "lodg_rev": 17461.92,
    "avg_paid_night": 19.05
   },
   {
    "tier": "Membre (adhérent/soutien) / Member (Basic/Support)",
-   "room_type": "Chambre individuelle",
-   "bookings": 129,
-   "nights": 734,
-   "lodg_rev": 24570.79,
-   "avg_paid_night": 47.25
-  },
-  {
-   "tier": "Membre (adhérent/soutien) / Member (Basic/Support)",
    "room_type": "Camping",
-   "bookings": 139,
-   "nights": 716,
-   "lodg_rev": 3861.0,
+   "bookings": 144,
+   "nights": 730,
+   "lodg_rev": 3998.5,
    "avg_paid_night": 5.5
   },
   {
    "tier": "Membre (adhérent/soutien) / Member (Basic/Support)",
+   "room_type": "Chambre individuelle",
+   "bookings": 127,
+   "nights": 718,
+   "lodg_rev": 24234.79,
+   "avg_paid_night": 47.24
+  },
+  {
+   "tier": "Membre (adhérent/soutien) / Member (Basic/Support)",
    "room_type": "NULL",
-   "bookings": 12,
-   "nights": 620,
-   "lodg_rev": 3643.5,
-   "avg_paid_night": 19.67
+   "bookings": 18,
+   "nights": 653,
+   "lodg_rev": 4174.5,
+   "avg_paid_night": 21.91
+  },
+  {
+   "tier": "Membre (adhérent/soutien) / Member (Basic/Support)",
+   "room_type": "Camping-car",
+   "bookings": 49,
+   "nights": 251,
+   "lodg_rev": 1380.5,
+   "avg_paid_night": 5.5
   },
   {
    "tier": "Membre (adhérent/soutien) / Member (Basic/Support)",
    "room_type": "Chambre individuelle +",
    "bookings": 47,
-   "nights": 246,
-   "lodg_rev": 13074.6,
+   "nights": 242,
+   "lodg_rev": 12854.6,
    "avg_paid_night": 54.95
-  },
-  {
-   "tier": "Membre (adhérent/soutien) / Member (Basic/Support)",
-   "room_type": "Camping-car",
-   "bookings": 45,
-   "nights": 225,
-   "lodg_rev": 1237.5,
-   "avg_paid_night": 5.5
   },
   {
    "tier": "Membre (adhérent/soutien) / Member (Basic/Support)",
@@ -2863,26 +2255,34 @@
   {
    "tier": "Membre Bienfaiteur / Member Benefactor",
    "room_type": "Dortoir",
-   "bookings": 243,
-   "nights": 1161,
-   "lodg_rev": 4956.5,
-   "avg_paid_night": 4.25
+   "bookings": 244,
+   "nights": 1163,
+   "lodg_rev": 4971.0,
+   "avg_paid_night": 4.26
   },
   {
    "tier": "Membre Bienfaiteur / Member Benefactor",
    "room_type": "Chambre à 2 pers.",
-   "bookings": 182,
-   "nights": 1091,
-   "lodg_rev": 9251.0,
-   "avg_paid_night": 9.25
+   "bookings": 183,
+   "nights": 1098,
+   "lodg_rev": 9356.0,
+   "avg_paid_night": 9.28
   },
   {
    "tier": "Membre Bienfaiteur / Member Benefactor",
    "room_type": "Chambre à 3 ou 4 pers.",
    "bookings": 69,
-   "nights": 481,
-   "lodg_rev": 3524.25,
+   "nights": 480,
+   "lodg_rev": 3512.5,
    "avg_paid_night": 7.33
+  },
+  {
+   "tier": "Membre Bienfaiteur / Member Benefactor",
+   "room_type": "Camping",
+   "bookings": 37,
+   "nights": 184,
+   "lodg_rev": 452.2,
+   "avg_paid_night": 2.36
   },
   {
    "tier": "Membre Bienfaiteur / Member Benefactor",
@@ -2894,34 +2294,26 @@
   },
   {
    "tier": "Membre Bienfaiteur / Member Benefactor",
-   "room_type": "Camping",
-   "bookings": 34,
-   "nights": 163,
-   "lodg_rev": 380.8,
-   "avg_paid_night": 2.27
-  },
-  {
-   "tier": "Membre Bienfaiteur / Member Benefactor",
    "room_type": "NULL",
-   "bookings": 11,
-   "nights": 149,
-   "lodg_rev": 2123.7,
-   "avg_paid_night": 14.85
+   "bookings": 12,
+   "nights": 159,
+   "lodg_rev": 2473.7,
+   "avg_paid_night": 16.53
   },
   {
    "tier": "Membre Bienfaiteur / Member Benefactor",
    "room_type": "Chambre individuelle +",
-   "bookings": 9,
-   "nights": 104,
-   "lodg_rev": 5720.0,
+   "bookings": 8,
+   "nights": 93,
+   "lodg_rev": 5115.0,
    "avg_paid_night": 55.0
   },
   {
    "tier": "Membre Bienfaiteur / Member Benefactor",
    "room_type": "Camping-car",
    "bookings": 16,
-   "nights": 83,
-   "lodg_rev": 244.8,
+   "nights": 78,
+   "lodg_rev": 227.8,
    "avg_paid_night": 2.97
   },
   {
@@ -2943,50 +2335,50 @@
   {
    "tier": "Non Membre / Non Member",
    "room_type": "Dortoir",
-   "bookings": 257,
-   "nights": 920,
-   "lodg_rev": 11453.25,
+   "bookings": 259,
+   "nights": 928,
+   "lodg_rev": 11553.25,
    "avg_paid_night": 12.53
   },
   {
    "tier": "Non Membre / Non Member",
    "room_type": "Chambre à 2 pers.",
-   "bookings": 245,
-   "nights": 738,
-   "lodg_rev": 22022.0,
-   "avg_paid_night": 30.08
+   "bookings": 244,
+   "nights": 716,
+   "lodg_rev": 21371.0,
+   "avg_paid_night": 30.09
   },
   {
    "tier": "Non Membre / Non Member",
    "room_type": "Camping",
-   "bookings": 100,
-   "nights": 497,
-   "lodg_rev": 3316.7,
-   "avg_paid_night": 6.77
+   "bookings": 117,
+   "nights": 549,
+   "lodg_rev": 3671.9,
+   "avg_paid_night": 6.78
   },
   {
    "tier": "Non Membre / Non Member",
    "room_type": "Chambre à 3 ou 4 pers.",
-   "bookings": 101,
-   "nights": 313,
-   "lodg_rev": 7347.0,
-   "avg_paid_night": 23.29
+   "bookings": 107,
+   "nights": 339,
+   "lodg_rev": 7945.2,
+   "avg_paid_night": 23.18
   },
   {
    "tier": "Non Membre / Non Member",
    "room_type": "Chambre individuelle",
-   "bookings": 75,
-   "nights": 271,
-   "lodg_rev": 14204.0,
+   "bookings": 73,
+   "nights": 256,
+   "lodg_rev": 13394.0,
    "avg_paid_night": 54.0
   },
   {
    "tier": "Non Membre / Non Member",
    "room_type": "Camping-car",
-   "bookings": 56,
-   "nights": 241,
-   "lodg_rev": 1489.2,
-   "avg_paid_night": 6.8
+   "bookings": 58,
+   "nights": 249,
+   "lodg_rev": 1515.25,
+   "avg_paid_night": 6.73
   },
   {
    "tier": "Non Membre / Non Member",
@@ -2999,10 +2391,10 @@
   {
    "tier": "Non Membre / Non Member",
    "room_type": "NULL",
-   "bookings": 4,
-   "nights": 90,
-   "lodg_rev": 787.0,
-   "avg_paid_night": 9.78
+   "bookings": 9,
+   "nights": 126,
+   "lodg_rev": 2226.0,
+   "avg_paid_night": 25.96
   },
   {
    "tier": "Non Membre / Non Member",
@@ -3056,17 +2448,17 @@
    "tier": "Sangha ordonnée / Ordained Sangha",
    "room_type": "Chambre individuelle",
    "bookings": 42,
-   "nights": 329,
-   "lodg_rev": 1992.0,
+   "nights": 324,
+   "lodg_rev": 1800.0,
    "avg_paid_night": 24.0
   },
   {
    "tier": "Sangha ordonnée / Ordained Sangha",
    "room_type": "Chambre à 2 pers.",
-   "bookings": 20,
-   "nights": 232,
-   "lodg_rev": 2695.53,
-   "avg_paid_night": 11.58
+   "bookings": 19,
+   "nights": 211,
+   "lodg_rev": 2443.53,
+   "avg_paid_night": 11.55
   },
   {
    "tier": "Sangha ordonnée / Ordained Sangha",
@@ -3127,9 +2519,9 @@
   {
    "tier": "Spécial -30%",
    "room_type": "Dortoir",
-   "bookings": 38,
-   "nights": 291,
-   "lodg_rev": 2062.76,
+   "bookings": 39,
+   "nights": 299,
+   "lodg_rev": 2118.76,
    "avg_paid_night": 7.08
   },
   {
@@ -3199,17 +2591,17 @@
   {
    "tier": "Spécial -50%",
    "room_type": "Dortoir",
-   "bookings": 10,
-   "nights": 149,
-   "lodg_rev": 745.0,
+   "bookings": 11,
+   "nights": 154,
+   "lodg_rev": 770.0,
    "avg_paid_night": 5.0
   },
   {
    "tier": "Spécial -50%",
    "room_type": "Chambre à 2 pers.",
    "bookings": 10,
-   "nights": 59,
-   "lodg_rev": 588.0,
+   "nights": 57,
+   "lodg_rev": 564.0,
    "avg_paid_night": 12.0
   },
   {
@@ -3722,6 +3114,1764 @@
    "tier": "Résident",
    "room": "Logement résident",
    "price": 0.0
+  }
+ ],
+ "eventsBySeason": [
+  {
+   "event": "Retraite de 108 Nyoung-Nés",
+   "season": "25-26",
+   "participants": 173,
+   "onsite": 173,
+   "nights": 2030,
+   "total_rev": 43640.75,
+   "lodg_rev": 22956.23,
+   "avg_pp": 252.26
+  },
+  {
+   "event": "Retraite de 108 Nyoung-Nés",
+   "season": "23-24",
+   "participants": 159,
+   "onsite": 158,
+   "nights": 2005,
+   "total_rev": 41760.6,
+   "lodg_rev": 29059.6,
+   "avg_pp": 262.65
+  },
+  {
+   "event": "Retraite de 108 Nyoung-Nés",
+   "season": "24-25",
+   "participants": 173,
+   "onsite": 172,
+   "nights": 2545,
+   "total_rev": 32454.32,
+   "lodg_rev": 18869.16,
+   "avg_pp": 187.6
+  },
+  {
+   "event": "Retraite de Lamrim avec Vénérable Gendun [SUR PLACE]",
+   "season": "25-26",
+   "participants": 44,
+   "onsite": 44,
+   "nights": 846,
+   "total_rev": 32332.68,
+   "lodg_rev": 11047.17,
+   "avg_pp": 734.83
+  },
+  {
+   "event": "Retraite sur le souffle de la voie (Vipassana) [SUR PLACE]",
+   "season": "25-26",
+   "participants": 69,
+   "onsite": 69,
+   "nights": 768,
+   "total_rev": 29878.73,
+   "lodg_rev": 13109.0,
+   "avg_pp": 433.03
+  },
+  {
+   "event": "Séjour personnel",
+   "season": "24-25",
+   "participants": 230,
+   "onsite": 230,
+   "nights": 783,
+   "total_rev": 26424.74,
+   "lodg_rev": 14459.47,
+   "avg_pp": 114.89
+  },
+  {
+   "event": "[obsolète] Retraite de Vajra Yogini",
+   "season": "24-25",
+   "participants": 53,
+   "onsite": 40,
+   "nights": 705,
+   "total_rev": 24453.49,
+   "lodg_rev": 10902.9,
+   "avg_pp": 461.39
+  },
+  {
+   "event": "Retraite sur le souffle de la voie (Vipassana) [SUR PLACE]",
+   "season": "24-25",
+   "participants": 81,
+   "onsite": 69,
+   "nights": 661,
+   "total_rev": 22029.48,
+   "lodg_rev": 7724.65,
+   "avg_pp": 271.97
+  },
+  {
+   "event": "Formation approfondie à la méditation [EN LIGNE]",
+   "season": "24-25",
+   "participants": 3128,
+   "onsite": 0,
+   "nights": 0,
+   "total_rev": 19760.0,
+   "lodg_rev": 0.0,
+   "avg_pp": 6.32
+  },
+  {
+   "event": "Pratique intensive de Vajrasattva / Intensive practice of Vajrasattva",
+   "season": "24-25",
+   "participants": 120,
+   "onsite": 120,
+   "nights": 533,
+   "total_rev": 19533.41,
+   "lodg_rev": 6532.75,
+   "avg_pp": 162.78
+  },
+  {
+   "event": "Séjour personnel",
+   "season": "25-26",
+   "participants": 158,
+   "onsite": 158,
+   "nights": 427,
+   "total_rev": 17667.24,
+   "lodg_rev": 9429.3,
+   "avg_pp": 111.82
+  },
+  {
+   "event": "Pratique intensive de Vajrasattva / Intensive practice of Vajrasattva",
+   "season": "25-26",
+   "participants": 79,
+   "onsite": 79,
+   "nights": 438,
+   "total_rev": 17425.63,
+   "lodg_rev": 7263.6,
+   "avg_pp": 220.58
+  },
+  {
+   "event": "PEBA (Programme d'Etudes Bouddhiques Approfondi)",
+   "season": "25-26",
+   "participants": 296,
+   "onsite": 296,
+   "nights": 353,
+   "total_rev": 16370.4,
+   "lodg_rev": 4610.05,
+   "avg_pp": 55.31
+  },
+  {
+   "event": "Retraite sur le souffle de la voie (Vipassana) [SUR PLACE]",
+   "season": "23-24",
+   "participants": 69,
+   "onsite": 53,
+   "nights": 560,
+   "total_rev": 16328.0,
+   "lodg_rev": 5985.0,
+   "avg_pp": 236.64
+  },
+  {
+   "event": "[obsolète] Retraite intercontemplative : Amour Radical",
+   "season": "24-25",
+   "participants": 75,
+   "onsite": 75,
+   "nights": 439,
+   "total_rev": 16235.22,
+   "lodg_rev": 5753.7,
+   "avg_pp": 216.47
+  },
+  {
+   "event": "Séjour personnel",
+   "season": "23-24",
+   "participants": 200,
+   "onsite": 200,
+   "nights": 559,
+   "total_rev": 15633.75,
+   "lodg_rev": 7634.25,
+   "avg_pp": 78.17
+  },
+  {
+   "event": "Pratique intensive de Vajrasattva / Intensive practice of Vajrasattva",
+   "season": "23-24",
+   "participants": 172,
+   "onsite": 166,
+   "nights": 540,
+   "total_rev": 15482.95,
+   "lodg_rev": 5537.95,
+   "avg_pp": 90.02
+  },
+  {
+   "event": "[obsolète] Retraite avec Vénérable Gendun : La voie du coeur",
+   "season": "23-24",
+   "participants": 67,
+   "onsite": 56,
+   "nights": 502,
+   "total_rev": 14925.7,
+   "lodg_rev": 5652.2,
+   "avg_pp": 222.77
+  },
+  {
+   "event": "[obsolète] Expérience de la pratique de Vajra Yogini",
+   "season": "23-24",
+   "participants": 88,
+   "onsite": 41,
+   "nights": 287,
+   "total_rev": 14915.25,
+   "lodg_rev": 3597.5,
+   "avg_pp": 169.49
+  },
+  {
+   "event": "Formation approfondie à la méditation [EN LIGNE]",
+   "season": "23-24",
+   "participants": 3916,
+   "onsite": 0,
+   "nights": 0,
+   "total_rev": 13113.0,
+   "lodg_rev": 0.0,
+   "avg_pp": 3.35
+  },
+  {
+   "event": "Retraite d'été de Lamrim (SUR PLACE)",
+   "season": "24-25",
+   "participants": 43,
+   "onsite": 43,
+   "nights": 292,
+   "total_rev": 12545.01,
+   "lodg_rev": 5320.2,
+   "avg_pp": 291.74
+  },
+  {
+   "event": "Retraite d'été de Lamrim (SUR PLACE)",
+   "season": "25-26",
+   "participants": 44,
+   "onsite": 44,
+   "nights": 267,
+   "total_rev": 12098.28,
+   "lodg_rev": 5080.05,
+   "avg_pp": 274.96
+  },
+  {
+   "event": "Stage de William Nelson",
+   "season": "25-26",
+   "participants": 54,
+   "onsite": 54,
+   "nights": 271,
+   "total_rev": 11784.03,
+   "lodg_rev": 4195.4,
+   "avg_pp": 218.22
+  },
+  {
+   "event": "Retraite d'été de Lamrim (SUR PLACE)",
+   "season": "23-24",
+   "participants": 75,
+   "onsite": 59,
+   "nights": 340,
+   "total_rev": 11700.0,
+   "lodg_rev": 4424.0,
+   "avg_pp": 156.0
+  },
+  {
+   "event": "PEBA (Programme d'Etudes Bouddhiques Approfondi)",
+   "season": "24-25",
+   "participants": 282,
+   "onsite": 281,
+   "nights": 322,
+   "total_rev": 11583.2,
+   "lodg_rev": 3689.05,
+   "avg_pp": 41.08
+  },
+  {
+   "event": "[obsolète] Retraite  avec Vén. Robina : Affronter la mort sans crainte",
+   "season": "24-25",
+   "participants": 94,
+   "onsite": 77,
+   "nights": 294,
+   "total_rev": 11566.03,
+   "lodg_rev": 4690.0,
+   "avg_pp": 123.04
+  },
+  {
+   "event": "Stage de Joëlle Maurel",
+   "season": "25-26",
+   "participants": 90,
+   "onsite": 90,
+   "nights": 212,
+   "total_rev": 11355.59,
+   "lodg_rev": 5258.0,
+   "avg_pp": 126.17
+  },
+  {
+   "event": "Demeurer calme et la vue supérieure (Shamata et Vipashyana)",
+   "season": "25-26",
+   "participants": 36,
+   "onsite": 36,
+   "nights": 310,
+   "total_rev": 10664.11,
+   "lodg_rev": 3877.15,
+   "avg_pp": 296.23
+  },
+  {
+   "event": "Retraite de Shiné",
+   "season": "25-26",
+   "participants": 41,
+   "onsite": 41,
+   "nights": 285,
+   "total_rev": 9894.58,
+   "lodg_rev": 4544.45,
+   "avg_pp": 241.33
+  },
+  {
+   "event": "Découverte du bouddhisme",
+   "season": "24-25",
+   "participants": 196,
+   "onsite": 196,
+   "nights": 207,
+   "total_rev": 9735.17,
+   "lodg_rev": 3237.1,
+   "avg_pp": 49.67
+  },
+  {
+   "event": "Retraite du Bouddha Médecine..",
+   "season": "24-25",
+   "participants": 52,
+   "onsite": 35,
+   "nights": 188,
+   "total_rev": 9325.37,
+   "lodg_rev": 3125.2,
+   "avg_pp": 179.33
+  },
+  {
+   "event": "Initiation à la méditation",
+   "season": "25-26",
+   "participants": 138,
+   "onsite": 138,
+   "nights": 150,
+   "total_rev": 9040.11,
+   "lodg_rev": 2691.6,
+   "avg_pp": 65.51
+  },
+  {
+   "event": "Découverte du bouddhisme",
+   "season": "25-26",
+   "participants": 130,
+   "onsite": 130,
+   "nights": 151,
+   "total_rev": 8309.84,
+   "lodg_rev": 2634.5,
+   "avg_pp": 63.92
+  },
+  {
+   "event": "PEBA (Programme d'Etudes Bouddhiques Approfondi)",
+   "season": "23-24",
+   "participants": 253,
+   "onsite": 252,
+   "nights": 251,
+   "total_rev": 8254.5,
+   "lodg_rev": 2868.5,
+   "avg_pp": 32.63
+  },
+  {
+   "event": "Retraite de Shiné",
+   "season": "24-25",
+   "participants": 38,
+   "onsite": 38,
+   "nights": 285,
+   "total_rev": 8178.47,
+   "lodg_rev": 3534.5,
+   "avg_pp": 215.22
+  },
+  {
+   "event": "Retraite avec Vén. Robina / Retreat with Ven. Robina",
+   "season": "25-26",
+   "participants": 44,
+   "onsite": 44,
+   "nights": 178,
+   "total_rev": 7867.81,
+   "lodg_rev": 3540.75,
+   "avg_pp": 178.81
+  },
+  {
+   "event": "Serkong Rinpoché & Alexander Berzin (SUR PLACE / ONSITE)",
+   "season": "25-26",
+   "participants": 89,
+   "onsite": 89,
+   "nights": 154,
+   "total_rev": 7251.94,
+   "lodg_rev": 2151.95,
+   "avg_pp": 81.48
+  },
+  {
+   "event": "Retraite du Bouddha Médecine..",
+   "season": "25-26",
+   "participants": 35,
+   "onsite": 35,
+   "nights": 157,
+   "total_rev": 7157.2,
+   "lodg_rev": 3397.0,
+   "avg_pp": 204.49
+  },
+  {
+   "event": "Retraite de Shiné",
+   "season": "23-24",
+   "participants": 46,
+   "onsite": 46,
+   "nights": 339,
+   "total_rev": 6962.25,
+   "lodg_rev": 2805.0,
+   "avg_pp": 151.35
+  },
+  {
+   "event": "Retraite de Vajra Yogini",
+   "season": "25-26",
+   "participants": 12,
+   "onsite": 12,
+   "nights": 143,
+   "total_rev": 6764.91,
+   "lodg_rev": 4166.5,
+   "avg_pp": 563.74
+  },
+  {
+   "event": "Découverte du bouddhisme",
+   "season": "23-24",
+   "participants": 186,
+   "onsite": 185,
+   "nights": 153,
+   "total_rev": 6617.3,
+   "lodg_rev": 1833.3,
+   "avg_pp": 35.58
+  },
+  {
+   "event": "Stage de William Nelson",
+   "season": "24-25",
+   "participants": 30,
+   "onsite": 30,
+   "nights": 149,
+   "total_rev": 6589.32,
+   "lodg_rev": 2300.0,
+   "avg_pp": 219.64
+  },
+  {
+   "event": "Initiation à la méditation",
+   "season": "23-24",
+   "participants": 123,
+   "onsite": 123,
+   "nights": 151,
+   "total_rev": 6503.0,
+   "lodg_rev": 2420.0,
+   "avg_pp": 52.87
+  },
+  {
+   "event": "Stage de Joëlle Maurel",
+   "season": "23-24",
+   "participants": 50,
+   "onsite": 50,
+   "nights": 173,
+   "total_rev": 6461.1,
+   "lodg_rev": 3443.1,
+   "avg_pp": 129.22
+  },
+  {
+   "event": "[obsolète] Retraite de Vajra Yogini",
+   "season": "23-24",
+   "participants": 14,
+   "onsite": 14,
+   "nights": 264,
+   "total_rev": 6192.25,
+   "lodg_rev": 3251.5,
+   "avg_pp": 442.3
+  },
+  {
+   "event": "Retraite de 100000 bols d'eau",
+   "season": "24-25",
+   "participants": 14,
+   "onsite": 14,
+   "nights": 189,
+   "total_rev": 6080.33,
+   "lodg_rev": 3100.0,
+   "avg_pp": 434.31
+  },
+  {
+   "event": "Stage de yoga de Sébastien Cierco",
+   "season": "25-26",
+   "participants": 26,
+   "onsite": 26,
+   "nights": 47,
+   "total_rev": 6007.48,
+   "lodg_rev": 1142.1,
+   "avg_pp": 231.06
+  },
+  {
+   "event": "Stage de Joëlle Maurel",
+   "season": "24-25",
+   "participants": 33,
+   "onsite": 33,
+   "nights": 135,
+   "total_rev": 5873.68,
+   "lodg_rev": 3134.6,
+   "avg_pp": 177.99
+  },
+  {
+   "event": "Stage de Qi Gong de l'Oie Sauvage",
+   "season": "24-25",
+   "participants": 27,
+   "onsite": 27,
+   "nights": 107,
+   "total_rev": 5679.05,
+   "lodg_rev": 2622.2,
+   "avg_pp": 210.34
+  },
+  {
+   "event": "ZOOM Retraite de Lamrim avec Vénérable Gendun [EN LIGNE]",
+   "season": "25-26",
+   "participants": 23,
+   "onsite": 2,
+   "nights": 0,
+   "total_rev": 5508.0,
+   "lodg_rev": 0.0,
+   "avg_pp": 239.48
+  },
+  {
+   "event": "Stage de William Nelson",
+   "season": "23-24",
+   "participants": 28,
+   "onsite": 28,
+   "nights": 142,
+   "total_rev": 5247.0,
+   "lodg_rev": 1771.5,
+   "avg_pp": 187.39
+  },
+  {
+   "event": "Stage de Marguerite Aflallo",
+   "season": "23-24",
+   "participants": 24,
+   "onsite": 24,
+   "nights": 107,
+   "total_rev": 5157.0,
+   "lodg_rev": 2346.0,
+   "avg_pp": 214.88
+  },
+  {
+   "event": "Stage de Marguerite Aflallo",
+   "season": "24-25",
+   "participants": 34,
+   "onsite": 34,
+   "nights": 96,
+   "total_rev": 5093.5,
+   "lodg_rev": 2223.2,
+   "avg_pp": 149.81
+  },
+  {
+   "event": "Séminaire essentiel pour le service au sein de la FPMT",
+   "season": "25-26",
+   "participants": 38,
+   "onsite": 38,
+   "nights": 105,
+   "total_rev": 4831.68,
+   "lodg_rev": 990.73,
+   "avg_pp": 127.15
+  },
+  {
+   "event": "L'entraînement de l'esprit en huit versets",
+   "season": "24-25",
+   "participants": 127,
+   "onsite": 127,
+   "nights": 108,
+   "total_rev": 4609.49,
+   "lodg_rev": 1579.1,
+   "avg_pp": 36.3
+  },
+  {
+   "event": "Stage de Qi Gong de l'Oie Sauvage",
+   "season": "25-26",
+   "participants": 20,
+   "onsite": 20,
+   "nights": 83,
+   "total_rev": 4606.41,
+   "lodg_rev": 2258.1,
+   "avg_pp": 230.32
+  },
+  {
+   "event": "[obsolète] Retraite avec Vén. Robina (SUR PLACE) : La compassion courageuse",
+   "season": "24-25",
+   "participants": 32,
+   "onsite": 32,
+   "nights": 111,
+   "total_rev": 4605.55,
+   "lodg_rev": 2441.0,
+   "avg_pp": 143.92
+  },
+  {
+   "event": "Stage de Qi Gong de Thierry Julien",
+   "season": "25-26",
+   "participants": 24,
+   "onsite": 24,
+   "nights": 72,
+   "total_rev": 4482.87,
+   "lodg_rev": 1927.8,
+   "avg_pp": 186.79
+  },
+  {
+   "event": "[obsolète] Mini-retraite Vipassana SUR PLACE",
+   "season": "23-24",
+   "participants": 73,
+   "onsite": 51,
+   "nights": 110,
+   "total_rev": 4371.75,
+   "lodg_rev": 1525.75,
+   "avg_pp": 59.89
+  },
+  {
+   "event": "Initiation à la méditation",
+   "season": "24-25",
+   "participants": 95,
+   "onsite": 95,
+   "nights": 63,
+   "total_rev": 4251.65,
+   "lodg_rev": 1220.05,
+   "avg_pp": 44.75
+  },
+  {
+   "event": "Stage de Qi Gong de Thierry Julien",
+   "season": "23-24",
+   "participants": 29,
+   "onsite": 29,
+   "nights": 89,
+   "total_rev": 4192.5,
+   "lodg_rev": 1679.5,
+   "avg_pp": 144.57
+  },
+  {
+   "event": "[obsolète] Retraite de Bodhicitta et de Tara blanche (SUR PLACE)",
+   "season": "24-25",
+   "participants": 34,
+   "onsite": 34,
+   "nights": 118,
+   "total_rev": 4100.38,
+   "lodg_rev": 1755.0,
+   "avg_pp": 120.6
+  },
+  {
+   "event": "Retraite de Ganden Lha Gyama",
+   "season": "25-26",
+   "participants": 16,
+   "onsite": 16,
+   "nights": 107,
+   "total_rev": 4060.32,
+   "lodg_rev": 2041.5,
+   "avg_pp": 253.77
+  },
+  {
+   "event": "Stage de Qi Gong de l'Oie Sauvage",
+   "season": "23-24",
+   "participants": 23,
+   "onsite": 23,
+   "nights": 84,
+   "total_rev": 3932.0,
+   "lodg_rev": 1718.0,
+   "avg_pp": 170.96
+  },
+  {
+   "event": "Stage de yoga de Sébastien Cierco",
+   "season": "23-24",
+   "participants": 29,
+   "onsite": 29,
+   "nights": 19,
+   "total_rev": 3858.0,
+   "lodg_rev": 210.5,
+   "avg_pp": 133.03
+  },
+  {
+   "event": "Retraite de Lamrim (Voie graduée vers l’éveil)",
+   "season": "24-25",
+   "participants": 41,
+   "onsite": 22,
+   "nights": 150,
+   "total_rev": 3786.05,
+   "lodg_rev": 1483.2,
+   "avg_pp": 92.34
+  },
+  {
+   "event": "[obsolète] Mini-retraite Vipassana SUR PLACE",
+   "season": "24-25",
+   "participants": 55,
+   "onsite": 55,
+   "nights": 96,
+   "total_rev": 3536.48,
+   "lodg_rev": 1210.2,
+   "avg_pp": 64.3
+  },
+  {
+   "event": "Retraite de 4 jours de compassion et pleine conscience, réservée aux femmes",
+   "season": "25-26",
+   "participants": 32,
+   "onsite": 32,
+   "nights": 85,
+   "total_rev": 3533.98,
+   "lodg_rev": 1187.5,
+   "avg_pp": 110.44
+  },
+  {
+   "event": "Retraite de Lamrim (Voie graduée vers l’éveil)",
+   "season": "23-24",
+   "participants": 14,
+   "onsite": 14,
+   "nights": 105,
+   "total_rev": 3378.0,
+   "lodg_rev": 1926.25,
+   "avg_pp": 241.29
+  },
+  {
+   "event": "[obsolète] Stage de Bénédicte Pavelak",
+   "season": "23-24",
+   "participants": 15,
+   "onsite": 15,
+   "nights": 98,
+   "total_rev": 3298.5,
+   "lodg_rev": 1257.5,
+   "avg_pp": 219.9
+  },
+  {
+   "event": "Séjour personnel [non-public]",
+   "season": "23-24",
+   "participants": 45,
+   "onsite": 45,
+   "nights": 171,
+   "total_rev": 3163.5,
+   "lodg_rev": 1478.25,
+   "avg_pp": 70.3
+  },
+  {
+   "event": "Initiation au bouddhisme",
+   "season": "25-26",
+   "participants": 49,
+   "onsite": 49,
+   "nights": 41,
+   "total_rev": 3107.16,
+   "lodg_rev": 998.7,
+   "avg_pp": 63.41
+  },
+  {
+   "event": "[obsolète] Atelier et conférence avec vénérable Thubten Chodron (SUR PLACE)",
+   "season": "24-25",
+   "participants": 66,
+   "onsite": 66,
+   "nights": 71,
+   "total_rev": 3068.41,
+   "lodg_rev": 975.0,
+   "avg_pp": 46.49
+  },
+  {
+   "event": "Serkong Rinpoché & Alexander Berzin (SUR PLACE / ONSITE)",
+   "season": "24-25",
+   "participants": 127,
+   "onsite": 120,
+   "nights": 68,
+   "total_rev": 3038.2,
+   "lodg_rev": 1017.0,
+   "avg_pp": 23.92
+  },
+  {
+   "event": "Retraite de 4 jours de compassion et pleine conscience, réservée aux femmes",
+   "season": "23-24",
+   "participants": 15,
+   "onsite": 15,
+   "nights": 26,
+   "total_rev": 2921.0,
+   "lodg_rev": 357.5,
+   "avg_pp": 194.73
+  },
+  {
+   "event": "Retraite sur le souffle de la voie (Vipassana) [EN ZOOM]",
+   "season": "25-26",
+   "participants": 22,
+   "onsite": 1,
+   "nights": 0,
+   "total_rev": 2895.0,
+   "lodg_rev": 0.0,
+   "avg_pp": 131.59
+  },
+  {
+   "event": "L'entraînement de l'esprit en huit versets",
+   "season": "25-26",
+   "participants": 76,
+   "onsite": 76,
+   "nights": 46,
+   "total_rev": 2782.45,
+   "lodg_rev": 707.7,
+   "avg_pp": 36.61
+  },
+  {
+   "event": "Formation approfondie à la méditation [EN LIGNE]",
+   "season": "25-26",
+   "participants": 2907,
+   "onsite": 0,
+   "nights": 0,
+   "total_rev": 2713.53,
+   "lodg_rev": 0.0,
+   "avg_pp": 0.93
+  },
+  {
+   "event": "Retraite de Mahamoudra",
+   "season": "25-26",
+   "participants": 22,
+   "onsite": 22,
+   "nights": 98,
+   "total_rev": 2710.46,
+   "lodg_rev": 1076.6,
+   "avg_pp": 123.2
+  },
+  {
+   "event": "[obsolète] Formation Approfondie à la Méditation (SESSIONS SUR PLACE)",
+   "season": "23-24",
+   "participants": 129,
+   "onsite": 129,
+   "nights": 18,
+   "total_rev": 2584.0,
+   "lodg_rev": 311.5,
+   "avg_pp": 20.03
+  },
+  {
+   "event": "Retraite de 4 jours de compassion et pleine conscience, réservée aux femmes",
+   "season": "24-25",
+   "participants": 17,
+   "onsite": 17,
+   "nights": 60,
+   "total_rev": 2577.11,
+   "lodg_rev": 926.2,
+   "avg_pp": 151.59
+  },
+  {
+   "event": "Retraite de pleine conscience en mouvement",
+   "season": "23-24",
+   "participants": 7,
+   "onsite": 7,
+   "nights": 16,
+   "total_rev": 2575.0,
+   "lodg_rev": 251.0,
+   "avg_pp": 367.86
+  },
+  {
+   "event": "Peinture de tsa-tsas",
+   "season": "25-26",
+   "participants": 84,
+   "onsite": 84,
+   "nights": 34,
+   "total_rev": 2325.75,
+   "lodg_rev": 613.7,
+   "avg_pp": 27.69
+  },
+  {
+   "event": "Enseignements de Guéshé Lodèn",
+   "season": "25-26",
+   "participants": 63,
+   "onsite": 63,
+   "nights": 31,
+   "total_rev": 2187.78,
+   "lodg_rev": 414.3,
+   "avg_pp": 34.73
+  },
+  {
+   "event": "Retraite de Yamantaka",
+   "season": "23-24",
+   "participants": 7,
+   "onsite": 7,
+   "nights": 198,
+   "total_rev": 2086.0,
+   "lodg_rev": 887.25,
+   "avg_pp": 298.0
+  },
+  {
+   "event": "L'entraînement de l'esprit en huit versets",
+   "season": "23-24",
+   "participants": 72,
+   "onsite": 72,
+   "nights": 48,
+   "total_rev": 1985.0,
+   "lodg_rev": 870.0,
+   "avg_pp": 27.57
+  },
+  {
+   "event": "Gestion des émotions par la pleine conscience",
+   "season": "23-24",
+   "participants": 30,
+   "onsite": 30,
+   "nights": 0,
+   "total_rev": 1919.5,
+   "lodg_rev": 0.0,
+   "avg_pp": 63.98
+  },
+  {
+   "event": "La Science Bouddhiste de l'Esprit (SBE)",
+   "season": "25-26",
+   "participants": 65,
+   "onsite": 41,
+   "nights": 32,
+   "total_rev": 1904.19,
+   "lodg_rev": 520.7,
+   "avg_pp": 29.3
+  },
+  {
+   "event": "Initiation au bouddhisme",
+   "season": "24-25",
+   "participants": 38,
+   "onsite": 38,
+   "nights": 28,
+   "total_rev": 1895.35,
+   "lodg_rev": 524.3,
+   "avg_pp": 49.88
+  },
+  {
+   "event": "Pratique intensive de Tchènrézi",
+   "season": "25-26",
+   "participants": 20,
+   "onsite": 20,
+   "nights": 41,
+   "total_rev": 1817.2,
+   "lodg_rev": 867.6,
+   "avg_pp": 90.86
+  },
+  {
+   "event": "Gestion des émotions par la pleine conscience",
+   "season": "24-25",
+   "participants": 42,
+   "onsite": 42,
+   "nights": 9,
+   "total_rev": 1804.65,
+   "lodg_rev": 355.0,
+   "avg_pp": 42.97
+  },
+  {
+   "event": "Le bonheur c'est maintenant ou jamais",
+   "season": "23-24",
+   "participants": 26,
+   "onsite": 26,
+   "nights": 25,
+   "total_rev": 1799.0,
+   "lodg_rev": 371.0,
+   "avg_pp": 69.19
+  },
+  {
+   "event": "Séjour personnel [non-public]",
+   "season": "24-25",
+   "participants": 17,
+   "onsite": 17,
+   "nights": 60,
+   "total_rev": 1792.29,
+   "lodg_rev": 987.0,
+   "avg_pp": 105.43
+  },
+  {
+   "event": "Compassion et auto-compassion",
+   "season": "23-24",
+   "participants": 25,
+   "onsite": 25,
+   "nights": 10,
+   "total_rev": 1700.5,
+   "lodg_rev": 90.0,
+   "avg_pp": 68.02
+  },
+  {
+   "event": "[obsolète] Retraite : apprentissage de la bienveillance",
+   "season": "24-25",
+   "participants": 30,
+   "onsite": 30,
+   "nights": 53,
+   "total_rev": 1696.16,
+   "lodg_rev": 761.4,
+   "avg_pp": 56.54
+  },
+  {
+   "event": "Chroniques Bouddhistes",
+   "season": "24-25",
+   "participants": 77,
+   "onsite": 77,
+   "nights": 42,
+   "total_rev": 1659.16,
+   "lodg_rev": 427.5,
+   "avg_pp": 21.55
+  },
+  {
+   "event": "Journée portes ouvertes",
+   "season": "25-26",
+   "participants": 104,
+   "onsite": 104,
+   "nights": 4,
+   "total_rev": 1581.57,
+   "lodg_rev": 82.5,
+   "avg_pp": 15.21
+  },
+  {
+   "event": "Transformative Mindfulness Methods (niveau 1)",
+   "season": "24-25",
+   "participants": 19,
+   "onsite": 19,
+   "nights": 16,
+   "total_rev": 1551.3,
+   "lodg_rev": 217.0,
+   "avg_pp": 81.65
+  },
+  {
+   "event": "Stage de Yoga de Dominique Meunier",
+   "season": "25-26",
+   "participants": 11,
+   "onsite": 11,
+   "nights": 19,
+   "total_rev": 1509.56,
+   "lodg_rev": 697.2,
+   "avg_pp": 137.23
+  },
+  {
+   "event": "Peinture de tsa-tsas",
+   "season": "24-25",
+   "participants": 59,
+   "onsite": 59,
+   "nights": 17,
+   "total_rev": 1372.92,
+   "lodg_rev": 360.0,
+   "avg_pp": 23.27
+  },
+  {
+   "event": "Transformative Mindfulness Methods (niveau 1)",
+   "season": "25-26",
+   "participants": 19,
+   "onsite": 19,
+   "nights": 34,
+   "total_rev": 1329.15,
+   "lodg_rev": 539.2,
+   "avg_pp": 69.96
+  },
+  {
+   "event": "16 attitudes pour mieux vivre - Niveau 1",
+   "season": "24-25",
+   "participants": 24,
+   "onsite": 24,
+   "nights": 25,
+   "total_rev": 1193.42,
+   "lodg_rev": 321.0,
+   "avg_pp": 49.73
+  },
+  {
+   "event": "Serkong Rinpoché & Alexander Berzin (VIA ZOOM)",
+   "season": "25-26",
+   "participants": 40,
+   "onsite": 0,
+   "nights": 14,
+   "total_rev": 1170.0,
+   "lodg_rev": 0.0,
+   "avg_pp": 29.25
+  },
+  {
+   "event": "L’art de vivre et de mourir : enseignements essentiels",
+   "season": "25-26",
+   "participants": 17,
+   "onsite": 17,
+   "nights": 20,
+   "total_rev": 1157.91,
+   "lodg_rev": 205.4,
+   "avg_pp": 68.11
+  },
+  {
+   "event": "Stage de Yoga de Dominique Meunier",
+   "season": "24-25",
+   "participants": 11,
+   "onsite": 11,
+   "nights": 16,
+   "total_rev": 1067.26,
+   "lodg_rev": 345.6,
+   "avg_pp": 97.02
+  },
+  {
+   "event": "Peinture de tsa-tsas",
+   "season": "23-24",
+   "participants": 49,
+   "onsite": 49,
+   "nights": 19,
+   "total_rev": 1008.5,
+   "lodg_rev": 185.0,
+   "avg_pp": 20.58
+  },
+  {
+   "event": "[obsolète] Retraite de Bodhicitta et Tara Blanche (VIA ZOOM)",
+   "season": "24-25",
+   "participants": 18,
+   "onsite": 0,
+   "nights": 0,
+   "total_rev": 983.0,
+   "lodg_rev": 0.0,
+   "avg_pp": 54.61
+  },
+  {
+   "event": "Stage de Gill-Eric Leininger",
+   "season": "24-25",
+   "participants": 6,
+   "onsite": 6,
+   "nights": 16,
+   "total_rev": 951.68,
+   "lodg_rev": 521.0,
+   "avg_pp": 158.61
+  },
+  {
+   "event": "Retraite de pleine conscience en mouvement",
+   "season": "24-25",
+   "participants": 9,
+   "onsite": 9,
+   "nights": 16,
+   "total_rev": 908.03,
+   "lodg_rev": 445.6,
+   "avg_pp": 100.89
+  },
+  {
+   "event": "[obsolète] Mini-retraite Vipassana VIA ZOOM",
+   "season": "24-25",
+   "participants": 22,
+   "onsite": 0,
+   "nights": 0,
+   "total_rev": 879.0,
+   "lodg_rev": 0.0,
+   "avg_pp": 39.95
+  },
+  {
+   "event": "16 attitudes pour mieux vivre - Niveau 1",
+   "season": "25-26",
+   "participants": 21,
+   "onsite": 21,
+   "nights": 18,
+   "total_rev": 859.62,
+   "lodg_rev": 324.0,
+   "avg_pp": 40.93
+  },
+  {
+   "event": "Initiation Je Rigsum Chidrup (Lama Tsong Khapa)",
+   "season": "25-26",
+   "participants": 100,
+   "onsite": 100,
+   "nights": 13,
+   "total_rev": 859.14,
+   "lodg_rev": 510.65,
+   "avg_pp": 8.59
+  },
+  {
+   "event": "Transformative Mindfulness Methods (niveau 1)",
+   "season": "23-24",
+   "participants": 6,
+   "onsite": 6,
+   "nights": 10,
+   "total_rev": 856.0,
+   "lodg_rev": 157.0,
+   "avg_pp": 142.67
+  },
+  {
+   "event": "[obsolète] Retraite avec Vén. Robina (VIA ZOOM) : La compassion courageuse",
+   "season": "24-25",
+   "participants": 17,
+   "onsite": 0,
+   "nights": 0,
+   "total_rev": 828.0,
+   "lodg_rev": 0.0,
+   "avg_pp": 48.71
+  },
+  {
+   "event": "16 attitudes pour mieux vivre - Niveau 1",
+   "season": "23-24",
+   "participants": 8,
+   "onsite": 8,
+   "nights": 5,
+   "total_rev": 819.5,
+   "lodg_rev": 119.0,
+   "avg_pp": 102.44
+  },
+  {
+   "event": "La Bienveillance et les 16 Attitudes pour Mieux Vivre",
+   "season": "23-24",
+   "participants": 13,
+   "onsite": 13,
+   "nights": 13,
+   "total_rev": 710.0,
+   "lodg_rev": 213.0,
+   "avg_pp": 54.62
+  },
+  {
+   "event": "Initiation à la pleine conscience",
+   "season": "23-24",
+   "participants": 11,
+   "onsite": 11,
+   "nights": 1,
+   "total_rev": 679.0,
+   "lodg_rev": 11.0,
+   "avg_pp": 61.73
+  },
+  {
+   "event": "1.2.3 Bonheur Atelier Pleine Conscience Parents-Enfants",
+   "season": "24-25",
+   "participants": 19,
+   "onsite": 19,
+   "nights": 31,
+   "total_rev": 662.34,
+   "lodg_rev": 152.75,
+   "avg_pp": 34.86
+  },
+  {
+   "event": "Stage de Catherine Boussard",
+   "season": "24-25",
+   "participants": 8,
+   "onsite": 8,
+   "nights": 9,
+   "total_rev": 623.68,
+   "lodg_rev": 233.0,
+   "avg_pp": 77.96
+  },
+  {
+   "event": "Le Deuil… pour accomplir une part du chemin.",
+   "season": "24-25",
+   "participants": 16,
+   "onsite": 16,
+   "nights": 14,
+   "total_rev": 602.17,
+   "lodg_rev": 181.5,
+   "avg_pp": 37.64
+  },
+  {
+   "event": "16 attitudes pour mieux vivre - Niveau 2",
+   "season": "24-25",
+   "participants": 16,
+   "onsite": 16,
+   "nights": 17,
+   "total_rev": 572.91,
+   "lodg_rev": 212.2,
+   "avg_pp": 35.81
+  },
+  {
+   "event": "Retraite d'été de Lamrim (VIA ZOOM)",
+   "season": "24-25",
+   "participants": 8,
+   "onsite": 0,
+   "nights": 0,
+   "total_rev": 560.0,
+   "lodg_rev": 0.0,
+   "avg_pp": 70.0
+  },
+  {
+   "event": "Stage de Gill-Eric Leininger",
+   "season": "23-24",
+   "participants": 4,
+   "onsite": 4,
+   "nights": 11,
+   "total_rev": 554.5,
+   "lodg_rev": 267.0,
+   "avg_pp": 138.63
+  },
+  {
+   "event": "[obsolète] Atelier avec vénérable Thubten Chodron (VIA ZOOM)",
+   "season": "24-25",
+   "participants": 13,
+   "onsite": 0,
+   "nights": 0,
+   "total_rev": 502.0,
+   "lodg_rev": 0.0,
+   "avg_pp": 38.62
+  },
+  {
+   "event": "[obsolète] Éveillez vos Sens avec les 16 Attitudes",
+   "season": "23-24",
+   "participants": 9,
+   "onsite": 9,
+   "nights": 1,
+   "total_rev": 485.5,
+   "lodg_rev": 43.5,
+   "avg_pp": 53.94
+  },
+  {
+   "event": "[obsolète] Une journée de pleine conscience",
+   "season": "23-24",
+   "participants": 11,
+   "onsite": 11,
+   "nights": 1,
+   "total_rev": 476.0,
+   "lodg_rev": 0.0,
+   "avg_pp": 43.27
+  },
+  {
+   "event": "Compassion et auto-compassion",
+   "season": "24-25",
+   "participants": 7,
+   "onsite": 7,
+   "nights": 10,
+   "total_rev": 427.86,
+   "lodg_rev": 211.0,
+   "avg_pp": 61.12
+  },
+  {
+   "event": "[obsolète] Cultiver la Compassion : Un Voyage en Pleine Conscience",
+   "season": "23-24",
+   "participants": 10,
+   "onsite": 10,
+   "nights": 1,
+   "total_rev": 424.5,
+   "lodg_rev": 0.0,
+   "avg_pp": 42.45
+  },
+  {
+   "event": "Enseignements de Jan Willis",
+   "season": "24-25",
+   "participants": 37,
+   "onsite": 37,
+   "nights": 21,
+   "total_rev": 415.25,
+   "lodg_rev": 149.0,
+   "avg_pp": 11.22
+  },
+  {
+   "event": "Stage de Gill-Eric Leininger",
+   "season": "25-26",
+   "participants": 2,
+   "onsite": 2,
+   "nights": 6,
+   "total_rev": 395.97,
+   "lodg_rev": 214.5,
+   "avg_pp": 197.98
+  },
+  {
+   "event": "Anniversaire de Sa Sainteté le Dalaï Lama",
+   "season": "25-26",
+   "participants": 38,
+   "onsite": 38,
+   "nights": 0,
+   "total_rev": 395.78,
+   "lodg_rev": 0.0,
+   "avg_pp": 10.42
+  },
+  {
+   "event": "Initiation au bouddhisme",
+   "season": "23-24",
+   "participants": 9,
+   "onsite": 9,
+   "nights": 6,
+   "total_rev": 320.0,
+   "lodg_rev": 98.5,
+   "avg_pp": 35.56
+  },
+  {
+   "event": "Retraite de pleine conscience en mouvement",
+   "season": "25-26",
+   "participants": 4,
+   "onsite": 4,
+   "nights": 8,
+   "total_rev": 318.53,
+   "lodg_rev": 170.0,
+   "avg_pp": 79.63
+  },
+  {
+   "event": "16 attitudes pour mieux communiquer",
+   "season": "25-26",
+   "participants": 11,
+   "onsite": 11,
+   "nights": 7,
+   "total_rev": 281.34,
+   "lodg_rev": 22.5,
+   "avg_pp": 25.58
+  },
+  {
+   "event": "Losar",
+   "season": "25-26",
+   "participants": 21,
+   "onsite": 21,
+   "nights": 0,
+   "total_rev": 271.94,
+   "lodg_rev": 0.0,
+   "avg_pp": 12.95
+  },
+  {
+   "event": "Premier pas sur le chemin du pardon…",
+   "season": "25-26",
+   "participants": 5,
+   "onsite": 5,
+   "nights": 6,
+   "total_rev": 270.96,
+   "lodg_rev": 107.0,
+   "avg_pp": 54.19
+  },
+  {
+   "event": "Célébration du Saka Dawa",
+   "season": "23-24",
+   "participants": 11,
+   "onsite": 11,
+   "nights": 7,
+   "total_rev": 251.0,
+   "lodg_rev": 63.0,
+   "avg_pp": 22.82
+  },
+  {
+   "event": "Le Deuil… pour accomplir une part du chemin.",
+   "season": "25-26",
+   "participants": 5,
+   "onsite": 5,
+   "nights": 2,
+   "total_rev": 248.04,
+   "lodg_rev": 120.0,
+   "avg_pp": 49.61
+  },
+  {
+   "event": "Célébration du Saka Dawa",
+   "season": "25-26",
+   "participants": 12,
+   "onsite": 12,
+   "nights": 3,
+   "total_rev": 206.33,
+   "lodg_rev": 23.4,
+   "avg_pp": 17.19
+  },
+  {
+   "event": "Pratique du Bouddha Médecine",
+   "season": "25-26",
+   "participants": 29,
+   "onsite": 29,
+   "nights": 2,
+   "total_rev": 192.17,
+   "lodg_rev": 47.5,
+   "avg_pp": 6.63
+  },
+  {
+   "event": "Chroniques Bouddhistes",
+   "season": "25-26",
+   "participants": 8,
+   "onsite": 8,
+   "nights": 5,
+   "total_rev": 153.56,
+   "lodg_rev": 32.0,
+   "avg_pp": 19.2
+  },
+  {
+   "event": "Célébration de Lhabab Dutchèn",
+   "season": "25-26",
+   "participants": 7,
+   "onsite": 7,
+   "nights": 4,
+   "total_rev": 150.73,
+   "lodg_rev": 32.0,
+   "avg_pp": 21.53
+  },
+  {
+   "event": "Compassion et auto-compassion",
+   "season": "25-26",
+   "participants": 5,
+   "onsite": 5,
+   "nights": 6,
+   "total_rev": 132.46,
+   "lodg_rev": 39.0,
+   "avg_pp": 26.49
+  },
+  {
+   "event": "Losar",
+   "season": "23-24",
+   "participants": 19,
+   "onsite": 19,
+   "nights": 0,
+   "total_rev": 130.0,
+   "lodg_rev": 0.0,
+   "avg_pp": 6.84
+  },
+  {
+   "event": "Enseignement du Dr Alexander Berzin",
+   "season": "25-26",
+   "participants": 10,
+   "onsite": 10,
+   "nights": 2,
+   "total_rev": 126.34,
+   "lodg_rev": 27.0,
+   "avg_pp": 12.63
+  },
+  {
+   "event": "Lama Tcheupa",
+   "season": "24-25",
+   "participants": 121,
+   "onsite": 121,
+   "nights": 2,
+   "total_rev": 125.19,
+   "lodg_rev": 13.5,
+   "avg_pp": 1.03
+  },
+  {
+   "event": "Journée portes ouvertes",
+   "season": "23-24",
+   "participants": 14,
+   "onsite": 14,
+   "nights": 0,
+   "total_rev": 105.5,
+   "lodg_rev": 0.0,
+   "avg_pp": 7.54
+  },
+  {
+   "event": "Initiation de Vajrasattva / Vajrasattva empowerment",
+   "season": "24-25",
+   "participants": 22,
+   "onsite": 22,
+   "nights": 0,
+   "total_rev": 101.85,
+   "lodg_rev": 0.0,
+   "avg_pp": 4.63
+  },
+  {
+   "event": "Gestion des émotions par la pleine conscience",
+   "season": "25-26",
+   "participants": 5,
+   "onsite": 5,
+   "nights": 1,
+   "total_rev": 42.85,
+   "lodg_rev": 0.0,
+   "avg_pp": 8.57
+  },
+  {
+   "event": "Pratique du Bouddha Médecine",
+   "season": "24-25",
+   "participants": 13,
+   "onsite": 13,
+   "nights": 0,
+   "total_rev": 42.0,
+   "lodg_rev": 0.0,
+   "avg_pp": 3.23
+  },
+  {
+   "event": "Pratique de Tara",
+   "season": "23-24",
+   "participants": 1,
+   "onsite": 1,
+   "nights": 1,
+   "total_rev": 39.5,
+   "lodg_rev": 5.0,
+   "avg_pp": 39.5
+  },
+  {
+   "event": "Rencontre avec les jeunes avec Vénérable Robina",
+   "season": "25-26",
+   "participants": 9,
+   "onsite": 9,
+   "nights": 0,
+   "total_rev": 38.26,
+   "lodg_rev": 0.0,
+   "avg_pp": 4.25
+  },
+  {
+   "event": "Journée d'hommage à Guéshé Tèngyéla",
+   "season": "24-25",
+   "participants": 81,
+   "onsite": 81,
+   "nights": 0,
+   "total_rev": 37.3,
+   "lodg_rev": 0.0,
+   "avg_pp": 0.46
+  },
+  {
+   "event": "Lama Tcheupa",
+   "season": "25-26",
+   "participants": 42,
+   "onsite": 42,
+   "nights": 1,
+   "total_rev": 36.12,
+   "lodg_rev": 10.0,
+   "avg_pp": 0.86
+  },
+  {
+   "event": "Lama Tcheupa",
+   "season": "23-24",
+   "participants": 111,
+   "onsite": 111,
+   "nights": 1,
+   "total_rev": 34.5,
+   "lodg_rev": 0.0,
+   "avg_pp": 0.31
+  },
+  {
+   "event": "Losar",
+   "season": "24-25",
+   "participants": 16,
+   "onsite": 16,
+   "nights": 0,
+   "total_rev": 28.7,
+   "lodg_rev": 0.0,
+   "avg_pp": 1.79
+  },
+  {
+   "event": "Célébration du Saka Dawa",
+   "season": "24-25",
+   "participants": 5,
+   "onsite": 5,
+   "nights": 2,
+   "total_rev": 26.99,
+   "lodg_rev": 7.0,
+   "avg_pp": 5.4
+  },
+  {
+   "event": "Journée d'hommage à Guéshé Tèngyéla",
+   "season": "23-24",
+   "participants": 16,
+   "onsite": 16,
+   "nights": 0,
+   "total_rev": 24.75,
+   "lodg_rev": 0.0,
+   "avg_pp": 1.55
+  },
+  {
+   "event": "Célébration de Tcheukor Dutchèn",
+   "season": "25-26",
+   "participants": 4,
+   "onsite": 4,
+   "nights": 0,
+   "total_rev": 22.95,
+   "lodg_rev": 0.0,
+   "avg_pp": 5.74
+  },
+  {
+   "event": "Célébration de Lhabab Dutchèn",
+   "season": "23-24",
+   "participants": 2,
+   "onsite": 2,
+   "nights": 1,
+   "total_rev": 20.0,
+   "lodg_rev": 9.0,
+   "avg_pp": 10.0
+  },
+  {
+   "event": "Célébration de Tcheukor Dutchèn",
+   "season": "24-25",
+   "participants": 3,
+   "onsite": 3,
+   "nights": 1,
+   "total_rev": 20.0,
+   "lodg_rev": 6.8,
+   "avg_pp": 6.67
+  },
+  {
+   "event": "Cercle d'empathie",
+   "season": "24-25",
+   "participants": 9,
+   "onsite": 9,
+   "nights": 0,
+   "total_rev": 18.95,
+   "lodg_rev": 0.0,
+   "avg_pp": 2.11
+  },
+  {
+   "event": "Journée d'hommage à Guéshé Tèngyéla",
+   "season": "25-26",
+   "participants": 33,
+   "onsite": 33,
+   "nights": 1,
+   "total_rev": 16.42,
+   "lodg_rev": 10.0,
+   "avg_pp": 0.5
+  },
+  {
+   "event": "Célébration de Tchotrul Dutchèn",
+   "season": "25-26",
+   "participants": 1,
+   "onsite": 1,
+   "nights": 0,
+   "total_rev": 12.25,
+   "lodg_rev": 0.0,
+   "avg_pp": 12.25
+  },
+  {
+   "event": "Pratique de Tara",
+   "season": "24-25",
+   "participants": 10,
+   "onsite": 10,
+   "nights": 0,
+   "total_rev": 10.5,
+   "lodg_rev": 0.0,
+   "avg_pp": 1.05
+  },
+  {
+   "event": "Nuit à Tara",
+   "season": "23-24",
+   "participants": 1,
+   "onsite": 1,
+   "nights": 0,
+   "total_rev": 10.0,
+   "lodg_rev": 0.0,
+   "avg_pp": 10.0
+  },
+  {
+   "event": "[obsolète] Nuit de prière pour le retour de Lama Zopa Rinpoché",
+   "season": "24-25",
+   "participants": 2,
+   "onsite": 2,
+   "nights": 1,
+   "total_rev": 8.0,
+   "lodg_rev": 8.0,
+   "avg_pp": 4.0
+  },
+  {
+   "event": "Célébration de Lhabab Dutchèn",
+   "season": "24-25",
+   "participants": 2,
+   "onsite": 2,
+   "nights": 0,
+   "total_rev": 0.0,
+   "lodg_rev": 0.0,
+   "avg_pp": 0.0
+  },
+  {
+   "event": "Pratique du Bouddha Médecine",
+   "season": "23-24",
+   "participants": 3,
+   "onsite": 3,
+   "nights": 0,
+   "total_rev": 0.0,
+   "lodg_rev": 0.0,
+   "avg_pp": 0.0
+  }
+ ],
+ "vyRetreats": [
+  {
+   "instance": "RET. PAULA VY [SUR PLACE] (2023-oct.-20-02)",
+   "period": "2023-10",
+   "participants": 37,
+   "nights": 287,
+   "total_rev": 8506.25,
+   "avg_pp": 229.9
+  },
+  {
+   "instance": "RET. PAULA VY [EN LIGNE] (2023-oct.-20-01)",
+   "period": "2023-10",
+   "participants": 51,
+   "nights": 0,
+   "total_rev": 6409.0,
+   "avg_pp": 125.67
+  },
+  {
+   "instance": "Retraite VY (2024-janv.-07-01)",
+   "period": "2024-01",
+   "participants": 14,
+   "nights": 264,
+   "total_rev": 6192.25,
+   "avg_pp": 442.3
+  },
+  {
+   "instance": "Retraite VY JS SUR PLACE (2025-janv.-13-05)",
+   "period": "2025-01",
+   "participants": 37,
+   "nights": 705,
+   "total_rev": 22818.49,
+   "avg_pp": 616.72
+  },
+  {
+   "instance": "Retraite VY JS EN LIGNE (2025-janv.-13-04)",
+   "period": "2025-01",
+   "participants": 16,
+   "nights": 0,
+   "total_rev": 1635.0,
+   "avg_pp": 102.19
+  },
+  {
+   "instance": "Retraite VY (1278)",
+   "period": "2026-01",
+   "participants": 6,
+   "nights": 143,
+   "total_rev": 6758.78,
+   "avg_pp": 1126.46
+  },
+  {
+   "instance": "JHADO RINPOCHE (1463)",
+   "period": "2026-10",
+   "participants": 65,
+   "nights": 377,
+   "total_rev": 17427.59,
+   "avg_pp": 268.12
+  },
+  {
+   "instance": "JHADO RINPOCHE (1464)",
+   "period": "2026-10",
+   "participants": 19,
+   "nights": 0,
+   "total_rev": 0.0,
+   "avg_pp": 0.0
   }
  ]
 }

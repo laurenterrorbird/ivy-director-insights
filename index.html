@@ -110,6 +110,11 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
 
 <div class="tc" id="t-ev">
   <div class="card">
+    <h3>Comparaison revenus par événement et par saison</h3>
+    <div class="note">Top événements par revenus totaux. Barres groupées : 23–24 / 24–25 / 25–26.</div>
+    <div class="cc" style="height:400px"><canvas id="c-ev-yoy"></canvas></div>
+  </div>
+  <div class="card">
     <h3>Événements & retraites — classés par revenus</h3>
     <div class="note">Chaque ligne = série d'événements (sessions regroupées). Inscriptions = réservations confirmées individuelles.</div>
     <input class="sb" id="ev-s" placeholder="Filtrer par nom ou enseignant...">
@@ -442,6 +447,25 @@ function rEv(){
     {k:'ba',f:FE,c:'n'},{k:'rpi',f:FE,c:'n'},{k:'te',f:v=>v||'—'}
   ]);
   document.getElementById('ev-s').oninput=e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('#t-ev-t tbody tr').forEach(tr=>tr.style.display=tr.textContent.toLowerCase().includes(q)?'':'none');};
+
+  // YoY revenue comparison chart
+  const yoySeason={};
+  RAW.filter(r=>r.status==='Confirmed').forEach(r=>{
+    const f=fy(r.mid||r.from);if(!f)return;
+    const sk=`${f}–${f+1}`;
+    if(!yoySeason[r.series])yoySeason[r.series]={};
+    yoySeason[r.series][sk]=(yoySeason[r.series][sk]||0)+r.revTotal;
+  });
+  const allSeasons=['2023–2024','2024–2025','2025–2026'];
+  const totalBySeries={};
+  Object.entries(yoySeason).forEach(([s,sv])=>{totalBySeries[s]=allSeasons.reduce((a,k)=>a+(sv[k]||0),0);});
+  const topEvents=Object.entries(totalBySeries).sort((a,b)=>b[1]-a[1]).slice(0,15).map(e=>e[0]);
+  const shortName=s=>s.length>30?s.slice(0,28)+'…':s;
+  const colors=['#6b8f63','#4a6741','#2c3e2c'];
+  DC('ev-yoy');CX['ev-yoy']=new Chart(document.getElementById('c-ev-yoy'),{type:'bar',data:{
+    labels:topEvents.map(shortName),
+    datasets:allSeasons.map((sk,i)=>({label:sk.replace('20',''),data:topEvents.map(e=>(yoySeason[e]||{})[sk]||0),backgroundColor:colors[i]}))
+  },options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',scales:{x:{beginAtZero:true,...chartEuroY}},plugins:{legend:{position:'top'},tooltip:chartEuroTip}}});
 }
 
 function rSe(){
