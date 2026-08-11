@@ -451,11 +451,14 @@ function rEv(){
   document.getElementById('ev-s').oninput=e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('#t-ev-t tbody tr').forEach(tr=>tr.style.display=tr.textContent.toLowerCase().includes(q)?'':'none');};
 
   // YoY revenue comparison chart — grouped by event_groups.tsv
+  console.log('EVGROUPS keys:',Object.keys(EVGROUPS).length,'sample:',Object.entries(EVGROUPS).slice(0,3));
   const yoyGrouped={};
+  let _dbg=0;
   RAW.filter(r=>r.status==='Confirmed').forEach(r=>{
     const f=fy(r.mid||r.from);if(!f)return;
     const sk=`${f}–${f+1}`;
     const grp=EVGROUPS[r.series]||r.series;
+    if(_dbg<5&&r.series.includes('Vipassana')){console.log('series:',JSON.stringify(r.series),'->grp:',grp);_dbg++;}
     if(!yoyGrouped[grp])yoyGrouped[grp]={};
     yoyGrouped[grp][sk]=(yoyGrouped[grp][sk]||0)+r.revTotal;
   });
