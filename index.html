@@ -119,11 +119,11 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
     <div id="ev-group-legend" style="margin-top:.3rem;font-size:.78rem;columns:2;column-gap:1.5rem;line-height:1.6"></div>
   </div>
   <div class="card">
-    <h3>Détail des revenus par événement et par groupe</h3>
-    <div class="note">Chaque groupe correspond à une barre du graphique ci-dessus. Les événements individuels sont listés sous leur groupe.</div>
+    <h3>Détail des revenus par événement, groupe et saison</h3>
+    <div class="note">Chaque groupe correspond à une barre du graphique. Les événements individuels sont listés par saison sous leur groupe.</div>
     <input class="sb" id="ev-s" placeholder="Filtrer par nom d'événement ou groupe...">
     <div style="overflow-x:auto"><table id="t-ev-t"><thead><tr>
-      <th>Groupe</th><th>Événement</th><th class="n">Participants</th><th class="n">Revenus</th>
+      <th>Groupe</th><th>Événement</th><th>Saison</th><th class="n">Participants</th><th class="n">Revenus</th>
     </tr></thead><tbody></tbody></table></div>
   </div>
 </div>
@@ -435,40 +435,40 @@ function rOv(){
 }
 
 function rEv(){
-  // Aggregate per series
+  // Aggregate per series per season
   const agg={};
-  filtered.forEach(r=>{
-    if(!agg[r.series])agg[r.series]={n:0,r:0};
-    agg[r.series].n++;agg[r.series].r+=r.revTotal;
+  RAW.filter(r=>r.status==='Confirmed').forEach(r=>{
+    const f=fy(r.mid||r.from);if(!f)return;
+    const sk=`${f}–${f+1}`;
+    const key=r.series+'||'+sk;
+    if(!agg[key])agg[key]={series:r.series,season:sk,n:0,r:0};
+    agg[key].n++;agg[key].r+=r.revTotal;
   });
 
-  // Build grouped table: group -> [{series, n, r}]
+  // Build grouped structure: group -> {totalN, totalR, events: [{series, season, n, r}]}
   const groupData={};
-  Object.entries(agg).forEach(([series,v])=>{
-    const grp=EVGROUPS[series]||series;
+  Object.values(agg).forEach(v=>{
+    const grp=EVGROUPS[v.series]||v.series;
     if(!groupData[grp])groupData[grp]={totalN:0,totalR:0,events:[]};
     groupData[grp].totalN+=v.n;groupData[grp].totalR+=v.r;
-    groupData[grp].events.push({series,n:v.n,r:v.r});
+    groupData[grp].events.push(v);
   });
 
-  // Sort groups alphabetically, events within each group by revenue desc
+  const seasonOrder=['2023–2024','2024–2025','2025–2026'];
   const sortedGroups=Object.entries(groupData).sort((a,b)=>a[0].localeCompare(b[0],'fr'));
   let html='';
   let alt=false;
   sortedGroups.forEach(([grp,gd])=>{
-    gd.events.sort((a,b)=>b.r-a.r);
+    gd.events.sort((a,b)=>a.series.localeCompare(b.series,'fr')||seasonOrder.indexOf(a.season)-seasonOrder.indexOf(b.season));
     const cls=alt?'season-a':'';
-    const multi=gd.events.length>1;
-    if(multi){
-      html+=`<tr class="${cls}" style="font-weight:700;background:${alt?'#f0f5f0':'#f8f9fa'}"><td>${grp}</td><td style="font-size:.7rem;color:var(--muted)">${gd.events.length} événements</td><td class="n">${F(gd.totalN)}</td><td class="n">${FE(gd.totalR)}</td></tr>`;
-      gd.events.forEach(ev=>{
-        html+=`<tr class="${cls}"><td></td><td style="padding-left:1.2rem;font-size:.8rem">${ev.series}</td><td class="n">${F(ev.n)}</td><td class="n">${FE(ev.r)}</td></tr>`;
-      });
-    } else {
-      const ev=gd.events[0];
-      const label=grp===ev.series?grp:grp;
-      html+=`<tr class="${cls}"><td>${label}</td><td style="font-size:.8rem">${ev.series!==grp?ev.series:''}</td><td class="n">${F(ev.n)}</td><td class="n">${FE(ev.r)}</td></tr>`;
-    }
+    const bg=alt?'#f0f5f0':'#f8f9fa';
+    // Group header
+    const uniqueSeries=new Set(gd.events.map(e=>e.series));
+    html+=`<tr class="${cls}" style="font-weight:700;background:${bg}"><td>${grp}</td><td style="font-size:.7rem;color:var(--muted)">${uniqueSeries.size} événement${uniqueSeries.size>1?'s':''}</td><td></td><td class="n">${F(gd.totalN)}</td><td class="n">${FE(gd.totalR)}</td></tr>`;
+    // Event rows by series then season
+    gd.events.forEach(ev=>{
+      html+=`<tr class="${cls}"><td></td><td style="padding-left:1rem;font-size:.78rem">${ev.series}</td><td style="font-size:.78rem">${ev.season.replace('20','')}</td><td class="n">${F(ev.n)}</td><td class="n">${FE(ev.r)}</td></tr>`;
+    });
     alt=!alt;
   });
   document.querySelector('#t-ev-t tbody').innerHTML=html;
