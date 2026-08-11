@@ -119,15 +119,11 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
     <div id="ev-group-legend" style="margin-top:.3rem;font-size:.78rem;columns:2;column-gap:1.5rem;line-height:1.6"></div>
   </div>
   <div class="card">
-    <h3>Événements & retraites — classés par revenus</h3>
-    <div class="note">Chaque ligne = série d'événements (sessions regroupées). Inscriptions = réservations confirmées individuelles.</div>
-    <input class="sb" id="ev-s" placeholder="Filtrer par nom ou enseignant...">
+    <h3>Détail des revenus par événement et par groupe</h3>
+    <div class="note">Chaque groupe correspond à une barre du graphique ci-dessus. Les événements individuels sont listés sous leur groupe.</div>
+    <input class="sb" id="ev-s" placeholder="Filtrer par nom d'événement ou groupe...">
     <div style="overflow-x:auto"><table id="t-ev-t"><thead><tr>
-      <th data-k="s">Événement</th><th data-k="b">Catégorie</th><th class="n" data-k="n">Participants</th>
-      <th class="n" data-k="r">Revenus</th><th class="n" data-k="a">Participation</th>
-      <th class="n" data-k="l">Héberg.</th><th class="n" data-k="m">Repas</th>
-      <th class="n" data-k="ba">Solde dû</th><th class="n" data-k="rpi">Rev./inscr.</th>
-      <th data-k="te">Enseignant</th>
+      <th>Groupe</th><th>Événement</th><th class="n">Participants</th><th class="n">Revenus</th>
     </tr></thead><tbody></tbody></table></div>
   </div>
 </div>
@@ -439,19 +435,43 @@ function rOv(){
 }
 
 function rEv(){
+  // Aggregate per series
   const agg={};
   filtered.forEach(r=>{
-    if(!agg[r.series])agg[r.series]={n:0,r:0,a:0,l:0,m:0,ba:0,b:r.bucket,te:new Set()};
-    const x=agg[r.series];x.n++;x.r+=r.revTotal;x.a+=r.revAtt;x.l+=r.revLodg;x.m+=r.revMeals;x.ba+=r.balance;
-    if(r.teacher)r.teacher.split('; ').forEach(t=>{if(t.trim())x.te.add(t.trim());});
+    if(!agg[r.series])agg[r.series]={n:0,r:0};
+    agg[r.series].n++;agg[r.series].r+=r.revTotal;
   });
-  let rows=Object.entries(agg).map(([s,v])=>({s,b:v.b,n:v.n,r:v.r,a:v.a,l:v.l,m:v.m,ba:v.ba,rpi:v.n?v.r/v.n:0,te:[...v.te].join(', ')}));
-  rows.sort((a,b)=>b.r-a.r);
-  sortableTable('t-ev-t',rows,[
-    {k:'s',f:v=>v},{k:'b',f:v=>`<span class="bt ${BC(v)}">${v}</span>`},{k:'n',f:F,c:'n'},
-    {k:'r',f:FE,c:'n'},{k:'a',f:FE,c:'n'},{k:'l',f:FE,c:'n'},{k:'m',f:FE,c:'n'},
-    {k:'ba',f:FE,c:'n'},{k:'rpi',f:FE,c:'n'},{k:'te',f:v=>v||'—'}
-  ]);
+
+  // Build grouped table: group -> [{series, n, r}]
+  const groupData={};
+  Object.entries(agg).forEach(([series,v])=>{
+    const grp=EVGROUPS[series]||series;
+    if(!groupData[grp])groupData[grp]={totalN:0,totalR:0,events:[]};
+    groupData[grp].totalN+=v.n;groupData[grp].totalR+=v.r;
+    groupData[grp].events.push({series,n:v.n,r:v.r});
+  });
+
+  // Sort groups alphabetically, events within each group by revenue desc
+  const sortedGroups=Object.entries(groupData).sort((a,b)=>a[0].localeCompare(b[0],'fr'));
+  let html='';
+  let alt=false;
+  sortedGroups.forEach(([grp,gd])=>{
+    gd.events.sort((a,b)=>b.r-a.r);
+    const cls=alt?'season-a':'';
+    const multi=gd.events.length>1;
+    if(multi){
+      html+=`<tr class="${cls}" style="font-weight:700;background:${alt?'#f0f5f0':'#f8f9fa'}"><td>${grp}</td><td style="font-size:.7rem;color:var(--muted)">${gd.events.length} événements</td><td class="n">${F(gd.totalN)}</td><td class="n">${FE(gd.totalR)}</td></tr>`;
+      gd.events.forEach(ev=>{
+        html+=`<tr class="${cls}"><td></td><td style="padding-left:1.2rem;font-size:.8rem">${ev.series}</td><td class="n">${F(ev.n)}</td><td class="n">${FE(ev.r)}</td></tr>`;
+      });
+    } else {
+      const ev=gd.events[0];
+      const label=grp===ev.series?grp:grp;
+      html+=`<tr class="${cls}"><td>${label}</td><td style="font-size:.8rem">${ev.series!==grp?ev.series:''}</td><td class="n">${F(ev.n)}</td><td class="n">${FE(ev.r)}</td></tr>`;
+    }
+    alt=!alt;
+  });
+  document.querySelector('#t-ev-t tbody').innerHTML=html;
   document.getElementById('ev-s').oninput=e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('#t-ev-t tbody tr').forEach(tr=>tr.style.display=tr.textContent.toLowerCase().includes(q)?'':'none');};
 
   // YoY revenue comparison chart — grouped by event_groups.tsv
