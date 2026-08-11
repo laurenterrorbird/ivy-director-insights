@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>IVY Director Insights</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <style>
@@ -113,7 +115,8 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
     <h3>Comparaison revenus par événement et par saison</h3>
     <div class="note">Top événements par revenus totaux. Barres groupées : 23–24 / 24–25 / 25–26. Certains événements sont regroupés (voir détail ci-dessous).</div>
     <div class="cc" style="height:400px"><canvas id="c-ev-yoy"></canvas></div>
-    <div id="ev-group-legend" style="margin-top:.5rem;font-size:.72rem;color:var(--muted);columns:2;column-gap:1.5rem"></div>
+    <div class="note" style="margin-top:.8rem">Regroupements appliques :</div>
+    <div id="ev-group-legend" style="margin-top:.3rem;font-size:.78rem;columns:2;column-gap:1.5rem;line-height:1.6"></div>
   </div>
   <div class="card">
     <h3>Événements & retraites — classés par revenus</h3>
