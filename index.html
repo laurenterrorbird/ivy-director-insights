@@ -111,8 +111,9 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
 <div class="tc" id="t-ev">
   <div class="card">
     <h3>Comparaison revenus par événement et par saison</h3>
-    <div class="note">Top événements par revenus totaux. Barres groupées : 23–24 / 24–25 / 25–26.</div>
+    <div class="note">Top événements par revenus totaux. Barres groupées : 23–24 / 24–25 / 25–26. Certains événements sont regroupés (voir détail ci-dessous).</div>
     <div class="cc" style="height:400px"><canvas id="c-ev-yoy"></canvas></div>
+    <div id="ev-group-legend" style="margin-top:.5rem;font-size:.72rem;color:var(--muted);columns:2;column-gap:1.5rem"></div>
   </div>
   <div class="card">
     <h3>Événements & retraites — classés par revenus</h3>
@@ -451,14 +452,11 @@ function rEv(){
   document.getElementById('ev-s').oninput=e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('#t-ev-t tbody tr').forEach(tr=>tr.style.display=tr.textContent.toLowerCase().includes(q)?'':'none');};
 
   // YoY revenue comparison chart — grouped by event_groups.tsv
-  console.log('EVGROUPS keys:',Object.keys(EVGROUPS).length,'sample:',Object.entries(EVGROUPS).slice(0,3));
   const yoyGrouped={};
-  let _dbg=0;
   RAW.filter(r=>r.status==='Confirmed').forEach(r=>{
     const f=fy(r.mid||r.from);if(!f)return;
     const sk=`${f}–${f+1}`;
     const grp=EVGROUPS[r.series]||r.series;
-    if(_dbg<5&&r.series.includes('Vipassana')){console.log('series:',JSON.stringify(r.series),'->grp:',grp);_dbg++;}
     if(!yoyGrouped[grp])yoyGrouped[grp]={};
     yoyGrouped[grp][sk]=(yoyGrouped[grp][sk]||0)+r.revTotal;
   });
@@ -472,6 +470,16 @@ function rEv(){
     labels:topGroups.map(shortName),
     datasets:allSeasons.map((sk,i)=>({label:sk.replace('20',''),data:topGroups.map(g=>(yoyGrouped[g]||{})[sk]||0),backgroundColor:colors[i]}))
   },options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,...chartEuroY},x:{ticks:{maxRotation:45,minRotation:45,font:{size:10}}}},plugins:{legend:{position:'top'},tooltip:chartEuroTip}}});
+
+  // Group legend: show which events are merged under each group
+  const grpMembers={};
+  Object.entries(EVGROUPS).forEach(([ev,grp])=>{
+    if(!grpMembers[grp])grpMembers[grp]=[];
+    if(ev!==grp)grpMembers[grp].push(ev);
+  });
+  const legendGroups=topGroups.filter(g=>grpMembers[g]&&grpMembers[g].length>0);
+  document.getElementById('ev-group-legend').innerHTML=legendGroups.length?
+    legendGroups.map(g=>`<div style="break-inside:avoid;margin-bottom:.5rem"><strong style="color:var(--text)">${g}</strong> : ${grpMembers[g].join(', ')}</div>`).join(''):'';
 }
 
 function rSe(){
