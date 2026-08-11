@@ -266,7 +266,7 @@ const chartEuroY={ticks:{callback:v=>FE(v)}};
 const doughnutTip=(tip)=>({plugins:{legend:{position:'right'},tooltip:tip}});
 function S(i,d){return i<0?'':d[i]||'';}
 const BUCKET_COLORS={'Bénévole':'#4a6741','IDMT (en ligne)':'#1565c0','Retraites & événements (sur place)':'#e65100','Retraites & événements (en ligne)':'#26a69a','Retraites & événements':'#e65100','Repas hors activités':'#c62828','Séjour personnel':'#6a1b9a'};
-const BUCKET_ORDER=['Retraites & événements (sur place)','Retraites & événements (en ligne)','IDMT (en ligne)','Bénévole','Repas hors activités','Séjour personnel'];
+const BUCKET_ORDER=['Retraites & événements (sur place)','Retraites & événements (en ligne)','Bénévole','Repas hors activités','Séjour personnel'];
 function BC(b){if(!b)return'ret';if(b.includes('IDMT'))return'idmt';if(b.includes('Bénévole'))return'ben';if(b.includes('Repas'))return'rep';if(b.includes('Séjour'))return'sej';if(b.includes('en ligne'))return'ret-ol';return'ret';}
 function P(r){return{from:r[0],to:r[1],mid:r[2],series:S(r[3],STR),bucket:S(r[4],STR),event:S(r[5],EVT),room:S(r[6],RMS),nights:r[7],mealDays:r[8],revAtt:r[9],revLodg:r[10],revMeals:r[11],revMisc:r[12],revTotal:r[13],paid:r[14],balance:r[15],status:S(r[16],STR),type:S(r[17],STR),teacher:S(r[18],TCH)};}
 function midMonth(r){return(r.mid||r.from).slice(0,7);}
@@ -372,6 +372,7 @@ function applyFilter(){
   // DEFAULT: Confirmed only. No status dropdown needed — canceled/waitlist excluded for revenue accuracy.
   filtered=RAW.filter(r=>{
     if(r.status!=='Confirmed')return false;
+    if(r.bucket==='IDMT (en ligne)')return false;
     const d=r.mid||r.from;
     if(d<from||d>to)return false;
     if(bk&&r.bucket!==bk)return false;
@@ -438,7 +439,7 @@ function rEv(){
   // Aggregate per series per season, collect teachers
   const agg={};
   const seriesTeachers={};
-  RAW.filter(r=>r.status==='Confirmed').forEach(r=>{
+  RAW.filter(r=>r.status==='Confirmed'&&r.bucket!=='IDMT (en ligne)').forEach(r=>{
     const f=fy(r.mid||r.from);if(!f)return;
     const sk=`${f}–${f+1}`;
     const key=r.series+'||'+sk;
@@ -490,7 +491,7 @@ function rEv(){
 
   // YoY revenue comparison chart — grouped by event_groups.tsv
   const yoyGrouped={};
-  RAW.filter(r=>r.status==='Confirmed').forEach(r=>{
+  RAW.filter(r=>r.status==='Confirmed'&&r.bucket!=='IDMT (en ligne)').forEach(r=>{
     const f=fy(r.mid||r.from);if(!f)return;
     const sk=`${f}–${f+1}`;
     const grp=EVGROUPS[r.series]||r.series;
