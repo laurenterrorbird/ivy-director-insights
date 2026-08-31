@@ -92,6 +92,7 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
 
 <div class="tc on" id="t-ov">
   <div class="kg" id="kpi"></div>
+  <div class="note" id="kpi-note" style="margin-bottom:.8rem"></div>
   <div class="g2">
     <div class="card"><h3>Revenus par catégorie</h3>
     <div class="note">Montants en euros (€).</div>
@@ -209,45 +210,47 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
 </div>
 
 <div class="tc" id="t-j31">
-  <div class="note" style="margin-bottom:.7rem">Instantané figé : inscriptions <strong>confirmées</strong>, paiements datés <strong>au 31 juillet 2026 inclus</strong>, pour les événements dont le début (ou, pour un séjour personnel, l'arrivée) est le <strong>1er août 2026 ou après</strong>. Indépendant du filtre de période.</div>
-  <div class="kg">
-    <div class="kc"><div class="v">22 210,01 €</div><div class="l">Déjà encaissé au 31 juillet</div></div>
-    <div class="kc"><div class="v">41 278,78 €</div><div class="l">Revenu confirmé (mêmes inscrits)</div></div>
-    <div class="kc"><div class="v">54 %</div><div class="l">Part déjà encaissée</div></div>
-    <div class="kc"><div class="v">67 / 161</div><div class="l">Inscrits ayant payé / confirmés</div></div>
+  <div class="note" style="margin-bottom:.7rem">
+    Parmi les encaissements du <strong>1er janvier au 31 juillet 2026</strong>, quelle part correspond à des événements
+    <strong>pas encore commencés au 31 juillet</strong> : instance commençant le 31 juillet ou après,
+    <em>ou</em> arrivée du participant le 31 juillet ou après (séjours personnels).
+    Argent réellement encaissé (remboursements déduits). Les inscriptions annulées ensuite restent incluses si le paiement était déjà là au 31 juillet.
+    Source : backup SeminarDesk du 31 août 2026.
   </div>
-  <div class="card">
-    <div style="display:flex;justify-content:space-between;font-size:.75rem"><span>Part du revenu confirmé déjà encaissée</span><span>22 210,01 € / 41 278,78 €</span></div>
-    <div class="prog"><div class="fill" style="width:53.8%"></div></div>
-    <div class="note" style="margin-top:.5rem">La retraite Vajrasattva (YR 1401) commence le 31 juillet : elle n'est pas dans cette fenêtre. Bénévoles à l'année et repas hors activités exclus (leur événement commence avant août).</div>
+  <div class="kg">
+    <div class="kc"><div class="v">40 777,12 €</div><div class="l">Encaissé au 31 juil. pour ces départs futurs</div></div>
+    <div class="kc"><div class="v">17 270,26 €</div><div class="l">dont Vajrasattva (dès le 31 juil.)</div></div>
+    <div class="kc"><div class="v">10 652,52 €</div><div class="l">dont Jhado Rinpoché (octobre)</div></div>
+    <div class="kc"><div class="v">126</div><div class="l">Inscriptions ayant un paiement net</div></div>
   </div>
   <div class="g2">
-    <div class="card"><h3>Encaissé au 31 juillet, par instance</h3>
-      <div class="note">Montants en euros (€).</div>
-      <div class="cc" style="height:320px"><canvas id="c-j31-ev"></canvas></div></div>
-    <div class="card"><h3>Encaissements mensuels jusqu'au 31 juillet</h3>
-      <div class="note">Paiements destinés aux départs du 1er août ou après.</div>
+    <div class="card"><h3>Répartition par instance</h3>
+      <div class="note">Montants en euros (€), net des remboursements datés au 31 juillet.</div>
+      <div class="cc" style="height:340px"><canvas id="c-j31-ev"></canvas></div></div>
+    <div class="card"><h3>Quand cet argent est arrivé</h3>
+      <div class="note">Paiements de 2026 affectés à ces départs futurs.</div>
       <div class="cc"><canvas id="c-j31-mo"></canvas></div></div>
   </div>
   <div class="card">
-    <h3>Toutes les instances incluses</h3>
+    <h3>Détail</h3>
     <div style="overflow-x:auto"><table>
       <thead><tr>
         <th>Instance</th><th>Dates</th>
-        <th class="n">Confirmés</th><th class="n">Ayant payé</th>
-        <th class="n">Encaissé au 31 juil.</th><th class="n">Revenu confirmé</th>
+        <th class="n">Ayant payé</th>
+        <th class="n">Encaissé 1 janv.–31 juil.</th>
       </tr></thead>
       <tbody>
-        <tr><td>Pleine conscience en mouvement</td><td>1–3 août</td><td class="n">4</td><td class="n">2</td><td class="n">318,53 €</td><td class="n">318,53 €</td></tr>
-        <tr><td>Shamata–Vipashyana, 10 jours</td><td>14–23 août</td><td class="n">27</td><td class="n">18</td><td class="n">6 750,82 €</td><td class="n">8 854,46 €</td></tr>
-        <tr><td>Shamata–Vipashyana, 6 jours</td><td>14–20 août</td><td class="n">9</td><td class="n">5</td><td class="n">1 190,34 €</td><td class="n">1 809,65 €</td></tr>
-        <tr><td>Lamrim d'été semaine 1 (sur place)</td><td>16–23 août</td><td class="n">18</td><td class="n">3</td><td class="n">1 457,47 €</td><td class="n">5 292,99 €</td></tr>
-        <tr><td>Premier pas sur le chemin du pardon</td><td>22–23 août</td><td class="n">5</td><td class="n">2</td><td class="n">66,68 €</td><td class="n">270,96 €</td></tr>
-        <tr><td>Lamrim d'été semaine 2 (sur place)</td><td>23–30 août</td><td class="n">26</td><td class="n">9</td><td class="n">2 750,15 €</td><td class="n">6 805,29 €</td></tr>
-        <tr><td>Retraite du Bouddha Médecine</td><td>28–30 août</td><td class="n">4</td><td class="n">1</td><td class="n">76,13 €</td><td class="n">125,13 €</td></tr>
-        <tr><td>Séjour personnel (arrivée ≥ 1er août)</td><td>arrivées en août</td><td class="n">3</td><td class="n">1</td><td class="n">229,22 €</td><td class="n">374,18 €</td></tr>
-        <tr><td>Jhado Rinpoché — initiation + commentaire</td><td>26 oct. – 3 nov.</td><td class="n">65</td><td class="n">26</td><td class="n">9 370,67 €</td><td class="n">17 427,59 €</td></tr>
-        <tr style="font-weight:700"><td>Total</td><td></td><td class="n">161</td><td class="n">67</td><td class="n">22 210,01 €</td><td class="n">41 278,78 €</td></tr>
+        <tr><td>Séjour personnel (arrivée ≥ 31 juil.)</td><td>arrivées dès le 31 juil.</td><td class="n">1</td><td class="n">229,22 €</td></tr>
+        <tr><td>Pratique intensive de Vajrasattva</td><td>31 juil. – 9 août</td><td class="n">56</td><td class="n">17 270,26 €</td></tr>
+        <tr><td>Pleine conscience en mouvement</td><td>1–3 août</td><td class="n">2</td><td class="n">318,53 €</td></tr>
+        <tr><td>Shamata–Vipashyana, 10 jours</td><td>14–23 août</td><td class="n">19</td><td class="n">6 765,82 €</td></tr>
+        <tr><td>Shamata–Vipashyana, 6 jours</td><td>14–20 août</td><td class="n">5</td><td class="n">1 190,34 €</td></tr>
+        <tr><td>Lamrim d'été semaine 1 (sur place)</td><td>16–23 août</td><td class="n">3</td><td class="n">1 457,47 €</td></tr>
+        <tr><td>Premier pas sur le chemin du pardon</td><td>22–23 août</td><td class="n">2</td><td class="n">66,68 €</td></tr>
+        <tr><td>Lamrim d'été semaine 2 (sur place)</td><td>23–30 août</td><td class="n">9</td><td class="n">2 750,15 €</td></tr>
+        <tr><td>Retraite du Bouddha Médecine</td><td>28–30 août</td><td class="n">1</td><td class="n">76,13 €</td></tr>
+        <tr><td>Jhado Rinpoché — initiation + commentaire</td><td>26 oct. – 3 nov.</td><td class="n">28</td><td class="n">10 652,52 €</td></tr>
+        <tr style="font-weight:700"><td>Total</td><td></td><td class="n">126</td><td class="n">40 777,12 €</td></tr>
       </tbody>
     </table></div>
   </div>
@@ -257,22 +260,24 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
       <table>
         <thead><tr><th>Mode</th><th class="n">Paiements</th><th class="n">Montant</th></tr></thead>
         <tbody>
-          <tr><td>Stripe (STRIPE CBM)</td><td class="n">65</td><td class="n">21 280,18 €</td></tr>
+          <tr><td>Stripe (STRIPE CBM)</td><td class="n">122</td><td class="n">38 362,82 €</td></tr>
+          <tr><td>Carte sur place (CB)</td><td class="n">5</td><td class="n">1 685,80 €</td></tr>
+          <tr><td>Espèces</td><td class="n">4</td><td class="n">445,20 €</td></tr>
+          <tr><td>Chèque</td><td class="n">4</td><td class="n">323,89 €</td></tr>
           <tr><td>Virement</td><td class="n">1</td><td class="n">293,04 €</td></tr>
-          <tr><td>Carte sur place (CB)</td><td class="n">1</td><td class="n">280,43 €</td></tr>
-          <tr><td>Espèces</td><td class="n">1</td><td class="n">228,00 €</td></tr>
-          <tr><td>Chèque</td><td class="n">1</td><td class="n">128,36 €</td></tr>
+          <tr><td>Stripe IVYES (avoir)</td><td class="n">1</td><td class="n">−333,63 €</td></tr>
         </tbody>
       </table>
     </div>
     <div class="card">
-      <h3>Hors périmètre</h3>
+      <h3>Lecture</h3>
+      <div class="note">Ces 40 777 € sont à rapprocher du résultat YTD comptable (1 janv.–31 juil.) : c'est la part déjà en caisse pour des activités qui n'avaient pas encore commencé.</div>
       <table>
-        <thead><tr><th>Filtre</th><th class="n">Montant</th></tr></thead>
+        <thead><tr><th></th><th class="n">Montant</th></tr></thead>
         <tbody>
-          <tr><td>Annulés sur ces mêmes événements futurs</td><td class="n">3 inscrits · 1 296,85 €</td></tr>
-          <tr><td>Retraite Vajrasattva (début 31 juillet)</td><td class="n">Hors fenêtre</td></tr>
-          <tr><td>En attente / liste d'attente</td><td class="n">Non inclus</td></tr>
+          <tr><td>Dont réservations encore confirmées au 31 août</td><td class="n">38 174,17 €</td></tr>
+          <tr><td>Dont réservations ensuite / déjà annulées (net remboursements)</td><td class="n">2 602,95 €</td></tr>
+          <tr><td>Offert (non cash, exclu du total)</td><td class="n">235,40 €</td></tr>
         </tbody>
       </table>
     </div>
@@ -488,7 +493,7 @@ function DC(id){if(CX[id]){CX[id].destroy();delete CX[id];}}
 
 function rOv(){
   let rev=0,paid=0,bal=0,n=filtered.length,ol=0,os=0,nights=0,meals=0;
-  filtered.forEach(r=>{rev+=r.revTotal;paid+=r.paid;if(r.balance>0)bal+=r.balance;
+  filtered.forEach(r=>{rev+=r.revTotal;paid+=r.paid;const due=r.revTotal-r.paid;if(due>0)bal+=due;
     if(r.type==='online')ol++;else if(r.type==='on-site')os++;
     nights+=r.nights;meals+=r.mealDays;});
   document.getElementById('kpi').innerHTML=[
@@ -496,6 +501,11 @@ function rOv(){
     {l:'Inscriptions confirmées',v:F(n)},{l:'Nuitées',v:F(nights)},{l:'Jours repas',v:F(meals)},
     {l:'Sur place',v:F(os)},{l:'En ligne',v:F(ol)},{l:'Revenu moy./inscr.',v:n?FE(rev/n):'—'}
   ].map(c=>`<div class="kc"><div class="v">${c.v}</div><div class="l">${c.l}</div></div>`).join('');
+  const over=filtered.reduce((s,r)=>s+Math.max(0,r.paid-r.revTotal),0);
+  const kn=document.getElementById('kpi-note');
+  if(kn) kn.textContent=over>0.5
+    ? `Solde ouvert = revenu − encaissé (encore dû). Encaissé + solde = revenus + ${FE(over)} de trop-perçus.`
+    : 'Solde ouvert = revenu − encaissé (encore dû). Encaissé + solde ouvert = revenus totaux.';
 
   const bks={};const bkN={};
   filtered.forEach(r=>{bks[r.bucket]=(bks[r.bucket]||0)+r.revTotal;bkN[r.bucket]=(bkN[r.bucket]||0)+1;});
@@ -667,14 +677,14 @@ function rLunchTables(){
 function rSt(){}
 
 function rJ31(){
-  const evLabels=['Jhado Rinpoché','Shamata 10 j.','Lamrim sem. 2','Lamrim sem. 1','Shamata 6 j.','PC mouvement','Séjour perso','Bouddha Médecine','Chemin du pardon'];
-  const evData=[9370.67,6750.82,2750.15,1457.47,1190.34,318.53,229.22,76.13,66.68];
+  const evLabels=['Vajrasattva','Jhado Rinpoché','Shamata 10 j.','Lamrim sem. 2','Lamrim sem. 1','Shamata 6 j.','PC mouvement','Séjour perso','Bouddha Médecine','Chemin du pardon'];
+  const evData=[17270.26,10652.52,6765.82,2750.15,1457.47,1190.34,318.53,229.22,76.13,66.68];
   DC('j31-ev');
   const elEv=document.getElementById('c-j31-ev');
-  if(elEv) CX['j31-ev']=new Chart(elEv,{type:'bar',data:{labels:evLabels,datasets:[{label:'Encaissé au 31 juil.',data:evData,backgroundColor:'#4a6741'}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{beginAtZero:true,...chartEuroY}},plugins:{legend:{display:false},tooltip:chartEuroTip}}});
+  if(elEv) CX['j31-ev']=new Chart(elEv,{type:'bar',data:{labels:evLabels,datasets:[{label:'Encaissé 1 janv.–31 juil.',data:evData,backgroundColor:'#4a6741'}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{beginAtZero:true,...chartEuroY}},plugins:{legend:{display:false},tooltip:chartEuroTip}}});
   DC('j31-mo');
   const elMo=document.getElementById('c-j31-mo');
-  if(elMo) CX['j31-mo']=new Chart(elMo,{type:'bar',data:{labels:['Jan','Mar','Avr','Mai','Juin','Juil'],datasets:[{label:'Encaissé',data:[1391.88,885.72,1004.08,1803.89,8394.95,8729.49],backgroundColor:'#4a6741'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,...chartEuroY}},plugins:{legend:{display:false},tooltip:chartEuroTip}}});
+  if(elMo) CX['j31-mo']=new Chart(elMo,{type:'bar',data:{labels:['Jan','Mar','Avr','Mai','Juin','Juil'],datasets:[{label:'Encaissé',data:[1391.88,4381.55,3707.23,4762.24,12639.65,13894.57],backgroundColor:'#4a6741'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,...chartEuroY}},plugins:{legend:{display:false},tooltip:chartEuroTip}}});
 }
 
 function rLo(){
@@ -772,10 +782,9 @@ function rCo(){
   const from=document.getElementById('f-from').value,to=document.getElementById('f-to').value;
   const bk=document.getElementById('f-bucket').value;
   const allInPeriod=RAW.filter(r=>{const d=r.mid||r.from;return d>=from&&d<=to&&(!bk||r.bucket===bk);});
-  allInPeriod.forEach(r=>{rev+=r.revTotal;paid+=r.paid;if(r.balance>0)bal+=r.balance;st[r.status]=(st[r.status]||0)+1;
-    if(r.balance>0){balByBk[r.bucket]=(balByBk[r.bucket]||0)+r.balance;}});
+  allInPeriod.forEach(r=>{rev+=r.revTotal;paid+=r.paid;const due=r.revTotal-r.paid;if(due>0){bal+=due;balByBk[r.bucket]=(balByBk[r.bucket]||0)+due;}st[r.status]=(st[r.status]||0)+1;});
   const rate=rev>0?(100*paid/rev).toFixed(1)+'%':'—';
-  const unpaid=allInPeriod.filter(r=>r.balance>0&&r.status==='Confirmed').length;
+  const unpaid=allInPeriod.filter(r=>(r.revTotal-r.paid)>0.5&&r.status==='Confirmed').length;
   document.getElementById('co-kpi').innerHTML=[
     {l:'Revenus (tous statuts)',v:FE(rev)},{l:'Encaissé',v:FE(paid)},{l:'Solde ouvert',v:FE(bal)},
     {l:'Taux encaissement',v:rate},{l:'Confirmées impayées',v:F(unpaid)},{l:'Solde moy. (impayés)',v:unpaid?FE(bal/unpaid):'—'}
