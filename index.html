@@ -52,6 +52,8 @@ tr:hover{background:var(--hover)}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
 .occ-bar{height:20px;background:#e9ecef;border-radius:3px;overflow:hidden;margin:.2rem 0}
 .occ-bar .fill{height:100%;background:var(--accent);border-radius:3px;transition:width .3s}
+.prog{height:10px;background:#e9ecef;border-radius:4px;overflow:hidden;margin:.4rem 0 .15rem}
+.prog .fill{height:100%;background:var(--accent);border-radius:4px}
 @media(max-width:900px){.g2{grid-template-columns:1fr}}
 @media(max-width:768px){.kg{grid-template-columns:repeat(2,1fr)}.fbar{flex-direction:column;align-items:stretch}}
 footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
@@ -82,6 +84,7 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
   <button data-t="lo">Hébergement</button>
   <button data-t="te">Enseignants</button>
   <button data-t="co">Encaissements</button>
+  <button data-t="j31">31 juillet</button>
   <button data-t="br">Détail réservations</button>
   <button data-t="st">Strategie</button>
   <button data-t="ai">Poser une question</button>
@@ -202,6 +205,77 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
   <div class="g2">
     <div class="card"><h3>Statuts</h3><div class="cc"><canvas id="c-st"></canvas></div></div>
     <div class="card"><h3>Solde par catégorie</h3><div class="cc"><canvas id="c-bal"></canvas></div></div>
+  </div>
+</div>
+
+<div class="tc" id="t-j31">
+  <div class="note" style="margin-bottom:.7rem">Instantané figé : inscriptions <strong>confirmées</strong>, paiements datés <strong>au 31 juillet 2026 inclus</strong>, pour les événements dont le début (ou, pour un séjour personnel, l'arrivée) est le <strong>1er août 2026 ou après</strong>. Indépendant du filtre de période.</div>
+  <div class="kg">
+    <div class="kc"><div class="v">22 210,01 €</div><div class="l">Déjà encaissé au 31 juillet</div></div>
+    <div class="kc"><div class="v">41 278,78 €</div><div class="l">Revenu confirmé (mêmes inscrits)</div></div>
+    <div class="kc"><div class="v">54 %</div><div class="l">Part déjà encaissée</div></div>
+    <div class="kc"><div class="v">67 / 161</div><div class="l">Inscrits ayant payé / confirmés</div></div>
+  </div>
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;font-size:.75rem"><span>Part du revenu confirmé déjà encaissée</span><span>22 210,01 € / 41 278,78 €</span></div>
+    <div class="prog"><div class="fill" style="width:53.8%"></div></div>
+    <div class="note" style="margin-top:.5rem">La retraite Vajrasattva (YR 1401) commence le 31 juillet : elle n'est pas dans cette fenêtre. Bénévoles à l'année et repas hors activités exclus (leur événement commence avant août).</div>
+  </div>
+  <div class="g2">
+    <div class="card"><h3>Encaissé au 31 juillet, par instance</h3>
+      <div class="note">Montants en euros (€).</div>
+      <div class="cc" style="height:320px"><canvas id="c-j31-ev"></canvas></div></div>
+    <div class="card"><h3>Encaissements mensuels jusqu'au 31 juillet</h3>
+      <div class="note">Paiements destinés aux départs du 1er août ou après.</div>
+      <div class="cc"><canvas id="c-j31-mo"></canvas></div></div>
+  </div>
+  <div class="card">
+    <h3>Toutes les instances incluses</h3>
+    <div style="overflow-x:auto"><table>
+      <thead><tr>
+        <th>Instance</th><th>Dates</th>
+        <th class="n">Confirmés</th><th class="n">Ayant payé</th>
+        <th class="n">Encaissé au 31 juil.</th><th class="n">Revenu confirmé</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Pleine conscience en mouvement</td><td>1–3 août</td><td class="n">4</td><td class="n">2</td><td class="n">318,53 €</td><td class="n">318,53 €</td></tr>
+        <tr><td>Shamata–Vipashyana, 10 jours</td><td>14–23 août</td><td class="n">27</td><td class="n">18</td><td class="n">6 750,82 €</td><td class="n">8 854,46 €</td></tr>
+        <tr><td>Shamata–Vipashyana, 6 jours</td><td>14–20 août</td><td class="n">9</td><td class="n">5</td><td class="n">1 190,34 €</td><td class="n">1 809,65 €</td></tr>
+        <tr><td>Lamrim d'été semaine 1 (sur place)</td><td>16–23 août</td><td class="n">18</td><td class="n">3</td><td class="n">1 457,47 €</td><td class="n">5 292,99 €</td></tr>
+        <tr><td>Premier pas sur le chemin du pardon</td><td>22–23 août</td><td class="n">5</td><td class="n">2</td><td class="n">66,68 €</td><td class="n">270,96 €</td></tr>
+        <tr><td>Lamrim d'été semaine 2 (sur place)</td><td>23–30 août</td><td class="n">26</td><td class="n">9</td><td class="n">2 750,15 €</td><td class="n">6 805,29 €</td></tr>
+        <tr><td>Retraite du Bouddha Médecine</td><td>28–30 août</td><td class="n">4</td><td class="n">1</td><td class="n">76,13 €</td><td class="n">125,13 €</td></tr>
+        <tr><td>Séjour personnel (arrivée ≥ 1er août)</td><td>arrivées en août</td><td class="n">3</td><td class="n">1</td><td class="n">229,22 €</td><td class="n">374,18 €</td></tr>
+        <tr><td>Jhado Rinpoché — initiation + commentaire</td><td>26 oct. – 3 nov.</td><td class="n">65</td><td class="n">26</td><td class="n">9 370,67 €</td><td class="n">17 427,59 €</td></tr>
+        <tr style="font-weight:700"><td>Total</td><td></td><td class="n">161</td><td class="n">67</td><td class="n">22 210,01 €</td><td class="n">41 278,78 €</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <h3>Modes de paiement</h3>
+      <table>
+        <thead><tr><th>Mode</th><th class="n">Paiements</th><th class="n">Montant</th></tr></thead>
+        <tbody>
+          <tr><td>Stripe (STRIPE CBM)</td><td class="n">65</td><td class="n">21 280,18 €</td></tr>
+          <tr><td>Virement</td><td class="n">1</td><td class="n">293,04 €</td></tr>
+          <tr><td>Carte sur place (CB)</td><td class="n">1</td><td class="n">280,43 €</td></tr>
+          <tr><td>Espèces</td><td class="n">1</td><td class="n">228,00 €</td></tr>
+          <tr><td>Chèque</td><td class="n">1</td><td class="n">128,36 €</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Hors périmètre</h3>
+      <table>
+        <thead><tr><th>Filtre</th><th class="n">Montant</th></tr></thead>
+        <tbody>
+          <tr><td>Annulés sur ces mêmes événements futurs</td><td class="n">3 inscrits · 1 296,85 €</td></tr>
+          <tr><td>Retraite Vajrasattva (début 31 juillet)</td><td class="n">Hors fenêtre</td></tr>
+          <tr><td>En attente / liste d'attente</td><td class="n">Non inclus</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -399,10 +473,13 @@ function switchTab(btn){
   document.querySelectorAll('.tc').forEach(t=>t.classList.remove('on'));
   btn.classList.add('on');
   panel.classList.add('on');
+  const fbar=document.querySelector('.fbar');
+  if(fbar) fbar.style.display = id==='j31' ? 'none' : '';
+  if(history.replaceState) history.replaceState(null,'','#'+id);
 }
 
 function render(){
-  const fns=[['ov',rOv],['ev',rEv],['se',rSe],['me',rMe],['lo',rLo],['te',rTe],['co',rCo],['br',rBr],['st',rSt]];
+  const fns=[['ov',rOv],['ev',rEv],['se',rSe],['me',rMe],['lo',rLo],['te',rTe],['co',rCo],['j31',rJ31],['br',rBr],['st',rSt]];
   for(const [name,fn] of fns){
     try{fn();}catch(err){console.error('Render failed:',name,err);}
   }
@@ -589,6 +666,17 @@ function rLunchTables(){
 
 function rSt(){}
 
+function rJ31(){
+  const evLabels=['Jhado Rinpoché','Shamata 10 j.','Lamrim sem. 2','Lamrim sem. 1','Shamata 6 j.','PC mouvement','Séjour perso','Bouddha Médecine','Chemin du pardon'];
+  const evData=[9370.67,6750.82,2750.15,1457.47,1190.34,318.53,229.22,76.13,66.68];
+  DC('j31-ev');
+  const elEv=document.getElementById('c-j31-ev');
+  if(elEv) CX['j31-ev']=new Chart(elEv,{type:'bar',data:{labels:evLabels,datasets:[{label:'Encaissé au 31 juil.',data:evData,backgroundColor:'#4a6741'}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{beginAtZero:true,...chartEuroY}},plugins:{legend:{display:false},tooltip:chartEuroTip}}});
+  DC('j31-mo');
+  const elMo=document.getElementById('c-j31-mo');
+  if(elMo) CX['j31-mo']=new Chart(elMo,{type:'bar',data:{labels:['Jan','Mar','Avr','Mai','Juin','Juil'],datasets:[{label:'Encaissé',data:[1391.88,885.72,1004.08,1803.89,8394.95,8729.49],backgroundColor:'#4a6741'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,...chartEuroY}},plugins:{legend:{display:false},tooltip:chartEuroTip}}});
+}
+
 function rLo(){
   // Compute occupancy from ROCC data filtered to selected period
   const from=document.getElementById('f-from').value.slice(0,7);
@@ -730,6 +818,12 @@ document.getElementById('tabs').addEventListener('click',e=>{
   const btn=e.target.closest('button[data-t]');
   if(btn) switchTab(btn);
 });
+(function openHashTab(){
+  const h=(location.hash||'').slice(1);
+  if(!h) return;
+  const b=document.querySelector('nav button[data-t="'+h+'"]');
+  if(b) switchTab(b);
+})();
 
 fixTabPanels();
 init();
