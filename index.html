@@ -223,6 +223,11 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
     <div class="kc"><div class="v">807,04 €</div><div class="l">dont retraite de Shiné (novembre)</div></div>
     <div class="kc"><div class="v">54</div><div class="l">Inscriptions ayant un paiement net</div></div>
   </div>
+  <div class="kg">
+    <div class="kc"><div class="v">8 077,86 €</div><div class="l">Repas</div></div>
+    <div class="kc"><div class="v">7 303,40 €</div><div class="l">Hébergement</div></div>
+    <div class="kc"><div class="v">228,40 €</div><div class="l">Taxe de séjour</div></div>
+  </div>
   <div class="g2">
     <div class="card"><h3>Répartition par instance</h3>
       <div class="note">Montants en euros (€), net des remboursements datés au 31 août.</div>
@@ -230,6 +235,23 @@ footer{text-align:center;padding:1.5rem;font-size:.68rem;color:var(--muted)}
     <div class="card"><h3>Quand cet argent est arrivé</h3>
       <div class="note">Paiements de 2026 affectés à ces départs futurs.</div>
       <div class="cc"><canvas id="c-j31-mo"></canvas></div></div>
+  </div>
+  <div class="g2">
+    <div class="card"><h3>Repas / hébergement / taxe</h3>
+      <div class="note">Allocation réelle des paiements dans SeminarDesk (pas un prorata des devis). Aucune participation d'événement dans ce total.</div>
+      <div class="cc"><canvas id="c-j31-split"></canvas></div></div>
+    <div class="card"><h3>Détail de l'allocation</h3>
+      <table>
+        <thead><tr><th>Poste</th><th class="n">Montant</th></tr></thead>
+        <tbody>
+          <tr><td>Repas</td><td class="n">8 077,86 €</td></tr>
+          <tr><td>Hébergement</td><td class="n">7 303,40 €</td></tr>
+          <tr><td>Taxe de séjour (chambre)</td><td class="n">227,24 €</td></tr>
+          <tr><td>Taxe de séjour (camping)</td><td class="n">1,16 €</td></tr>
+          <tr style="font-weight:700"><td>Total</td><td class="n">15 609,66 €</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
   <div class="card">
     <h3>Détail</h3>
@@ -682,6 +704,9 @@ function rJ31(){
   DC('j31-mo');
   const elMo=document.getElementById('c-j31-mo');
   if(elMo) CX['j31-mo']=new Chart(elMo,{type:'bar',data:{labels:['Mai','Juin','Juil','Août'],datasets:[{label:'Encaissé',data:[860.85,5810.60,3981.07,4957.14],backgroundColor:'#4a6741'}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,...chartEuroY}},plugins:{legend:{display:false},tooltip:chartEuroTip}}});
+  DC('j31-split');
+  const elSp=document.getElementById('c-j31-split');
+  if(elSp) CX['j31-split']=new Chart(elSp,{type:'doughnut',data:{labels:['Repas','Hébergement','Taxe de séjour'],datasets:[{data:[8077.86,7303.40,228.40],backgroundColor:['#e65100','#4a6741','#1565c0']}]},options:{responsive:true,maintainAspectRatio:false,...doughnutTip(chartEuroTip)}});
 }
 
 function rLo(){
